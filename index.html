@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pizzaingrammi | Pizzeria a Pozzuoli, Pomigliano, Quarto e Capri</title>
+<meta name="description" content="Pizzaingrammi: mentre tutti corrono, noi abbiamo deciso di rallentare. Pizzerie a Pozzuoli, Pomigliano d'Arco, Quarto e la novità dell'estate 2026: a-Ma-Re Capri. Prenota un tavolo o ordina a domicilio.">
+<meta name="theme-color" content="#F69A07">
+<meta property="og:title" content="Pizzaingrammi">
+<meta property="og:description" content="Rallenta. Vivi. Ci pensiamo noi.">
+<meta property="og:image" content="assets/img/capri-terrazza.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;500;700;800&family=Oswald:wght@300;400;600;700&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --arancio: #F69A07;
+    --arancio-scuro: #D98500;
+    --bordeaux: #990D1A;
+    --bordeaux-scuro: #6E0912;
+    --crema: #FEF5E4;
+    --carta: #F7EFDF;
+    --blu: #1D3466;
+    --oro: #F2C76E;
+    --grafite: #2B2B2B;
+    --grigio: #5E5E5E;
+    --bianco: #FFFFFF;
+    --testo: #2B2B2B;
+    --ombra: 0 10px 30px rgba(60, 25, 0, .14);
+    --ombra-forte: 0 18px 50px rgba(60, 25, 0, .22);
+    --raggio: 14px;
+    --header-h: 72px;
+    --max: 1180px;
+    --font-titoli: "Oswald", "Arial Narrow", sans-serif;
+    --font-testo: "Fira Sans Condensed", "Arial Narrow", sans-serif;
+    --font-script: "Yellowtail", cursive;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bianco);
+    color: var(--testo);
+    font-family: var(--font-testo);
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--font-titoli); font-weight: 400; line-height: 1.15; margin: 0; letter-spacing: .02em; }
+  p { margin: 0 0 1em; }
+  .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- Titoli di sezione ---------- */
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-testo);
+    font-weight: 700;
+    font-size: .8rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .titolo {
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  .titolo strong { font-weight: 600; }
+  .divisore { width: 64px; height: 3px; border-radius: 3px; background: currentColor; opacity: .45; margin: 18px auto 0; }
+  .testa { text-align: center; margin-bottom: 40px; }
+  .testa .sotto { margin-top: 14px; font-size: 1.05rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; }
+
+  /* ---------- Bottoni ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 56px; padding: 14px 26px;
+    background: var(--arancio); color: var(--grafite);
+    border: 2px solid var(--arancio); border-radius: 10px;
+    font-family: var(--font-testo); font-weight: 800; font-size: 1rem;
+    letter-spacing: .16em; text-transform: uppercase; text-decoration: none; text-align: center;
+    box-shadow: 0 6px 16px rgba(246, 154, 7, .28);
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(246, 154, 7, .38); background: #FFA819; }
+  .btn:active { transform: translateY(0); }
+  .btn:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--bordeaux); outline-offset: 3px; }
+  .btn--bordeaux { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--bianco); box-shadow: 0 6px 16px rgba(153, 13, 26, .3); }
+  .btn--bordeaux:hover { background: #B01222; box-shadow: 0 10px 22px rgba(153, 13, 26, .4); }
+  .btn--chiaro { background: transparent; border-color: var(--bianco); color: var(--bianco); box-shadow: none; }
+  .btn--chiaro:hover { background: var(--bianco); color: var(--bordeaux); }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  .btn small { display: block; font-weight: 500; letter-spacing: .08em; font-size: .78rem; opacity: .8; }
+
+  .griglia-btn { display: grid; gap: 14px; grid-template-columns: 1fr; max-width: 980px; margin: 0 auto; }
+
+  /* ---------- Header ---------- */
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    height: var(--header-h);
+    background: rgba(254, 245, 228, .94);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid rgba(153, 13, 26, .08);
+    transition: box-shadow .2s ease;
+  }
+  .header.scrolled { box-shadow: 0 6px 24px rgba(60, 25, 0, .12); }
+  .header .wrap { height: 100%; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; }
+  .logo { justify-self: center; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bordeaux); }
+  .logo img { height: 50px; width: auto; }
+  .logo span { font-family: var(--font-script); font-size: 1.9rem; line-height: 1; display: none; }
+  .burger {
+    width: 48px; height: 48px; border: 0; background: transparent; padding: 12px; cursor: pointer; border-radius: 10px;
+    display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  }
+  .burger span { display: block; height: 3px; border-radius: 3px; background: var(--grafite); transition: transform .25s ease, opacity .25s ease; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+  .nav-desktop { display: none; }
+  .header-cta { display: none; }
+
+  .menu-mobile {
+    position: fixed; inset: var(--header-h) 0 auto 0; z-index: 49;
+    background: var(--crema);
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease;
+    box-shadow: var(--ombra-forte);
+  }
+  .menu-mobile.aperto { max-height: calc(100vh - var(--header-h)); overflow-y: auto; }
+  .menu-mobile ul { list-style: none; margin: 0; padding: 10px 20px 24px; }
+  .menu-mobile li + li { border-top: 1px solid rgba(153, 13, 26, .1); }
+  .menu-mobile a {
+    display: block; padding: 15px 4px; text-decoration: none;
+    font-family: var(--font-titoli); font-size: 1.35rem; text-transform: uppercase; letter-spacing: .06em; color: var(--bordeaux);
+  }
+  .menu-mobile .btn { width: 100%; margin-top: 14px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; isolation: isolate;
+    background: var(--arancio);
+    color: var(--bianco);
+    text-align: center;
+    padding: 56px 0 64px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255, 255, 255, .18), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(153, 13, 26, .18), transparent 45%);
+  }
+  .hero .logo-grande { width: min(42vw, 190px); margin: 0 auto 14px; filter: drop-shadow(0 12px 20px rgba(110, 9, 18, .3)); }
+  .hero .marchio { font-family: var(--font-script); font-size: clamp(2.6rem, 10vw, 4.4rem); color: var(--bordeaux); line-height: 1; text-shadow: 0 2px 0 rgba(255, 255, 255, .25); }
+  .hero h1 {
+    margin: 18px auto 0; max-width: 16ch;
+    font-size: clamp(1.6rem, 5.6vw, 3.4rem); font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+  }
+  .hero .claim { font-family: var(--font-script); font-size: clamp(1.7rem, 5.5vw, 2.5rem); margin: 18px 0 30px; color: var(--bordeaux-scuro); }
+  .hero .azioni { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .hero .azioni .btn { min-width: 220px; }
+
+  /* ---------- Marquee ---------- */
+  .marquee { background: var(--bordeaux); color: var(--crema); overflow: hidden; padding: 16px 0; border-block: 4px solid var(--arancio); }
+  .marquee__track { display: flex; width: max-content; animation: scorri 28s linear infinite; }
+  .marquee__track span { font-family: var(--font-titoli); font-size: clamp(1.4rem, 4vw, 2rem); letter-spacing: .06em; white-space: nowrap; padding-right: 64px; display: flex; align-items: center; gap: 64px; }
+  .marquee__track span::after { content: "★"; color: var(--arancio); font-size: .8em; }
+  @keyframes scorri { to { transform: translateX(-50%); } }
+
+  /* ---------- Filosofia ---------- */
+  .filosofia { background: var(--crema); padding: 72px 0; }
+  .carta {
+    position: relative;
+    max-width: 760px; margin: 0 auto;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255, 255, 255, .7), transparent 50%),
+      radial-gradient(circle at 80% 90%, rgba(214, 190, 150, .25), transparent 55%),
+      var(--carta);
+    border: 10px solid var(--bianco);
+    box-shadow: var(--ombra-forte);
+    padding: 48px 26px 40px;
+    text-align: center;
+    color: var(--blu);
+  }
+  .carta h2 { color: var(--bordeaux); font-weight: 700; font-size: clamp(2.2rem, 8vw, 3.6rem); text-transform: uppercase; letter-spacing: .01em; }
+  .carta .sottotitolo { font-family: var(--font-titoli); font-weight: 600; font-size: clamp(1.25rem, 4.4vw, 1.75rem); text-transform: uppercase; line-height: 1.15; margin: 10px 0 28px; letter-spacing: .03em; }
+  .carta p { font-size: 1.1rem; line-height: 1.45; margin-bottom: 1.1em; }
+  .carta p:not(.sottotitolo):not(.firma) br { display: none; }
+  .carta .firma { font-family: var(--font-script); color: var(--bordeaux); font-size: clamp(2rem, 7vw, 2.7rem); line-height: 1.15; margin: 26px 0 22px; }
+  .carta .timbro { width: 70px; margin: 0 auto; opacity: .95; }
+
+  /* ---------- Capri ---------- */
+  .capri { background: var(--arancio); color: var(--bianco); padding: 72px 0; }
+  .capri__grid { display: grid; gap: 34px; align-items: center; }
+  .capri__foto { position: relative; }
+  .capri__foto img { width: 100%; border-radius: var(--raggio); box-shadow: var(--ombra-forte); aspect-ratio: 2 / 1; object-fit: cover; }
+  .capri__badge {
+    position: absolute; left: 14px; bottom: -18px;
+    background: var(--bordeaux); color: var(--crema);
+    font-family: var(--font-titoli); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: .9rem;
+    padding: 10px 16px; border-radius: 999px; box-shadow: var(--ombra);
+  }
+  .capri .titolo { font-weight: 400; }
+  .capri h3 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: .08em; margin: 22px 0 16px; color: var(--bordeaux-scuro); font-weight: 600; }
+  .capri p { font-size: 1.12rem; }
+  .capri .ama { font-weight: 700; white-space: nowrap; }
+  .capri .btn { margin-top: 10px; }
+
+  /* ---------- Sezioni con bottoni ---------- */
+  .sezione { padding: 72px 0; }
+  .sezione--bianca { background: var(--bianco); }
+  .sezione--bianca .testa { color: var(--arancio-scuro); }
+  .sezione--crema { background: var(--crema); }
+  .sezione--crema .testa { color: var(--arancio-scuro); }
+
+  .card-sede {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 20px; min-height: 84px;
+    background: var(--arancio); color: var(--grafite); text-decoration: none;
+    border-radius: 12px; box-shadow: 0 6px 16px rgba(246, 154, 7, .28);
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .card-sede:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(246, 154, 7, .4); background: #FFA819; }
+  .card-sede__icona { width: 46px; height: 46px; flex: none; border-radius: 50%; background: var(--bianco); color: var(--bordeaux); display: grid; place-items: center; }
+  .card-sede__icona svg { width: 22px; height: 22px; }
+  .card-sede__testo { flex: 1; min-width: 0; }
+  .card-sede__nome { display: block; font-weight: 800; font-size: 1.1rem; letter-spacing: .16em; text-transform: uppercase; line-height: 1.2; }
+  .card-sede__info { display: block; font-size: .92rem; letter-spacing: .03em; opacity: .85; line-height: 1.3; margin-top: 3px; }
+  .card-sede__freccia { flex: none; width: 22px; height: 22px; transition: transform .18s ease; }
+  .card-sede:hover .card-sede__freccia { transform: translateX(4px); }
+
+  /* ---------- Galleria ---------- */
+  .pizze { background: var(--arancio); color: var(--bianco); padding: 72px 0; }
+  .galleria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .galleria button {
+    padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 8px 20px rgba(80, 35, 0, .22); aspect-ratio: 4 / 5;
+  }
+  .galleria img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+  .galleria button:hover img { transform: scale(1.06); }
+  .galleria .nascosta { display: none; }
+  .galleria.tutte .nascosta { display: block; }
+  .mostra { display: flex; justify-content: center; margin-top: 32px; }
+  .mostra .btn { background: var(--bianco); border-color: var(--bianco); color: var(--bordeaux); box-shadow: 0 8px 20px rgba(80, 35, 0, .2); }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center;
+    background: rgba(20, 8, 0, .9); padding: 60px 16px;
+  }
+  .lightbox.aperto { display: flex; }
+  .lightbox img { max-height: 100%; max-width: min(100%, 720px); border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); object-fit: contain; }
+  .lightbox button {
+    position: absolute; width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(255, 255, 255, .14); color: var(--bianco); font-size: 1.6rem; line-height: 1; display: grid; place-items: center;
+  }
+  .lightbox button:hover { background: var(--arancio); color: var(--grafite); }
+  .lb-chiudi { top: 14px; right: 14px; }
+  .lb-prec { left: 12px; top: 50%; transform: translateY(-50%); }
+  .lb-succ { right: 12px; top: 50%; transform: translateY(-50%); }
+
+  /* ---------- Recensioni ---------- */
+  .recensioni {
+    position: relative; isolation: isolate; color: var(--bianco); text-align: center; padding: 80px 0;
+    background: var(--grafite) url("assets/img/pizza-marinara-alici.jpg") center / cover no-repeat;
+  }
+  .recensioni::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(30, 20, 15, .82), rgba(30, 20, 15, .9)); }
+  .voto { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); border-radius: 18px; padding: 28px 36px; backdrop-filter: blur(4px); }
+  .voto h3 { font-family: var(--font-testo); font-weight: 500; font-size: 1.5rem; letter-spacing: .04em; }
+  .voto__numero { display: flex; align-items: center; gap: 14px; }
+  .voto__numero strong { font-family: var(--font-titoli); font-weight: 300; font-size: 3.6rem; line-height: 1; }
+  .stelle { display: flex; gap: 3px; }
+  .stelle svg { width: 26px; height: 26px; }
+  .voto__conteggio { opacity: .85; font-size: 1rem; }
+  .voto .btn { margin-top: 12px; }
+
+  /* ---------- Partner ---------- */
+  .partner-lista { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 28px 48px; }
+  .partner-lista img { height: 92px; width: auto; mix-blend-mode: multiply; filter: grayscale(.1); transition: transform .2s ease; }
+  .partner-lista img.tondo { height: 130px; border-radius: 50%; mix-blend-mode: normal; }
+  .partner-lista img:hover { transform: scale(1.05); }
+
+  /* ---------- Sedi ---------- */
+  .sedi { background: var(--arancio); color: var(--bianco); padding: 72px 0; }
+  .sedi__grid { display: grid; gap: 18px; }
+  .sede {
+    background: var(--bianco); color: var(--testo);
+    border-radius: var(--raggio); padding: 26px 24px; box-shadow: var(--ombra);
+    display: flex; flex-direction: column; gap: 14px;
+    border-top: 6px solid var(--bordeaux);
+  }
+  .sede h3 { color: var(--bordeaux); font-size: 1.55rem; text-transform: uppercase; font-weight: 600; letter-spacing: .04em; }
+  .sede h3 small { display: block; font-family: var(--font-testo); font-weight: 500; color: var(--arancio-scuro); font-size: .85rem; letter-spacing: .18em; margin-bottom: 2px; }
+  .orario {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--crema); color: var(--bordeaux); border-radius: 999px; padding: 6px 14px;
+    font-weight: 700; font-size: .85rem; letter-spacing: .14em; text-transform: uppercase;
+  }
+  .orario::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #2E9E4F; }
+  .orario.chiuso-giorno::before { background: var(--arancio); }
+  .sede ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .sede li a { display: flex; align-items: flex-start; gap: 12px; text-decoration: none; line-height: 1.35; padding: 4px 0; }
+  .sede li a:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  .sede li svg { width: 22px; height: 22px; flex: none; color: var(--arancio-scuro); margin-top: 1px; }
+  .sede .tel { font-weight: 700; font-size: 1.15rem; letter-spacing: .04em; }
+
+  /* ---------- Social & footer ---------- */
+  .social { background: var(--bordeaux); color: var(--crema); padding: 64px 0; text-align: center; }
+  .social .titolo { font-weight: 400; }
+  .social__lista { display: flex; gap: 18px; justify-content: center; margin-top: 30px; }
+  .social__lista a {
+    width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--arancio); color: var(--grafite); transition: transform .2s ease, background .2s ease;
+  }
+  .social__lista a:hover { transform: translateY(-4px) rotate(-6deg); background: var(--crema); }
+  .social__lista svg { width: 28px; height: 28px; }
+  .footer { background: var(--grafite); color: rgba(255, 255, 255, .78); text-align: center; padding: 30px 0 calc(30px + env(safe-area-inset-bottom)); font-size: .95rem; }
+  .footer img { width: 44px; margin: 0 auto 10px; }
+  .footer p { margin: 0; }
+
+  /* ---------- Barra azioni (solo mobile) ---------- */
+  .barra-mobile {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: var(--bianco); box-shadow: 0 -6px 24px rgba(60, 25, 0, .16);
+    padding-bottom: env(safe-area-inset-bottom);
+    transform: translateY(110%); transition: transform .3s ease;
+  }
+  .barra-mobile.visibile { transform: none; }
+  .barra-mobile a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 9px 4px 10px;
+    text-decoration: none; font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--grafite);
+  }
+  .barra-mobile a + a { border-left: 1px solid #F0E6D6; }
+  .barra-mobile a:first-child { background: var(--arancio); }
+  .barra-mobile svg { width: 22px; height: 22px; color: var(--bordeaux); }
+  body.con-barra { padding-bottom: 64px; }
+
+  /* ---------- Animazione in entrata ---------- */
+  .rivela { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .rivela.visto { opacity: 1; transform: none; }
+
+  /* ================= TABLET ================= */
+  @media (min-width: 700px) {
+    body { font-size: 19px; }
+    .wrap { padding: 0 32px; }
+    .hero { padding: 72px 0 84px; }
+    .griglia-btn { grid-template-columns: repeat(2, 1fr); }
+    .griglia-btn--3 { grid-template-columns: repeat(3, 1fr); }
+    .griglia-btn--3 .btn { flex-direction: column; gap: 2px; }
+    .galleria { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .sedi__grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .carta { padding: 64px 56px 48px; }
+    .carta p:not(.sottotitolo):not(.firma) br { display: inline; }
+    .logo span { display: inline; }
+    .partner-lista { gap: 32px 72px; }
+  }
+
+  /* ================= DESKTOP ================= */
+  @media (min-width: 1024px) {
+    :root { --header-h: 84px; }
+    .header .wrap { grid-template-columns: auto 1fr auto; gap: 28px; }
+    .burger, .menu-mobile, .barra-mobile { display: none; }
+    body.con-barra { padding-bottom: 0; }
+    .logo { justify-self: start; }
+    .logo img { height: 58px; }
+    .nav-desktop { display: flex; justify-content: center; gap: 4px; }
+    .nav-desktop a {
+      position: relative; padding: 10px 12px; text-decoration: none;
+      font-family: var(--font-titoli); font-size: 1rem; text-transform: uppercase; letter-spacing: .1em; color: var(--grafite);
+    }
+    .nav-desktop a::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 2px; background: var(--arancio); transform: scaleX(0); transition: transform .2s ease; }
+    .nav-desktop a:hover { color: var(--bordeaux); }
+    .nav-desktop a:hover::after { transform: scaleX(1); }
+    .header-cta { display: inline-flex; min-height: 46px; padding: 10px 20px; font-size: .9rem; }
+
+    .hero { padding: 88px 0 100px; text-align: left; }
+    .hero__grid { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 56px; }
+    .hero h1 { margin-left: 0; }
+    .hero .azioni { justify-content: flex-start; }
+    .hero__logo-mobile { display: none; }
+    .hero__foto { position: relative; }
+    .hero__foto .logo-grande { position: absolute; left: -70px; bottom: -40px; width: 160px; }
+    .hero__foto .foto { border-radius: 22px; box-shadow: var(--ombra-forte); transform: rotate(2deg); border: 8px solid var(--crema); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+
+    .capri__grid { grid-template-columns: 1.1fr 1fr; gap: 64px; }
+    .capri__grid--foto2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .griglia-btn--4 { grid-template-columns: repeat(4, 1fr); }
+    .griglia-btn--4 .card-sede { flex-direction: column; text-align: center; padding: 26px 16px; }
+    .griglia-btn--4 .card-sede__freccia { display: none; }
+    .galleria { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .sedi__grid { grid-template-columns: repeat(4, 1fr); }
+    .titolo { font-size: 3.4rem; }
+  }
+
+  @media (max-width: 1023px) {
+    .hero__foto { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .marquee__track { animation: none; }
+    .rivela { opacity: 1; transform: none; transition: none; }
+    * { transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body class="con-barra">
+
+<!-- Icone SVG riutilizzabili -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="i-freccia" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-calendario" viewBox="0 0 24 24"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm-2 8h14v10H5V10Zm2 2v2h2v-2H7Zm4 0v2h2v-2h-2Zm4 0v2h2v-2h-2Z"/></symbol>
+  <symbol id="i-scooter" viewBox="0 0 24 24"><path fill="currentColor" d="M14 4h3l3.2 7.3A4 4 0 1 1 15.1 16H10a4 4 0 1 1-6.9-3.4L5 10h7l1.6 3.4.9-.4L13.4 6H14V4ZM6 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm13 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3 6h7v2H3V6Z"/></symbol>
+  <symbol id="i-regalo" viewBox="0 0 24 24"><path fill="currentColor" d="M20 7h-2.2A3 3 0 0 0 12 3.8 3 3 0 0 0 6.2 7H4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8h1a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Zm-5-2a1 1 0 1 1 0 2h-2a2 2 0 0 1 2-2ZM9 5a2 2 0 0 1 2 2H9a1 1 0 1 1 0-2Zm2 15H7v-8h4v8Zm0-10H5V9h6v1Zm6 10h-4v-8h4v8Zm2-10h-6V9h6v1Z"/></symbol>
+  <symbol id="i-stella" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.6c2-1.9 3.3-4.7 3.3-8Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.8c-1 .7-2.2 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.9A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.8 14.1a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 10l3.7-2.9Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 0 0 2.1 7l3.7 2.9C6.7 7.3 9.1 5.4 12 5.4Z"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="top">
+  <div class="wrap">
+    <button class="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="logo" href="#top" aria-label="Pizzaingrammi, torna all'inizio">
+      <img src="assets/logo.svg" alt="" width="48" height="50">
+      <span>pizzaingrammi</span>
+    </a>
+    <nav class="nav-desktop" aria-label="Menu principale">
+      <a href="#filosofia">Filosofia</a>
+      <a href="#capri">Capri</a>
+      <a href="#domicilio">Domicilio</a>
+      <a href="#pizze">Le pizze</a>
+      <a href="#carta-regalo">Carta regalo</a>
+      <a href="#sedi">Sedi</a>
+    </nav>
+    <a class="btn btn--bordeaux header-cta" href="#prenota">Prenota</a>
+  </div>
+</header>
+
+<nav class="menu-mobile" id="menu-mobile" aria-label="Menu">
+  <ul>
+    <li><a href="#filosofia">La nostra filosofia</a></li>
+    <li><a href="#capri">Pizzaingrammi Capri</a></li>
+    <li><a href="#prenota">Prenota un tavolo</a></li>
+    <li><a href="#domicilio">Ordina a domicilio</a></li>
+    <li><a href="#pizze">Le nostre pizze</a></li>
+    <li><a href="#carta-regalo">Carta regalo</a></li>
+    <li><a href="#sedi">Sedi e contatti</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__testo">
+      <img class="logo-grande hero__logo-mobile" src="assets/logo.svg" alt="Logo Pizzaingrammi" width="190" height="200">
+      <div class="marchio">pizzaingrammi</div>
+      <h1>Mentre tutti corrono, noi abbiamo deciso di rallentare.</h1>
+      <p class="claim">Rallenta. Vivi. Ci pensiamo noi.</p>
+      <div class="azioni">
+        <a class="btn btn--bordeaux" href="#prenota"><svg><use href="#i-calendario"/></svg>Prenota un tavolo</a>
+        <a class="btn btn--chiaro" href="#domicilio"><svg><use href="#i-scooter"/></svg>Ordina a domicilio</a>
+      </div>
+    </div>
+    <div class="hero__foto">
+      <img class="foto" src="assets/img/pizza-margherita.jpg" alt="Pizza margherita con mozzarella e basilico" width="488" height="611">
+      <img class="logo-grande hero__logo-desktop" src="assets/logo.svg" alt="" width="160" height="170">
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-label="Benvenuti in un mondo di leggerezza!">
+  <div class="marquee__track" aria-hidden="true">
+    <span>Benvenuti in un mondo di leggerezza!</span><span>Benvenuti in un mondo di leggerezza!</span><span>Benvenuti in un mondo di leggerezza!</span>
+    <span>Benvenuti in un mondo di leggerezza!</span><span>Benvenuti in un mondo di leggerezza!</span><span>Benvenuti in un mondo di leggerezza!</span>
+  </div>
+</div>
+
+<!-- ============ FILOSOFIA ============ -->
+<section class="filosofia" id="filosofia">
+  <div class="wrap">
+    <article class="carta rivela">
+      <h2>La nostra filosofia</h2>
+      <p class="sottotitolo">Mentre tutti corrono,<br>noi abbiamo deciso<br>di rallentare.</p>
+      <p>Crediamo nella bellezza delle cose semplici,<br>nel valore del tempo che ci si concede.</p>
+      <p>Crediamo nell'anima delle nostre creazioni,<br>fatte con ingredienti selezionati con cura<br>e cotte con pazienza.</p>
+      <p>Crediamo nelle risate genuine a tavola<br>e nei brindisi che non hanno fretta.</p>
+      <p>Pizzaingrammi è un invito a godersi il momento,<br>a vivere con leggerezza e a ricordare<br>che la vita vera ha i tempi della felicità.</p>
+      <p class="firma">Rallenta. Vivi.<br>Ci pensiamo noi.</p>
+      <img class="timbro" src="assets/logo.svg" alt="" width="70" height="74">
+    </article>
+  </div>
+</section>
+
+<!-- ============ CAPRI ============ -->
+<section class="capri" id="capri">
+  <div class="wrap capri__grid">
+    <div class="capri__foto rivela">
+      <img src="assets/img/capri-terrazza.jpg" alt="La terrazza sul mare di a-Ma-Re Capri con ombrelloni e tavoli apparecchiati" width="1014" height="503" loading="lazy">
+      <span class="capri__badge">Novità · Estate 2026</span>
+    </div>
+    <div class="rivela">
+      <h2 class="titolo">L'estate ha un <strong>nuovo gusto</strong></h2>
+      <h3>Pizzaingrammi Capri</h3>
+      <p>Siamo felici di condividere con voi l'inizio di una nuova avventura firmata Pizzaingrammi: nasce <span class="ama">a-Ma-Re Capri</span>, un progetto che unisce eleganza, tradizione mediterranea e ricerca gastronomica nel cuore di Capri.</p>
+      <p>Un luogo dove il gusto incontra l'atmosfera dell'isola più iconica del Mediterraneo, tra ingredienti selezionati, cucina contemporanea e un'esperienza pensata per emozionare.</p>
+      <p>L'estate 2026 si apre così, con una collaborazione che racconta la nostra continua voglia di crescere, innovare e portare la nostra idea di ospitalità in luoghi straordinari.</p>
+      <p><strong>Vi aspettiamo a Capri per vivere insieme questa nuova esperienza.</strong></p>
+      <a class="btn btn--bordeaux" data-link="prenota-capri" href="tel:+390819780900"><svg><use href="#i-calendario"/></svg>Prenota a Capri</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRENOTA ============ -->
+<section class="sezione sezione--bianca" id="prenota">
+  <div class="wrap">
+    <div class="testa rivela">
+      <span class="eyebrow">Ti aspettiamo</span>
+      <h2 class="titolo">Prenota un tavolo</h2>
+      <div class="divisore"></div>
+    </div>
+    <div class="griglia-btn griglia-btn--4 rivela">
+      <a class="card-sede" data-link="prenota-pomigliano" href="tel:+3908119736687">
+        <span class="card-sede__icona"><svg><use href="#i-pin"/></svg></span>
+        <span class="card-sede__testo"><span class="card-sede__nome">Pomigliano</span><span class="card-sede__info">Pomigliano d'Arco · Sempre aperti</span></span>
+        <svg class="card-sede__freccia"><use href="#i-freccia"/></svg>
+      </a>
+      <a class="card-sede" data-link="prenota-pozzuoli" href="tel:+390812352961">
+        <span class="card-sede__icona"><svg><use href="#i-pin"/></svg></span>
+        <span class="card-sede__testo"><span class="card-sede__nome">Pozzuoli</span><span class="card-sede__info">Via Libero Bovio · Sempre aperti</span></span>
+        <svg class="card-sede__freccia"><use href="#i-freccia"/></svg>
+      </a>
+      <a class="card-sede" data-link="prenota-quarto" href="tel:+390812189208">
+        <span class="card-sede__icona"><svg><use href="#i-pin"/></svg></span>
+        <span class="card-sede__testo"><span class="card-sede__nome">Quarto</span><span class="card-sede__info">Via Santa Maria · Sempre aperti</span></span>
+        <svg class="card-sede__freccia"><use href="#i-freccia"/></svg>
+      </a>
+      <a class="card-sede" data-link="prenota-capri" href="tel:+390819780900">
+        <span class="card-sede__icona"><svg><use href="#i-pin"/></svg></span>
+        <span class="card-sede__testo"><span class="card-sede__nome">Capri</span><span class="card-sede__info">a-Ma-Re · Chiuso il martedì</span></span>
+        <svg class="card-sede__freccia"><use href="#i-freccia"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOMICILIO ============ -->
+<section class="sezione sezione--crema" id="domicilio">
+  <div class="wrap">
+    <div class="testa rivela">
+      <span class="eyebrow">Delivery</span>
+      <h2 class="titolo">Ordina a domicilio</h2>
+      <p class="sotto">In un attimo siamo a casa tua!</p>
+      <div class="divisore"></div>
+    </div>
+    <div class="griglia-btn griglia-btn--3 rivela">
+      <a class="btn" data-link="domicilio-alfonsino" href="#" target="_blank" rel="noopener"><svg><use href="#i-scooter"/></svg><span>Pomigliano <small>con Alfonsino</small></span></a>
+      <a class="btn" data-link="domicilio-jafood" href="#" target="_blank" rel="noopener"><svg><use href="#i-scooter"/></svg><span>Pozzuoli <small>con Jafood</small></span></a>
+      <a class="btn" data-link="domicilio-deliveroo" href="#" target="_blank" rel="noopener"><svg><use href="#i-scooter"/></svg><span>Pozzuoli <small>con Deliveroo</small></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERIA ============ -->
+<section class="pizze" id="pizze">
+  <div class="wrap">
+    <div class="testa rivela">
+      <span class="eyebrow">Dal nostro forno</span>
+      <h2 class="titolo">Alcune delle nostre pizze</h2>
+      <div class="divisore"></div>
+    </div>
+    <div class="galleria" id="galleria">
+      <button><img src="assets/img/pizza-fritta.jpg" alt="Pizza fritta ripiena con ricotta e ciccioli" loading="lazy" width="488" height="610"></button>
+      <button><img src="assets/img/pizza-bresaola.jpg" alt="Pizza con bresaola, rucola e lime" loading="lazy" width="488" height="610"></button>
+      <button><img src="assets/img/pizza-pomodorini-gialli.jpg" alt="Pizza con pomodorini gialli, rossi e scaglie di formaggio" loading="lazy" width="488" height="611"></button>
+      <button><img src="assets/img/pizza-alici-olive.jpg" alt="Pizza con alici, olive e pomodorini" loading="lazy" width="488" height="610"></button>
+      <button><img src="assets/img/pizza-funghi-grana.jpg" alt="Pizza bianca con funghi e grana" loading="lazy" width="488" height="610"></button>
+      <button><img src="assets/img/pizza-marinara-alici.jpg" alt="Pizza rossa con alici e capperi" loading="lazy" width="488" height="610"></button>
+      <button><img src="assets/img/pizza-spicchi.jpg" alt="Pizza a spicchi con pomodorini e alici" loading="lazy" width="488" height="610"></button>
+      <button><img src="assets/img/pizza-margherita.jpg" alt="Pizza margherita con mozzarella e basilico" loading="lazy" width="488" height="611"></button>
+      <button class="nascosta"><img src="assets/img/pizza-melanzane.jpg" alt="Pizza con melanzane e verdure" loading="lazy" width="488" height="612"></button>
+      <button class="nascosta"><img src="assets/img/pizza-crema-zucchine.jpg" alt="Pizza con crema di zucchine e pancetta" loading="lazy" width="488" height="611"></button>
+      <button class="nascosta"><img src="assets/img/pizza-ortolana.jpg" alt="Pizza ortolana con verdure di stagione" loading="lazy" width="489" height="612"></button>
+      <button class="nascosta"><img src="assets/img/pizza-salsiccia.jpg" alt="Pizza con salsiccia, provola e basilico" loading="lazy" width="488" height="611"></button>
+      <button class="nascosta"><img src="assets/img/pizza-bianca-prosciutto.jpg" alt="Pizza con prosciutto e basilico" loading="lazy" width="489" height="613"></button>
+      <button class="nascosta"><img src="assets/img/pizza-salame.jpg" alt="Pizza con salame piccante e mozzarella" loading="lazy" width="489" height="611"></button>
+      <button class="nascosta"><img src="assets/img/pizza-funghi.jpg" alt="Pizza bianca con funghi" loading="lazy" width="489" height="612"></button>
+      <button class="nascosta"><img src="assets/img/capri-ombrelloni.jpg" alt="Gli ombrelloni di a-Ma-Re Capri sugli scogli" loading="lazy" width="490" height="742"></button>
+      <button class="nascosta"><img src="assets/img/pizza-alici-pomodorini.jpg" alt="Pizza con alici e pomodorini vista dall'alto" loading="lazy" width="489" height="740"></button>
+      <button class="nascosta"><img src="assets/img/capri-tavolo-mare.jpg" alt="Pizza servita su un tavolo vista mare a Capri" loading="lazy" width="489" height="740"></button>
+      <button class="nascosta"><img src="assets/img/pizzaiolo-pomodoro.jpg" alt="Il pizzaiolo stende il pomodoro sull'impasto" loading="lazy" width="489" height="740"></button>
+      <button class="nascosta"><img src="assets/img/pizza-mortadella.jpg" alt="Pizza con mortadella e basilico" loading="lazy" width="494" height="741"></button>
+    </div>
+    <div class="mostra">
+      <button class="btn" id="mostra-tutto" aria-controls="galleria" aria-expanded="false">+ Mostra tutto</button>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ingrandita">
+  <button class="lb-chiudi" aria-label="Chiudi">✕</button>
+  <button class="lb-prec" aria-label="Foto precedente">‹</button>
+  <img src="" alt="">
+  <button class="lb-succ" aria-label="Foto successiva">›</button>
+</div>
+
+<!-- ============ RECENSIONI ============ -->
+<section class="recensioni" id="recensioni">
+  <div class="wrap">
+    <div class="testa rivela">
+      <h2 class="titolo">La tua opinione è importante</h2>
+      <div class="divisore"></div>
+    </div>
+    <div class="voto rivela">
+      <h3>Pizzaingrammi Pozzuoli</h3>
+      <div class="voto__numero">
+        <strong>4,6</strong>
+        <span class="stelle" aria-label="4,6 stelle su 5">
+          <svg fill="#FBC02D"><use href="#i-stella"/></svg><svg fill="#FBC02D"><use href="#i-stella"/></svg><svg fill="#FBC02D"><use href="#i-stella"/></svg><svg fill="#FBC02D"><use href="#i-stella"/></svg>
+          <svg viewBox="0 0 24 24"><defs><linearGradient id="mezza"><stop offset="60%" stop-color="#FBC02D"/><stop offset="60%" stop-color="rgba(255,255,255,.35)"/></linearGradient></defs><use href="#i-stella" fill="url(#mezza)"/></svg>
+        </span>
+      </div>
+      <span class="voto__conteggio">su oltre 4.730 recensioni Google</span>
+      <a class="btn" data-link="recensioni" href="https://www.google.com/maps/search/?api=1&query=Pizzaingrammi+Via+Libero+Bovio+25+Pozzuoli" target="_blank" rel="noopener"><svg><use href="#i-google"/></svg>Leggi tutte le recensioni</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARTA REGALO ============ -->
+<section class="sezione sezione--bianca" id="carta-regalo">
+  <div class="wrap">
+    <div class="testa rivela">
+      <span class="eyebrow">L'idea giusta</span>
+      <h2 class="titolo">Acquista una carta regalo</h2>
+      <div class="divisore"></div>
+    </div>
+    <div class="griglia-btn griglia-btn--3 rivela">
+      <a class="btn" data-link="regalo-pomigliano" href="#"><svg><use href="#i-regalo"/></svg><span>Carta regalo <small>Pomigliano</small></span></a>
+      <a class="btn" data-link="regalo-pozzuoli" href="#"><svg><use href="#i-regalo"/></svg><span>Carta regalo <small>Pozzuoli</small></span></a>
+      <a class="btn" data-link="regalo-quarto" href="#"><svg><use href="#i-regalo"/></svg><span>Carta regalo <small>Quarto</small></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNER ============ -->
+<section class="sezione sezione--crema" id="partner">
+  <div class="wrap">
+    <div class="testa rivela">
+      <h2 class="titolo">I nostri partner</h2>
+      <div class="divisore"></div>
+    </div>
+    <div class="partner-lista rivela">
+      <img src="assets/partner/caramella.jpg" alt="La Caramella Food &amp; Beverage" loading="lazy" width="280" height="150">
+      <img src="assets/partner/bianco.jpg" alt="Bianco Fresco" loading="lazy" width="376" height="224">
+      <img class="tondo" src="assets/partner/cumadoro.jpg" alt="Cumadoro" loading="lazy" width="468" height="470">
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEDI ============ -->
+<section class="sedi" id="sedi">
+  <div class="wrap">
+    <div class="testa rivela">
+      <span class="eyebrow">Vieni a trovarci</span>
+      <h2 class="titolo">Le nostre sedi</h2>
+      <div class="divisore"></div>
+    </div>
+    <div class="sedi__grid">
+      <article class="sede rivela">
+        <h3><small>Pizzaingrammi</small>Pozzuoli</h3>
+        <span class="orario">Sempre aperti</span>
+        <ul>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Via+Libero+Bovio+25+80078+Pozzuoli" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg><span>Via Libero Bovio, 25<br>80078 Pozzuoli (NA)</span></a></li>
+          <li><a class="tel" href="tel:+390812352961"><svg><use href="#i-tel"/></svg><span>081 235 2961</span></a></li>
+        </ul>
+      </article>
+      <article class="sede rivela">
+        <h3><small>Pizzaingrammi</small>Pomigliano</h3>
+        <span class="orario">Sempre aperti</span>
+        <ul>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Via+Nazionale+delle+Puglie+36+80038+Pomigliano+d%27Arco" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg><span>Via Nazionale delle Puglie, 36<br>80038 Pomigliano d'Arco (NA)</span></a></li>
+          <li><a class="tel" href="tel:+3908119736687"><svg><use href="#i-tel"/></svg><span>081 1973 6687</span></a></li>
+        </ul>
+      </article>
+      <article class="sede rivela">
+        <h3><small>Pizzaingrammi</small>Quarto</h3>
+        <span class="orario">Sempre aperti</span>
+        <ul>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Via+Santa+Maria+287+80010+Quarto" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg><span>Via Santa Maria, 287<br>80010 Quarto (NA)</span></a></li>
+          <li><a class="tel" href="tel:+390812189208"><svg><use href="#i-tel"/></svg><span>081 218 9208</span></a></li>
+        </ul>
+      </article>
+      <article class="sede rivela">
+        <h3><small>Pizzaingrammi</small>Capri</h3>
+        <span class="orario chiuso-giorno">Chiuso il martedì</span>
+        <ul>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Via+Gradola+2+80071+Anacapri" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg><span>Via Gradola, 2<br>80071 Anacapri, Isola di Capri (NA)</span></a></li>
+          <li><a class="tel" href="tel:+390819780900"><svg><use href="#i-tel"/></svg><span>081 978 0900</span></a></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOCIAL ============ -->
+<section class="social">
+  <div class="wrap">
+    <h2 class="titolo">Seguici sui social</h2>
+    <div class="divisore"></div>
+    <div class="social__lista">
+      <a data-link="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.3v3.2h2.8V22h3.4Z"/></svg></a>
+      <a data-link="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM21 7c-.1-1.6-.4-3-1.6-4.2C18.2 1.6 16.8 1.3 15.2 1.2 13.6 1.1 10.4 1.1 8.8 1.2 7.2 1.3 5.8 1.6 4.6 2.8 3.4 4 3.1 5.4 3 7c-.1 1.6-.1 6.8 0 8.4.1 1.6.4 3 1.6 4.2 1.2 1.2 2.6 1.5 4.2 1.6 1.6.1 6.8.1 8.4 0 1.6-.1 3-.4 4.2-1.6 1.2-1.2 1.5-2.6 1.6-4.2.1-1.6.1-6.8 0-8.4Zm-2.1 10.2a3.4 3.4 0 0 1-1.9 1.9c-1.3.5-4.4.4-5.9.4s-4.6.1-5.9-.4a3.4 3.4 0 0 1-1.9-1.9c-.5-1.3-.4-4.4-.4-5.9s-.1-4.6.4-5.9A3.4 3.4 0 0 1 5.2 3.5c1.3-.5 4.4-.4 5.9-.4s4.6-.1 5.9.4a3.4 3.4 0 0 1 1.9 1.9c.5 1.3.4 4.4.4 5.9s.1 4.6-.4 5.9Z"/></svg></a>
+      <a data-link="youtube" href="#" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2C.5 9.1.5 12 .5 12s0 2.9.5 4.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.8.5-4.8s0-2.9-.5-4.8ZM9.7 15.5v-7l6 3.5-6 3.5Z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <img src="assets/logo.svg" alt="" width="44" height="46">
+  <p>Copyright © 2026 Pizzaingrammi – Tutti i diritti riservati.</p>
+</footer>
+
+<!-- Barra azioni rapide (solo mobile) -->
+<nav class="barra-mobile" aria-label="Azioni rapide">
+  <a href="#prenota"><svg><use href="#i-calendario"/></svg>Prenota</a>
+  <a href="#domicilio"><svg><use href="#i-scooter"/></svg>Ordina</a>
+  <a href="#sedi"><svg><use href="#i-tel"/></svg>Chiama</a>
+</nav>
+
+<script>
+  /* =====================================================================
+     LINK DA COMPLETARE
+     Inserisci qui gli indirizzi presi dal sito attuale (prenotazioni,
+     delivery, carte regalo, social). Se un valore resta vuoto, il bottone
+     usa il link di riserva già presente nell'HTML (es. la telefonata).
+     ===================================================================== */
+  const LINK = {
+    "prenota-pomigliano": "",
+    "prenota-pozzuoli": "",
+    "prenota-quarto": "",
+    "prenota-capri": "",
+    "domicilio-alfonsino": "",
+    "domicilio-jafood": "",
+    "domicilio-deliveroo": "",
+    "regalo-pomigliano": "",
+    "regalo-pozzuoli": "",
+    "regalo-quarto": "",
+    "recensioni": "",
+    "facebook": "",
+    "instagram": "",
+    "youtube": ""
+  };
+  document.querySelectorAll("[data-link]").forEach(el => {
+    const url = LINK[el.dataset.link];
+    if (url) el.href = url;
+  });
+
+  // Menu mobile
+  const burger = document.querySelector(".burger");
+  const menu = document.getElementById("menu-mobile");
+  const toggleMenu = (open) => {
+    burger.setAttribute("aria-expanded", open);
+    burger.setAttribute("aria-label", open ? "Chiudi il menu" : "Apri il menu");
+    menu.classList.toggle("aperto", open);
+  };
+  burger.addEventListener("click", () => toggleMenu(burger.getAttribute("aria-expanded") !== "true"));
+  menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => toggleMenu(false)));
+
+  // Ombra header + barra mobile
+  const header = document.querySelector(".header");
+  const barra = document.querySelector(".barra-mobile");
+  const onScroll = () => {
+    header.classList.toggle("scrolled", scrollY > 8);
+    barra.classList.toggle("visibile", scrollY > 400);
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Galleria: mostra tutto
+  const galleria = document.getElementById("galleria");
+  const mostra = document.getElementById("mostra-tutto");
+  mostra.addEventListener("click", () => {
+    const tutte = galleria.classList.toggle("tutte");
+    mostra.textContent = tutte ? "− Mostra meno" : "+ Mostra tutto";
+    mostra.setAttribute("aria-expanded", tutte);
+    if (!tutte) document.getElementById("pizze").scrollIntoView();
+  });
+
+  // Lightbox
+  const lb = document.getElementById("lightbox");
+  const lbImg = lb.querySelector("img");
+  const foto = [...galleria.querySelectorAll("img")];
+  let indice = 0;
+  const mostraFoto = (i) => {
+    indice = (i + foto.length) % foto.length;
+    lbImg.src = foto[indice].src;
+    lbImg.alt = foto[indice].alt;
+  };
+  const apriLb = (i) => { mostraFoto(i); lb.classList.add("aperto"); document.body.style.overflow = "hidden"; lb.querySelector(".lb-chiudi").focus(); };
+  const chiudiLb = () => { lb.classList.remove("aperto"); document.body.style.overflow = ""; foto[indice].parentElement.focus(); };
+  foto.forEach((img, i) => img.parentElement.addEventListener("click", () => apriLb(i)));
+  lb.querySelector(".lb-chiudi").addEventListener("click", chiudiLb);
+  lb.querySelector(".lb-prec").addEventListener("click", () => mostraFoto(indice - 1));
+  lb.querySelector(".lb-succ").addEventListener("click", () => mostraFoto(indice + 1));
+  lb.addEventListener("click", e => { if (e.target === lb) chiudiLb(); });
+  addEventListener("keydown", e => {
+    if (!lb.classList.contains("aperto")) return;
+    if (e.key === "Escape") chiudiLb();
+    if (e.key === "ArrowLeft") mostraFoto(indice - 1);
+    if (e.key === "ArrowRight") mostraFoto(indice + 1);
+  });
+  let touchX = null;
+  lb.addEventListener("touchstart", e => touchX = e.touches[0].clientX, { passive: true });
+  lb.addEventListener("touchend", e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) mostraFoto(indice + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+
+  // Animazioni in entrata
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add("visto"); io.unobserve(en.target); }
+    }), { threshold: .12 });
+    document.querySelectorAll(".rivela").forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll(".rivela").forEach(el => el.classList.add("visto"));
+  }
+</script>
+</body>
+</html>
