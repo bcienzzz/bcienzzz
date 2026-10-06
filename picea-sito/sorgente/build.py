@@ -52,8 +52,9 @@ ICONE = """<svg width="0" height="0" style="position:absolute" aria-hidden="true
 # ------------------------------------------------------------------ dati derivati
 IND = C["indirizzo"]
 INDIRIZZO_RIGA = f'{IND["via"]}, {IND["cap"]} {IND["citta"]} ({IND["provincia"]})'
-TEL_V, TEL_L = C["telefono"]["visibile"], C["telefono"]["link"]
-WA_V, WA_N = C["whatsapp"]["visibile"], C["whatsapp"]["numero"]
+# Spazi non separabili: i numeri di telefono non vanno mai a capo.
+TEL_V, TEL_L = C["telefono"]["visibile"].replace(" ", "\u00a0"), C["telefono"]["link"]
+WA_V, WA_N = C["whatsapp"]["visibile"].replace(" ", "\u00a0"), C["whatsapp"]["numero"]
 GLOVO = C["glovo_url"]
 GIORNI_IT = ["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"]
 SCHEMA_GIORNI = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -69,7 +70,7 @@ NAV = [
 def link_esterno(url, testo, classe="", icona_nome=None, etichetta=None):
     i = icona(icona_nome) if icona_nome else ""
     aria = f' aria-label="{e(etichetta)}"' if etichetta else ""
-    return f'<a class="{classe}" href="{e(url)}" target="_blank" rel="noopener"{aria}>{i}{testo}</a>'
+    return f'<a class="{classe}" href="{e(url)}" target="_blank" rel="noopener"{aria}>{i}{testo}<span class="sr-only"> (si apre in una nuova scheda)</span></a>'
 
 
 def fasce_testo(giorno):
@@ -219,7 +220,9 @@ def dati_js():
 def head(pagina, titolo, descrizione, extra=""):
     url = C["sito_url"].rstrip("/")
     canon = ""
-    if url:
+    if pagina == "404.html":
+        canon = '<meta name="robots" content="noindex">\n<base href="/">'
+    elif url:
         percorso = "/" if pagina == "index.html" else "/" + pagina
         canon = f'<link rel="canonical" href="{url}{percorso}">\n<meta property="og:url" content="{url}{percorso}">\n<meta property="og:image" content="{url}/assets/img/og-picea.jpg">'
     return f"""<!DOCTYPE html>
@@ -260,7 +263,7 @@ def header(pagina):
 {ICONE}
 <header class="header">
   <div class="contenitore">
-    <a class="marchio" href="index.html" aria-label="{e(C["nome_completo"])}, vai alla home">
+    <a class="marchio" href="index.html" aria-label="{e(C["nome"])}, Pozzuoli dal {C["anno_apertura"]}: torna alla home">
       {logo}
       <span class="marchio__testo"><span class="marchio__nome">{e(C["nome"])}</span><span class="marchio__sotto">Pozzuoli · dal {C["anno_apertura"]}</span></span>
     </a>
@@ -269,7 +272,7 @@ def header(pagina):
     <button class="burger" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile"><span></span><span></span><span></span></button>
   </div>
 </header>
-<div class="menu-mobile" id="menu-mobile" aria-hidden="true">
+<div class="menu-mobile" id="menu-mobile" inert>
   <nav aria-label="Menu"><ul>{"".join(voci_m)}</ul></nav>
   {info_m}
 </div>"""
@@ -297,7 +300,7 @@ def footer():
   <div class="contenitore">
     <div class="footer__griglia">
       <div>
-        <a class="marchio" href="index.html" aria-label="{e(C["nome_completo"])}, vai alla home">{logo}<span class="marchio__testo"><span class="marchio__nome">{e(C["nome"])}</span><span class="marchio__sotto">Pozzuoli · dal {C["anno_apertura"]}</span></span></a>
+        <a class="marchio" href="index.html" aria-label="{e(C["nome"])}, Pozzuoli dal {C["anno_apertura"]}: torna alla home">{logo}<span class="marchio__testo"><span class="marchio__nome">{e(C["nome"])}</span><span class="marchio__sotto">Pozzuoli · dal {C["anno_apertura"]}</span></span></a>
         <p>Pizzeria napoletana nel centro storico di Pozzuoli. La verace pizza napoletana, cotta nel forno a legna.</p>
         {social_html()}
       </div>
@@ -311,7 +314,7 @@ def footer():
       <div>
         <h2>Contatti</h2>
         <ul>
-          <li><a href="tel:{TEL_L}">Tel. {e(TEL_V)}</a></li>
+          <li><a href="tel:{TEL_L}">Tel.&nbsp;{e(TEL_V)}</a></li>
           {wa}
           <li><a href="mailto:{e(C["email"])}">{e(C["email"])}</a></li>
           {glovo}
@@ -364,7 +367,7 @@ def home():
     glovo_hero = bottone_glovo()
     corpo = f"""
 <section class="hero" aria-labelledby="titolo-home">
-  {immagine("pizze", "Tre pizze napoletane di Picea viste dall'alto su un tavolo di legno", [800, 1280, 2000, 2800], "(max-aspect-ratio: 3/2) 150vh, 100vw", "hero__foto", lazy=False, priorita=True, w=2000, h=1333)}
+  {immagine("pizze", "Tre pizze napoletane di Picea viste dall’alto su un tavolo di legno", [800, 1280, 2000, 2800], "(max-aspect-ratio: 3/2) 150vh, 100vw", "hero__foto", lazy=False, priorita=True, w=2000, h=1333)}
   <div class="contenitore">
     {stato_html()}
     <p class="hero__epigrafe" aria-hidden="true">PVTEOLI · MCMXCVI</p>
@@ -573,7 +576,7 @@ def prenota():
             <input id="p-persone" name="persone" type="number" inputmode="numeric" min="1" max="{pmax}" value="2" required>
             <button type="button" data-persone="1" aria-label="Una persona in più">+</button>
           </div>
-          <span class="aiuto">Per più di {pmax} persone o per un evento privato, chiamaci.</span>
+          <span class="aiuto">Per gruppi numerosi o eventi privati, chiamaci.</span>
         </div>
         <div class="campo">
           <label for="p-note">Note <span style="text-transform:none;letter-spacing:0;font-weight:400">(facoltativo)</span></label>
@@ -617,7 +620,7 @@ def contatti():
       <div class="canali rivela">
         <a class="canale" href="tel:{TEL_L}">{icona("tel")}<div><small>Telefono</small><span>{e(TEL_V)}</span></div></a>
         {wa}
-        <a class="canale" href="mailto:{e(C["email"])}">{icona("email")}<div><small>Email</small><span>{e(C["email"])}</span></div></a>
+        <a class="canale" href="mailto:{e(C["email"])}">{icona("email")}<div><small>Email</small><span>{e(C["email"]).replace("@", "@<wbr>")}</span></div></a>
         <a class="canale" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Indirizzo</small><span>{e(IND["via"])}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</span></div></a>
       </div>
       <h2 class="titolo-sezione rivela" style="font-size:2rem;margin-top:48px">Orari</h2>
@@ -635,6 +638,7 @@ def contatti():
           </div>
           <div class="campo"><label for="c-messaggio">Messaggio</label><textarea id="c-messaggio" required></textarea></div>
           <p class="errore" id="c-errore" role="alert"></p>
+          <p class="nota-modulo" id="c-stato" role="status" hidden>Si sta aprendo la tua app di posta con il messaggio pronto. Se non si apre, scrivici a <a href="mailto:{e(C["email"])}">{e(C["email"])}</a> oppure chiamaci al {e(TEL_V)}.</p>
           <button class="btn" type="submit">{icona("email")}Scrivi l’email</button>
           <p class="nota-modulo">Il sito non salva i tuoi dati. <a href="privacy.html">Privacy</a></p>
         </form>
@@ -657,6 +661,8 @@ def privacy():
     if L["codice_fiscale"] and L["codice_fiscale"] != L["partita_iva"]:
         ident.append(f"<dt>Codice fiscale</dt><dd>{e(L['codice_fiscale'])}</dd>")
     sede = e(L["sede_legale"] or INDIRIZZO_RIGA)
+    nota_logo = ("\n    <p>Il logo viene caricato da un server esterno (DISH Digital Solutions), che può ricevere l’indirizzo IP del visitatore.</p>"
+                 if C["logo_url"].startswith("http") else "")
     corpo = f"""
 <section class="testata">
   <div class="contenitore">
@@ -677,7 +683,7 @@ def privacy():
     </dl>
 
     <h2>Cookie e statistiche</h2>
-    <p>Questo sito non usa cookie di profilazione né strumenti di statistica o pubblicità. I caratteri tipografici sono ospitati sul sito stesso, senza collegamenti a servizi esterni.</p>
+    <p>Questo sito non usa cookie di profilazione né strumenti di statistica o pubblicità. I caratteri tipografici sono ospitati sul sito stesso.</p>{nota_logo}
 
     <h2>Prenotazioni e messaggi</h2>
     <p>I moduli “Prenota” e “Scrivici” non salvano dati sul sito. Servono solo a preparare un messaggio (con nome, giorno, orario, numero di persone, note o testo del messaggio) che invii tu tramite WhatsApp o la tua app di posta elettronica. Riceviamo questi dati soltanto se scegli di inviare il messaggio e li usiamo esclusivamente per rispondere alla tua richiesta e gestire la prenotazione (art. 6, par. 1, lett. b del GDPR). Li conserviamo per il tempo necessario a questo scopo.</p>
@@ -693,7 +699,7 @@ def privacy():
     <p>Il servizio che ospita il sito può registrare automaticamente dati tecnici (come indirizzo IP, data e ora della visita) per garantirne il funzionamento e la sicurezza.</p>
 
     <h2>I tuoi diritti</h2>
-    <p>Puoi chiedere in qualsiasi momento l’accesso, la rettifica o la cancellazione dei tuoi dati, la limitazione del trattamento o opporti, scrivendo a <a href="mailto:{e(C["email"])}">{e(C["email"])}</a> (artt. 15–22 GDPR). Puoi anche presentare reclamo al <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
+    <p>Puoi chiedere in qualsiasi momento l’accesso, la rettifica o la cancellazione dei tuoi dati e la limitazione del trattamento, oppure opporti al trattamento, scrivendo a <a href="mailto:{e(C["email"])}">{e(C["email"])}</a> (artt. 15–22 GDPR). Puoi anche presentare reclamo al <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
 
     <p style="margin-top:40px;color:var(--grigio-scuro)">Ultimo aggiornamento: {OGGI.day} {["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"][OGGI.month - 1]} {OGGI.year}.</p>
   </div>

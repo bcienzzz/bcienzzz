@@ -46,7 +46,7 @@
 </defs></svg>
 <header class="header">
   <div class="contenitore">
-    <a class="marchio" href="index.html" aria-label="Pizzeria Picea, vai alla home">
+    <a class="marchio" href="index.html" aria-label="Picea, Pozzuoli dal 1996: torna alla home">
       <img src="https://cdn.website.dish.co/media/1b/df/5088652/Pizzeria-Picea-130305898-2771379876455441-1981788927430622800-n-jpg.jpg" alt="" width="48" height="48" referrerpolicy="no-referrer" onerror="this.remove()">
       <span class="marchio__testo"><span class="marchio__nome">Picea</span><span class="marchio__sotto">Pozzuoli · dal 1996</span></span>
     </a>
@@ -55,14 +55,14 @@
     <button class="burger" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile"><span></span><span></span><span></span></button>
   </div>
 </header>
-<div class="menu-mobile" id="menu-mobile" aria-hidden="true">
+<div class="menu-mobile" id="menu-mobile" inert>
   <nav aria-label="Menu"><ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="storia.html">La storia</a></li><li><a href="prenota.html">Prenota</a></li><li><a href="contatti.html">Contatti</a></li></ul></nav>
-  <p class="info">Corso della Repubblica, 131, 80078 Pozzuoli (NA)<br><a href="tel:+390813030195">081 303 0195</a></p>
+  <p class="info">Corso della Repubblica, 131, 80078 Pozzuoli (NA)<br><a href="tel:+390813030195">081 303 0195</a></p>
 </div>
 <main id="contenuto">
 
 <section class="hero" aria-labelledby="titolo-home">
-  <picture class="hero__foto"><source type="image/webp" srcset="assets/img/pizze-800.webp 800w, assets/img/pizze-1280.webp 1280w, assets/img/pizze-2000.webp 2000w, assets/img/pizze-2800.webp 2800w" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"><img src="assets/img/pizze-2000.jpg" srcset="assets/img/pizze-800.jpg 800w, assets/img/pizze-1280.jpg 1280w, assets/img/pizze-2000.jpg 2000w, assets/img/pizze-2800.jpg 2800w" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw" alt="Tre pizze napoletane di Picea viste dall&#x27;alto su un tavolo di legno" width="2000" height="1333" decoding="async" fetchpriority="high"></picture>
+  <picture class="hero__foto"><source type="image/webp" srcset="assets/img/pizze-800.webp 800w, assets/img/pizze-1280.webp 1280w, assets/img/pizze-2000.webp 2000w, assets/img/pizze-2800.webp 2800w" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"><img src="assets/img/pizze-2000.jpg" srcset="assets/img/pizze-800.jpg 800w, assets/img/pizze-1280.jpg 1280w, assets/img/pizze-2000.jpg 2000w, assets/img/pizze-2800.jpg 2800w" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw" alt="Tre pizze napoletane di Picea viste dall’alto su un tavolo di legno" width="2000" height="1333" decoding="async" fetchpriority="high"></picture>
   <div class="contenitore">
     <p class="stato" data-stato hidden role="status"><span class="stato__punto" aria-hidden="true"></span><span data-stato-testo></span></p>
     <p class="hero__epigrafe" aria-hidden="true">PVTEOLI · MCMXCVI</p>
@@ -70,7 +70,7 @@
     <p class="hero__sotto">La vera pizza napoletana, cotta nel forno a legna nel centro storico di Pozzuoli.</p>
     <div class="hero__azioni">
       <a class="btn" href="prenota.html"><svg aria-hidden="true" focusable="false"><use href="#i-calendario"/></svg>Prenota un tavolo</a>
-      <a class="btn btn--vuoto btn--glovo" href="https://glovoapp.com/" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-scooter"/></svg>Ordina su Glovo</a>
+      <a class="btn btn--vuoto btn--glovo" href="https://glovoapp.com/" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-scooter"/></svg>Ordina su Glovo<span class="sr-only"> (si apre in una nuova scheda)</span></a>
       <a class="btn btn--vuoto solo-desktop" href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>Chiama</a>
     </div>
   </div>
@@ -80,7 +80,7 @@
   <div class="contenitore">
     <a class="info-rapide__voce" href="#orari"><svg aria-hidden="true" focusable="false"><use href="#i-orologio"/></svg><div><small>Oggi</small><span data-oggi-orari>Vedi gli orari</span></div></a>
     <a class="info-rapide__voce" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg><div><small>Dove siamo</small><span>Corso della Repubblica, 131 · Pozzuoli</span></div></a>
-    <a class="info-rapide__voce" href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg><div><small>Chiama</small><span>081 303 0195</span></div></a>
+    <a class="info-rapide__voce" href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg><div><small>Chiama</small><span>081 303 0195</span></div></a>
   </div>
 </section>
 
@@ -115,7 +115,7 @@
     <span class="occhiello rivela">Da Picea</span>
     <h2 class="titolo-sezione rivela" id="titolo-servizi">Al tavolo, da asporto <em>o a casa tua</em></h2>
     <p class="intro-sezione rivela">Una delle storiche pizzerie di Pozzuoli. Una cultura generazionale della tradizione della pizza partenopea.</p>
-    <ul class="servizi rivela"><li><svg aria-hidden="true" focusable="false"><use href="#i-accessibile"/></svg>Accessibile</li><li><svg aria-hidden="true" focusable="false"><use href="#i-consegna"/></svg>Consegna a domicilio</li><li><svg aria-hidden="true" focusable="false"><use href="#i-aperto"/></svg>Tavoli all’aperto</li><li><svg aria-hidden="true" focusable="false"><use href="#i-eventi"/></svg>Eventi privati</li><li><svg aria-hidden="true" focusable="false"><use href="#i-asporto"/></svg>Take away</li><li><svg aria-hidden="true" focusable="false"><use href="#i-wifi"/></svg>Wi-Fi gratuito</li></ul>
+    <ul class="servizi rivela"><li><svg aria-hidden="true" focusable="false"><use href="#i-accessibile"/></svg>Accessibile</li><li><svg aria-hidden="true" focusable="false"><use href="#i-consegna"/></svg>Consegna a domicilio</li><li><svg aria-hidden="true" focusable="false"><use href="#i-aperto"/></svg>Tavoli all’aperto</li><li><svg aria-hidden="true" focusable="false"><use href="#i-eventi"/></svg>Eventi privati</li><li><svg aria-hidden="true" focusable="false"><use href="#i-asporto"/></svg>Da asporto</li><li><svg aria-hidden="true" focusable="false"><use href="#i-wifi"/></svg>Wi-Fi gratuito</li></ul>
     <p class="sottotitolo-piccolo rivela">Pagamenti accettati</p>
     <ul class="pagamenti rivela"><li>Contanti</li><li>Pagamento contactless</li><li>Mastercard</li><li>VISA</li><li>Carta di debito</li><li>Apple Pay</li><li>Maestro</li></ul>
   </div>
@@ -129,7 +129,7 @@
     <p class="intro-sezione rivela">Scegli giorno, orario e numero di persone: il messaggio si prepara da solo, tu devi solo inviarlo. Ti rispondiamo noi per confermare.</p>
     <div class="azioni rivela">
       <a class="btn" href="prenota.html"><svg aria-hidden="true" focusable="false"><use href="#i-calendario"/></svg>Prenota un tavolo</a>
-      <a class="btn btn--vuoto" href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>081 303 0195</a>
+      <a class="btn btn--vuoto" href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>081 303 0195</a>
     </div>
   </div>
 </section>
@@ -141,7 +141,7 @@
       <h2 class="titolo-sezione rivela" id="titolo-dove">Vieni a <em>trovarci</em></h2>
       <div class="rivela"><ul class="tabella-orari "><li data-giorni="1"><span class="giorni">Lunedì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="2,3,4,5"><span class="giorni">Martedì – Venerdì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="6,0"><span class="giorni">Sabato – Domenica <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>02:00</time></span></span></li></ul></div>
       <address class="indirizzo rivela">Corso della Repubblica, 131<br>80078 Pozzuoli (NA)</address>
-      <div class="hero__azioni rivela"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Indicazioni</a><a class="btn btn--vuoto" href="contatti.html">Tutti i contatti</a></div>
+      <div class="hero__azioni rivela"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Indicazioni<span class="sr-only"> (si apre in una nuova scheda)</span></a><a class="btn btn--vuoto" href="contatti.html">Tutti i contatti</a></div>
     </div>
     <div class="rivela" data-ritardo="1"><div class="mappa">
   <div class="mappa__copertina">
@@ -150,7 +150,7 @@
     <p>La mappa di Google si carica solo se la apri: prima di quel momento Google non riceve nessun dato.</p>
     <div class="azioni">
       <button class="btn" type="button" data-carica-mappa>Mostra la mappa</button>
-      <a class="btn btn--vuoto" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-esterno"/></svg>Apri in Google Maps</a>
+      <a class="btn btn--vuoto" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-esterno"/></svg>Apri in Google Maps<span class="sr-only"> (si apre in una nuova scheda)</span></a>
     </div>
   </div>
 </div></div>
@@ -162,9 +162,9 @@
   <div class="contenitore">
     <div class="footer__griglia">
       <div>
-        <a class="marchio" href="index.html" aria-label="Pizzeria Picea, vai alla home"><img src="https://cdn.website.dish.co/media/1b/df/5088652/Pizzeria-Picea-130305898-2771379876455441-1981788927430622800-n-jpg.jpg" alt="" width="48" height="48" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"><span class="marchio__testo"><span class="marchio__nome">Picea</span><span class="marchio__sotto">Pozzuoli · dal 1996</span></span></a>
+        <a class="marchio" href="index.html" aria-label="Picea, Pozzuoli dal 1996: torna alla home"><img src="https://cdn.website.dish.co/media/1b/df/5088652/Pizzeria-Picea-130305898-2771379876455441-1981788927430622800-n-jpg.jpg" alt="" width="48" height="48" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"><span class="marchio__testo"><span class="marchio__nome">Picea</span><span class="marchio__sotto">Pozzuoli · dal 1996</span></span></a>
         <p>Pizzeria napoletana nel centro storico di Pozzuoli. La verace pizza napoletana, cotta nel forno a legna.</p>
-        <div class="social"><a class="" href="https://www.instagram.com/piceapizzerie/" target="_blank" rel="noopener" aria-label="Picea su Instagram"><svg aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg></a><a class="" href="https://www.facebook.com/pizzeriapicea/" target="_blank" rel="noopener" aria-label="Picea su Facebook"><svg aria-hidden="true" focusable="false"><use href="#i-facebook"/></svg></a></div>
+        <div class="social"><a class="" href="https://www.instagram.com/piceapizzerie/" target="_blank" rel="noopener" aria-label="Picea su Instagram"><svg aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg><span class="sr-only"> (si apre in una nuova scheda)</span></a><a class="" href="https://www.facebook.com/pizzeriapicea/" target="_blank" rel="noopener" aria-label="Picea su Facebook"><svg aria-hidden="true" focusable="false"><use href="#i-facebook"/></svg><span class="sr-only"> (si apre in una nuova scheda)</span></a></div>
       </div>
       <div>
         <h2>Dove siamo</h2>
@@ -176,8 +176,8 @@
       <div>
         <h2>Contatti</h2>
         <ul>
-          <li><a href="tel:+390813030195">Tel. 081 303 0195</a></li>
-          <li><a href="https://wa.me/393389950152" target="_blank" rel="noopener">WhatsApp 338 995 0152</a></li>
+          <li><a href="tel:+390813030195">Tel.&nbsp;081 303 0195</a></li>
+          <li><a href="https://wa.me/393389950152" target="_blank" rel="noopener">WhatsApp 338 995 0152</a></li>
           <li><a href="mailto:giannivanacore@libero.it">giannivanacore@libero.it</a></li>
           <li><a href="https://glovoapp.com/" target="_blank" rel="noopener">Ordina su Glovo</a></li>
         </ul>
@@ -193,7 +193,7 @@
     </div>
   </div>
 </footer>
-<nav class="barra" aria-label="Azioni rapide" style="grid-template-columns:repeat(4,1fr)"><a href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>Chiama</a><a class="primario" href="prenota.html"><svg aria-hidden="true" focusable="false"><use href="#i-calendario"/></svg>Prenota</a><a class="" href="https://glovoapp.com/" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-scooter"/></svg>Ordina</a><a class="" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Mappa</a></nav>
+<nav class="barra" aria-label="Azioni rapide" style="grid-template-columns:repeat(4,1fr)"><a href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>Chiama</a><a class="primario" href="prenota.html"><svg aria-hidden="true" focusable="false"><use href="#i-calendario"/></svg>Prenota</a><a class="" href="https://glovoapp.com/" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-scooter"/></svg>Ordina<span class="sr-only"> (si apre in una nuova scheda)</span></a><a class="" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Mappa<span class="sr-only"> (si apre in una nuova scheda)</span></a></nav>
 <script>window.PICEA={"orari": {"1": [["18:00", "00:00"]], "2": [["11:30", "15:30"], ["18:00", "00:00"]], "3": [["11:30", "15:30"], ["18:00", "00:00"]], "4": [["11:30", "15:30"], ["18:00", "00:00"]], "5": [["11:30", "15:30"], ["18:00", "00:00"]], "6": [["11:30", "15:30"], ["18:00", "02:00"]], "0": [["11:30", "15:30"], ["18:00", "02:00"]]}, "whatsapp": "393389950152", "email": "giannivanacore@libero.it", "mapsEmbed": "https://www.google.com/maps?q=Corso%20della%20Repubblica%20131%2C%2080078%20Pozzuoli&output=embed", "indirizzo": "Corso della Repubblica, 131, 80078 Pozzuoli (NA)", "prenotazioni": {"intervallo": 30, "margine": 30, "personeMax": 20}};</script>
 <script src="assets/js/main.js" defer></script>
 </body>

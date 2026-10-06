@@ -48,16 +48,19 @@
     else testo = "<strong>Ora chiuso</strong> · apre " + (s.giorni === 0 ? "oggi" : s.giorni === 1 ? "domani" : GIORNI[s.giorno]) + " alle " + hhmm(s.apre);
     document.querySelectorAll("[data-stato]").forEach(function (el) {
       var t = el.querySelector("[data-stato-testo]");
-      if (t) t.innerHTML = testo;
+      if (t && t.innerHTML !== testo) t.innerHTML = testo;
       el.classList.toggle("aperto", s.aperto);
       el.hidden = false;
     });
+    // Dopo mezzanotte, finché è aperta la fascia della sera prima, "oggi" è ancora quella giornata.
+    var giornoServizio = adesso.giorno;
+    if (s.aperto && fasce(adesso.giorno).every(function (f) { return adesso.minuti < f[0]; })) giornoServizio = (adesso.giorno + 6) % 7;
     document.querySelectorAll("[data-oggi-orari]").forEach(function (el) {
-      var f = fasce(adesso.giorno);
+      var f = fasce(giornoServizio);
       el.textContent = f.length ? f.map(function (x) { return hhmm(x[0]) + "–" + hhmm(x[1]); }).join(" · ") : "Chiuso";
     });
     document.querySelectorAll("[data-giorni]").forEach(function (riga) {
-      var oggi = riga.getAttribute("data-giorni").split(",").indexOf(String(adesso.giorno)) !== -1;
+      var oggi = riga.getAttribute("data-giorni").split(",").indexOf(String(giornoServizio)) !== -1;
       riga.classList.toggle("oggi", oggi);
       var b = riga.querySelector(".badge-oggi");
       if (b) b.hidden = !oggi;
@@ -76,8 +79,8 @@
     burger.setAttribute("aria-expanded", String(si));
     burger.setAttribute("aria-label", si ? "Chiudi il menu" : "Apri il menu");
     menu.classList.toggle("aperto", si);
-    menu.setAttribute("aria-hidden", String(!si));
     if ("inert" in menu) menu.inert = !si;
+    document.querySelectorAll("main, footer, .barra").forEach(function (el) { if ("inert" in el) el.inert = si; });
     document.body.style.overflow = si ? "hidden" : "";
     scroll();
   }
@@ -170,7 +173,7 @@
       var lista = orariDisponibili(cData.value);
       if (!lista.length) { cOra.appendChild(new Option("Nessun orario disponibile in questo giorno", "")); cOra.disabled = true; return; }
       cOra.disabled = false;
-      cOra.appendChild(new Option("Scegli l'orario", ""));
+      cOra.appendChild(new Option("Scegli l’orario", ""));
       var pranzo = document.createElement("optgroup"); pranzo.label = "Pranzo";
       var cena = document.createElement("optgroup"); cena.label = "Cena";
       lista.forEach(function (m) {
@@ -189,22 +192,36 @@
 
     fp.querySelectorAll("[data-persone]").forEach(function (b) {
       b.addEventListener("click", function () {
-        var n = parseInt(cPers.value, 10) || 2;
+        var n = parseInt(cPers.value, 10);
+        if (!(n >= 1)) { cPers.value = 1; return; }
         n = Math.min(cfg.personeMax, Math.max(1, n + parseInt(b.getAttribute("data-persone"), 10)));
         cPers.value = n;
       });
     });
 
+    function elenco(a) { return a.length > 1 ? a.slice(0, -1).join(", ") + " e " + a[a.length - 1] : a[0]; }
+
     fp.addEventListener("submit", function (e) {
       e.preventDefault();
-      var problemi = [];
+      var ok = document.getElementById("p-inviato");
+      if (ok) ok.hidden = true;
+      // Se la pagina è rimasta aperta a lungo, aggiorna data e orari disponibili prima di controllare.
+      var ora = adessoRoma();
+      if (ora) { adesso = ora; cData.min = ora.data; riempiOrari(); }
+      var problemi = [], fuori = [];
       [cNome, cData, cOra, cPers].forEach(function (c) { c.removeAttribute("aria-invalid"); });
       if (!cNome.value.trim()) { problemi.push("il nome"); cNome.setAttribute("aria-invalid", "true"); }
-      if (!cData.value || cData.value < cData.min || cData.value > cData.max) { problemi.push("il giorno"); cData.setAttribute("aria-invalid", "true"); }
-      if (!cOra.value) { problemi.push("l'orario"); cOra.setAttribute("aria-invalid", "true"); }
-      var n = parseInt(cPers.value, 10);
-      if (!(n >= 1 && n <= cfg.personeMax)) { problemi.push("il numero di persone (da 1 a " + cfg.personeMax + ")"); cPers.setAttribute("aria-invalid", "true"); }
-      if (problemi.length) { erroreP.textContent = "Manca " + problemi.join(", ") + "."; var primo = fp.querySelector('[aria-invalid="true"]'); if (primo) primo.focus(); return; }
+      if (!cData.value) { problemi.push("il giorno"); cData.setAttribute("aria-invalid", "true"); }
+      else if (cData.value < cData.min || cData.value > cData.max) { fuori.push("Scegli un giorno da oggi ai prossimi tre mesi."); cData.setAttribute("aria-invalid", "true"); }
+      if (!cOra.value) { problemi.push("l’orario"); cOra.setAttribute("aria-invalid", "true"); }
+      var n = /^\d+$/.test(cPers.value.trim()) ? parseInt(cPers.value, 10) : NaN;
+      if (!cPers.value.trim()) { problemi.push("il numero di persone"); cPers.setAttribute("aria-invalid", "true"); }
+      else if (!(n >= 1 && n <= cfg.personeMax)) { fuori.push("Il numero di persone deve essere da 1 a " + cfg.personeMax + "."); cPers.setAttribute("aria-invalid", "true"); }
+      if (problemi.length || fuori.length) {
+        var msg = problemi.length ? (problemi.length > 1 ? "Mancano " : "Manca ") + elenco(problemi) + "." : "";
+        erroreP.textContent = (msg + " " + fuori.join(" ")).trim();
+        var primo = fp.querySelector('[aria-invalid="true"]'); if (primo) primo.focus(); return;
+      }
       erroreP.textContent = "";
       var testo = "Ciao Picea! Vorrei prenotare un tavolo.\n\n" +
         "Nome: " + cNome.value.trim() + "\n" +
@@ -214,7 +231,6 @@
         (cNote.value.trim() ? "\nNote: " + cNote.value.trim() : "") +
         "\n\nAttendo la vostra conferma. Grazie!";
       apri("https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(testo));
-      var ok = document.getElementById("p-inviato");
       if (ok) { ok.hidden = false; ok.focus(); }
     });
   }
@@ -229,10 +245,13 @@
       var manca = [];
       if (!nome.value.trim()) { manca.push("il nome"); nome.setAttribute("aria-invalid", "true"); }
       if (!msg.value.trim()) { manca.push("il messaggio"); msg.setAttribute("aria-invalid", "true"); }
-      if (manca.length) { err.textContent = "Manca " + manca.join(" e ") + "."; fc.querySelector('[aria-invalid="true"]').focus(); return; }
+      var stato = fc.querySelector("#c-stato");
+      if (stato) stato.hidden = true;
+      if (manca.length) { err.textContent = (manca.length > 1 ? "Mancano " : "Manca ") + manca.join(" e ") + "."; fc.querySelector('[aria-invalid="true"]').focus(); return; }
       err.textContent = "";
       var corpo = msg.value.trim() + "\n\n— " + nome.value.trim() + (tel.value.trim() ? "\nTelefono: " + tel.value.trim() : "");
       window.location.href = "mailto:" + D.email + "?subject=" + encodeURIComponent("Messaggio dal sito – " + nome.value.trim()) + "&body=" + encodeURIComponent(corpo);
+      if (stato) stato.hidden = false;
     });
   }
 
