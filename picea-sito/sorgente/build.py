@@ -73,14 +73,18 @@ def link_esterno(url, testo, classe="", icona_nome=None, etichetta=None):
     return f'<a class="{classe}" href="{e(url)}" target="_blank" rel="noopener"{aria}>{i}{testo}<span class="sr-only"> (si apre in una nuova scheda)</span></a>'
 
 
+def fasce_giorno(giorno):
+    return C["orari"]["fasce"].get(str(giorno)) or []
+
+
 def fasce_testo(giorno):
-    return [f"{a}–{c}" for a, c in C["orari"]["fasce"][str(giorno)]]
+    return [f"{a}–{c}" for a, c in fasce_giorno(giorno)]
 
 
 def tabella_orari(classe=""):
     righe = []
     for g in C["orari"]["gruppi"]:
-        fasce = "".join(f"<span><time>{a}</time>–<time>{c}</time></span>" for a, c in C["orari"]["fasce"][str(g["giorni"][0])])
+        fasce = "".join(f"<span><time>{a}</time>–<time>{c}</time></span>" for a, c in fasce_giorno(g["giorni"][0])) or '<span class="chiuso">Chiuso</span>'
         righe.append(
             f'<li data-giorni="{",".join(map(str, g["giorni"]))}"><span class="giorni">{e(g["etichetta"])} '
             f'<span class="badge-oggi" hidden>Oggi</span></span><span class="fasce">{fasce}</span></li>')
@@ -91,7 +95,7 @@ def settimana_html():
     nomi = [(1, "Lun"), (2, "Mar"), (3, "Mer"), (4, "Gio"), (5, "Ven"), (6, "Sab"), (0, "Dom")]
     col = []
     for g, n in nomi:
-        fasce = "".join(f'<span><time>{a}</time><i>–</i><time>{c}</time></span>' for a, c in C["orari"]["fasce"][str(g)])
+        fasce = "".join(f'<span><time>{a}</time><i>–</i><time>{c}</time></span>' for a, c in fasce_giorno(g)) or '<span class="chiuso">Chiuso</span>'
         col.append(f'<li data-giorni="{g}"><b>{n}</b>{fasce}<em class="badge-oggi" hidden>Oggi</em></li>')
     return f'<ul class="settimana">{"".join(col)}</ul>'
 
@@ -99,7 +103,7 @@ def settimana_html():
 def orari_brevi():
     out = []
     for g in C["orari"]["gruppi"]:
-        fasce = "".join(f"<span>{f}</span>" for f in fasce_testo(g["giorni"][0]))
+        fasce = "".join(f"<span>{f}</span>" for f in fasce_testo(g["giorni"][0])) or "<span>Chiuso</span>"
         out.append(f'<li><span>{e(g["etichetta"])}</span><span>{fasce}</span></li>')
     return f'<ul class="orari-brevi">{"".join(out)}</ul>'
 
@@ -183,7 +187,7 @@ def strati():
 def schema_ristorante():
     spec = []
     for g in range(7):
-        for a, c in C["orari"]["fasce"][str(g)]:
+        for a, c in fasce_giorno(g):
             spec.append({"@type": "OpeningHoursSpecification", "dayOfWeek": SCHEMA_GIORNI[g],
                          "opens": a, "closes": "23:59" if c == "00:00" else c})
     dati = {
@@ -671,6 +675,7 @@ def prenota():
         <button class="btn" type="submit">{icona("whatsapp")}Invia la richiesta su WhatsApp</button>
         <p class="nota-modulo">Il sito non salva i tuoi dati: vengono solo inseriti nel messaggio che invii tu. <a href="privacy.html">Privacy</a></p>
         <p class="nota-modulo" id="p-inviato" tabindex="-1" hidden><strong>Ora tocca a te:</strong> nella chat di WhatsApp che si è aperta premi invia. Ti rispondiamo per confermare il tavolo.</p>
+        <p class="nota-modulo" id="p-wa" hidden><a class="btn" id="p-wa-link" href="https://wa.me/{C["whatsapp"]["numero"]}" target="_blank" rel="noopener">{icona("whatsapp")}Apri WhatsApp con il messaggio</a><br>WhatsApp non si è aperto? Tocca il bottone qui sopra.</p>
       </form>
     </div>
     <aside class="lato rivela" data-ritardo="1">

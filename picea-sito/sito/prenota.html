@@ -103,6 +103,7 @@
         <button class="btn" type="submit"><svg aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Invia la richiesta su WhatsApp</button>
         <p class="nota-modulo">Il sito non salva i tuoi dati: vengono solo inseriti nel messaggio che invii tu. <a href="privacy.html">Privacy</a></p>
         <p class="nota-modulo" id="p-inviato" tabindex="-1" hidden><strong>Ora tocca a te:</strong> nella chat di WhatsApp che si è aperta premi invia. Ti rispondiamo per confermare il tavolo.</p>
+        <p class="nota-modulo" id="p-wa" hidden><a class="btn" id="p-wa-link" href="https://wa.me/393389950152" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Apri WhatsApp con il messaggio</a><br>WhatsApp non si è aperto? Tocca il bottone qui sopra.</p>
       </form>
     </div>
     <aside class="lato rivela" data-ritardo="1">
@@ -117,7 +118,7 @@
         <div class="biglietto__piede"><span>Corso della Repubblica, 131 · Pozzuoli</span><span class="biglietto__timbro" aria-hidden="true">Pronta</span></div>
       </div>
       <h2>Orari</h2>
-      <ul class="tabella-orari "><li data-giorni="1"><span class="giorni">Lunedì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="2,3,4,5"><span class="giorni">Martedì – Venerdì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="6,0"><span class="giorni">Sabato – Domenica <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>02:00</time></span></span></li></ul>
+      <ul class="tabella-orari "><li data-giorni="1"><span class="giorni">Lunedì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="2"><span class="giorni">Martedì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span class="chiuso">Chiuso</span></span></li><li data-giorni="3,4,5"><span class="giorni">Mercoledì – Venerdì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="6,0"><span class="giorni">Sabato – Domenica <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>02:00</time></span></span></li></ul>
       <div class="alternativa">
         <small>Preferisci chiamare?</small>
         <a href="tel:+390813030195">081 303 0195</a>
@@ -146,14 +147,14 @@
         <h2>Contatti</h2>
         <ul>
           <li><a href="tel:+390813030195">Tel.&nbsp;081 303 0195</a></li>
-          <li><a href="https://wa.me/393389950152" target="_blank" rel="noopener">WhatsApp 338 995 0152</a></li>
+          <li><a href="https://wa.me/393389950152" target="_blank" rel="noopener">WhatsApp 338 9950152</a></li>
           <li><a href="mailto:giannivanacore@libero.it">giannivanacore@libero.it</a></li>
           <li><a href="https://glovoapp.com/" target="_blank" rel="noopener">Ordina su Glovo</a></li>
         </ul>
       </div>
       <div>
         <h2>Orari</h2>
-        <ul class="orari-brevi"><li><span>Lunedì</span><span><span>18:00–00:00</span></span></li><li><span>Martedì – Venerdì</span><span><span>11:30–15:30</span><span>18:00–00:00</span></span></li><li><span>Sabato – Domenica</span><span><span>11:30–15:30</span><span>18:00–02:00</span></span></li></ul>
+        <ul class="orari-brevi"><li><span>Lunedì</span><span><span>18:00–00:00</span></span></li><li><span>Martedì</span><span><span>Chiuso</span></span></li><li><span>Mercoledì – Venerdì</span><span><span>11:30–15:30</span><span>18:00–00:00</span></span></li><li><span>Sabato – Domenica</span><span><span>11:30–15:30</span><span>18:00–02:00</span></span></li></ul>
       </div>
     </div>
     <p class="footer__gigante" aria-hidden="true">Picea</p>
@@ -164,7 +165,7 @@
   </div>
 </footer>
 <nav class="barra" aria-label="Azioni rapide" style="grid-template-columns:repeat(4,1fr)"><a href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>Chiama</a><a class="primario" href="prenota.html" aria-current="page"><svg aria-hidden="true" focusable="false"><use href="#i-calendario"/></svg>Prenota</a><a class="" href="https://glovoapp.com/" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-scooter"/></svg>Ordina<span class="sr-only"> (si apre in una nuova scheda)</span></a><a class="" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Mappa<span class="sr-only"> (si apre in una nuova scheda)</span></a></nav>
-<script>window.PICEA={"orari": {"1": [["18:00", "00:00"]], "2": [["11:30", "15:30"], ["18:00", "00:00"]], "3": [["11:30", "15:30"], ["18:00", "00:00"]], "4": [["11:30", "15:30"], ["18:00", "00:00"]], "5": [["11:30", "15:30"], ["18:00", "00:00"]], "6": [["11:30", "15:30"], ["18:00", "02:00"]], "0": [["11:30", "15:30"], ["18:00", "02:00"]]}, "whatsapp": "393389950152", "email": "giannivanacore@libero.it", "mapsEmbed": "https://www.google.com/maps?q=Corso%20della%20Repubblica%20131%2C%2080078%20Pozzuoli&output=embed", "indirizzo": "Corso della Repubblica, 131, 80078 Pozzuoli (NA)", "prenotazioni": {"intervallo": 30, "margine": 30, "personeMax": 20}};</script>
+<script>window.PICEA={"orari": {"1": [["18:00", "00:00"]], "2": [], "3": [["11:30", "15:30"], ["18:00", "00:00"]], "4": [["11:30", "15:30"], ["18:00", "00:00"]], "5": [["11:30", "15:30"], ["18:00", "00:00"]], "6": [["11:30", "15:30"], ["18:00", "02:00"]], "0": [["11:30", "15:30"], ["18:00", "02:00"]]}, "whatsapp": "393389950152", "email": "giannivanacore@libero.it", "mapsEmbed": "https://www.google.com/maps?q=Corso%20della%20Repubblica%20131%2C%2080078%20Pozzuoli&output=embed", "indirizzo": "Corso della Repubblica, 131, 80078 Pozzuoli (NA)", "prenotazioni": {"intervallo": 30, "margine": 30, "personeMax": 20}};</script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

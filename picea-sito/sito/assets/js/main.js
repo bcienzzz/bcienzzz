@@ -138,11 +138,6 @@
     }, { passive: true });
   }
 
-  function apri(url) {
-    var a = document.createElement("a");
-    a.href = url; a.target = "_blank"; a.rel = "noopener";
-    document.body.appendChild(a); a.click(); a.remove();
-  }
 
   /* ---------- Prenotazione via WhatsApp ---------- */
   var fp = document.getElementById("modulo-prenota");
@@ -171,7 +166,7 @@
       cOra.innerHTML = "";
       if (!cData.value) { cOra.appendChild(new Option("Scegli prima il giorno", "")); cOra.disabled = true; return; }
       var lista = orariDisponibili(cData.value);
-      if (!lista.length) { cOra.appendChild(new Option("Nessun orario disponibile in questo giorno", "")); cOra.disabled = true; return; }
+      if (!lista.length) { cOra.appendChild(new Option(fasce(giornoSett(cData.value)).length ? "Nessun orario disponibile in questo giorno" : "Il " + GIORNI[giornoSett(cData.value)] + " siamo chiusi", "")); cOra.disabled = true; return; }
       cOra.disabled = false;
       cOra.appendChild(new Option("Scegli l’orario", ""));
       var pranzo = document.createElement("optgroup"); pranzo.label = "Pranzo";
@@ -203,8 +198,9 @@
 
     fp.addEventListener("submit", function (e) {
       e.preventDefault();
-      var ok = document.getElementById("p-inviato");
+      var ok = document.getElementById("p-inviato"), wa = document.getElementById("p-wa");
       if (ok) ok.hidden = true;
+      if (wa) wa.hidden = true;
       // Se la pagina è rimasta aperta a lungo, aggiorna data e orari disponibili prima di controllare.
       var ora = adessoRoma();
       if (ora) { adesso = ora; cData.min = ora.data; riempiOrari(); }
@@ -230,7 +226,15 @@
         "Persone: " + n +
         (cNote.value.trim() ? "\nNote: " + cNote.value.trim() : "") +
         "\n\nAttendo la vostra conferma. Grazie!";
-      apri("https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(testo));
+      var url = "https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(testo);
+      // Il bottone resta visibile: se il browser blocca l'apertura automatica, basta toccarlo.
+      var link = document.getElementById("p-wa-link");
+      if (link) link.href = url;
+      if (wa) wa.hidden = false;
+      var finestra = null;
+      try { finestra = window.open(url, "_blank"); } catch (err) { finestra = null; }
+      if (finestra) { try { finestra.opener = null; } catch (err) {} }
+      else { try { window.location.href = url; } catch (err) {} }
       if (ok) { ok.hidden = false; ok.focus(); }
     });
   }
