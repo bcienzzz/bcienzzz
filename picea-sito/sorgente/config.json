@@ -27,7 +27,7 @@
     "numero": "393389950152"
   },
   "email": "giannivanacore@libero.it",
-  "glovo_url": "https://glovoapp.com/",
+  "glovo_url": "https://glovoapp.com/it/it/napoli/stores/pizzeria-picea-nap",
   "social": {
     "instagram": "https://www.instagram.com/piceapizzerie/",
     "facebook": "https://www.facebook.com/pizzeriapicea/"
@@ -171,7 +171,7 @@
     "codice_fiscale": "",
     "sede_legale": ""
   },
-  "glovo_provvisorio": true,
+  "glovo_provvisorio": false,
   "cronologia": [
     {
       "anno": "1996",
