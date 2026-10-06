@@ -391,24 +391,19 @@ def home():
     <div class="rivela">
       <span class="occhiello">Dal {C["anno_apertura"]}</span>
       <h2 class="citazione" id="titolo-intro">Rispettare le origini per <em>esaltare i sapori</em>.</h2>
-      <p class="dettaglio">Picea prende il nome dalla <i class="botanica">Picea abies</i>, l’abete rosso con cui gli antichi romani alimentavano i loro forni pubblici. Dal {C["anno_apertura"]}, nel centro storico di Pozzuoli, è un dialogo tra la fornace romana e il forno moderno.</p>
+      <p class="dettaglio">Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero.</p>
       <a class="link-freccia" href="storia.html">Leggi la nostra storia {icona("freccia")}</a>
     </div>
-    <figure class="intro-storia__ramo rivela" data-ritardo="1" style="margin:0">
-      {ramo_svg()}
-      <figcaption class="didascalia-botanica"><i>Picea abies</i> · abete rosso</figcaption>
-    </figure>
   </div>
 </section>
 
 <section class="sezione" aria-labelledby="titolo-metodo">
-  <div class="contenitore metodo">
-    <div class="metodo__foto rivela">{immagine("dettaglio-gialli", "Pizza napoletana con pomodorini gialli, fior di latte e basilico", None, "", w=1600, h=1328)}</div>
+  <div class="contenitore stretto">
     <div>
       <span class="occhiello rivela">La nostra pizza</span>
       <h2 class="titolo-sezione rivela" id="titolo-metodo">La verace pizza <em>napoletana</em></h2>
       <ol class="passi">
-        <li class="rivela"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi: pomodoro San Marzano DOP, fior di latte di Agerola, pomodorino del Piennolo del Vesuvio DOP.</p></li>
+        <li class="rivela"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
         <li class="rivela"><span class="num" aria-hidden="true">II</span><h3>L’impasto</h3><p>Un impasto disciplinato da tempi di lievitazione rigorosi.</p></li>
         <li class="rivela"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
         <li class="rivela"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
@@ -422,7 +417,6 @@ def home():
     <span class="occhiello rivela">Da Picea</span>
     <h2 class="titolo-sezione rivela" id="titolo-servizi">Al tavolo, da asporto <em>o a casa tua</em></h2>
     <p class="intro-sezione rivela">Una delle storiche pizzerie di Pozzuoli. Una cultura generazionale della tradizione della pizza partenopea.</p>
-    <figure class="foto-locale rivela">{immagine("bancone", "Il bancone di Picea con l'insegna in maiolica e i tavoli bianchi della sala", [800, 1280, 2000], "(min-width: 1200px) 1140px, 100vw", w=2000, h=1250)}</figure>
     <ul class="servizi rivela">{servizi}</ul>
     <p class="sottotitolo-piccolo rivela">Pagamenti accettati</p>
     <ul class="pagamenti rivela">{pagamenti}</ul>
@@ -463,63 +457,25 @@ def home():
 def storia():
     corpo = f"""
 <section class="testata">
-  {ramo_svg()}
   <div class="contenitore">
     <span class="occhiello">Dal {C["anno_apertura"]}</span>
     <h1>La nostra storia</h1>
-    <p>Come la legna dei forni romani ha dato il nome alla nostra pizzeria.</p>
   </div>
 </section>
 
 <section class="sezione chiaro">
-  <div class="contenitore stretto">
-    <article>
-      <section class="capitolo capitolo--primo rivela" aria-labelledby="cap-1">
-        <span class="capitolo__num" aria-hidden="true">I</span>
-        <div>
-          <h2 id="cap-1">Un luogo che respira archeologia</h2>
-          <p>Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero: terme, macellum, ville, anfiteatri. Un luogo che respira archeologia.</p>
-        </div>
-      </section>
-      <section class="capitolo rivela" aria-labelledby="cap-2">
-        <span class="capitolo__num" aria-hidden="true">II</span>
-        <div>
-          <h2 id="cap-2"><i class="botanica">Picea abies</i></h2>
-          <p>Tra le fonti, Giovanni incrocia la <i class="botanica">Picea abies</i>, l’abete rosso: era il combustibile eletto dai romani per alimentare i loro forni pubblici. Una legna vigorosa, che sprigionava calore rapido e un profumo balsamico. Da quella intuizione nasce “Picea”.</p>
-        </div>
-      </section>
-      <section class="capitolo rivela" aria-labelledby="cap-3">
-        <span class="capitolo__num" aria-hidden="true">III</span>
-        <div>
-          <h2 id="cap-3">La verace pizza napoletana</h2>
-          <p>Pioniere a Pozzuoli della pizza tradizionale napoletana, Giovanni sceglie una caratteristica ben precisa: cornicione contenuto e stesura della verace pizza napoletana, impasto disciplinato da tempi di lievitazione rigorosi. La materia prima? Solo eccellenze del territorio, selezionate senza compromessi.</p>
-        </div>
-      </section>
-      <section class="capitolo rivela" aria-labelledby="cap-4">
-        <span class="capitolo__num" aria-hidden="true">IV</span>
-        <div>
-          <h2 id="cap-4">Più di una pizzeria</h2>
-          <p>Diventa così più di una pizzeria: è una continuità. Un dialogo tra la fornace romana e il forno moderno.</p>
-        </div>
-      </section>
-    </article>
-    <figure class="foto-locale rivela">{immagine("sala", "La sala di Picea con i tavoli apparecchiati e, in fondo, il bancone", [800, 1280, 2000], "(min-width: 900px) 860px, 100vw", w=2000, h=1250)}</figure>
+  <div class="contenitore stretto storia-testo">
+    <div class="capitolo--primo rivela">
+      <p>Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero: terme, macellum, ville, anfiteatri. Un luogo che respira archeologia.</p>
+    </div>
+    <p class="rivela">Tra le fonti, Giovanni incrocia la “Picea abies”, un abete rosso: era il combustibile eletto dai romani per alimentare i loro forni pubblici. Una legna vigorosa, che sprigionava calore rapido e un profumo balsamico. Da quella intuizione nasce “Picea”.</p>
+    <p class="rivela">Pioniere a Pozzuoli della pizza tradizionale napoletana, Giovanni sceglie una caratteristica ben precisa: cornicione contenuto e stesura della verace pizza napoletana, impasto disciplinato da tempi di lievitazione rigorosi. La materia prima? Solo eccellenze del territorio, selezionate senza compromessi.</p>
+    <p class="rivela">Diventa così più di una pizzeria: è una continuità. Un dialogo tra la fornace romana e il forno moderno.</p>
     <blockquote class="estratto rivela">
       <p>Dal 1996 ad oggi la filosofia è immutata: rispettare le origini per esaltare i sapori.</p>
-      <cite>Picea · Pozzuoli</cite>
     </blockquote>
-    <p class="rivela" style="font-size:1.2rem;text-align:center;max-width:46ch;margin-inline:auto">Entrare da Picea significa assaporare una pizza, ma anche una stratificazione di storia.</p>
-  </div>
-</section>
-
-<section class="sezione">
-  <div class="contenitore stretto">
-    <span class="occhiello rivela">In breve</span>
-    <h2 class="titolo-sezione rivela">Dalla fornace romana <em>al forno moderno</em></h2>
-    <ol class="cronologia rivela" style="margin-top:36px">
-      {cronologia_html()}
-    </ol>
-    <div class="hero__azioni rivela" style="margin-top:40px">
+    <p class="rivela finale">Entrare da Picea significa assaporare una pizza, ma anche una stratificazione di storia.</p>
+    <div class="hero__azioni rivela" style="margin-top:48px;justify-content:center">
       <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
       <a class="btn btn--vuoto" href="contatti.html">Contatti</a>
     </div>
@@ -527,7 +483,7 @@ def storia():
 </section>
 """
     pagina("storia.html", f"La nostra storia · {C['nome_completo']} a Pozzuoli",
-           "Nel 1996 Giovanni Vanacore apre Picea a Pozzuoli. Il nome viene dalla Picea abies, l'abete rosso che alimentava i forni pubblici romani.",
+           "La storia di Picea, pizzeria napoletana nel centro storico di Pozzuoli dal 1996.",
            corpo)
 
 
@@ -550,7 +506,6 @@ def menu():
     avviso = f'<p class="avviso-menu">{e(MENU["avviso"])}</p>' if MENU.get("avviso") else ""
     corpo = f"""
 <section class="testata">
-  {ramo_svg()}
   <div class="contenitore">
     <span class="occhiello">Dal nostro forno</span>
     <h1>Il menu</h1>
@@ -587,7 +542,6 @@ def prenota():
     pmax = C["prenotazioni"]["persone_max"]
     corpo = f"""
 <section class="testata">
-  {ramo_svg()}
   <div class="contenitore">
     <span class="occhiello">Prenotazioni</span>
     <h1>Prenota un tavolo</h1>
@@ -651,7 +605,6 @@ def contatti():
           f'<div><small>WhatsApp</small><span>{e(WA_V)}</span></div></a>') if WA_N else ""
     corpo = f"""
 <section class="testata">
-  {ramo_svg()}
   <div class="contenitore">
     <span class="occhiello">Contatti</span>
     <h1>Vieni a trovarci</h1>
