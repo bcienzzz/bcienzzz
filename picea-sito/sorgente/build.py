@@ -325,6 +325,7 @@ def footer():
         {orari_brevi()}
       </div>
     </div>
+    <p class="footer__gigante" aria-hidden="true">{e(C["nome"])}</p>
     <div class="footer__fondo">
       <p>© <span data-anno>{OGGI.year}</span> {legale_riga()}</p>
       <p><a href="privacy.html">Privacy</a></p>
@@ -357,6 +358,7 @@ def stato_html():
 
 # ------------------------------------------------------------------ pagine
 def home():
+    NASTRO = "".join(f"<span>{v}</span>" for v in ['Verace pizza napoletana', 'Forno a legna', 'Centro storico di Pozzuoli', 'Dal 1996'])
     firme = [p for cat in MENU["categorie"] for p in cat["piatti"] if p.get("in_evidenza")]
     lista_firme = "".join(
         f'<li><h3>{e(p["nome"])}</h3>' + (f'<p>{e(p["descrizione"])}</p>' if p.get("descrizione") else "") + "</li>"
@@ -389,7 +391,10 @@ def home():
   </div>
 </section>
 
+<div class="nastro" aria-hidden="true"><div class="nastro__binario">{NASTRO}{NASTRO}</div></div>
+
 <section class="sezione chiaro" aria-labelledby="titolo-intro">
+  <span class="anno-sfondo" aria-hidden="true">MCMXCVI</span>
   <div class="contenitore intro-storia">
     <div class="rivela">
       <span class="occhiello">Dal {C["anno_apertura"]}</span>
@@ -400,16 +405,17 @@ def home():
   </div>
 </section>
 
-<section class="sezione" aria-labelledby="titolo-metodo">
-  <div class="contenitore stretto">
-    <div>
+<section class="sezione metodo-sezione" aria-labelledby="titolo-metodo">
+  <div class="contenitore">
+    <div class="centro">
       <span class="occhiello rivela">La nostra pizza</span>
       <h2 class="titolo-sezione rivela" id="titolo-metodo">La verace pizza <em>napoletana</em></h2>
-      <ol class="passi">
-        <li class="rivela"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
-        <li class="rivela"><span class="num" aria-hidden="true">II</span><h3>L’impasto</h3><p>Un impasto disciplinato da tempi di lievitazione rigorosi.</p></li>
-        <li class="rivela"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
-        <li class="rivela"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
+      <div class="strati" aria-hidden="true"><span></span><span></span><span></span></div>
+      <ol class="passi passi--schede">
+        <li class="rivela" data-ritardo="0"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
+        <li class="rivela" data-ritardo="1"><span class="num" aria-hidden="true">II</span><h3>L’impasto</h3><p>Un impasto disciplinato da tempi di lievitazione rigorosi.</p></li>
+        <li class="rivela" data-ritardo="2"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
+        <li class="rivela" data-ritardo="3"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
       </ol>
     </div>
   </div>
@@ -436,6 +442,10 @@ def home():
       <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
       <a class="btn btn--vuoto" href="tel:{TEL_L}">{icona("tel")}{e(TEL_V)}</a>
     </div>
+    <a class="sigillo" href="prenota.html" aria-label="Prenota un tavolo">
+      <svg class="sigillo__testo" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="cerchio" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#cerchio" textLength="486" lengthAdjust="spacing">PRENOTA SU WHATSAPP · PRENOTA SU WHATSAPP · </textPath></text></svg>
+      <span class="sigillo__centro">{icona("whatsapp")}</span>
+    </a>
   </div>
 </section>
 

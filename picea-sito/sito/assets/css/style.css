@@ -588,3 +588,59 @@ body::after {
   .js .titolo-sezione.rivela.visto, .js .citazione.rivela.visto, .js .rivela.visto .citazione { animation: none; }
   .braci { display: none; }
 }
+
+/* ---------- Nastro scorrevole ---------- */
+.nastro { position: relative; overflow: hidden; background: var(--bordo-sezione); padding: 26px 0; border-block: 1px solid rgba(201, 139, 62, .18);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.nastro__binario { display: flex; width: max-content; animation: nastro 38s linear infinite; }
+.nastro span { display: inline-flex; align-items: center; gap: 44px; padding-right: 44px; white-space: nowrap;
+  font-family: var(--f-titoli); font-size: clamp(1.6rem, 4.2vw, 2.8rem); letter-spacing: .06em; color: transparent; -webkit-text-stroke: 1px rgba(243, 239, 232, .55); }
+.nastro span:nth-child(odd) { color: var(--calce); -webkit-text-stroke: 0; }
+.nastro span::after { content: "✦"; font-size: .45em; color: var(--resina); -webkit-text-stroke: 0; }
+@keyframes nastro { to { transform: translateX(-50%); } }
+.nastro:hover .nastro__binario { animation-play-state: paused; }
+
+/* ---------- Intro: anno romano sullo sfondo ---------- */
+.chiaro { position: relative; overflow: hidden; isolation: isolate; }
+.anno-sfondo { position: absolute; z-index: -1; right: -2vw; top: 50%; transform: translateY(-50%); pointer-events: none;
+  font-family: var(--f-titoli); font-size: clamp(6rem, 22vw, 20rem); line-height: 1; letter-spacing: .02em; white-space: nowrap;
+  color: transparent; -webkit-text-stroke: 1.5px rgba(138, 87, 23, .16); }
+@media (max-width: 719px) { .anno-sfondo { top: auto; bottom: 120px; transform: none; right: -10vw; } }
+
+/* ---------- La nostra pizza: quattro schede ---------- */
+.metodo-sezione { background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(201, 139, 62, .10), transparent 70%), var(--bordo-sezione) !important; }
+.metodo-sezione .centro { text-align: center; }
+.metodo-sezione .occhiello { justify-content: center; }
+.passi--schede { display: grid; gap: 16px; margin-top: 48px; text-align: left; }
+.passi--schede li { position: relative; display: block; padding: 34px 28px 30px; border: 1px solid var(--cenere); border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, 0)); overflow: hidden;
+  transition: transform .5s var(--ease), border-color .5s var(--ease), background .5s var(--ease); }
+.passi--schede li:last-child { border-bottom: 1px solid var(--cenere); }
+.passi--schede li::after { content: ""; position: absolute; left: 28px; right: 28px; top: 0; height: 1px; background: var(--resina); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease) .3s; }
+.passi--schede li.visto::after { transform: scaleX(1); }
+.passi--schede li:hover { transform: translateY(-6px); border-color: rgba(201, 139, 62, .45); background: linear-gradient(180deg, rgba(201, 139, 62, .08), rgba(201, 139, 62, 0)); }
+.passi--schede .num { display: block; font-size: 4.2rem; line-height: 1; margin-bottom: 22px; color: transparent; -webkit-text-stroke: 1px var(--resina); }
+.passi--schede h3 { font-size: 1.55rem; margin-bottom: 10px; }
+.passi--schede p { color: var(--grigio-chiaro); }
+.js .rivela[data-ritardo="0"] { transition-delay: 0s; }
+@media (min-width: 720px) { .passi--schede { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .passi--schede { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+
+/* ---------- Sigillo rotante ---------- */
+.banda .contenitore { position: relative; }
+.sigillo { position: absolute; right: var(--gutter); bottom: -10px; width: 168px; height: 168px; display: none; place-items: center; color: var(--calce); text-decoration: none; }
+.sigillo__testo { position: absolute; inset: 0; width: 100%; height: 100%; animation: ruota 22s linear infinite; }
+.sigillo__testo text { font-family: var(--f-testo); font-size: 14px; font-weight: 700; fill: currentColor; }
+.sigillo__centro { width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; background: var(--resina); color: var(--carbone); transition: transform .4s var(--ease); }
+.sigillo__centro svg { width: 32px; height: 32px; }
+.sigillo:hover .sigillo__centro { transform: scale(1.1); }
+@keyframes ruota { to { transform: rotate(360deg); } }
+@media (min-width: 900px) { .sigillo { display: grid; top: 50%; bottom: auto; transform: translateY(-50%); } }
+
+/* ---------- Marchio gigante nel footer ---------- */
+.footer .footer__gigante { margin: 64px 0 0; font-family: var(--f-titoli); font-size: clamp(5rem, 25vw, 22rem); line-height: .8; letter-spacing: .12em; text-align: center; text-transform: uppercase;
+  color: transparent; -webkit-text-stroke: 1px rgba(201, 139, 62, .28); background: linear-gradient(180deg, rgba(201, 139, 62, .12), transparent 75%); -webkit-background-clip: text; background-clip: text; user-select: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nastro__binario, .sigillo__testo { animation: none; }
+}
