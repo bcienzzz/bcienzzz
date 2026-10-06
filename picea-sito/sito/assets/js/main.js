@@ -255,6 +255,60 @@
     });
   }
 
+  /* ---------- Hero: braci che salgono dal forno e leggero parallasse ---------- */
+  var hero = document.querySelector(".hero");
+  if (hero && !ridotto) {
+    var cv = document.createElement("canvas");
+    cv.className = "braci"; cv.setAttribute("aria-hidden", "true");
+    hero.insertBefore(cv, hero.querySelector(".contenitore"));
+    var cx = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0, braci = [], visibile = true;
+    function misura() { W = hero.clientWidth; H = hero.clientHeight; cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px"; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    function nuova(iniziale) {
+      return { x: Math.random() * W, y: iniziale ? Math.random() * H : H + 10, r: .6 + Math.random() * 1.8,
+        v: .25 + Math.random() * .7, o: Math.random() * Math.PI * 2, a: .35 + Math.random() * .5, vita: 0 };
+    }
+    misura();
+    var n = Math.round(Math.min(46, W / 28));
+    for (var i = 0; i < n; i++) braci.push(nuova(true));
+    window.addEventListener("resize", misura);
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (v) { visibile = v[0].isIntersecting; }).observe(hero);
+    (function anima() {
+      if (visibile && !document.hidden) {
+        cx.clearRect(0, 0, W, H);
+        braci.forEach(function (b, k) {
+          b.y -= b.v; b.o += .02; b.x += Math.sin(b.o) * .35; b.vita++;
+          var alto = b.y / H, alfa = b.a * Math.min(1, b.vita / 60) * Math.max(0, alto);
+          if (b.y < -10 || alfa <= 0.01 && b.vita > 60) { braci[k] = nuova(false); return; }
+          var g = cx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r * 4);
+          g.addColorStop(0, "rgba(255, 196, 120," + alfa + ")");
+          g.addColorStop(.4, "rgba(232, 128, 48," + alfa * .55 + ")");
+          g.addColorStop(1, "rgba(232, 128, 48, 0)");
+          cx.fillStyle = g; cx.beginPath(); cx.arc(b.x, b.y, b.r * 4, 0, Math.PI * 2); cx.fill();
+        });
+      }
+      requestAnimationFrame(anima);
+    })();
+    var heroImg = hero.querySelector(".hero__foto img"), bandaImg = document.querySelector(".banda__foto img"), banda = document.querySelector(".banda");
+    var inAttesa = false;
+    window.addEventListener("scroll", function () {
+      if (inAttesa) return; inAttesa = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        if (heroImg && y < hero.offsetHeight) heroImg.style.transform = "translate3d(0," + (y * .25).toFixed(1) + "px,0) scale(1.04)";
+        if (bandaImg && banda) { var r = banda.getBoundingClientRect(); if (r.bottom > 0 && r.top < window.innerHeight) bandaImg.style.transform = "translate3d(0," + ((r.top - window.innerHeight / 2) * -.12).toFixed(1) + "px,0) scale(1.15)"; }
+        inAttesa = false;
+      });
+    }, { passive: true });
+  }
+
+  /* ---------- Servizi: luce che segue il puntatore ---------- */
+  document.querySelectorAll(".servizi li").forEach(function (li) {
+    li.addEventListener("pointermove", function (e) {
+      var r = li.getBoundingClientRect();
+      li.style.setProperty("--x", (e.clientX - r.left) + "px"); li.style.setProperty("--y", (e.clientY - r.top) + "px");
+    });
+  });
+
   /* ---------- Anno nel footer ---------- */
   document.querySelectorAll("[data-anno]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
