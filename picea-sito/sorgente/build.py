@@ -61,7 +61,6 @@ SCHEMA_GIORNI = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday
 NAV = [
     ("index.html", "Home"),
     ("storia.html", "La storia"),
-    ("menu.html", "Menu"),
     ("prenota.html", "Prenota"),
     ("contatti.html", "Contatti"),
 ]
@@ -191,7 +190,6 @@ def schema_ristorante():
         "geo": {"@type": "GeoCoordinates", "latitude": C["geo"]["lat"], "longitude": C["geo"]["lng"]},
         "hasMap": C["maps_link"],
         "acceptsReservations": True,
-        "hasMenu": (C["sito_url"].rstrip("/") + "/menu.html") if C["sito_url"] else "menu.html",
         "paymentAccepted": ", ".join(C["pagamenti"]),
         "openingHoursSpecification": spec,
     }
@@ -284,7 +282,6 @@ def barra(pagina):
         f'<a href="tel:{TEL_L}">{icona("tel")}Chiama</a>',
         f'<a class="primario" href="prenota.html"{cur("prenota.html")}>{icona("calendario")}Prenota</a>',
         glovo,
-        f'<a href="menu.html"{cur("menu.html")}>{icona("menu")}Menu</a>',
         link_esterno(C["maps_link"], "Mappa", "", "pin"),
     ]
     voci = [v for v in voci if v]
@@ -367,7 +364,7 @@ def home():
     glovo_hero = bottone_glovo()
     corpo = f"""
 <section class="hero" aria-labelledby="titolo-home">
-  {immagine("pizze", "Tre pizze napoletane di Picea viste dall'alto su un tavolo di legno", [800, 1280, 2000], "(max-aspect-ratio: 3/2) 150vh, 100vw", "hero__foto", lazy=False, priorita=True, w=2000, h=1333)}
+  {immagine("pizze", "Tre pizze napoletane di Picea viste dall'alto su un tavolo di legno", [800, 1280, 2000, 2800], "(max-aspect-ratio: 3/2) 150vh, 100vw", "hero__foto", lazy=False, priorita=True, w=2000, h=1333)}
   <div class="contenitore">
     {stato_html()}
     <p class="hero__epigrafe" aria-hidden="true">PVTEOLI · MCMXCVI</p>
@@ -406,7 +403,7 @@ def home():
 
 <section class="sezione" aria-labelledby="titolo-metodo">
   <div class="contenitore metodo">
-    <div class="metodo__foto rivela">{immagine("dettaglio-gialli", "Pizza napoletana con pomodorini gialli, fior di latte e basilico", None, "", w=900, h=747)}</div>
+    <div class="metodo__foto rivela">{immagine("dettaglio-gialli", "Pizza napoletana con pomodorini gialli, fior di latte e basilico", None, "", w=1600, h=1328)}</div>
     <div>
       <span class="occhiello rivela">La nostra pizza</span>
       <h2 class="titolo-sezione rivela" id="titolo-metodo">La verace pizza <em>napoletana</em></h2>
@@ -416,22 +413,6 @@ def home():
         <li class="rivela"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
         <li class="rivela"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
       </ol>
-    </div>
-  </div>
-</section>
-
-<section class="sezione chiaro" aria-labelledby="titolo-menu">
-  <div class="contenitore evidenza">
-    <div class="evidenza__foto rivela">{immagine("dettaglio-pesto", "Pizza napoletana con pesto, fior di latte e basilico", None, "", w=900, h=774)}</div>
-    <div class="evidenza__testo">
-      <span class="occhiello rivela">Il menu</span>
-      <h2 class="titolo-sezione rivela" id="titolo-menu">Dal nostro <em>forno</em></h2>
-      <p class="intro-sezione rivela">{e(MENU.get("intro_home", ""))}</p>
-      {blocco_firme}
-      <div class="hero__azioni rivela">
-        <a class="btn" href="menu.html">{icona("menu")}Sfoglia il menu</a>
-        {bottone_glovo("btn btn--vuoto btn--glovo")}
-      </div>
     </div>
   </div>
 </section>
@@ -448,7 +429,7 @@ def home():
 </section>
 
 <section class="banda" aria-labelledby="titolo-banda">
-  {immagine("dettaglio-alto", "", None, "", "banda__foto", w=900, h=540)}
+  {immagine("dettaglio-alto", "", None, "", "banda__foto", w=1600, h=960)}
   <div class="contenitore">
     <span class="occhiello rivela">Prenotazioni</span>
     <h2 class="titolo-sezione rivela" id="titolo-banda">Prenota il tuo tavolo <em>su WhatsApp</em></h2>
@@ -537,8 +518,8 @@ def storia():
       {cronologia_html()}
     </ol>
     <div class="hero__azioni rivela" style="margin-top:40px">
-      <a class="btn" href="menu.html">{icona("menu")}Sfoglia il menu</a>
-      <a class="btn btn--vuoto" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
+      <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
+      <a class="btn btn--vuoto" href="contatti.html">Contatti</a>
     </div>
   </div>
 </section>
@@ -775,7 +756,7 @@ def non_trovata():
     <p>La pagina che cerchi non esiste o è stata spostata.</p>
     <div class="hero__azioni" style="justify-content:center;margin-top:28px">
       <a class="btn" href="index.html">Torna alla home</a>
-      <a class="btn btn--vuoto" href="menu.html">Vedi il menu</a>
+      <a class="btn btn--vuoto" href="contatti.html">Contatti</a>
     </div>
   </div>
 </section>"""
@@ -788,7 +769,7 @@ def extra():
     if url:
         robots += f"\nSitemap: {url}/sitemap.xml\n"
         voci = "".join(f"  <url><loc>{url}/{'' if p == 'index.html' else p}</loc><lastmod>{OGGI.isoformat()}</lastmod></url>\n"
-                       for p in ["index.html", "storia.html", "menu.html", "prenota.html", "contatti.html", "privacy.html"])
+                       for p in ["index.html", "storia.html", "prenota.html", "contatti.html", "privacy.html"])
         with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
             f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{voci}</urlset>\n')
         print("scritta sitemap.xml")
@@ -802,7 +783,6 @@ def extra():
 if __name__ == "__main__":
     home()
     storia()
-    menu()
     prenota()
     contatti()
     privacy()

@@ -425,8 +425,8 @@ a.canale:hover { background: var(--bianco); }
 .footer a:hover { color: var(--calce); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--resina); }
 .footer .orari-brevi { gap: 12px; }
 .footer .orari-brevi li { display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
-.footer .orari-brevi span:first-child { color: var(--calce); font-size: .92rem; }
-.footer .orari-brevi span:last-child span { display: block; }
+.footer .orari-brevi li > span:first-child { color: var(--calce); font-size: .92rem; }
+.footer .orari-brevi li > span:last-child span { display: block; }
 .social { display: flex; gap: 10px; margin-top: 18px; }
 .social a { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--cenere); border-radius: 50%; color: var(--calce); transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); }
 .social a:hover { background: var(--resina); border-color: var(--resina); color: var(--carbone); text-decoration: none; }
