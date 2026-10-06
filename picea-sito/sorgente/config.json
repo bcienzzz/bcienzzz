@@ -1,0 +1,196 @@
+{
+  "_nota": "Dati del sito. Modifica qui e poi lancia: python3 build.py",
+  "nome": "Picea",
+  "nome_completo": "Pizzeria Picea",
+  "categoria": "Pizzeria napoletana",
+  "anno_apertura": 1996,
+  "sito_url": "https://www.pizzeriapicea.com",
+  "indirizzo": {
+    "via": "Corso della Repubblica, 131",
+    "cap": "80078",
+    "citta": "Pozzuoli",
+    "provincia": "NA",
+    "paese": "Italia"
+  },
+  "geo": {
+    "lat": 40.8228733,
+    "lng": 14.1195213
+  },
+  "maps_link": "https://www.google.com/maps/search/?api=1&query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli",
+  "maps_embed": "https://www.google.com/maps?q=Corso%20della%20Repubblica%20131%2C%2080078%20Pozzuoli&output=embed",
+  "telefono": {
+    "visibile": "081 303 0195",
+    "link": "+390813030195"
+  },
+  "whatsapp": {
+    "visibile": "338 995 0152",
+    "numero": "393389950152"
+  },
+  "email": "giannivanacore@libero.it",
+  "glovo_url": "https://glovoapp.com/",
+  "social": {
+    "instagram": "https://www.instagram.com/piceapizzerie/",
+    "facebook": "https://www.facebook.com/pizzeriapicea/"
+  },
+  "logo_url": "https://cdn.website.dish.co/media/1b/df/5088652/Pizzeria-Picea-130305898-2771379876455441-1981788927430622800-n-jpg.jpg",
+  "orari": {
+    "_formato": "giorni: 0=domenica ... 6=sabato. Una chiusura minore o uguale all'apertura significa il giorno dopo (es. 18:00-02:00).",
+    "fasce": {
+      "1": [
+        [
+          "18:00",
+          "00:00"
+        ]
+      ],
+      "2": [
+        [
+          "11:30",
+          "15:30"
+        ],
+        [
+          "18:00",
+          "00:00"
+        ]
+      ],
+      "3": [
+        [
+          "11:30",
+          "15:30"
+        ],
+        [
+          "18:00",
+          "00:00"
+        ]
+      ],
+      "4": [
+        [
+          "11:30",
+          "15:30"
+        ],
+        [
+          "18:00",
+          "00:00"
+        ]
+      ],
+      "5": [
+        [
+          "11:30",
+          "15:30"
+        ],
+        [
+          "18:00",
+          "00:00"
+        ]
+      ],
+      "6": [
+        [
+          "11:30",
+          "15:30"
+        ],
+        [
+          "18:00",
+          "02:00"
+        ]
+      ],
+      "0": [
+        [
+          "11:30",
+          "15:30"
+        ],
+        [
+          "18:00",
+          "02:00"
+        ]
+      ]
+    },
+    "gruppi": [
+      {
+        "etichetta": "Lunedì",
+        "giorni": [
+          1
+        ]
+      },
+      {
+        "etichetta": "Martedì – Venerdì",
+        "giorni": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "etichetta": "Sabato – Domenica",
+        "giorni": [
+          6,
+          0
+        ]
+      }
+    ]
+  },
+  "prenotazioni": {
+    "intervallo_minuti": 30,
+    "ultimo_orario_prima_della_chiusura_minuti": 30,
+    "persone_max": 20
+  },
+  "servizi": [
+    {
+      "nome": "Accessibile",
+      "icona": "accessibile"
+    },
+    {
+      "nome": "Consegna a domicilio",
+      "icona": "consegna"
+    },
+    {
+      "nome": "Tavoli all’aperto",
+      "icona": "aperto"
+    },
+    {
+      "nome": "Eventi privati",
+      "icona": "eventi"
+    },
+    {
+      "nome": "Take away",
+      "icona": "asporto"
+    },
+    {
+      "nome": "Wi-Fi gratuito",
+      "icona": "wifi"
+    }
+  ],
+  "pagamenti": [
+    "Contanti",
+    "Pagamento contactless",
+    "Mastercard",
+    "VISA",
+    "Carta di debito",
+    "Apple Pay",
+    "Maestro"
+  ],
+  "legale": {
+    "titolare": "Giovanni Vanacore",
+    "ragione_sociale": "Picea S.a.s. di Giovanni Vanacore & C.",
+    "partita_iva": "06812631213",
+    "codice_fiscale": "06812631213",
+    "sede_legale": ""
+  },
+  "glovo_provvisorio": true,
+  "cronologia": [
+    {
+      "anno": "1996",
+      "sotto": "Luglio",
+      "testo": "Giovanni Vanacore arriva a Pozzuoli e apre Picea in Corso della Repubblica."
+    },
+    {
+      "anno": "2026",
+      "sotto": "Trent’anni",
+      "testo": "Picea festeggia trent’anni di attività con una serata dedicata, a luglio."
+    },
+    {
+      "anno": "Oggi",
+      "sotto": "",
+      "testo": "La filosofia è immutata: rispettare le origini per esaltare i sapori."
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "_nota": "Menu senza prezzi (scelta del cliente). Voci ricavate da Jafood, stampa e schede pubbliche di Picea: DA CONFRONTARE con il menu che manda Gianni. Per mettere una pizza in home: \"in_evidenza\": true",
+  "intro": "La verace pizza napoletana, cotta nel forno a legna, e le specialità della casa.",
+  "intro_home": "Le classiche della tradizione e le pizze speciali della casa, con pomodoro San Marzano DOP, fior di latte di Agerola e pomodorino del Piennolo del Vesuvio DOP.",
+  "avviso": "Il menu cambia qualche volta durante l’anno: chiedi al personale le pizze del momento.",
+  "categorie": [
+    {
+      "id": "classiche",
+      "titolo": "Le classiche",
+      "piatti": [
+        { "nome": "Marinara", "descrizione": "Pomodoro San Marzano DOP, aglio di Sulmona, origano, basilico" },
+        { "nome": "Margherita", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, basilico" },
+        { "nome": "Margherita bianca", "descrizione": "Fior di latte di Agerola, basilico" },
+        { "nome": "Margherita al prosciutto", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, prosciutto cotto, basilico" },
+        { "nome": "Margherita al salame", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame, basilico" },
+        { "nome": "Diavola", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame piccante, basilico" },
+        { "nome": "Capricciosa", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame, funghi, prosciutto cotto, carciofini" },
+        { "nome": "Ortolana", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, peperoni, melanzane a funghetto, zucchine, basilico" },
+        { "nome": "4 formaggi", "descrizione": "Fior di latte di Agerola, provola di Agerola, sottiletta, gorgonzola" },
+        { "nome": "Baby", "descrizione": "Fior di latte di Agerola, würstel, patatine fritte, basilico" }
+      ]
+    },
+    {
+      "id": "speciali",
+      "titolo": "Le speciali",
+      "piatti": [
+        { "nome": "Polpettina", "descrizione": "Ricotta, pesto di basilico, fior di latte, olio, polpettine fritte, Provolone del Monaco DOP", "in_evidenza": true },
+        { "nome": "Pulcinella", "descrizione": "Fior di latte di Agerola, salsiccia di maialino nero casertano, friarielli novantini", "in_evidenza": true },
+        { "nome": "D.O.P.G.", "descrizione": "Pomodori gialli del Piennolo, mozzarella di bufala DOP, Parmigiano Reggiano 24 mesi, olio extravergine d’oliva, basilico", "in_evidenza": true },
+        { "nome": "D.O.P.", "descrizione": "Pomodorini del Piennolo DOP, mozzarella di bufala DOP, basilico" },
+        { "nome": "D.O.C.", "descrizione": "Pomodorini, mozzarella di bufala DOP, basilico" },
+        { "nome": "Duetto", "descrizione": "Metà D.O.C. e metà fior di latte di Agerola con bresaola, rucola e Parmigiano Reggiano 24 mesi" },
+        { "nome": "Bronte", "descrizione": "Provola di Agerola, pesto di pistacchi, pancetta al pepe nero, olio extravergine d’oliva, basilico" },
+        { "nome": "Cacio & pepe", "descrizione": "Fior di latte di Agerola, pecorino romano, pepe nero, olio extravergine d’oliva, basilico" },
+        { "nome": "Spilinga", "descrizione": "Friarielli novantini, provola di Agerola, spuma di ricotta, ’nduja di Spilinga, olio extravergine d’oliva, basilico" },
+        { "nome": "Portoghese", "descrizione": "Fior di latte di Agerola, pomodoro del Piennolo DOP, baccalà, olive, capperi, chips di cipolla, olio extravergine d’oliva, basilico" },
+        { "nome": "Della nonna", "descrizione": "Provola di Agerola, scarola ripassata in padella con olive, uvetta e capperi, acciughe di Cetara, olio extravergine d’oliva, basilico" }
+      ]
+    },
+    {
+      "id": "ripieni-focacce",
+      "titolo": "Ripieni e focacce",
+      "piatti": [
+        { "nome": "Ripieno al forno", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, ricotta di bufala, prosciutto cotto, salame, basilico" },
+        { "nome": "Ripieno fritto", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, ricotta di bufala, prosciutto cotto, salame, basilico" },
+        { "nome": "Caprese", "descrizione": "Focaccia con pomodori, mozzarella di bufala DOP, provola di Agerola, origano, basilico" },
+        { "nome": "Marlin", "descrizione": "Focaccia farcita all’uscita dal forno con straccetti di mozzarella di bufala, rucola, marlin affumicato, scorza di limone, olio extravergine d’oliva, basilico" }
+      ]
+    },
+    {
+      "id": "fritti",
+      "titolo": "Fritti e stuzzichini",
+      "piatti": [
+        { "nome": "Frittatina" },
+        { "nome": "Arancini" },
+        { "nome": "Crocchè" },
+        { "nome": "Zeppoline" },
+        { "nome": "Montanarine" },
+        { "nome": "Mozzarella in carrozza" },
+        { "nome": "Verdurine" },
+        { "nome": "Bruschette", "descrizione": "Al pomodoro fresco" },
+        { "nome": "Patate fritte" }
+      ]
+    },
+    {
+      "id": "cucina",
+      "titolo": "Dalla cucina",
+      "piatti": [
+        { "nome": "Antipasto Picea" },
+        { "nome": "Picea Mare", "descrizione": "Antipasto di mare, ideale per due persone" },
+        { "nome": "Impepata di cozze" },
+        { "nome": "Pasta e patate con provola" },
+        { "nome": "Gnocchetti alla caprese", "descrizione": "Pomodoro e parmigiano" },
+        { "nome": "Spaghetti limone, menta e cozze" },
+        { "nome": "Gnocchetto crema di tartufo e gamberi" }
+      ]
+    },
+    {
+      "id": "insalate",
+      "titolo": "Insalate",
+      "piatti": [
+        { "nome": "Insalata Picea", "descrizione": "Riccia, filetto di tonno, rucola, mozzarella, pomodorini" },
+        { "nome": "Insalata caprese", "descrizione": "Lattuga, mozzarella di bufala, provola, pomodori, Parmigiano Reggiano 24 mesi, olive" },
+        { "nome": "Insalata primavera", "descrizione": "Lattuga, rucola, radicchio, pomodori, mais, Parmigiano Reggiano 24 mesi, olive" }
+      ]
+    }
+  ]
+}
