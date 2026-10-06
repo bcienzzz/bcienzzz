@@ -34,6 +34,7 @@
   --resina-scura: #8a5717;   /* accento su chiaro (contrasto AA) */
   --aperto: #6fcf8f;         /* stato "aperto ora" */
   --bianco: #ffffff;
+  --corpo: #2b2723;          /* testo lungo su chiaro */
 
   /* Tipografia */
   --f-titoli: "Marcellus", "Trajan Pro", "Times New Roman", serif;
@@ -318,8 +319,8 @@ a.info-rapide__voce:hover span { text-decoration: underline; text-underline-offs
 .mappa iframe { width: 100%; height: 100%; border: 0; }
 .mappa__copertina { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center; color: var(--inchiostro);
   background:
-    repeating-linear-gradient(0deg, transparent 0 39px, rgba(25, 23, 20, .06) 39px 40px),
-    repeating-linear-gradient(90deg, transparent 0 39px, rgba(25, 23, 20, .06) 39px 40px),
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(255, 255, 255, .035) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgba(255, 255, 255, .035) 39px 40px),
     var(--tufo);
 }
 .mappa__copertina .pin { width: 44px; height: 44px; color: var(--resina-scura); }
@@ -338,7 +339,7 @@ a.info-rapide__voce:hover span { text-decoration: underline; text-underline-offs
 .capitolo:first-of-type { border-top: 0; padding-top: 0; }
 .capitolo__num { font-family: var(--f-titoli); font-size: 1.1rem; letter-spacing: .08em; color: var(--resina-scura); }
 .capitolo h2 { font-size: clamp(1.8rem, 4.6vw, 2.6rem); margin-bottom: 18px; }
-.capitolo p { font-size: 1.12rem; line-height: 1.75; max-width: 62ch; color: #2b2723; }
+.capitolo p { font-size: 1.12rem; line-height: 1.75; max-width: 62ch; color: var(--corpo); }
 .capitolo--primo p:first-of-type::first-letter { float: left; font-family: var(--f-titoli); font-size: 4.6rem; line-height: .82; padding: 8px 12px 0 0; color: var(--resina-scura); }
 .botanica { font-family: var(--f-titoli); font-style: normal; }
 .estratto { margin: 56px 0; padding: 40px 0; border-block: 1px solid var(--inchiostro); text-align: center; }
@@ -380,7 +381,7 @@ a.info-rapide__voce:hover span { text-decoration: underline; text-underline-offs
   border: 1.5px solid var(--linea-chiara); border-radius: var(--r);
   transition: border-color .2s ease, box-shadow .2s ease;
 }
-.campo select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23191714' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 18px; padding-right: 40px; }
+.campo select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23b9b2a7' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 18px; padding-right: 40px; }
 .campo textarea { min-height: 110px; resize: vertical; }
 .campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--inchiostro); box-shadow: 0 0 0 3px rgba(138, 87, 23, .18); }
 .campo .aiuto { font-size: .85rem; color: var(--grigio-scuro); }
@@ -416,7 +417,7 @@ a.canale:hover { background: var(--bianco); }
 
 /* ---------- Pagina legale ---------- */
 .legale-testo h2 { font-size: 1.6rem; margin: 40px 0 12px; }
-.legale-testo p, .legale-testo li { color: #2b2723; }
+.legale-testo p, .legale-testo li { color: var(--corpo); }
 .legale-testo ul { padding-left: 1.2em; }
 .legale-testo dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; }
 .legale-testo dt { font-weight: 700; }
@@ -514,7 +515,7 @@ a.canale:hover { background: var(--bianco); }
 .foto-locale img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* Storia: testo del cliente */
-.storia-testo p { font-size: 1.15rem; line-height: 1.8; color: #2b2723; max-width: 62ch; margin-inline: auto; }
+.storia-testo p { font-size: 1.15rem; line-height: 1.8; color: var(--corpo); max-width: 62ch; margin-inline: auto; }
 .storia-testo .capitolo--primo p:first-of-type::first-letter { float: left; font-family: var(--f-titoli); font-size: 4.6rem; line-height: .82; padding: 8px 12px 0 0; color: var(--resina-scura); }
 .storia-testo .estratto p { font-size: clamp(1.7rem, 5vw, 2.6rem); line-height: 1.2; max-width: 22ch; color: var(--inchiostro); }
 .storia-testo .finale { text-align: center; font-size: 1.25rem; }
@@ -526,7 +527,7 @@ a.canale:hover { background: var(--bianco); }
 .canale:focus-visible { outline-offset: -4px; }
 .persone:focus-within { border-color: var(--inchiostro); box-shadow: 0 0 0 3px rgba(138, 87, 23, .18); }
 .persone button:focus-visible { outline-offset: -3px; }
-.campo input, .campo select, .campo textarea, .persone { border-color: #8f887d; }
+.campo input, .campo select, .campo textarea, .persone { border-color: #5d564c; }
 .chiaro :focus-visible, .scheda :focus-visible, .mappa :focus-visible { outline-color: var(--resina-scura); }
 .mappa__copertina .pin { flex: none; }
 @media (max-width: 719px) {
@@ -540,6 +541,33 @@ a.canale:hover { background: var(--bianco); }
 .footer ul { gap: 0; }
 .footer ul a, .footer__fondo a { display: inline-block; padding-block: 10px; }
 @media (max-width: 359px) { .canale span { font-size: 1rem; } }
+
+/* =====================================================================
+   Tono unico scuro: le sezioni "chiare" diventano un nero caldo poco
+   diverso dagli altri, così scorrendo non ci sono stacchi bianco/nero.
+   ===================================================================== */
+.chiaro {
+  --calce: #16130f;
+  --bianco: #1f1b16;
+  --tufo: #25201a;
+  --inchiostro: #f3efe8;
+  --corpo: #ddd6cb;
+  --grigio-scuro: #b3ab9f;
+  --linea-chiara: #332d25;
+  --resina-scura: #d39a4f;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(201, 139, 62, .07), transparent 65%),
+    var(--calce);
+}
+.chiaro .tabella-orari li.oggi { background: #2a241c; color: var(--inchiostro); box-shadow: inset 3px 0 0 var(--resina); }
+.chiaro .btn { --sfondo: var(--inchiostro); --colore: #16130f; --bordo: var(--inchiostro); }
+.chiaro .btn:hover { --sfondo: var(--resina); --bordo: var(--resina); --colore: #16130f; }
+.chiaro .btn--vuoto { --sfondo: transparent; --colore: var(--inchiostro); --bordo: rgba(243, 239, 232, .45); }
+.chiaro .btn--vuoto:hover { --sfondo: var(--inchiostro); --colore: #16130f; --bordo: var(--inchiostro); }
+.chiaro ::selection { background: var(--resina); color: #16130f; }
+/* passaggi morbidi tra una sezione e l'altra */
+.sezione, .banda, .info-rapide, .testata, .footer { border-top: 1px solid rgba(243, 239, 232, .05); }
+.scuro-2 { background: linear-gradient(180deg, #14120f, #1a1814 30%, #1a1814 70%, #14120f); }
 </style>
 <script>document.documentElement.className="js";</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Pizzeria Picea", "description": "Pizzeria napoletana nel centro storico di Pozzuoli dal 1996: la verace pizza napoletana cotta nel forno a legna.", "foundingDate": "1996", "servesCuisine": ["Pizza napoletana"], "telephone": "+390813030195", "email": "giannivanacore@libero.it", "address": {"@type": "PostalAddress", "streetAddress": "Corso della Repubblica, 131", "postalCode": "80078", "addressLocality": "Pozzuoli", "addressRegion": "NA", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.8228733, "longitude": 14.1195213}, "hasMap": "https://www.google.com/maps/search/?api=1&query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli", "acceptsReservations": true, "paymentAccepted": "Contanti, Pagamento contactless, Mastercard, VISA, Carta di debito, Apple Pay, Maestro", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "02:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "18:00", "closes": "02:00"}], "url": "https://www.pizzeriapicea.com", "image": "https://www.pizzeriapicea.com/assets/img/og-picea.jpg", "sameAs": ["https://www.instagram.com/piceapizzerie/", "https://www.facebook.com/pizzeriapicea/"]}</script>
