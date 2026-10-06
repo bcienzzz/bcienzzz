@@ -411,11 +411,48 @@ def home():
       <span class="occhiello rivela">La nostra pizza</span>
       <h2 class="titolo-sezione rivela" id="titolo-metodo">La verace pizza <em>napoletana</em></h2>
       <div class="strati" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="intro-sezione rivela" style="margin-inline:auto">Scorri o tocca le quattro fasi.</p>
+    </div>
+    <div class="laboratorio">
+      <figure class="laboratorio__scena">
+        <svg class="laboratorio__svg" viewBox="0 0 400 400" data-fase="1" role="img" aria-labelledby="lab-didascalia">
+          <defs>
+            <radialGradient id="g-impasto" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#f6e7c8"/><stop offset=".72" stop-color="#ecd3a2"/><stop offset="1" stop-color="#d9a866"/></radialGradient>
+            <radialGradient id="g-bagliore" cx="50%" cy="80%" r="60%"><stop offset="0" stop-color="#ff9a3c" stop-opacity=".55"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+          </defs>
+          <g class="fx-forno">
+            <path d="M30 392V236a170 170 0 0 1 340 0v156z" fill="#2a1e15" stroke="#c98b3e" stroke-width="2"/>
+            <path d="M40 392V238a160 160 0 0 1 320 0v154" fill="none" stroke="#3a2a1d" stroke-width="10" stroke-dasharray="2 26"/>
+            <path d="M92 392V262a108 108 0 0 1 216 0v130z" fill="#0b0806"/>
+            <ellipse cx="200" cy="360" rx="150" ry="70" fill="url(#g-bagliore)"/>
+            <g class="fiamme">
+              <path class="fiamma" d="M118 392c-6-30 14-38 10-62 16 18 22 40 12 62z" fill="#ff8a2a"/>
+              <path class="fiamma f2" d="M138 392c-4-24 10-30 8-48 12 14 14 32 8 48z" fill="#ffc35a"/>
+              <path class="fiamma f3" d="M282 392c6-30-14-38-10-62-16 18-22 40-12 62z" fill="#ff8a2a"/>
+              <path class="fiamma f2" d="M262 392c4-24-10-30-8-48-12 14-14 32-8 48z" fill="#ffc35a"/>
+            </g>
+          </g>
+          <g class="fx-ingredienti">
+            <g class="ingrediente" style="--d:0s"><circle cx="112" cy="128" r="34" fill="#c4372a"/><path d="M112 96l6 6 8-3-4 8 6 6-9-1-4 8-3-9-9-1 8-4z" fill="#3f7d3a"/><ellipse cx="100" cy="116" rx="9" ry="5" fill="#fff" opacity=".25"/></g>
+            <g class="ingrediente" style="--d:.6s"><circle cx="290" cy="136" r="31" fill="#f5f1e8"/><ellipse cx="280" cy="126" rx="10" ry="6" fill="#fff"/></g>
+            <g class="ingrediente" style="--d:1.2s"><path d="M96 286c22-34 70-30 78 2-24 26-62 26-78-2z" fill="#3f8a3a"/><path d="M98 286c26-6 50-6 74 2" stroke="#2c6a28" stroke-width="2" fill="none"/></g>
+            <g class="ingrediente" style="--d:1.8s"><path d="M292 250c14 22 22 34 22 46a22 22 0 0 1-44 0c0-12 8-24 22-46z" fill="#d9b13b"/><ellipse cx="284" cy="294" rx="5" ry="8" fill="#fff" opacity=".35"/></g>
+          </g>
+          <g class="fx-pizza">
+            <circle class="fx-impasto" cx="200" cy="215" r="132" fill="url(#g-impasto)"/>
+            <circle class="fx-sugo" cx="200" cy="215" r="104" fill="#b5321f"/>
+            <g class="fx-mozz" fill="#f7f3ea"><circle cx="160" cy="185" r="18"/><circle cx="238" cy="178" r="15"/><circle cx="214" cy="244" r="20"/><circle cx="160" cy="250" r="13"/><circle cx="254" cy="232" r="11"/><circle cx="196" cy="206" r="9"/></g>
+            <g class="fx-basilico" fill="#2f7a2c"><ellipse cx="190" cy="160" rx="16" ry="8" transform="rotate(-25 190 160)"/><ellipse cx="246" cy="204" rx="15" ry="8" transform="rotate(35 246 204)"/><ellipse cx="176" cy="226" rx="14" ry="7" transform="rotate(10 176 226)"/></g>
+            <g class="fx-macchie" fill="#5a3418"><circle cx="86" cy="190" r="5"/><circle cx="92" cy="258" r="4"/><circle cx="122" cy="306" r="6"/><circle cx="196" cy="341" r="4"/><circle cx="270" cy="322" r="6"/><circle cx="318" cy="262" r="4"/><circle cx="326" cy="196" r="6"/><circle cx="296" cy="122" r="4"/><circle cx="236" cy="90" r="6"/><circle cx="160" cy="92" r="5"/><circle cx="112" cy="128" r="4"/></g>
+          </g>
+        </svg>
+        <figcaption id="lab-didascalia" class="laboratorio__didascalia" aria-live="polite"><span>I</span> La materia prima</figcaption>
+      </figure>
       <ol class="passi passi--schede">
-        <li class="rivela" data-ritardo="0"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
-        <li class="rivela" data-ritardo="1"><span class="num" aria-hidden="true">II</span><h3>L’impasto</h3><p>Un impasto disciplinato da tempi di lievitazione rigorosi.</p></li>
-        <li class="rivela" data-ritardo="2"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
-        <li class="rivela" data-ritardo="3"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
+          <li class="rivela passo" data-fase="1" tabindex="0" aria-pressed="true"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
+          <li class="rivela passo" data-fase="2" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">II</span><h3>L’impasto</h3><p>Un impasto disciplinato da tempi di lievitazione rigorosi.</p></li>
+          <li class="rivela passo" data-fase="3" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
+          <li class="rivela passo" data-fase="4" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
       </ol>
     </div>
   </div>

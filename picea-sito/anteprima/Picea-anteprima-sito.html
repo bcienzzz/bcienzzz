@@ -652,6 +652,56 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .nastro__binario, .sigillo__testo { animation: none; }
 }
+
+/* ---------- Laboratorio della pizza (interattivo) ---------- */
+.laboratorio { display: grid; gap: 28px; margin-top: 40px; align-items: start; }
+.laboratorio__scena { margin: 0; position: sticky; top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 8px); z-index: 2;
+  background: radial-gradient(circle at 50% 55%, rgba(201, 139, 62, .12), transparent 62%), var(--bordo-sezione);
+  padding: 8px 0 14px; border-bottom: 1px solid var(--cenere); }
+.laboratorio__svg { width: min(270px, 70vw); height: auto; margin: 0 auto; overflow: visible; }
+.laboratorio__didascalia { text-align: center; font-family: var(--f-titoli); font-size: 1.35rem; margin-top: 6px; }
+.laboratorio__didascalia span { color: var(--resina); margin-right: 6px; }
+.laboratorio .passi--schede { margin-top: 0; grid-template-columns: 1fr !important; }
+.passo { cursor: pointer; opacity: .5; }
+.passo.attivo, .passo:hover, .passo:focus-visible { opacity: 1; }
+.passo.attivo { border-color: rgba(201, 139, 62, .55); background: linear-gradient(180deg, rgba(201, 139, 62, .10), rgba(201, 139, 62, 0)); }
+.passo.attivo::after { transform: scaleX(1); }
+.js .passo.rivela.visto:not(.attivo) { opacity: .5; }
+@media (min-width: 900px) {
+  .laboratorio { grid-template-columns: 1fr 1fr; gap: 64px; }
+  .laboratorio__scena { top: calc(var(--header-h) + 40px); border: 0; background: radial-gradient(circle at 50% 55%, rgba(201, 139, 62, .14), transparent 65%); padding: 24px 0; }
+  .laboratorio__svg { width: min(460px, 100%); }
+  .laboratorio .passi--schede li { padding-block: 44px; min-height: 52vh; display: flex; flex-direction: column; justify-content: center; }
+}
+
+/* Fasi dell'animazione */
+.laboratorio__svg g, .laboratorio__svg circle, .laboratorio__svg ellipse { transform-box: view-box; }
+.fx-forno, .fx-ingredienti, .fx-pizza, .fx-sugo, .fx-mozz, .fx-basilico, .fx-macchie { transition: opacity .8s var(--ease), transform 1s var(--ease); }
+.fx-forno { opacity: 0; transform: translateY(30px); }
+.fx-pizza { transform-origin: 200px 215px; transform: scale(0); opacity: 0; }
+.fx-sugo, .fx-mozz, .fx-basilico, .fx-macchie { opacity: 0; transform-origin: 200px 215px; transform: scale(.6); }
+.fx-mozz { transition-delay: .25s; } .fx-basilico { transition-delay: .5s; }
+.ingrediente { transform-origin: 200px 200px; animation: galleggia 3.6s ease-in-out var(--d) infinite; }
+.fx-ingredienti { transform-origin: 200px 200px; }
+@keyframes galleggia { 50% { transform: translateY(-8px); } }
+
+[data-fase="1"] .fx-ingredienti { opacity: 1; transform: none; }
+[data-fase="2"] .fx-ingredienti, [data-fase="3"] .fx-ingredienti, [data-fase="4"] .fx-ingredienti { opacity: 0; transform: scale(.3); }
+[data-fase="2"] .fx-pizza { opacity: 1; transform: scale(.42); animation: lievita 2.6s ease-in-out infinite; }
+@keyframes lievita { 50% { transform: scale(.48); } }
+[data-fase="3"] .fx-pizza { opacity: 1; transform: scale(1); }
+[data-fase="3"] .fx-sugo, [data-fase="3"] .fx-mozz, [data-fase="3"] .fx-basilico,
+[data-fase="4"] .fx-sugo, [data-fase="4"] .fx-mozz, [data-fase="4"] .fx-basilico, [data-fase="4"] .fx-macchie { opacity: 1; transform: none; }
+[data-fase="4"] .fx-forno { opacity: 1; transform: none; }
+[data-fase="4"] .fx-pizza { opacity: 1; transform: translateY(78px) scale(.62); }
+[data-fase="4"] .fx-impasto { fill: #e3b26c; transition: fill 1.2s ease .4s; }
+.fiamma { transform-origin: center bottom; transform-box: fill-box; animation: fiamma .9s ease-in-out infinite alternate; }
+.fiamma.f2 { animation-duration: .7s; } .fiamma.f3 { animation-delay: .3s; }
+@keyframes fiamma { from { transform: scaleY(.85) skewX(-4deg); opacity: .8; } to { transform: scaleY(1.12) skewX(4deg); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ingrediente, .fiamma, [data-fase="2"] .fx-pizza { animation: none; }
+}
 </style>
 <script>document.documentElement.className="js";</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Pizzeria Picea", "description": "Pizzeria napoletana nel centro storico di Pozzuoli dal 1996: la verace pizza napoletana cotta nel forno a legna.", "foundingDate": "1996", "servesCuisine": ["Pizza napoletana"], "telephone": "+390813030195", "email": "giannivanacore@libero.it", "address": {"@type": "PostalAddress", "streetAddress": "Corso della Repubblica, 131", "postalCode": "80078", "addressLocality": "Pozzuoli", "addressRegion": "NA", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.8228733, "longitude": 14.1195213}, "hasMap": "https://www.google.com/maps/search/?api=1&query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli", "acceptsReservations": true, "paymentAccepted": "Contanti, Pagamento contactless, Mastercard, VISA, Carta di debito, Apple Pay, Maestro", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "02:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "18:00", "closes": "02:00"}], "url": "https://www.pizzeriapicea.com", "image": "https://www.pizzeriapicea.com/assets/img/og-picea.jpg", "sameAs": ["https://www.instagram.com/piceapizzerie/", "https://www.facebook.com/pizzeriapicea/"]}</script>
@@ -739,11 +789,48 @@ body::after {
       <span class="occhiello rivela">La nostra pizza</span>
       <h2 class="titolo-sezione rivela" id="titolo-metodo">La verace pizza <em>napoletana</em></h2>
       <div class="strati" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="intro-sezione rivela" style="margin-inline:auto">Scorri o tocca le quattro fasi.</p>
+    </div>
+    <div class="laboratorio">
+      <figure class="laboratorio__scena">
+        <svg class="laboratorio__svg" viewBox="0 0 400 400" data-fase="1" role="img" aria-labelledby="lab-didascalia">
+          <defs>
+            <radialGradient id="g-impasto" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#f6e7c8"/><stop offset=".72" stop-color="#ecd3a2"/><stop offset="1" stop-color="#d9a866"/></radialGradient>
+            <radialGradient id="g-bagliore" cx="50%" cy="80%" r="60%"><stop offset="0" stop-color="#ff9a3c" stop-opacity=".55"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+          </defs>
+          <g class="fx-forno">
+            <path d="M30 392V236a170 170 0 0 1 340 0v156z" fill="#2a1e15" stroke="#c98b3e" stroke-width="2"/>
+            <path d="M40 392V238a160 160 0 0 1 320 0v154" fill="none" stroke="#3a2a1d" stroke-width="10" stroke-dasharray="2 26"/>
+            <path d="M92 392V262a108 108 0 0 1 216 0v130z" fill="#0b0806"/>
+            <ellipse cx="200" cy="360" rx="150" ry="70" fill="url(#g-bagliore)"/>
+            <g class="fiamme">
+              <path class="fiamma" d="M118 392c-6-30 14-38 10-62 16 18 22 40 12 62z" fill="#ff8a2a"/>
+              <path class="fiamma f2" d="M138 392c-4-24 10-30 8-48 12 14 14 32 8 48z" fill="#ffc35a"/>
+              <path class="fiamma f3" d="M282 392c6-30-14-38-10-62-16 18-22 40-12 62z" fill="#ff8a2a"/>
+              <path class="fiamma f2" d="M262 392c4-24-10-30-8-48-12 14-14 32-8 48z" fill="#ffc35a"/>
+            </g>
+          </g>
+          <g class="fx-ingredienti">
+            <g class="ingrediente" style="--d:0s"><circle cx="112" cy="128" r="34" fill="#c4372a"/><path d="M112 96l6 6 8-3-4 8 6 6-9-1-4 8-3-9-9-1 8-4z" fill="#3f7d3a"/><ellipse cx="100" cy="116" rx="9" ry="5" fill="#fff" opacity=".25"/></g>
+            <g class="ingrediente" style="--d:.6s"><circle cx="290" cy="136" r="31" fill="#f5f1e8"/><ellipse cx="280" cy="126" rx="10" ry="6" fill="#fff"/></g>
+            <g class="ingrediente" style="--d:1.2s"><path d="M96 286c22-34 70-30 78 2-24 26-62 26-78-2z" fill="#3f8a3a"/><path d="M98 286c26-6 50-6 74 2" stroke="#2c6a28" stroke-width="2" fill="none"/></g>
+            <g class="ingrediente" style="--d:1.8s"><path d="M292 250c14 22 22 34 22 46a22 22 0 0 1-44 0c0-12 8-24 22-46z" fill="#d9b13b"/><ellipse cx="284" cy="294" rx="5" ry="8" fill="#fff" opacity=".35"/></g>
+          </g>
+          <g class="fx-pizza">
+            <circle class="fx-impasto" cx="200" cy="215" r="132" fill="url(#g-impasto)"/>
+            <circle class="fx-sugo" cx="200" cy="215" r="104" fill="#b5321f"/>
+            <g class="fx-mozz" fill="#f7f3ea"><circle cx="160" cy="185" r="18"/><circle cx="238" cy="178" r="15"/><circle cx="214" cy="244" r="20"/><circle cx="160" cy="250" r="13"/><circle cx="254" cy="232" r="11"/><circle cx="196" cy="206" r="9"/></g>
+            <g class="fx-basilico" fill="#2f7a2c"><ellipse cx="190" cy="160" rx="16" ry="8" transform="rotate(-25 190 160)"/><ellipse cx="246" cy="204" rx="15" ry="8" transform="rotate(35 246 204)"/><ellipse cx="176" cy="226" rx="14" ry="7" transform="rotate(10 176 226)"/></g>
+            <g class="fx-macchie" fill="#5a3418"><circle cx="86" cy="190" r="5"/><circle cx="92" cy="258" r="4"/><circle cx="122" cy="306" r="6"/><circle cx="196" cy="341" r="4"/><circle cx="270" cy="322" r="6"/><circle cx="318" cy="262" r="4"/><circle cx="326" cy="196" r="6"/><circle cx="296" cy="122" r="4"/><circle cx="236" cy="90" r="6"/><circle cx="160" cy="92" r="5"/><circle cx="112" cy="128" r="4"/></g>
+          </g>
+        </svg>
+        <figcaption id="lab-didascalia" class="laboratorio__didascalia" aria-live="polite"><span>I</span> La materia prima</figcaption>
+      </figure>
       <ol class="passi passi--schede">
-        <li class="rivela" data-ritardo="0"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
-        <li class="rivela" data-ritardo="1"><span class="num" aria-hidden="true">II</span><h3>L’impasto</h3><p>Un impasto disciplinato da tempi di lievitazione rigorosi.</p></li>
-        <li class="rivela" data-ritardo="2"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
-        <li class="rivela" data-ritardo="3"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
+          <li class="rivela passo" data-fase="1" tabindex="0" aria-pressed="true"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
+          <li class="rivela passo" data-fase="2" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">II</span><h3>L’impasto</h3><p>Un impasto disciplinato da tempi di lievitazione rigorosi.</p></li>
+          <li class="rivela passo" data-fase="3" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
+          <li class="rivela passo" data-fase="4" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
       </ol>
     </div>
   </div>
@@ -1291,6 +1378,15 @@ body::after {
         v: .25 + Math.random() * .7, o: Math.random() * Math.PI * 2, a: .35 + Math.random() * .5, vita: 0 };
     }
     misura();
+    hero.addEventListener("pointerdown", function (e) {
+      if (e.target.closest("a, button")) return;
+      var r = hero.getBoundingClientRect();
+      for (var k = 0; k < 22; k++) {
+        var b = nuova(false); b.x = e.clientX - r.left; b.y = e.clientY - r.top;
+        b.v = 1 + Math.random() * 2.2; b.vx = (Math.random() - .5) * 3; b.a = .9; b.vita = 60; b.scintilla = true;
+        braci.push(b);
+      }
+    });
     var n = Math.round(Math.min(46, W / 28));
     for (var i = 0; i < n; i++) braci.push(nuova(true));
     window.addEventListener("resize", misura);
@@ -1299,9 +1395,10 @@ body::after {
       if (visibile && !document.hidden) {
         cx.clearRect(0, 0, W, H);
         braci.forEach(function (b, k) {
-          b.y -= b.v; b.o += .02; b.x += Math.sin(b.o) * .35; b.vita++;
+          b.y -= b.v; b.o += .02; b.x += Math.sin(b.o) * .35 + (b.vx || 0); b.vita++;
+          if (b.scintilla) { b.vx *= .96; b.v *= .985; b.a *= .985; if (b.a < .05) { braci.splice(k, 1); return; } }
           var alto = b.y / H, alfa = b.a * Math.min(1, b.vita / 60) * Math.max(0, alto);
-          if (b.y < -10 || alfa <= 0.01 && b.vita > 60) { braci[k] = nuova(false); return; }
+          if (b.y < -10 || alfa <= 0.01 && b.vita > 60) { if (b.scintilla) braci.splice(k, 1); else braci[k] = nuova(false); return; }
           var g = cx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r * 4);
           g.addColorStop(0, "rgba(255, 196, 120," + alfa + ")");
           g.addColorStop(.4, "rgba(232, 128, 48," + alfa * .55 + ")");
@@ -1322,6 +1419,35 @@ body::after {
         inAttesa = false;
       });
     }, { passive: true });
+  }
+
+  /* ---------- Laboratorio della pizza: le fasi seguono lo scorrimento o il tocco ---------- */
+  var lab = document.querySelector(".laboratorio__svg");
+  if (lab) {
+    var passi = Array.prototype.slice.call(document.querySelectorAll(".passo"));
+    var didascalia = document.getElementById("lab-didascalia");
+    var ROMANI = ["I", "II", "III", "IV"];
+    var bloccoFinoA = 0;
+    function fase(n) {
+      if (lab.getAttribute("data-fase") === String(n)) return;
+      lab.setAttribute("data-fase", n);
+      passi.forEach(function (p) { var on = p.getAttribute("data-fase") === String(n); p.classList.toggle("attivo", on); p.setAttribute("aria-pressed", String(on)); });
+      var t = passi[n - 1] && passi[n - 1].querySelector("h3");
+      if (didascalia && t) didascalia.innerHTML = "<span>" + ROMANI[n - 1] + "</span> " + t.textContent;
+    }
+    passi.forEach(function (p) {
+      function scegli() { bloccoFinoA = Date.now() + 1200; fase(+p.getAttribute("data-fase")); }
+      p.addEventListener("click", scegli);
+      p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); scegli(); } });
+    });
+    if ("IntersectionObserver" in window) {
+      var ioLab = new IntersectionObserver(function (voci) {
+        if (Date.now() < bloccoFinoA) return;
+        voci.forEach(function (v) { if (v.isIntersecting) fase(+v.target.getAttribute("data-fase")); });
+      }, { rootMargin: "-48% 0px -48% 0px" });
+      passi.forEach(function (p) { ioLab.observe(p); });
+    }
+    fase(1);
   }
 
   /* ---------- Servizi: luce che segue il puntatore ---------- */

@@ -268,6 +268,15 @@
         v: .25 + Math.random() * .7, o: Math.random() * Math.PI * 2, a: .35 + Math.random() * .5, vita: 0 };
     }
     misura();
+    hero.addEventListener("pointerdown", function (e) {
+      if (e.target.closest("a, button")) return;
+      var r = hero.getBoundingClientRect();
+      for (var k = 0; k < 22; k++) {
+        var b = nuova(false); b.x = e.clientX - r.left; b.y = e.clientY - r.top;
+        b.v = 1 + Math.random() * 2.2; b.vx = (Math.random() - .5) * 3; b.a = .9; b.vita = 60; b.scintilla = true;
+        braci.push(b);
+      }
+    });
     var n = Math.round(Math.min(46, W / 28));
     for (var i = 0; i < n; i++) braci.push(nuova(true));
     window.addEventListener("resize", misura);
@@ -276,9 +285,10 @@
       if (visibile && !document.hidden) {
         cx.clearRect(0, 0, W, H);
         braci.forEach(function (b, k) {
-          b.y -= b.v; b.o += .02; b.x += Math.sin(b.o) * .35; b.vita++;
+          b.y -= b.v; b.o += .02; b.x += Math.sin(b.o) * .35 + (b.vx || 0); b.vita++;
+          if (b.scintilla) { b.vx *= .96; b.v *= .985; b.a *= .985; if (b.a < .05) { braci.splice(k, 1); return; } }
           var alto = b.y / H, alfa = b.a * Math.min(1, b.vita / 60) * Math.max(0, alto);
-          if (b.y < -10 || alfa <= 0.01 && b.vita > 60) { braci[k] = nuova(false); return; }
+          if (b.y < -10 || alfa <= 0.01 && b.vita > 60) { if (b.scintilla) braci.splice(k, 1); else braci[k] = nuova(false); return; }
           var g = cx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r * 4);
           g.addColorStop(0, "rgba(255, 196, 120," + alfa + ")");
           g.addColorStop(.4, "rgba(232, 128, 48," + alfa * .55 + ")");
@@ -299,6 +309,35 @@
         inAttesa = false;
       });
     }, { passive: true });
+  }
+
+  /* ---------- Laboratorio della pizza: le fasi seguono lo scorrimento o il tocco ---------- */
+  var lab = document.querySelector(".laboratorio__svg");
+  if (lab) {
+    var passi = Array.prototype.slice.call(document.querySelectorAll(".passo"));
+    var didascalia = document.getElementById("lab-didascalia");
+    var ROMANI = ["I", "II", "III", "IV"];
+    var bloccoFinoA = 0;
+    function fase(n) {
+      if (lab.getAttribute("data-fase") === String(n)) return;
+      lab.setAttribute("data-fase", n);
+      passi.forEach(function (p) { var on = p.getAttribute("data-fase") === String(n); p.classList.toggle("attivo", on); p.setAttribute("aria-pressed", String(on)); });
+      var t = passi[n - 1] && passi[n - 1].querySelector("h3");
+      if (didascalia && t) didascalia.innerHTML = "<span>" + ROMANI[n - 1] + "</span> " + t.textContent;
+    }
+    passi.forEach(function (p) {
+      function scegli() { bloccoFinoA = Date.now() + 1200; fase(+p.getAttribute("data-fase")); }
+      p.addEventListener("click", scegli);
+      p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); scegli(); } });
+    });
+    if ("IntersectionObserver" in window) {
+      var ioLab = new IntersectionObserver(function (voci) {
+        if (Date.now() < bloccoFinoA) return;
+        voci.forEach(function (v) { if (v.isIntersecting) fase(+v.target.getAttribute("data-fase")); });
+      }, { rootMargin: "-48% 0px -48% 0px" });
+      passi.forEach(function (p) { ioLab.observe(p); });
+    }
+    fase(1);
   }
 
   /* ---------- Servizi: luce che segue il puntatore ---------- */

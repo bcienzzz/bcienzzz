@@ -644,3 +644,53 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .nastro__binario, .sigillo__testo { animation: none; }
 }
+
+/* ---------- Laboratorio della pizza (interattivo) ---------- */
+.laboratorio { display: grid; gap: 28px; margin-top: 40px; align-items: start; }
+.laboratorio__scena { margin: 0; position: sticky; top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 8px); z-index: 2;
+  background: radial-gradient(circle at 50% 55%, rgba(201, 139, 62, .12), transparent 62%), var(--bordo-sezione);
+  padding: 8px 0 14px; border-bottom: 1px solid var(--cenere); }
+.laboratorio__svg { width: min(270px, 70vw); height: auto; margin: 0 auto; overflow: visible; }
+.laboratorio__didascalia { text-align: center; font-family: var(--f-titoli); font-size: 1.35rem; margin-top: 6px; }
+.laboratorio__didascalia span { color: var(--resina); margin-right: 6px; }
+.laboratorio .passi--schede { margin-top: 0; grid-template-columns: 1fr !important; }
+.passo { cursor: pointer; opacity: .5; }
+.passo.attivo, .passo:hover, .passo:focus-visible { opacity: 1; }
+.passo.attivo { border-color: rgba(201, 139, 62, .55); background: linear-gradient(180deg, rgba(201, 139, 62, .10), rgba(201, 139, 62, 0)); }
+.passo.attivo::after { transform: scaleX(1); }
+.js .passo.rivela.visto:not(.attivo) { opacity: .5; }
+@media (min-width: 900px) {
+  .laboratorio { grid-template-columns: 1fr 1fr; gap: 64px; }
+  .laboratorio__scena { top: calc(var(--header-h) + 40px); border: 0; background: radial-gradient(circle at 50% 55%, rgba(201, 139, 62, .14), transparent 65%); padding: 24px 0; }
+  .laboratorio__svg { width: min(460px, 100%); }
+  .laboratorio .passi--schede li { padding-block: 44px; min-height: 52vh; display: flex; flex-direction: column; justify-content: center; }
+}
+
+/* Fasi dell'animazione */
+.laboratorio__svg g, .laboratorio__svg circle, .laboratorio__svg ellipse { transform-box: view-box; }
+.fx-forno, .fx-ingredienti, .fx-pizza, .fx-sugo, .fx-mozz, .fx-basilico, .fx-macchie { transition: opacity .8s var(--ease), transform 1s var(--ease); }
+.fx-forno { opacity: 0; transform: translateY(30px); }
+.fx-pizza { transform-origin: 200px 215px; transform: scale(0); opacity: 0; }
+.fx-sugo, .fx-mozz, .fx-basilico, .fx-macchie { opacity: 0; transform-origin: 200px 215px; transform: scale(.6); }
+.fx-mozz { transition-delay: .25s; } .fx-basilico { transition-delay: .5s; }
+.ingrediente { transform-origin: 200px 200px; animation: galleggia 3.6s ease-in-out var(--d) infinite; }
+.fx-ingredienti { transform-origin: 200px 200px; }
+@keyframes galleggia { 50% { transform: translateY(-8px); } }
+
+[data-fase="1"] .fx-ingredienti { opacity: 1; transform: none; }
+[data-fase="2"] .fx-ingredienti, [data-fase="3"] .fx-ingredienti, [data-fase="4"] .fx-ingredienti { opacity: 0; transform: scale(.3); }
+[data-fase="2"] .fx-pizza { opacity: 1; transform: scale(.42); animation: lievita 2.6s ease-in-out infinite; }
+@keyframes lievita { 50% { transform: scale(.48); } }
+[data-fase="3"] .fx-pizza { opacity: 1; transform: scale(1); }
+[data-fase="3"] .fx-sugo, [data-fase="3"] .fx-mozz, [data-fase="3"] .fx-basilico,
+[data-fase="4"] .fx-sugo, [data-fase="4"] .fx-mozz, [data-fase="4"] .fx-basilico, [data-fase="4"] .fx-macchie { opacity: 1; transform: none; }
+[data-fase="4"] .fx-forno { opacity: 1; transform: none; }
+[data-fase="4"] .fx-pizza { opacity: 1; transform: translateY(78px) scale(.62); }
+[data-fase="4"] .fx-impasto { fill: #e3b26c; transition: fill 1.2s ease .4s; }
+.fiamma { transform-origin: center bottom; transform-box: fill-box; animation: fiamma .9s ease-in-out infinite alternate; }
+.fiamma.f2 { animation-duration: .7s; } .fiamma.f3 { animation-delay: .3s; }
+@keyframes fiamma { from { transform: scaleY(.85) skewX(-4deg); opacity: .8; } to { transform: scaleY(1.12) skewX(4deg); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ingrediente, .fiamma, [data-fase="2"] .fx-pizza { animation: none; }
+}
