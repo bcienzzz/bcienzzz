@@ -422,6 +422,7 @@ def home():
     <span class="occhiello rivela">Da Picea</span>
     <h2 class="titolo-sezione rivela" id="titolo-servizi">Al tavolo, da asporto <em>o a casa tua</em></h2>
     <p class="intro-sezione rivela">Una delle storiche pizzerie di Pozzuoli. Una cultura generazionale della tradizione della pizza partenopea.</p>
+    <figure class="foto-locale rivela">{immagine("bancone", "Il bancone di Picea con l'insegna in maiolica e i tavoli bianchi della sala", [800, 1280, 2000], "(min-width: 1200px) 1140px, 100vw", w=2000, h=1250)}</figure>
     <ul class="servizi rivela">{servizi}</ul>
     <p class="sottotitolo-piccolo rivela">Pagamenti accettati</p>
     <ul class="pagamenti rivela">{pagamenti}</ul>
@@ -502,6 +503,7 @@ def storia():
         </div>
       </section>
     </article>
+    <figure class="foto-locale rivela">{immagine("sala", "La sala di Picea con i tavoli apparecchiati e, in fondo, il bancone", [800, 1280, 2000], "(min-width: 900px) 860px, 100vw", w=2000, h=1250)}</figure>
     <blockquote class="estratto rivela">
       <p>Dal 1996 ad oggi la filosofia è immutata: rispettare le origini per esaltare i sapori.</p>
       <cite>Picea · Pozzuoli</cite>
