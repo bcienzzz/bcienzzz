@@ -87,6 +87,15 @@ def tabella_orari(classe=""):
     return f'<ul class="tabella-orari {classe}">{"".join(righe)}</ul>'
 
 
+def settimana_html():
+    nomi = [(1, "Lun"), (2, "Mar"), (3, "Mer"), (4, "Gio"), (5, "Ven"), (6, "Sab"), (0, "Dom")]
+    col = []
+    for g, n in nomi:
+        fasce = "".join(f'<span><time>{a}</time><i>–</i><time>{c}</time></span>' for a, c in C["orari"]["fasce"][str(g)])
+        col.append(f'<li data-giorni="{g}"><b>{n}</b>{fasce}<em class="badge-oggi" hidden>Oggi</em></li>')
+    return f'<ul class="settimana">{"".join(col)}</ul>'
+
+
 def orari_brevi():
     out = []
     for g in C["orari"]["gruppi"]:
@@ -130,7 +139,7 @@ def legale_riga():
 def mappa_html():
     return f"""<div class="mappa">
   <div class="mappa__copertina">
-    {icona("pin", "pin")}
+    <span class="mappa__pin" aria-hidden="true"><i></i><i></i>{icona("pin", "pin")}</span>
     <strong>{e(IND["via"])}, {e(IND["citta"])}</strong>
     <p>La mappa di Google si carica solo se la apri: prima di quel momento Google non riceve nessun dato.</p>
     <div class="azioni">
@@ -487,15 +496,36 @@ def home():
 </section>
 
 <section class="sezione chiaro" id="orari" aria-labelledby="titolo-dove">
-  <div class="contenitore dove">
-    <div>
+  <div class="contenitore">
+    <div class="centro">
       <span class="occhiello rivela">Orari e indirizzo</span>
       <h2 class="titolo-sezione rivela" id="titolo-dove">Vieni a <em>trovarci</em></h2>
-      <div class="rivela">{tabella_orari()}</div>
-      <address class="indirizzo rivela">{e(IND["via"])}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</address>
-      <div class="hero__azioni rivela">{link_esterno(C["maps_link"], "Indicazioni", "btn", "pin")}<a class="btn btn--vuoto" href="contatti.html">Tutti i contatti</a></div>
+      <div class="rivela" style="margin-top:22px">{stato_html()}</div>
     </div>
-    <div class="rivela" data-ritardo="1">{mappa_html()}</div>
+    <div class="rivela">{settimana_html()}</div>
+    <div class="dove dove--home">
+      <div class="dove__indirizzo rivela">
+        <span class="dove__etichetta">Ci trovi qui</span>
+        <address class="indirizzo">{e(IND["via"]).replace(", ", ",&nbsp;")}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</address>
+        <p class="dove__nota">Nel centro storico di Pozzuoli.</p>
+        <div class="hero__azioni">{link_esterno(C["maps_link"], "Indicazioni", "btn", "pin")}<a class="btn btn--vuoto" href="contatti.html">Tutti i contatti</a></div>
+      </div>
+      <div class="rivela" data-ritardo="1">{mappa_html()}</div>
+    </div>
+  </div>
+</section>
+
+<section class="finale" aria-labelledby="titolo-finale">
+  <div class="finale__luce" aria-hidden="true"></div>
+  <div class="contenitore centro">
+    <p class="hero__epigrafe rivela" aria-hidden="true">PVTEOLI · MCMXCVI</p>
+    <h2 class="finale__titolo rivela" id="titolo-finale">Ti aspettiamo <em>a tavola</em></h2>
+    <p class="intro-sezione rivela" style="margin-inline:auto">La vera pizza napoletana, cotta nel forno a legna nel centro storico di Pozzuoli.</p>
+    <div class="finale__azioni rivela">
+      <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
+      <a class="btn btn--vuoto" href="tel:{TEL_L}">{icona("tel")}{e(TEL_V)}</a>
+      {bottone_glovo()}
+    </div>
   </div>
 </section>
 """
@@ -514,13 +544,21 @@ def storia():
 </section>
 
 <section class="sezione chiaro">
-  <div class="contenitore stretto storia-testo">
-    <div class="capitolo--primo rivela">
-      <p>Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero: terme, macellum, ville, anfiteatri. Un luogo che respira archeologia.</p>
+  <div class="contenitore storia-testo">
+    <div class="capitoli rivela">
+      <ol class="capitoli__binario" tabindex="0" aria-label="La storia di Picea, da scorrere">
+        <li class="capitolo-card" id="cap-1"><span class="sr-only">Capitolo 1 di 4</span><span class="capitolo-card__num" aria-hidden="true">I</span><p>Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero: terme, macellum, ville, anfiteatri. Un luogo che respira archeologia.</p></li>
+        <li class="capitolo-card" id="cap-2"><span class="sr-only">Capitolo 2 di 4</span><span class="capitolo-card__num" aria-hidden="true">II</span><p>Tra le fonti, Giovanni incrocia la “Picea abies”, un abete rosso: era il combustibile eletto dai romani per alimentare i loro forni pubblici. Una legna vigorosa, che sprigionava calore rapido e un profumo balsamico. Da quella intuizione nasce “Picea”.</p></li>
+        <li class="capitolo-card" id="cap-3"><span class="sr-only">Capitolo 3 di 4</span><span class="capitolo-card__num" aria-hidden="true">III</span><p>Pioniere a Pozzuoli della pizza tradizionale napoletana, Giovanni sceglie una caratteristica ben precisa: cornicione contenuto e stesura della verace pizza napoletana, impasto disciplinato da tempi di lievitazione rigorosi. La materia prima? Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
+        <li class="capitolo-card" id="cap-4"><span class="sr-only">Capitolo 4 di 4</span><span class="capitolo-card__num" aria-hidden="true">IV</span><p>Diventa così più di una pizzeria: è una continuità. Un dialogo tra la fornace romana e il forno moderno.</p></li>
+      </ol>
+      <div class="capitoli__comandi">
+        <button type="button" class="capitoli__freccia" data-dir="-1" aria-label="Capitolo precedente">{icona("freccia")}</button>
+        <div class="capitoli__punti" aria-hidden="true"><span class="attivo"></span><span></span><span></span><span></span></div>
+        <button type="button" class="capitoli__freccia" data-dir="1" aria-label="Capitolo successivo">{icona("freccia")}</button>
+      </div>
+      <p class="capitoli__aiuto">Scorri con il dito o usa le frecce</p>
     </div>
-    <p class="rivela">Tra le fonti, Giovanni incrocia la “Picea abies”, un abete rosso: era il combustibile eletto dai romani per alimentare i loro forni pubblici. Una legna vigorosa, che sprigionava calore rapido e un profumo balsamico. Da quella intuizione nasce “Picea”.</p>
-    <p class="rivela">Pioniere a Pozzuoli della pizza tradizionale napoletana, Giovanni sceglie una caratteristica ben precisa: cornicione contenuto e stesura della verace pizza napoletana, impasto disciplinato da tempi di lievitazione rigorosi. La materia prima? Solo eccellenze del territorio, selezionate senza compromessi.</p>
-    <p class="rivela">Diventa così più di una pizzeria: è una continuità. Un dialogo tra la fornace romana e il forno moderno.</p>
     <blockquote class="estratto rivela">
       <p>Dal 1996 ad oggi la filosofia è immutata: rispettare le origini per esaltare i sapori.</p>
     </blockquote>
@@ -636,6 +674,16 @@ def prenota():
       </form>
     </div>
     <aside class="lato rivela" data-ritardo="1">
+      <div class="biglietto" id="biglietto" aria-live="polite">
+        <div class="biglietto__testa"><span>Picea</span><small>Richiesta di prenotazione</small></div>
+        <dl class="biglietto__dati">
+          <div><dt>Nome</dt><dd data-b="nome">—</dd></div>
+          <div><dt>Giorno</dt><dd data-b="data">—</dd></div>
+          <div><dt>Ora</dt><dd data-b="ora">—</dd></div>
+          <div><dt>Persone</dt><dd data-b="persone">2</dd></div>
+        </dl>
+        <div class="biglietto__piede"><span>{e(IND["via"])} · {e(IND["citta"])}</span><span class="biglietto__timbro" aria-hidden="true">Pronta</span></div>
+      </div>
       <h2>Orari</h2>
       {tabella_orari()}
       <div class="alternativa">

@@ -348,6 +348,64 @@
     });
   });
 
+  /* ---------- Biglietto di prenotazione che si compone mentre scrivi ---------- */
+  var big = document.getElementById("biglietto");
+  if (big && fp) {
+    function mostra(chiave, valore) {
+      var dd = big.querySelector('[data-b="' + chiave + '"]');
+      if (!dd || dd.textContent === valore) return;
+      dd.textContent = valore; dd.classList.remove("cambiato"); void dd.offsetWidth; dd.classList.add("cambiato");
+    }
+    function aggiornaBiglietto() {
+      var d = fp.querySelector("#p-data").value;
+      mostra("nome", fp.querySelector("#p-nome").value.trim() || "—");
+      mostra("data", d ? (function () { var p = d.split("-"), x = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); return GIORNI[x.getUTCDay()] + " " + x.getUTCDate() + " " + MESI[x.getUTCMonth()]; })() : "—");
+      mostra("ora", fp.querySelector("#p-ora").value || "—");
+      mostra("persone", fp.querySelector("#p-persone").value || "—");
+      big.classList.remove("pronto");
+    }
+    fp.addEventListener("input", aggiornaBiglietto);
+    fp.addEventListener("change", aggiornaBiglietto);
+    fp.querySelectorAll("[data-persone]").forEach(function (b) { b.addEventListener("click", function () { setTimeout(aggiornaBiglietto, 0); }); });
+    fp.addEventListener("submit", function () { setTimeout(function () { var ok = document.getElementById("p-inviato"); if (ok && !ok.hidden) big.classList.add("pronto"); }, 0); });
+  }
+
+  /* ---------- Storia: capitoli da scorrere (dito, mouse, frecce) ---------- */
+  var binario = document.querySelector(".capitoli__binario");
+  if (binario) {
+    var schede = Array.prototype.slice.call(binario.children);
+    var punti = document.querySelectorAll(".capitoli__punti span");
+    var frecce = document.querySelectorAll(".capitoli__freccia");
+    var attuale = 0;
+    function segna(i) {
+      attuale = i;
+      schede.forEach(function (c, k) { c.classList.toggle("attivo", k === i); });
+      punti.forEach(function (p, k) { p.classList.toggle("attivo", k === i); });
+      frecce[0].disabled = i === 0; frecce[1].disabled = i === schede.length - 1;
+    }
+    function vai(i) { i = Math.max(0, Math.min(schede.length - 1, i)); binario.scrollTo({ left: schede[i].offsetLeft - schede[0].offsetLeft, behavior: ridotto ? "auto" : "smooth" }); segna(i); }
+    frecce.forEach(function (f) { f.addEventListener("click", function () { vai(attuale + +f.getAttribute("data-dir")); }); });
+    binario.addEventListener("keydown", function (e) { if (e.key === "ArrowRight") { e.preventDefault(); vai(attuale + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); vai(attuale - 1); } });
+    var tScroll;
+    binario.addEventListener("scroll", function () {
+      clearTimeout(tScroll);
+      tScroll = setTimeout(function () {
+        var x = binario.scrollLeft, migliore = 0, dist = Infinity;
+        schede.forEach(function (c, k) { var d = Math.abs(c.offsetLeft - schede[0].offsetLeft - x); if (d < dist) { dist = d; migliore = k; } });
+        segna(migliore);
+      }, 80);
+    }, { passive: true });
+    // trascinamento con il mouse
+    var giu = false, x0 = 0, s0 = 0, mosso = false;
+    binario.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") return; giu = true; mosso = false; x0 = e.clientX; s0 = binario.scrollLeft; binario.classList.add("trascina"); });
+    window.addEventListener("pointermove", function (e) { if (!giu) return; var dx = e.clientX - x0; if (Math.abs(dx) > 4) mosso = true; binario.scrollLeft = s0 - dx; });
+    window.addEventListener("pointerup", function () {
+      if (!giu) return; giu = false; binario.classList.remove("trascina");
+      if (mosso) { var dx = binario.scrollLeft - s0; vai(attuale + (dx > 60 ? 1 : dx < -60 ? -1 : 0)); }
+    });
+    segna(0);
+  }
+
   /* ---------- Anno nel footer ---------- */
   document.querySelectorAll("[data-anno]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

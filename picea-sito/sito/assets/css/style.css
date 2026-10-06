@@ -694,3 +694,106 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .ingrediente, .fiamma, [data-fase="2"] .fx-pizza { animation: none; }
 }
+
+/* ---------- Settimana (home) ---------- */
+.centro { text-align: center; }
+.centro .occhiello { justify-content: center; }
+.centro .stato { margin: 0; background: rgba(25, 23, 20, .06); border-color: var(--linea-chiara); color: var(--inchiostro); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.settimana { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.settimana li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 4px 22px; border: 1px solid var(--linea-chiara); border-radius: 12px; background: rgba(255, 255, 255, .35);
+  font-variant-numeric: tabular-nums; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+.settimana li:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -18px rgba(60, 40, 20, .5); }
+.settimana b { font-family: var(--f-titoli); font-weight: 400; font-size: 1.35rem; margin-bottom: 4px; }
+.settimana span { display: flex; flex-direction: column; align-items: center; font-size: .86rem; line-height: 1.25; color: var(--grigio-scuro); }
+.settimana span + span { margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--linea-chiara); }
+.settimana span i { font-style: normal; opacity: .5; font-size: .7rem; }
+.settimana li.oggi { background: var(--inchiostro); border-color: var(--inchiostro); color: var(--calce); transform: translateY(-6px); box-shadow: 0 18px 36px -18px rgba(40, 25, 10, .7); }
+.settimana li.oggi span { color: #e6dccb; }
+.settimana li.oggi span + span { border-top-color: rgba(255, 255, 255, .2); }
+.settimana .badge-oggi { position: absolute; top: -10px; font-style: normal; }
+@media (max-width: 719px) {
+  .settimana { grid-template-columns: 1fr; gap: 6px; }
+  .settimana li { flex-direction: row; justify-content: space-between; padding: 12px 16px; gap: 12px; }
+  .settimana b { margin: 0; width: 46px; text-align: left; }
+  .settimana span { flex-direction: row; gap: 4px; }
+  .settimana span + span { margin: 0; padding: 0 0 0 10px; border-top: 0; border-left: 1px dashed var(--linea-chiara); }
+  .settimana li > span:first-of-type { margin-left: auto; }
+  .settimana .badge-oggi { position: static; order: -1; }
+  .settimana li.oggi { transform: none; }
+}
+.dove--home { margin-top: 56px; align-items: center; text-align: left; }
+.dove__etichetta { font-size: .75rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--resina-scura); }
+.dove--home .indirizzo { font-family: var(--f-titoli); font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; margin: 12px 0 10px; }
+.dove__nota { color: var(--grigio-scuro); margin-bottom: 26px; }
+
+/* Pin animato sulla copertina della mappa */
+.mappa__pin { position: relative; width: 64px; height: 64px; display: grid; place-items: center; }
+.mappa__pin .pin { position: relative; z-index: 1; width: 44px; height: 44px; animation: salta 2.4s var(--ease) infinite; }
+.mappa__pin i { position: absolute; left: 50%; top: 78%; width: 40px; height: 14px; margin: -7px 0 0 -20px; border-radius: 50%; border: 1.5px solid var(--resina-scura); opacity: 0; animation: onda 2.4s ease-out infinite; }
+.mappa__pin i + i { animation-delay: 1.2s; }
+@keyframes salta { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes onda { from { transform: scale(.3); opacity: .9; } to { transform: scale(2.2); opacity: 0; } }
+
+/* ---------- Finale ---------- */
+.finale { position: relative; isolation: isolate; overflow: hidden; padding: clamp(110px, 14vw, 180px) 0; background: var(--bordo-sezione); }
+.finale__luce { position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse 55% 60% at 50% 110%, rgba(232, 128, 48, .35), rgba(201, 139, 62, .08) 50%, transparent 75%),
+              repeating-linear-gradient(90deg, transparent 0 119px, rgba(243, 239, 232, .03) 119px 120px);
+  animation: brace 6s ease-in-out infinite alternate; }
+@keyframes brace { from { opacity: .75; } to { opacity: 1; } }
+.finale__titolo { font-size: clamp(3rem, 10vw, 6.4rem); line-height: 1; margin-top: 8px; }
+.finale__titolo em { font-style: normal; color: var(--resina); }
+.finale .intro-sezione { margin-top: 22px; }
+.finale__azioni { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
+.finale .hero__epigrafe { text-shadow: none; }
+
+/* ---------- Biglietto (Prenota) ---------- */
+.biglietto { position: relative; margin-bottom: 40px; padding: 26px 26px 20px; border-radius: 14px; color: var(--carbone);
+  background: linear-gradient(135deg, #fbf3e3, #efdcb9); box-shadow: 0 24px 50px -28px rgba(60, 35, 10, .6);
+  -webkit-mask: radial-gradient(circle 11px at 0 64%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% 64%, transparent 98%, #000) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle 11px at 0 64%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% 64%, transparent 98%, #000) right / 51% 100% no-repeat;
+  transform: rotate(-1.2deg); transition: transform .5s var(--ease); }
+.biglietto:hover { transform: rotate(0); }
+.biglietto__testa { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid rgba(15, 14, 12, .15); }
+.biglietto__testa span { font-family: var(--f-titoli); font-size: 1.7rem; letter-spacing: .14em; text-transform: uppercase; }
+.biglietto__testa small { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #7a5a2e; text-align: right; }
+.biglietto__dati { margin: 16px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+.biglietto__dati dt { font-size: .66rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #7a5a2e; }
+.biglietto__dati dd { margin: 2px 0 0; font-family: var(--f-titoli); font-size: 1.3rem; line-height: 1.2; overflow-wrap: anywhere; }
+.biglietto__dati dd.cambiato { animation: lampo .6s var(--ease); }
+@keyframes lampo { from { color: #c0661c; transform: translateY(-3px); } to { color: inherit; transform: none; } }
+.biglietto__piede { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 14px; border-top: 1.5px dashed rgba(15, 14, 12, .25); font-size: .8rem; color: #5d4523; }
+.biglietto__timbro { font-family: var(--f-titoli); font-size: .95rem; letter-spacing: .2em; text-transform: uppercase; color: #a23b16; border: 2px solid currentColor; border-radius: 6px; padding: 2px 10px; transform: rotate(-8deg) scale(1.6); opacity: 0; transition: opacity .4s ease, transform .5s cubic-bezier(.2, 1.6, .4, 1); }
+.biglietto.pronto .biglietto__timbro { opacity: 1; transform: rotate(-8deg) scale(1); }
+
+/* ---------- Storia: capitoli da scorrere ---------- */
+.capitoli { margin: 0 calc(var(--gutter) * -1); }
+.capitoli__binario { list-style: none; margin: 0; padding: 10px var(--gutter) 24px; display: grid; grid-auto-flow: column; grid-auto-columns: min(86%, 560px); gap: 18px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; cursor: grab; }
+.capitoli__binario::-webkit-scrollbar { display: none; }
+.capitoli__binario.trascina { cursor: grabbing; scroll-snap-type: none; }
+.capitolo-card { scroll-snap-align: start; position: relative; padding: 40px 32px 36px; border-radius: 16px; border: 1px solid var(--linea-chiara);
+  background: linear-gradient(160deg, var(--bianco), var(--tufo)); box-shadow: 0 18px 40px -30px rgba(60, 40, 20, .55); transition: transform .5s var(--ease), opacity .5s var(--ease); opacity: .55; transform: scale(.97); }
+.capitolo-card.attivo { opacity: 1; transform: none; }
+.capitolo-card__num { display: block; font-family: var(--f-titoli); font-size: 3.6rem; line-height: 1; margin-bottom: 18px; color: transparent; -webkit-text-stroke: 1px var(--resina-scura); }
+.capitolo-card p { margin: 0; max-width: none !important; }
+.capitolo-card:first-child p::first-letter { float: left; font-family: var(--f-titoli); font-size: 4rem; line-height: .82; padding: 6px 10px 0 0; color: var(--resina-scura); }
+.capitoli__comandi { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 6px; }
+.capitoli__freccia { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--inchiostro); background: none; cursor: pointer; display: grid; place-items: center; transition: background .3s, color .3s; color: var(--inchiostro); }
+.capitoli__freccia:hover { background: var(--inchiostro); color: var(--calce); }
+.capitoli__freccia[data-dir="-1"] svg { transform: rotate(180deg); }
+.capitoli__freccia svg { width: 20px; height: 20px; }
+.capitoli__freccia:disabled { opacity: .3; cursor: default; background: none; color: var(--inchiostro); }
+.capitoli__punti { display: flex; gap: 8px; }
+.capitoli__punti span { width: 8px; height: 8px; border-radius: 999px; background: var(--linea-chiara); transition: width .4s var(--ease), background .4s; }
+.capitoli__punti span.attivo { width: 28px; background: var(--resina-scura); }
+.capitoli__aiuto { text-align: center; font-size: .82rem; color: var(--grigio-scuro); margin: 12px 0 0; }
+@media (min-width: 1024px) { .capitoli { margin: 0; } .capitoli__binario { padding-inline: 0; scroll-padding-inline: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mappa__pin .pin, .mappa__pin i, .finale__luce { animation: none; }
+}
+@media (max-width: 560px) {
+  .finale__azioni { flex-direction: column; align-items: stretch; max-width: 320px; margin-inline: auto; }
+  .finale__azioni .btn { justify-content: center; }
+}

@@ -180,17 +180,23 @@
 </section>
 
 <section class="sezione chiaro" id="orari" aria-labelledby="titolo-dove">
-  <div class="contenitore dove">
-    <div>
+  <div class="contenitore">
+    <div class="centro">
       <span class="occhiello rivela">Orari e indirizzo</span>
       <h2 class="titolo-sezione rivela" id="titolo-dove">Vieni a <em>trovarci</em></h2>
-      <div class="rivela"><ul class="tabella-orari "><li data-giorni="1"><span class="giorni">Lunedì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="2,3,4,5"><span class="giorni">Martedì – Venerdì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="6,0"><span class="giorni">Sabato – Domenica <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>02:00</time></span></span></li></ul></div>
-      <address class="indirizzo rivela">Corso della Repubblica, 131<br>80078 Pozzuoli (NA)</address>
-      <div class="hero__azioni rivela"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Indicazioni<span class="sr-only"> (si apre in una nuova scheda)</span></a><a class="btn btn--vuoto" href="contatti.html">Tutti i contatti</a></div>
+      <div class="rivela" style="margin-top:22px"><p class="stato" data-stato hidden role="status"><span class="stato__punto" aria-hidden="true"></span><span data-stato-testo></span></p></div>
     </div>
-    <div class="rivela" data-ritardo="1"><div class="mappa">
+    <div class="rivela"><ul class="settimana"><li data-giorni="1"><b>Lun</b><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="2"><b>Mar</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="3"><b>Mer</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="4"><b>Gio</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="5"><b>Ven</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="6"><b>Sab</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>02:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="0"><b>Dom</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>02:00</time></span><em class="badge-oggi" hidden>Oggi</em></li></ul></div>
+    <div class="dove dove--home">
+      <div class="dove__indirizzo rivela">
+        <span class="dove__etichetta">Ci trovi qui</span>
+        <address class="indirizzo">Corso della Repubblica,&nbsp;131<br>80078 Pozzuoli (NA)</address>
+        <p class="dove__nota">Nel centro storico di Pozzuoli.</p>
+        <div class="hero__azioni"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Indicazioni<span class="sr-only"> (si apre in una nuova scheda)</span></a><a class="btn btn--vuoto" href="contatti.html">Tutti i contatti</a></div>
+      </div>
+      <div class="rivela" data-ritardo="1"><div class="mappa">
   <div class="mappa__copertina">
-    <svg class="pin" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>
+    <span class="mappa__pin" aria-hidden="true"><i></i><i></i><svg class="pin" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg></span>
     <strong>Corso della Repubblica, 131, Pozzuoli</strong>
     <p>La mappa di Google si carica solo se la apri: prima di quel momento Google non riceve nessun dato.</p>
     <div class="azioni">
@@ -199,6 +205,21 @@
     </div>
   </div>
 </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="finale" aria-labelledby="titolo-finale">
+  <div class="finale__luce" aria-hidden="true"></div>
+  <div class="contenitore centro">
+    <p class="hero__epigrafe rivela" aria-hidden="true">PVTEOLI · MCMXCVI</p>
+    <h2 class="finale__titolo rivela" id="titolo-finale">Ti aspettiamo <em>a tavola</em></h2>
+    <p class="intro-sezione rivela" style="margin-inline:auto">La vera pizza napoletana, cotta nel forno a legna nel centro storico di Pozzuoli.</p>
+    <div class="finale__azioni rivela">
+      <a class="btn" href="prenota.html"><svg aria-hidden="true" focusable="false"><use href="#i-calendario"/></svg>Prenota un tavolo</a>
+      <a class="btn btn--vuoto" href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>081 303 0195</a>
+      <a class="btn btn--vuoto btn--glovo" href="https://glovoapp.com/" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-scooter"/></svg>Ordina su Glovo<span class="sr-only"> (si apre in una nuova scheda)</span></a>
+    </div>
   </div>
 </section>
 

@@ -702,6 +702,109 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .ingrediente, .fiamma, [data-fase="2"] .fx-pizza { animation: none; }
 }
+
+/* ---------- Settimana (home) ---------- */
+.centro { text-align: center; }
+.centro .occhiello { justify-content: center; }
+.centro .stato { margin: 0; background: rgba(25, 23, 20, .06); border-color: var(--linea-chiara); color: var(--inchiostro); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.settimana { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.settimana li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 4px 22px; border: 1px solid var(--linea-chiara); border-radius: 12px; background: rgba(255, 255, 255, .35);
+  font-variant-numeric: tabular-nums; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+.settimana li:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -18px rgba(60, 40, 20, .5); }
+.settimana b { font-family: var(--f-titoli); font-weight: 400; font-size: 1.35rem; margin-bottom: 4px; }
+.settimana span { display: flex; flex-direction: column; align-items: center; font-size: .86rem; line-height: 1.25; color: var(--grigio-scuro); }
+.settimana span + span { margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--linea-chiara); }
+.settimana span i { font-style: normal; opacity: .5; font-size: .7rem; }
+.settimana li.oggi { background: var(--inchiostro); border-color: var(--inchiostro); color: var(--calce); transform: translateY(-6px); box-shadow: 0 18px 36px -18px rgba(40, 25, 10, .7); }
+.settimana li.oggi span { color: #e6dccb; }
+.settimana li.oggi span + span { border-top-color: rgba(255, 255, 255, .2); }
+.settimana .badge-oggi { position: absolute; top: -10px; font-style: normal; }
+@media (max-width: 719px) {
+  .settimana { grid-template-columns: 1fr; gap: 6px; }
+  .settimana li { flex-direction: row; justify-content: space-between; padding: 12px 16px; gap: 12px; }
+  .settimana b { margin: 0; width: 46px; text-align: left; }
+  .settimana span { flex-direction: row; gap: 4px; }
+  .settimana span + span { margin: 0; padding: 0 0 0 10px; border-top: 0; border-left: 1px dashed var(--linea-chiara); }
+  .settimana li > span:first-of-type { margin-left: auto; }
+  .settimana .badge-oggi { position: static; order: -1; }
+  .settimana li.oggi { transform: none; }
+}
+.dove--home { margin-top: 56px; align-items: center; text-align: left; }
+.dove__etichetta { font-size: .75rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--resina-scura); }
+.dove--home .indirizzo { font-family: var(--f-titoli); font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; margin: 12px 0 10px; }
+.dove__nota { color: var(--grigio-scuro); margin-bottom: 26px; }
+
+/* Pin animato sulla copertina della mappa */
+.mappa__pin { position: relative; width: 64px; height: 64px; display: grid; place-items: center; }
+.mappa__pin .pin { position: relative; z-index: 1; width: 44px; height: 44px; animation: salta 2.4s var(--ease) infinite; }
+.mappa__pin i { position: absolute; left: 50%; top: 78%; width: 40px; height: 14px; margin: -7px 0 0 -20px; border-radius: 50%; border: 1.5px solid var(--resina-scura); opacity: 0; animation: onda 2.4s ease-out infinite; }
+.mappa__pin i + i { animation-delay: 1.2s; }
+@keyframes salta { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes onda { from { transform: scale(.3); opacity: .9; } to { transform: scale(2.2); opacity: 0; } }
+
+/* ---------- Finale ---------- */
+.finale { position: relative; isolation: isolate; overflow: hidden; padding: clamp(110px, 14vw, 180px) 0; background: var(--bordo-sezione); }
+.finale__luce { position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse 55% 60% at 50% 110%, rgba(232, 128, 48, .35), rgba(201, 139, 62, .08) 50%, transparent 75%),
+              repeating-linear-gradient(90deg, transparent 0 119px, rgba(243, 239, 232, .03) 119px 120px);
+  animation: brace 6s ease-in-out infinite alternate; }
+@keyframes brace { from { opacity: .75; } to { opacity: 1; } }
+.finale__titolo { font-size: clamp(3rem, 10vw, 6.4rem); line-height: 1; margin-top: 8px; }
+.finale__titolo em { font-style: normal; color: var(--resina); }
+.finale .intro-sezione { margin-top: 22px; }
+.finale__azioni { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
+.finale .hero__epigrafe { text-shadow: none; }
+
+/* ---------- Biglietto (Prenota) ---------- */
+.biglietto { position: relative; margin-bottom: 40px; padding: 26px 26px 20px; border-radius: 14px; color: var(--carbone);
+  background: linear-gradient(135deg, #fbf3e3, #efdcb9); box-shadow: 0 24px 50px -28px rgba(60, 35, 10, .6);
+  -webkit-mask: radial-gradient(circle 11px at 0 64%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% 64%, transparent 98%, #000) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle 11px at 0 64%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% 64%, transparent 98%, #000) right / 51% 100% no-repeat;
+  transform: rotate(-1.2deg); transition: transform .5s var(--ease); }
+.biglietto:hover { transform: rotate(0); }
+.biglietto__testa { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid rgba(15, 14, 12, .15); }
+.biglietto__testa span { font-family: var(--f-titoli); font-size: 1.7rem; letter-spacing: .14em; text-transform: uppercase; }
+.biglietto__testa small { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #7a5a2e; text-align: right; }
+.biglietto__dati { margin: 16px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+.biglietto__dati dt { font-size: .66rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #7a5a2e; }
+.biglietto__dati dd { margin: 2px 0 0; font-family: var(--f-titoli); font-size: 1.3rem; line-height: 1.2; overflow-wrap: anywhere; }
+.biglietto__dati dd.cambiato { animation: lampo .6s var(--ease); }
+@keyframes lampo { from { color: #c0661c; transform: translateY(-3px); } to { color: inherit; transform: none; } }
+.biglietto__piede { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 14px; border-top: 1.5px dashed rgba(15, 14, 12, .25); font-size: .8rem; color: #5d4523; }
+.biglietto__timbro { font-family: var(--f-titoli); font-size: .95rem; letter-spacing: .2em; text-transform: uppercase; color: #a23b16; border: 2px solid currentColor; border-radius: 6px; padding: 2px 10px; transform: rotate(-8deg) scale(1.6); opacity: 0; transition: opacity .4s ease, transform .5s cubic-bezier(.2, 1.6, .4, 1); }
+.biglietto.pronto .biglietto__timbro { opacity: 1; transform: rotate(-8deg) scale(1); }
+
+/* ---------- Storia: capitoli da scorrere ---------- */
+.capitoli { margin: 0 calc(var(--gutter) * -1); }
+.capitoli__binario { list-style: none; margin: 0; padding: 10px var(--gutter) 24px; display: grid; grid-auto-flow: column; grid-auto-columns: min(86%, 560px); gap: 18px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; cursor: grab; }
+.capitoli__binario::-webkit-scrollbar { display: none; }
+.capitoli__binario.trascina { cursor: grabbing; scroll-snap-type: none; }
+.capitolo-card { scroll-snap-align: start; position: relative; padding: 40px 32px 36px; border-radius: 16px; border: 1px solid var(--linea-chiara);
+  background: linear-gradient(160deg, var(--bianco), var(--tufo)); box-shadow: 0 18px 40px -30px rgba(60, 40, 20, .55); transition: transform .5s var(--ease), opacity .5s var(--ease); opacity: .55; transform: scale(.97); }
+.capitolo-card.attivo { opacity: 1; transform: none; }
+.capitolo-card__num { display: block; font-family: var(--f-titoli); font-size: 3.6rem; line-height: 1; margin-bottom: 18px; color: transparent; -webkit-text-stroke: 1px var(--resina-scura); }
+.capitolo-card p { margin: 0; max-width: none !important; }
+.capitolo-card:first-child p::first-letter { float: left; font-family: var(--f-titoli); font-size: 4rem; line-height: .82; padding: 6px 10px 0 0; color: var(--resina-scura); }
+.capitoli__comandi { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 6px; }
+.capitoli__freccia { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--inchiostro); background: none; cursor: pointer; display: grid; place-items: center; transition: background .3s, color .3s; color: var(--inchiostro); }
+.capitoli__freccia:hover { background: var(--inchiostro); color: var(--calce); }
+.capitoli__freccia[data-dir="-1"] svg { transform: rotate(180deg); }
+.capitoli__freccia svg { width: 20px; height: 20px; }
+.capitoli__freccia:disabled { opacity: .3; cursor: default; background: none; color: var(--inchiostro); }
+.capitoli__punti { display: flex; gap: 8px; }
+.capitoli__punti span { width: 8px; height: 8px; border-radius: 999px; background: var(--linea-chiara); transition: width .4s var(--ease), background .4s; }
+.capitoli__punti span.attivo { width: 28px; background: var(--resina-scura); }
+.capitoli__aiuto { text-align: center; font-size: .82rem; color: var(--grigio-scuro); margin: 12px 0 0; }
+@media (min-width: 1024px) { .capitoli { margin: 0; } .capitoli__binario { padding-inline: 0; scroll-padding-inline: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mappa__pin .pin, .mappa__pin i, .finale__luce { animation: none; }
+}
+@media (max-width: 560px) {
+  .finale__azioni { flex-direction: column; align-items: stretch; max-width: 320px; margin-inline: auto; }
+  .finale__azioni .btn { justify-content: center; }
+}
 </style>
 <script>document.documentElement.className="js";</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Pizzeria Picea", "description": "Pizzeria napoletana nel centro storico di Pozzuoli dal 1996: la verace pizza napoletana cotta nel forno a legna.", "foundingDate": "1996", "servesCuisine": ["Pizza napoletana"], "telephone": "+390813030195", "email": "giannivanacore@libero.it", "address": {"@type": "PostalAddress", "streetAddress": "Corso della Repubblica, 131", "postalCode": "80078", "addressLocality": "Pozzuoli", "addressRegion": "NA", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.8228733, "longitude": 14.1195213}, "hasMap": "https://www.google.com/maps/search/?api=1&query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli", "acceptsReservations": true, "paymentAccepted": "Contanti, Pagamento contactless, Mastercard, VISA, Carta di debito, Apple Pay, Maestro", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "02:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "18:00", "closes": "02:00"}], "url": "https://www.pizzeriapicea.com", "image": "https://www.pizzeriapicea.com/assets/img/og-picea.jpg", "sameAs": ["https://www.instagram.com/piceapizzerie/", "https://www.facebook.com/pizzeriapicea/"]}</script>
@@ -865,17 +968,23 @@ body::after {
 </section>
 
 <section class="sezione chiaro" id="orari" aria-labelledby="titolo-dove">
-  <div class="contenitore dove">
-    <div>
+  <div class="contenitore">
+    <div class="centro">
       <span class="occhiello rivela">Orari e indirizzo</span>
       <h2 class="titolo-sezione rivela" id="titolo-dove">Vieni a <em>trovarci</em></h2>
-      <div class="rivela"><ul class="tabella-orari "><li data-giorni="1"><span class="giorni">Lunedì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="2,3,4,5"><span class="giorni">Martedì – Venerdì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="6,0"><span class="giorni">Sabato – Domenica <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>02:00</time></span></span></li></ul></div>
-      <address class="indirizzo rivela">Corso della Repubblica, 131<br>80078 Pozzuoli (NA)</address>
-      <div class="hero__azioni rivela"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Indicazioni<span class="sr-only"> (si apre in una nuova scheda)</span></a><a class="btn btn--vuoto" href="#contatti">Tutti i contatti</a></div>
+      <div class="rivela" style="margin-top:22px"><p class="stato" data-stato hidden role="status"><span class="stato__punto" aria-hidden="true"></span><span data-stato-testo></span></p></div>
     </div>
-    <div class="rivela" data-ritardo="1"><div class="mappa">
+    <div class="rivela"><ul class="settimana"><li data-giorni="1"><b>Lun</b><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="2"><b>Mar</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="3"><b>Mer</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="4"><b>Gio</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="5"><b>Ven</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>00:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="6"><b>Sab</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>02:00</time></span><em class="badge-oggi" hidden>Oggi</em></li><li data-giorni="0"><b>Dom</b><span><time>11:30</time><i>–</i><time>15:30</time></span><span><time>18:00</time><i>–</i><time>02:00</time></span><em class="badge-oggi" hidden>Oggi</em></li></ul></div>
+    <div class="dove dove--home">
+      <div class="dove__indirizzo rivela">
+        <span class="dove__etichetta">Ci trovi qui</span>
+        <address class="indirizzo">Corso della Repubblica,&nbsp;131<br>80078 Pozzuoli (NA)</address>
+        <p class="dove__nota">Nel centro storico di Pozzuoli.</p>
+        <div class="hero__azioni"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Indicazioni<span class="sr-only"> (si apre in una nuova scheda)</span></a><a class="btn btn--vuoto" href="#contatti">Tutti i contatti</a></div>
+      </div>
+      <div class="rivela" data-ritardo="1"><div class="mappa">
   <div class="mappa__copertina">
-    <svg class="pin" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>
+    <span class="mappa__pin" aria-hidden="true"><i></i><i></i><svg class="pin" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg></span>
     <strong>Corso della Repubblica, 131, Pozzuoli</strong>
     <p>La mappa di Google si carica solo se la apri: prima di quel momento Google non riceve nessun dato.</p>
     <div class="azioni">
@@ -884,6 +993,21 @@ body::after {
     </div>
   </div>
 </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="finale" aria-labelledby="titolo-finale">
+  <div class="finale__luce" aria-hidden="true"></div>
+  <div class="contenitore centro">
+    <p class="hero__epigrafe rivela" aria-hidden="true">PVTEOLI · MCMXCVI</p>
+    <h2 class="finale__titolo rivela" id="titolo-finale">Ti aspettiamo <em>a tavola</em></h2>
+    <p class="intro-sezione rivela" style="margin-inline:auto">La vera pizza napoletana, cotta nel forno a legna nel centro storico di Pozzuoli.</p>
+    <div class="finale__azioni rivela">
+      <a class="btn" href="#prenota"><svg aria-hidden="true" focusable="false"><use href="#i-calendario"/></svg>Prenota un tavolo</a>
+      <a class="btn btn--vuoto" href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>081 303 0195</a>
+      <a class="btn btn--vuoto btn--glovo" href="https://glovoapp.com/" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-scooter"/></svg>Ordina su Glovo<span class="sr-only"> (si apre in una nuova scheda)</span></a>
+    </div>
   </div>
 </section>
 
@@ -897,13 +1021,21 @@ body::after {
 </section>
 
 <section class="sezione chiaro">
-  <div class="contenitore stretto storia-testo">
-    <div class="capitolo--primo rivela">
-      <p>Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero: terme, macellum, ville, anfiteatri. Un luogo che respira archeologia.</p>
+  <div class="contenitore storia-testo">
+    <div class="capitoli rivela">
+      <ol class="capitoli__binario" tabindex="0" aria-label="La storia di Picea, da scorrere">
+        <li class="capitolo-card" id="cap-1"><span class="sr-only">Capitolo 1 di 4</span><span class="capitolo-card__num" aria-hidden="true">I</span><p>Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero: terme, macellum, ville, anfiteatri. Un luogo che respira archeologia.</p></li>
+        <li class="capitolo-card" id="cap-2"><span class="sr-only">Capitolo 2 di 4</span><span class="capitolo-card__num" aria-hidden="true">II</span><p>Tra le fonti, Giovanni incrocia la “Picea abies”, un abete rosso: era il combustibile eletto dai romani per alimentare i loro forni pubblici. Una legna vigorosa, che sprigionava calore rapido e un profumo balsamico. Da quella intuizione nasce “Picea”.</p></li>
+        <li class="capitolo-card" id="cap-3"><span class="sr-only">Capitolo 3 di 4</span><span class="capitolo-card__num" aria-hidden="true">III</span><p>Pioniere a Pozzuoli della pizza tradizionale napoletana, Giovanni sceglie una caratteristica ben precisa: cornicione contenuto e stesura della verace pizza napoletana, impasto disciplinato da tempi di lievitazione rigorosi. La materia prima? Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
+        <li class="capitolo-card" id="cap-4"><span class="sr-only">Capitolo 4 di 4</span><span class="capitolo-card__num" aria-hidden="true">IV</span><p>Diventa così più di una pizzeria: è una continuità. Un dialogo tra la fornace romana e il forno moderno.</p></li>
+      </ol>
+      <div class="capitoli__comandi">
+        <button type="button" class="capitoli__freccia" data-dir="-1" aria-label="Capitolo precedente"><svg aria-hidden="true" focusable="false"><use href="#i-freccia"/></svg></button>
+        <div class="capitoli__punti" aria-hidden="true"><span class="attivo"></span><span></span><span></span><span></span></div>
+        <button type="button" class="capitoli__freccia" data-dir="1" aria-label="Capitolo successivo"><svg aria-hidden="true" focusable="false"><use href="#i-freccia"/></svg></button>
+      </div>
+      <p class="capitoli__aiuto">Scorri con il dito o usa le frecce</p>
     </div>
-    <p class="rivela">Tra le fonti, Giovanni incrocia la “Picea abies”, un abete rosso: era il combustibile eletto dai romani per alimentare i loro forni pubblici. Una legna vigorosa, che sprigionava calore rapido e un profumo balsamico. Da quella intuizione nasce “Picea”.</p>
-    <p class="rivela">Pioniere a Pozzuoli della pizza tradizionale napoletana, Giovanni sceglie una caratteristica ben precisa: cornicione contenuto e stesura della verace pizza napoletana, impasto disciplinato da tempi di lievitazione rigorosi. La materia prima? Solo eccellenze del territorio, selezionate senza compromessi.</p>
-    <p class="rivela">Diventa così più di una pizzeria: è una continuità. Un dialogo tra la fornace romana e il forno moderno.</p>
     <blockquote class="estratto rivela">
       <p>Dal 1996 ad oggi la filosofia è immutata: rispettare le origini per esaltare i sapori.</p>
     </blockquote>
@@ -962,6 +1094,16 @@ body::after {
       </form>
     </div>
     <aside class="lato rivela" data-ritardo="1">
+      <div class="biglietto" id="biglietto" aria-live="polite">
+        <div class="biglietto__testa"><span>Picea</span><small>Richiesta di prenotazione</small></div>
+        <dl class="biglietto__dati">
+          <div><dt>Nome</dt><dd data-b="nome">—</dd></div>
+          <div><dt>Giorno</dt><dd data-b="data">—</dd></div>
+          <div><dt>Ora</dt><dd data-b="ora">—</dd></div>
+          <div><dt>Persone</dt><dd data-b="persone">2</dd></div>
+        </dl>
+        <div class="biglietto__piede"><span>Corso della Repubblica, 131 · Pozzuoli</span><span class="biglietto__timbro" aria-hidden="true">Pronta</span></div>
+      </div>
       <h2>Orari</h2>
       <ul class="tabella-orari "><li data-giorni="1"><span class="giorni">Lunedì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="2,3,4,5"><span class="giorni">Martedì – Venerdì <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>00:00</time></span></span></li><li data-giorni="6,0"><span class="giorni">Sabato – Domenica <span class="badge-oggi" hidden>Oggi</span></span><span class="fasce"><span><time>11:30</time>–<time>15:30</time></span><span><time>18:00</time>–<time>02:00</time></span></span></li></ul>
       <div class="alternativa">
@@ -996,7 +1138,7 @@ body::after {
     <div>
       <div class="rivela"><div class="mappa">
   <div class="mappa__copertina">
-    <svg class="pin" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>
+    <span class="mappa__pin" aria-hidden="true"><i></i><i></i><svg class="pin" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg></span>
     <strong>Corso della Repubblica, 131, Pozzuoli</strong>
     <p>La mappa di Google si carica solo se la apri: prima di quel momento Google non riceve nessun dato.</p>
     <div class="azioni">
@@ -1457,6 +1599,64 @@ body::after {
       li.style.setProperty("--x", (e.clientX - r.left) + "px"); li.style.setProperty("--y", (e.clientY - r.top) + "px");
     });
   });
+
+  /* ---------- Biglietto di prenotazione che si compone mentre scrivi ---------- */
+  var big = document.getElementById("biglietto");
+  if (big && fp) {
+    function mostra(chiave, valore) {
+      var dd = big.querySelector('[data-b="' + chiave + '"]');
+      if (!dd || dd.textContent === valore) return;
+      dd.textContent = valore; dd.classList.remove("cambiato"); void dd.offsetWidth; dd.classList.add("cambiato");
+    }
+    function aggiornaBiglietto() {
+      var d = fp.querySelector("#p-data").value;
+      mostra("nome", fp.querySelector("#p-nome").value.trim() || "—");
+      mostra("data", d ? (function () { var p = d.split("-"), x = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); return GIORNI[x.getUTCDay()] + " " + x.getUTCDate() + " " + MESI[x.getUTCMonth()]; })() : "—");
+      mostra("ora", fp.querySelector("#p-ora").value || "—");
+      mostra("persone", fp.querySelector("#p-persone").value || "—");
+      big.classList.remove("pronto");
+    }
+    fp.addEventListener("input", aggiornaBiglietto);
+    fp.addEventListener("change", aggiornaBiglietto);
+    fp.querySelectorAll("[data-persone]").forEach(function (b) { b.addEventListener("click", function () { setTimeout(aggiornaBiglietto, 0); }); });
+    fp.addEventListener("submit", function () { setTimeout(function () { var ok = document.getElementById("p-inviato"); if (ok && !ok.hidden) big.classList.add("pronto"); }, 0); });
+  }
+
+  /* ---------- Storia: capitoli da scorrere (dito, mouse, frecce) ---------- */
+  var binario = document.querySelector(".capitoli__binario");
+  if (binario) {
+    var schede = Array.prototype.slice.call(binario.children);
+    var punti = document.querySelectorAll(".capitoli__punti span");
+    var frecce = document.querySelectorAll(".capitoli__freccia");
+    var attuale = 0;
+    function segna(i) {
+      attuale = i;
+      schede.forEach(function (c, k) { c.classList.toggle("attivo", k === i); });
+      punti.forEach(function (p, k) { p.classList.toggle("attivo", k === i); });
+      frecce[0].disabled = i === 0; frecce[1].disabled = i === schede.length - 1;
+    }
+    function vai(i) { i = Math.max(0, Math.min(schede.length - 1, i)); binario.scrollTo({ left: schede[i].offsetLeft - schede[0].offsetLeft, behavior: ridotto ? "auto" : "smooth" }); segna(i); }
+    frecce.forEach(function (f) { f.addEventListener("click", function () { vai(attuale + +f.getAttribute("data-dir")); }); });
+    binario.addEventListener("keydown", function (e) { if (e.key === "ArrowRight") { e.preventDefault(); vai(attuale + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); vai(attuale - 1); } });
+    var tScroll;
+    binario.addEventListener("scroll", function () {
+      clearTimeout(tScroll);
+      tScroll = setTimeout(function () {
+        var x = binario.scrollLeft, migliore = 0, dist = Infinity;
+        schede.forEach(function (c, k) { var d = Math.abs(c.offsetLeft - schede[0].offsetLeft - x); if (d < dist) { dist = d; migliore = k; } });
+        segna(migliore);
+      }, 80);
+    }, { passive: true });
+    // trascinamento con il mouse
+    var giu = false, x0 = 0, s0 = 0, mosso = false;
+    binario.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") return; giu = true; mosso = false; x0 = e.clientX; s0 = binario.scrollLeft; binario.classList.add("trascina"); });
+    window.addEventListener("pointermove", function (e) { if (!giu) return; var dx = e.clientX - x0; if (Math.abs(dx) > 4) mosso = true; binario.scrollLeft = s0 - dx; });
+    window.addEventListener("pointerup", function () {
+      if (!giu) return; giu = false; binario.classList.remove("trascina");
+      if (mosso) { var dx = binario.scrollLeft - s0; vai(attuale + (dx > 60 ? 1 : dx < -60 ? -1 : 0)); }
+    });
+    segna(0);
+  }
 
   /* ---------- Anno nel footer ---------- */
   document.querySelectorAll("[data-anno]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
