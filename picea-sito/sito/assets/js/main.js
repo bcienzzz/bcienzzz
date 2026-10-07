@@ -102,10 +102,25 @@
     var io = new IntersectionObserver(function (voci) {
       voci.forEach(function (v) { if (v.isIntersecting) { v.target.classList.add("visto"); io.unobserve(v.target); } });
     }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-    rivela.forEach(function (el) {
-      if (el.getBoundingClientRect().top < window.innerHeight * 0.94) el.classList.add("visto");
-      else io.observe(el);
+    var inAttesaRivela = rivela.filter(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.94) { el.classList.add("visto"); return false; }
+      io.observe(el); return true;
     });
+    // Rete di sicurezza: con uno scorrimento velocissimo (o un salto dal menu delle categorie)
+    // un elemento può passare sullo schermo tra due controlli; ciò che è già sopra si mostra comunque.
+    var attesaControllo = false;
+    window.addEventListener("scroll", function () {
+      if (attesaControllo || !inAttesaRivela.length) return;
+      attesaControllo = true;
+      setTimeout(function () {
+        attesaControllo = false;
+        inAttesaRivela = inAttesaRivela.filter(function (el) {
+          if (el.classList.contains("visto")) return false;
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.94) { el.classList.add("visto"); io.unobserve(el); return false; }
+          return true;
+        });
+      }, 150);
+    }, { passive: true });
   } else rivela.forEach(function (el) { el.classList.add("visto"); });
 
   /* ---------- Mappa: si carica solo al clic (niente cookie di Google prima) ---------- */
@@ -562,6 +577,24 @@
       var dx = e.clientX - xInizio; xInizio = null;
       if (Math.abs(dx) > 50 && foto.length > 1) mostraFoto(corrente + (dx < 0 ? 1 : -1));
     });
+  }
+
+  /* ---------- Menu: la categoria che stai leggendo si accende nella barra ---------- */
+  var linkCat = Array.prototype.slice.call(document.querySelectorAll(".menu-nav a"));
+  if (linkCat.length && "IntersectionObserver" in window) {
+    var barraCat = document.querySelector(".menu-nav ul");
+    var ioCat = new IntersectionObserver(function (voci) {
+      voci.forEach(function (v) {
+        if (!v.isIntersecting) return;
+        linkCat.forEach(function (a) {
+          var on = a.getAttribute("href") === "#" + v.target.id;
+          a.classList.toggle("attivo", on);
+          if (on) { a.setAttribute("aria-current", "true"); if (barraCat.scrollWidth > barraCat.clientWidth) barraCat.scrollTo({ left: a.offsetLeft - 16, behavior: ridotto ? "auto" : "smooth" }); }
+          else a.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-35% 0px -60% 0px" });
+    document.querySelectorAll(".categoria[id]").forEach(function (c) { ioCat.observe(c); });
   }
 
   /* ---------- Anno nel footer ---------- */

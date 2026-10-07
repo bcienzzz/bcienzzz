@@ -5,13 +5,13 @@ Sito statico (solo HTML, CSS e JavaScript, nessun database) per Picea, pizzeria 
 ```
 picea-sito/
 ├── sito/        ← la cartella da pubblicare online (è il sito vero e proprio)
-│   ├── index.html, storia.html, galleria.html, prenota.html, contatti.html, privacy.html, 404.html
+│   ├── index.html, storia.html, menu.html, galleria.html, prenota.html, contatti.html, privacy.html, 404.html
 │   ├── robots.txt, sitemap.xml, favicon.ico
 │   └── assets/  (css, js, font, immagini)
 └── sorgente/    ← da qui si modificano i contenuti
     ├── config.json   dati della pizzeria: orari, telefono, WhatsApp, Glovo, social, dati legali
     ├── build.py      rigenera le pagine in ../sito
-    └── menu.json     bozza di menu NON verificata e NON pubblicata (vedi sotto)
+    └── menu.json     il menu ufficiale (trascritto dal PDF del cliente)
 ```
 
 ## Modificare i contenuti
@@ -31,7 +31,7 @@ Esempi:
 - **Logo**: il logo ufficiale è in `sito/assets/img/logo-picea-*.webp/.png` (esportato dal file vettoriale del cliente). Compare grande in cima alla home e piccolo nell’intestazione e nel footer.
 - **Galleria**: le foto sono elencate in `galleria` dentro `config.json` (file, larghezze, dimensioni originali, testo alternativo, didascalia). Per aggiungerne una: salva in `sito/assets/img/` le versioni `nome-800.webp/.jpg` e `nome-1600.webp/.jpg` (o la larghezza reale, se la foto è più piccola) e aggiungi una voce all'elenco. Oggi la galleria usa dettagli dell'unica foto disponibile: appena arrivano foto recenti del locale e delle pizze vanno aggiunte qui.
 - **Privacy**: se cambi il testo dell'informativa, aggiorna anche `privacy_aggiornata`.
-- **Menu**: la pagina è stata tolta finché non arriva il menu ufficiale del cliente. `menu.json` contiene solo una bozza raccolta da fonti online, da NON pubblicare senza il controllo del cliente.
+- **Menu**: in `menu.json` (categorie, piatti, descrizioni, prezzi). Le pizze con `"foto"` compaiono con la foto tonda tra "Le firme di Picea" e nella galleria (file `assets/img/pizza-NOME-280.webp` e `-560.webp`). **Prezzi**: oggi nascosti, come chiesto nel questionario; per mostrarli metti `"menu_prezzi": true` in `config.json` (compare anche il coperto).
 
 Puoi modificare i colori e le spaziature in `sito/assets/css/style.css` e il comportamento delle pagine (prenotazione, mappa, menu mobile) in `sito/assets/js/main.js`. Questi due file non vengono toccati da `build.py`.
 

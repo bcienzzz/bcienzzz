@@ -13,6 +13,7 @@ import re
 QUI = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(QUI, "..", "sito")
 C = json.load(open(os.path.join(QUI, "config.json"), encoding="utf-8"))
+MENU = json.load(open(os.path.join(QUI, "menu.json"), encoding="utf-8"))
 OGGI = datetime.date.today()
 
 e = html.escape  # testo sicuro nell'HTML
@@ -58,6 +59,7 @@ SCHEMA_GIORNI = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday
 NAV = [
     ("index.html", "Home"),
     ("storia.html", "La storia"),
+    ("menu.html", "Menu"),
     ("galleria.html", "Galleria"),
     ("prenota.html", "Prenota"),
     ("contatti.html", "Contatti"),
@@ -215,6 +217,7 @@ def schema_ristorante():
         "geo": {"@type": "GeoCoordinates", "latitude": C["geo"]["lat"], "longitude": C["geo"]["lng"]},
         "hasMap": C["maps_link"],
         "acceptsReservations": True,
+        "hasMenu": C["sito_url"].rstrip("/") + "/menu.html",
         "areaServed": {"@type": "City", "name": IND["citta"]},
         "paymentAccepted": ", ".join(C["pagamenti"]),
         "openingHoursSpecification": spec,
@@ -433,7 +436,7 @@ def dalla_radice(doc):
     """Per la 404, che può essere mostrata a qualsiasi indirizzo: risorse e pagine con percorsi assoluti."""
     doc = re.sub(r'(?<=["\s,])assets/', "/assets/", doc)
     doc = doc.replace('href="index.html"', 'href="/"')
-    return re.sub(r'href="(storia|galleria|prenota|contatti|privacy)\.html"', r'href="/\1.html"', doc)
+    return re.sub(r'href="(storia|menu|galleria|prenota|contatti|privacy)\.html"', r'href="/\1.html"', doc)
 
 
 def pagina(nome, titolo, descrizione, corpo, classe_body="", extra_head=""):
@@ -500,7 +503,7 @@ def home():
       <span class="occhiello">Dal {C["anno_apertura"]}</span>
       <h2 class="citazione" id="titolo-intro">Rispettare le origini per <em>esaltare i sapori</em>.</h2>
       <p class="dettaglio">Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero.</p>
-      <div class="intro-link"><a class="link-freccia" href="storia.html">Leggi la nostra storia {icona("freccia")}</a><a class="link-freccia" href="galleria.html">Guarda la galleria {icona("freccia")}</a></div>
+      <div class="intro-link"><a class="link-freccia" href="storia.html">Leggi la nostra storia {icona("freccia")}</a><a class="link-freccia" href="menu.html">Scopri il menu {icona("freccia")}</a><a class="link-freccia" href="galleria.html">Guarda la galleria {icona("freccia")}</a></div>
     </div>
   </div>
 </section>
@@ -673,15 +676,26 @@ def _romano(n):
     return out
 
 
+def foto_pizza(nome_file, alt, sizes, lazy=True):
+    """Foto tonda (sfondo trasparente) di una pizza del menu."""
+    l = ' loading="lazy"' if lazy else ""
+    return (f'<img src="assets/img/pizza-{nome_file}-280.webp" srcset="assets/img/pizza-{nome_file}-280.webp 280w, '
+            f'assets/img/pizza-{nome_file}-560.webp 560w" sizes="{sizes}" width="280" height="280" alt="{e(alt)}"{l} decoding="async">')
+
+
+def pizze_con_foto():
+    return [x for c in MENU["categorie"] for x in c["piatti"] if x.get("foto")]
+
+
 def galleria():
-    foto = C.get("galleria", [])
-    voci = []
-    for i, f in enumerate(foto):
-        L = f["larghezze"]
-        h = round(800 * f["h"] / f["w"])
-        pic = immagine(f["file"], f["alt"], L, "(min-width: 1024px) 390px, (min-width: 720px) 46vw, 100vw", w=800, h=h)
-        voci.append(f'<li class="galleria__voce rivela" style="--n:\'{_romano(i + 1)}\'"><a href="assets/img/{f["file"]}-{L[-1]}.jpg" data-grande="assets/img/{f["file"]}-{L[-1]}.webp" data-indice="{i}">'
-                    f'{pic}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(f["didascalia"])}</p></li>')
+    principale = C["galleria"][0]
+    L = principale["larghezze"]
+    grande = immagine(principale["file"], principale["alt"], L, "(min-width: 1024px) 1100px, 100vw", w=800, h=round(800 * principale["h"] / principale["w"]))
+    piatti = []
+    for i, x in enumerate(pizze_con_foto(), 1):
+        piatti.append(f'<li class="galleria__voce galleria__piatto rivela" style="--i:{i % 4}"><a href="assets/img/pizza-{x["foto"]}-560.webp" data-grande="assets/img/pizza-{x["foto"]}-560.webp" data-indice="{i}">'
+                      f'{foto_pizza(x["foto"], "Pizza " + x["nome"] + " di Picea", "(min-width: 1024px) 250px, (min-width: 720px) 30vw, 42vw")}</a>'
+                      f'<p class="galleria__did">{e(x["nome"])}</p></li>')
     insta = link_esterno(C["social"]["instagram"], "Altre foto su Instagram", "btn btn--vuoto", "instagram") if C["social"].get("instagram") else ""
     corpo = f"""
 <section class="testata testata--premium">
@@ -694,10 +708,15 @@ def galleria():
 </section>
 <section class="sezione galleria-sezione">
   <span class="galleria-sezione__scritta" aria-hidden="true">PVTEOLI</span>
-  <div class="contenitore">
-    <ul class="galleria">{"".join(voci)}</ul>
-    <div class="hero__azioni rivela" style="margin-top:40px;justify-content:center">
-      <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
+  <div class="contenitore galleria">
+    <div class="galleria__voce galleria__grande rivela"><a href="assets/img/{principale["file"]}-{L[-1]}.jpg" data-grande="assets/img/{principale["file"]}-{L[-1]}.webp" data-indice="0">{grande}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(principale["didascalia"])}</p></div>
+    <div class="centro galleria__intro">
+      <span class="occhiello rivela">Le pizze speciali</span>
+      <h2 class="titolo-sezione rivela">Dal menu, <em>una per una</em></h2>
+    </div>
+    <ul class="galleria__piatti">{"".join(piatti)}</ul>
+    <div class="hero__azioni rivela" style="margin-top:48px;justify-content:center">
+      <a class="btn" href="menu.html">Scopri il menu</a>
       {insta}
     </div>
   </div>
@@ -710,8 +729,69 @@ def galleria():
 </dialog>
 """
     pagina("galleria.html", f"Foto · {C['nome_completo']}, pizza napoletana a Pozzuoli",
-           "Le foto della Pizzeria Picea: la verace pizza napoletana cotta nel forno a legna, nel centro storico di Pozzuoli.", corpo,
+           "Le foto della Pizzeria Picea: la verace pizza napoletana e le pizze speciali del menu, cotte nel forno a legna nel centro storico di Pozzuoli.", corpo,
            extra_head=briciole("Galleria", "galleria.html"))
+
+
+def menu():
+    prezzi = C.get("menu_prezzi", False)
+    def prezzo(x):
+        return f'<span class="voce__prezzo">€&nbsp;{e(x["prezzo"])}</span>' if prezzi and x.get("prezzo") else ""
+    def voce(x):
+        nota = f' <small>{e(x["nota"])}</small>' if x.get("nota") else ""
+        desc = f'<p>{e(x["descrizione"])}</p>' if x.get("descrizione") else ""
+        return f'<li class="voce"><div class="voce__testa"><h3>{e(x["nome"])}{nota}</h3>{prezzo(x)}</div>{desc}</li>'
+    def scheda(x):
+        nota = f' <small>{e(x["nota"])}</small>' if x.get("nota") else ""
+        return (f'<li class="firma rivela"><div class="firma__foto">{foto_pizza(x["foto"], "Pizza " + x["nome"], "(min-width: 1024px) 220px, 46vw")}</div>'
+                f'<div class="voce__testa"><h3>{e(x["nome"])}{nota}</h3>{prezzo(x)}</div><p>{e(x.get("descrizione", ""))}</p></li>')
+    nav, blocchi = [], []
+    for n, c in enumerate(MENU["categorie"], 1):
+        nav.append(f'<li><a href="#{c["id"]}">{e(c["titolo"])}</a></li>')
+        semplici = [x for x in c["piatti"] if not x.get("foto")]
+        firme = [x for x in c["piatti"] if x.get("foto")]
+        nota = f'<p class="categoria__nota">{e(c["nota"])}</p>' if c.get("nota") else ""
+        motto = f'<p class="categoria__motto">{e(MENU["motto"])}</p>' if c["id"] in ("classiche",) else ""
+        firme_html = (f'<h3 class="firme__titolo">Le firme di Picea</h3><ul class="firme">{"".join(scheda(x) for x in firme)}</ul>') if firme else ""
+        blocchi.append(f"""<section class="categoria" id="{c["id"]}" aria-labelledby="t-{c["id"]}">
+  <div class="categoria__testa rivela"><span class="categoria__num" aria-hidden="true">{_romano(n)}</span><h2 id="t-{c["id"]}">{e(c["titolo"])}</h2></div>
+  {motto}{nota}
+  <ul class="voci">{"".join(voce(x) for x in semplici)}</ul>
+  {firme_html}
+</section>""")
+    coperto = f' Coperto € {e(MENU["coperto"])}.' if prezzi and MENU.get("coperto") else ""
+    corpo = f"""
+<section class="testata testata--premium">
+  <span class="testata__anno" aria-hidden="true">MENU</span>
+  <div class="contenitore">
+    <span class="occhiello">Benvenuti a tavola</span>
+    <h1>Il menu</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
+    <p>La verace pizza napoletana nel forno a legna, i fritti, la cucina e il mare.</p>
+  </div>
+</section>
+<nav class="menu-nav" aria-label="Sezioni del menu"><div class="contenitore"><ul>{"".join(nav)}</ul></div></nav>
+<section class="sezione menu-sezione">
+  <div class="contenitore">
+    {"".join(blocchi)}
+    <div class="menu-fine rivela">
+      <p class="menu-fine__allergeni">{e(MENU["allergeni"])}{coperto}</p>
+      <div class="hero__azioni" style="justify-content:center">
+        <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
+        {bottone_glovo()}
+      </div>
+      <p class="menu-fine__grazie">Grazie per averci scelto</p>
+    </div>
+  </div>
+</section>
+"""
+    menu_ld = ld({"@context": "https://schema.org", "@type": "Menu", "name": f"Menu {C['nome_completo']}", "inLanguage": "it-IT",
+                  "hasMenuSection": [{"@type": "MenuSection", "name": c["titolo"], "hasMenuItem": [
+                      {"@type": "MenuItem", "name": x["nome"], **({"description": x["descrizione"]} if x.get("descrizione") else {})} for x in c["piatti"]]}
+                      for c in MENU["categorie"]]})
+    pagina("menu.html", f"Menu · {C['nome_completo']}, pizza napoletana a Pozzuoli",
+           "Il menu della Pizzeria Picea a Pozzuoli: pizze classiche e speciali nel forno a legna, fritti, antipasti, sfizi di mare, primi, secondi e insalatone.", corpo,
+           "pagina-menu", briciole("Menu", "menu.html") + "\n" + menu_ld)
 
 
 def prenota():
@@ -935,7 +1015,7 @@ def extra():
     if url:
         robots += f"\nSitemap: {url}/sitemap.xml\n"
         voci = "".join(f"  <url><loc>{url}/{'' if p == 'index.html' else p}</loc><lastmod>{OGGI.isoformat()}</lastmod></url>\n"
-                       for p in ["index.html", "storia.html", "galleria.html", "prenota.html", "contatti.html"])
+                       for p in ["index.html", "storia.html", "menu.html", "galleria.html", "prenota.html", "contatti.html"])
         with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
             f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{voci}</urlset>\n')
         print("scritta sitemap.xml")
@@ -949,6 +1029,7 @@ def extra():
 if __name__ == "__main__":
     home()
     storia()
+    menu()
     galleria()
     prenota()
     contatti()

@@ -1,87 +1,727 @@
 {
-  "_nota": "Menu senza prezzi (scelta del cliente). Voci ricavate da Jafood, stampa e schede pubbliche di Picea: DA CONFRONTARE con il menu che manda Gianni. Per mettere una pizza in home: \"in_evidenza\": true",
-  "intro": "La verace pizza napoletana, cotta nel forno a legna, e le specialità della casa.",
-  "intro_home": "Le classiche della tradizione e le pizze speciali della casa, con pomodoro San Marzano DOP, fior di latte di Agerola e pomodorino del Piennolo del Vesuvio DOP.",
-  "avviso": "Il menu cambia qualche volta durante l’anno: chiedi al personale le pizze del momento.",
+  "_nota": "Menu trascritto dal PDF ufficiale di Picea (ottobre 2026). I prezzi si mostrano solo se in config.json menu_prezzi è true.",
+  "motto": "“L’arte tradizionale dei pizzaiuoli napoletani” è patrimonio culturale immateriale dell’umanità.",
+  "coperto": "2,00",
+  "allergeni": "Segnalaci eventuali allergie o intolleranze: il personale è a tua disposizione e ti indica gli allergeni presenti in ogni piatto (Reg. UE 1169/2011).",
   "categorie": [
     {
-      "id": "classiche",
-      "titolo": "Le classiche",
+      "id": "bere",
+      "titolo": "Da bere",
       "piatti": [
-        { "nome": "Marinara", "descrizione": "Pomodoro San Marzano DOP, aglio di Sulmona, origano, basilico" },
-        { "nome": "Margherita", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, basilico" },
-        { "nome": "Margherita bianca", "descrizione": "Fior di latte di Agerola, basilico" },
-        { "nome": "Margherita al prosciutto", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, prosciutto cotto, basilico" },
-        { "nome": "Margherita al salame", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame, basilico" },
-        { "nome": "Diavola", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame piccante, basilico" },
-        { "nome": "Capricciosa", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame, funghi, prosciutto cotto, carciofini" },
-        { "nome": "Ortolana", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, peperoni, melanzane a funghetto, zucchine, basilico" },
-        { "nome": "4 formaggi", "descrizione": "Fior di latte di Agerola, provola di Agerola, sottiletta, gorgonzola" },
-        { "nome": "Baby", "descrizione": "Fior di latte di Agerola, würstel, patatine fritte, basilico" }
+        {
+          "nome": "Acqua naturale",
+          "descrizione": "1 l",
+          "prezzo": "2,50"
+        },
+        {
+          "nome": "Acqua frizzante",
+          "descrizione": "1 l",
+          "prezzo": "2,50"
+        },
+        {
+          "nome": "Coca-Cola",
+          "descrizione": "Bottiglia 33 cl",
+          "prezzo": "3,00"
+        },
+        {
+          "nome": "Coca-Cola Zero",
+          "descrizione": "Bottiglia 33 cl",
+          "prezzo": "3,00"
+        },
+        {
+          "nome": "Aranciata",
+          "descrizione": "Bottiglia 33 cl",
+          "prezzo": "3,00"
+        },
+        {
+          "nome": "Sprite",
+          "descrizione": "Bottiglia 33 cl",
+          "prezzo": "3,00"
+        },
+        {
+          "nome": "Birra chiara alla spina",
+          "descrizione": "20 cl / 40 cl",
+          "prezzo": "3,50 / 5,50"
+        },
+        {
+          "nome": "Birra rossa alla spina",
+          "descrizione": "20 cl / 40 cl",
+          "prezzo": "4,00 / 6,00"
+        },
+        {
+          "nome": "Birrasalento Agricola",
+          "descrizione": "Birra artigianale, 33 cl",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Birrasalento Agricola ambrata",
+          "descrizione": "Birra artigianale, 33 cl",
+          "prezzo": "6,00"
+        },
+        {
+          "nome": "Birrasalento Pizzica",
+          "descrizione": "Birra artigianale, 33 cl",
+          "prezzo": "6,00"
+        },
+        {
+          "nome": "Birrasalento Taranta",
+          "descrizione": "Birra artigianale, 75 cl",
+          "prezzo": "12,00"
+        },
+        {
+          "nome": "Birrasalento Beggia ambrata",
+          "descrizione": "Birra artigianale, 75 cl",
+          "prezzo": "13,00"
+        },
+        {
+          "nome": "Vino bianco alla mescita",
+          "descrizione": "¼ l / ½ l / 1 l",
+          "prezzo": "4,00 / 8,00 / 13,00"
+        },
+        {
+          "nome": "Falanghina D.O.P. Astroni",
+          "descrizione": "Bottiglia 75 cl",
+          "prezzo": "16,00"
+        },
+        {
+          "nome": "Falanghina della casa",
+          "descrizione": "Bottiglia 75 cl",
+          "prezzo": "11,00"
+        },
+        {
+          "nome": "Fiano di Avellino Taburno",
+          "descrizione": "Bottiglia 75 cl",
+          "prezzo": "13,00"
+        },
+        {
+          "nome": "Biancolella Casa D’Ambra",
+          "descrizione": "Bottiglia 75 cl",
+          "prezzo": "20,00"
+        },
+        {
+          "nome": "Greco di Tufo",
+          "descrizione": "Bottiglia 75 cl",
+          "prezzo": "16,00"
+        },
+        {
+          "nome": "Moio 57",
+          "descrizione": "Bottiglia 75 cl",
+          "prezzo": "19,00"
+        },
+        {
+          "nome": "Gragnano Ottouve",
+          "descrizione": "Bottiglia 75 cl",
+          "prezzo": "15,00"
+        }
       ]
     },
     {
-      "id": "speciali",
-      "titolo": "Le speciali",
+      "id": "antipasti",
+      "titolo": "Antipasti",
       "piatti": [
-        { "nome": "Polpettina", "descrizione": "Ricotta, pesto di basilico, fior di latte, olio, polpettine fritte, Provolone del Monaco DOP", "in_evidenza": true },
-        { "nome": "Pulcinella", "descrizione": "Fior di latte di Agerola, salsiccia di maialino nero casertano, friarielli novantini", "in_evidenza": true },
-        { "nome": "D.O.P.G.", "descrizione": "Pomodori gialli del Piennolo, mozzarella di bufala DOP, Parmigiano Reggiano 24 mesi, olio extravergine d’oliva, basilico", "in_evidenza": true },
-        { "nome": "D.O.P.", "descrizione": "Pomodorini del Piennolo DOP, mozzarella di bufala DOP, basilico" },
-        { "nome": "D.O.C.", "descrizione": "Pomodorini, mozzarella di bufala DOP, basilico" },
-        { "nome": "Duetto", "descrizione": "Metà D.O.C. e metà fior di latte di Agerola con bresaola, rucola e Parmigiano Reggiano 24 mesi" },
-        { "nome": "Bronte", "descrizione": "Provola di Agerola, pesto di pistacchi, pancetta al pepe nero, olio extravergine d’oliva, basilico" },
-        { "nome": "Cacio & pepe", "descrizione": "Fior di latte di Agerola, pecorino romano, pepe nero, olio extravergine d’oliva, basilico" },
-        { "nome": "Spilinga", "descrizione": "Friarielli novantini, provola di Agerola, spuma di ricotta, ’nduja di Spilinga, olio extravergine d’oliva, basilico" },
-        { "nome": "Portoghese", "descrizione": "Fior di latte di Agerola, pomodoro del Piennolo DOP, baccalà, olive, capperi, chips di cipolla, olio extravergine d’oliva, basilico" },
-        { "nome": "Della nonna", "descrizione": "Provola di Agerola, scarola ripassata in padella con olive, uvetta e capperi, acciughe di Cetara, olio extravergine d’oliva, basilico" }
-      ]
-    },
-    {
-      "id": "ripieni-focacce",
-      "titolo": "Ripieni e focacce",
-      "piatti": [
-        { "nome": "Ripieno al forno", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, ricotta di bufala, prosciutto cotto, salame, basilico" },
-        { "nome": "Ripieno fritto", "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, ricotta di bufala, prosciutto cotto, salame, basilico" },
-        { "nome": "Caprese", "descrizione": "Focaccia con pomodori, mozzarella di bufala DOP, provola di Agerola, origano, basilico" },
-        { "nome": "Marlin", "descrizione": "Focaccia farcita all’uscita dal forno con straccetti di mozzarella di bufala, rucola, marlin affumicato, scorza di limone, olio extravergine d’oliva, basilico" }
+        {
+          "nome": "Il tagliere",
+          "nota": "ideale per 4 persone",
+          "descrizione": "Degustazione di salumi e formaggi selezionati, accompagnati da confetture e focaccia calda",
+          "prezzo": "36,00"
+        },
+        {
+          "nome": "La regina",
+          "descrizione": "Mozzarella di bufala campana DOP da 500 g e pomodoro datterino",
+          "prezzo": "12,00"
+        },
+        {
+          "nome": "Picea",
+          "nota": "ideale per 2 persone",
+          "descrizione": "Mozzarella, prosciutto, salame, caciotta, ricotta, olive, contorni e focaccia",
+          "prezzo": "20,00"
+        },
+        {
+          "nome": "Picea mare",
+          "nota": "ideale per 2 persone",
+          "descrizione": "Composto da vari sfizi di mare",
+          "prezzo": "30,00"
+        },
+        {
+          "nome": "Prosciutto e mozzarella",
+          "descrizione": "Prosciutto crudo di Parma e mozzarella di bufala campana DOP",
+          "prezzo": "12,00"
+        }
       ]
     },
     {
       "id": "fritti",
-      "titolo": "Fritti e stuzzichini",
+      "titolo": "Classici & fritti",
       "piatti": [
-        { "nome": "Frittatina" },
-        { "nome": "Arancini" },
-        { "nome": "Crocchè" },
-        { "nome": "Zeppoline" },
-        { "nome": "Montanarine" },
-        { "nome": "Mozzarella in carrozza" },
-        { "nome": "Verdurine" },
-        { "nome": "Bruschette", "descrizione": "Al pomodoro fresco" },
-        { "nome": "Patate fritte" }
+        {
+          "nome": "Bruschette al pomodoro fresco",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Frittatina",
+          "prezzo": "2,50"
+        },
+        {
+          "nome": "Crocchè",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Arancini",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Zeppoline",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Patate fritte dippers",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Patate fritte dippers con würstel",
+          "prezzo": "6,00"
+        },
+        {
+          "nome": "Verdurine",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Frittura Italia",
+          "prezzo": "6,00"
+        },
+        {
+          "nome": "Montanarine",
+          "prezzo": "7,00"
+        },
+        {
+          "nome": "Mozzarella in carrozza",
+          "prezzo": "6,00"
+        },
+        {
+          "nome": "Tris degustazione",
+          "descrizione": "Frittatina, crocchè di patate e montanara",
+          "prezzo": "8,00"
+        },
+        {
+          "nome": "Mini ripieni mix",
+          "descrizione": "Degustazione di piccoli ripieni fritti farciti",
+          "prezzo": "8,00"
+        }
       ]
     },
     {
-      "id": "cucina",
-      "titolo": "Dalla cucina",
+      "id": "classiche",
+      "titolo": "Pizze classiche",
       "piatti": [
-        { "nome": "Antipasto Picea" },
-        { "nome": "Picea Mare", "descrizione": "Antipasto di mare, ideale per due persone" },
-        { "nome": "Impepata di cozze" },
-        { "nome": "Pasta e patate con provola" },
-        { "nome": "Gnocchetti alla caprese", "descrizione": "Pomodoro e parmigiano" },
-        { "nome": "Spaghetti limone, menta e cozze" },
-        { "nome": "Gnocchetto crema di tartufo e gamberi" }
+        {
+          "nome": "Marinara",
+          "descrizione": "Pomodoro San Marzano DOP, aglio di Sulmona, origano e basilico",
+          "prezzo": "6,00"
+        },
+        {
+          "nome": "Margherita",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola e basilico",
+          "prezzo": "7,00"
+        },
+        {
+          "nome": "Margherita bianca",
+          "descrizione": "Fior di latte di Agerola e basilico",
+          "prezzo": "6,00"
+        },
+        {
+          "nome": "Filetto",
+          "descrizione": "Pomodorini, fior di latte di Agerola e basilico",
+          "prezzo": "7,00"
+        },
+        {
+          "nome": "Margherita al prosciutto",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, prosciutto cotto e basilico",
+          "prezzo": "7,50"
+        },
+        {
+          "nome": "Margherita ai funghi",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, funghi e basilico",
+          "prezzo": "7,50"
+        },
+        {
+          "nome": "Margherita prosciutto e funghi",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, prosciutto cotto, funghi e basilico",
+          "prezzo": "8,00"
+        },
+        {
+          "nome": "Margherita al salame",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame e basilico",
+          "prezzo": "7,50"
+        },
+        {
+          "nome": "Diavola",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame piccante e basilico",
+          "prezzo": "7,50"
+        },
+        {
+          "nome": "Capricciosa",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, salame, funghi, prosciutto cotto, carciofini, olive e basilico",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "Ripieno",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, ricotta di bufala, prosciutto cotto, salame e basilico",
+          "prezzo": "8,50"
+        },
+        {
+          "nome": "Ripieno fritto",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, ricotta di bufala, provola di Agerola e salame",
+          "prezzo": "8,50"
+        },
+        {
+          "nome": "Baby",
+          "descrizione": "Fior di latte di Agerola, würstel, patate fritte e basilico",
+          "prezzo": "8,00"
+        },
+        {
+          "nome": "Chef",
+          "descrizione": "Fior di latte di Agerola, panna, prosciutto cotto, mais e basilico",
+          "prezzo": "8,50"
+        },
+        {
+          "nome": "Pagnottiello al forno",
+          "descrizione": "Prosciutto crudo di Parma Doppia Corona, provola di Agerola, rucola e pomodori",
+          "prezzo": "9,50"
+        },
+        {
+          "nome": "Pizza crocchè",
+          "descrizione": "Panna, prosciutto cotto, fior di latte di Agerola, crocchè di patate",
+          "prezzo": "9,50"
+        },
+        {
+          "nome": "Siciliana",
+          "descrizione": "Pomodoro San Marzano DOP, provola di Agerola, melanzane a funghetto e basilico",
+          "prezzo": "8,50"
+        },
+        {
+          "nome": "Caprese",
+          "descrizione": "Focaccia, pomodori, mozzarella di bufala DOP, provola di Agerola, origano e basilico",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "Panna e prosciutto",
+          "descrizione": "Fior di latte di Agerola, panna, prosciutto cotto e basilico",
+          "prezzo": "8,00"
+        },
+        {
+          "nome": "Panna, prosciutto e funghi",
+          "descrizione": "Fior di latte di Agerola, panna, prosciutto cotto, funghi e basilico",
+          "prezzo": "8,50"
+        },
+        {
+          "nome": "Primavera",
+          "descrizione": "Fior di latte di Agerola, prosciutto crudo di Parma Doppia Corona, rucola e Parmigiano Reggiano 24 mesi",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Ortolana",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, peperoni, melanzane a funghetto, zucchine e basilico",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "Margherita con ricotta",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, ricotta di bufala e basilico",
+          "prezzo": "7,00"
+        },
+        {
+          "nome": "Quattro formaggi",
+          "descrizione": "Fior di latte di Agerola, provola di Agerola, sottiletta, gorgonzola",
+          "prezzo": "8,50"
+        },
+        {
+          "nome": "Quattro stagioni",
+          "descrizione": "¼ con prosciutto, ¼ con salame, ¼ con funghi, ¼ margherita",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "Olio e pomodoro",
+          "descrizione": "Pomodoro San Marzano DOP, olio e basilico",
+          "prezzo": "5,50"
+        },
+        {
+          "nome": "Tonnata",
+          "descrizione": "Pomodorini gialli del Vesuvio, fior di latte di Agerola, filetto di tonno di Cetara, cipolla, olive taggiasche e basilico",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Frutti di mare",
+          "descrizione": "Pomodoro San Marzano DOP, aglio di Sulmona, origano, frutti di mare e basilico",
+          "prezzo": "12,50"
+        },
+        {
+          "nome": "Pescatora",
+          "descrizione": "Fior di latte di Agerola, polpo, calamaro, gamberetti e rucola",
+          "prezzo": "12,50"
+        }
       ]
     },
     {
-      "id": "insalate",
-      "titolo": "Insalate",
+      "id": "speciali",
+      "titolo": "Pizze speciali",
       "piatti": [
-        { "nome": "Insalata Picea", "descrizione": "Riccia, filetto di tonno, rucola, mozzarella, pomodorini" },
-        { "nome": "Insalata caprese", "descrizione": "Lattuga, mozzarella di bufala, provola, pomodori, Parmigiano Reggiano 24 mesi, olive" },
-        { "nome": "Insalata primavera", "descrizione": "Lattuga, rucola, radicchio, pomodori, mais, Parmigiano Reggiano 24 mesi, olive" }
+        {
+          "nome": "Picea",
+          "nota": "ideale per 2 persone",
+          "descrizione": "Doppio impasto farcito con pomodoro San Marzano DOP, fior di latte di Agerola, ricotta di bufala, melanzane a funghetto e, all’uscita, pomodorini, rucola e Parmigiano Reggiano 24 mesi",
+          "prezzo": "16,00"
+        },
+        {
+          "nome": "Pulcinella",
+          "descrizione": "Fior di latte di Agerola, salsiccia di maialino nero di Caserta e friarielli novantini",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "Mix formaggi",
+          "descrizione": "Specialità del pizzaiolo con selezione di formaggi italiani",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "D.O.C.",
+          "descrizione": "Pomodorini, mozzarella di bufala DOP e basilico",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "D.O.P.",
+          "descrizione": "Pomodori del Piennolo DOP, mozzarella di bufala DOP e basilico",
+          "prezzo": "9,50"
+        },
+        {
+          "nome": "Duetto",
+          "descrizione": "½ D.O.C., ½ fior di latte di Agerola, bresaola, rucola e Parmigiano Reggiano 24 mesi",
+          "prezzo": "9,50"
+        },
+        {
+          "nome": "Lasagna",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, provola di Agerola, ricotta di bufala, prosciutto cotto, salame, uova e basilico",
+          "prezzo": "9,50"
+        },
+        {
+          "nome": "Parmigiana",
+          "descrizione": "Pomodoro San Marzano DOP, fior di latte di Agerola, parmigiana di melanzane e basilico",
+          "prezzo": "9,50"
+        },
+        {
+          "nome": "4 gusti",
+          "descrizione": "¼ prosciutto e funghi, ¼ quattro formaggi, ¼ primavera e ¼ D.O.C.",
+          "prezzo": "10,50"
+        },
+        {
+          "nome": "Sfiziosa",
+          "descrizione": "Fior di latte di Agerola, crema ai formaggi, bacon affumicato, chips di cipolla e basilico",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Polpettina",
+          "descrizione": "Fior di latte di Agerola, pesto di basilico, ricotta di bufala, polpettine di manzo, provolone del Monaco, olio EVO e basilico",
+          "prezzo": "10,00",
+          "foto": "polpettina"
+        },
+        {
+          "nome": "Della nonna",
+          "descrizione": "Provola di Agerola, scarola ripassata in padella con olive, uvetta passa e capperi, acciughe di Cetara, olio EVO e basilico",
+          "prezzo": "11,00",
+          "foto": "della-nonna"
+        },
+        {
+          "nome": "Portoghese",
+          "descrizione": "Fior di latte di Agerola, pomodoro del Piennolo DOP, baccalà, olive, capperi, chips di cipolla, olio EVO e basilico",
+          "prezzo": "12,00",
+          "foto": "portoghese"
+        },
+        {
+          "nome": "Mediterranea",
+          "descrizione": "Focaccia condita all’uscita con squacquerone, rucola, salmone affumicato, cipolla novella, scorzetta di limone, olio EVO e basilico",
+          "prezzo": "12,00",
+          "foto": "mediterranea"
+        },
+        {
+          "nome": "Marlin",
+          "descrizione": "Focaccia condita all’uscita con stracciata di bufala, rucola, pesce spada marlin affumicato, scorzetta di limone, olio EVO e basilico",
+          "prezzo": "12,00",
+          "foto": "marlin"
+        },
+        {
+          "nome": "Specials",
+          "descrizione": "Provola di Agerola, purea di patate viola Bayard, pancetta affumicata, crema ai formaggi, olio EVO e basilico",
+          "prezzo": "11,00",
+          "foto": "specials"
+        },
+        {
+          "nome": "D.O.P.G.",
+          "descrizione": "Pomodori gialli del Piennolo, mozzarella di bufala DOP, Parmigiano Reggiano 24 mesi, olio EVO e basilico",
+          "prezzo": "11,00",
+          "foto": "dopg"
+        },
+        {
+          "nome": "Spilinga",
+          "descrizione": "Friarielli novantini, provola di Agerola, spuma di ricotta, ’nduja di Spilinga, olio EVO e basilico",
+          "prezzo": "10,00",
+          "foto": "spilinga"
+        },
+        {
+          "nome": "Vivara",
+          "descrizione": "Mozzarella di bufala DOP, pomodoro datterino giallo e rosso, alici di Cetara, origano, olio EVO e basilico",
+          "prezzo": "11,00",
+          "foto": "vivara"
+        },
+        {
+          "nome": "Farms",
+          "descrizione": "Provola di Agerola, vellutata di zucca, salsiccia di maialino nero casertano, provolone del Monaco, olio EVO e basilico",
+          "prezzo": "10,00",
+          "foto": "farms"
+        },
+        {
+          "nome": "Bronte",
+          "descrizione": "Provola di Agerola, pesto di pistacchi, pancetta al pepe nero, olio EVO e basilico",
+          "prezzo": "11,00",
+          "foto": "bronte"
+        },
+        {
+          "nome": "Cacio & pepe",
+          "descrizione": "Fior di latte di Agerola, pecorino romano, pepe nero, olio EVO e basilico",
+          "prezzo": "10,00",
+          "foto": "cacio-e-pepe"
+        }
+      ]
+    },
+    {
+      "id": "mare",
+      "titolo": "Sfizi di mare",
+      "piatti": [
+        {
+          "nome": "Fritto di gamberi e calamari",
+          "prezzo": "16,00"
+        },
+        {
+          "nome": "Fritto di calamari",
+          "prezzo": "14,00"
+        },
+        {
+          "nome": "Impepata di cozze",
+          "prezzo": "12,00"
+        },
+        {
+          "nome": "Calamaro alla brace",
+          "prezzo": "13,00"
+        },
+        {
+          "nome": "Gamberoni alla brace",
+          "prezzo": "12,00"
+        },
+        {
+          "nome": "Insalata di mare",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Polpo all’insalata",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Pesce spada alla brace",
+          "prezzo": "10,00"
+        }
+      ]
+    },
+    {
+      "id": "primi",
+      "titolo": "Primi piatti",
+      "piatti": [
+        {
+          "nome": "Vermicelli cozze e limone",
+          "descrizione": "Cozze, crema di limone e menta",
+          "prezzo": "13,00"
+        },
+        {
+          "nome": "Gnocchi capresi",
+          "descrizione": "Pomodorini datterini, Parmigiano Reggiano e basilico fresco",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Spaghetti alla Nerano",
+          "descrizione": "Zucchine, provolone del Monaco",
+          "prezzo": "12,00"
+        },
+        {
+          "nome": "Ravioli tartufo e gamberi",
+          "descrizione": "Crema di tartufo e gamberi",
+          "prezzo": "14,00"
+        }
+      ]
+    },
+    {
+      "id": "secondi",
+      "titolo": "Secondi piatti",
+      "nota": "Serviti con contorno a scelta",
+      "piatti": [
+        {
+          "nome": "Bistecca di manzo arrostita",
+          "prezzo": "14,00"
+        },
+        {
+          "nome": "Tagliata di manzo ai ferri",
+          "descrizione": "Rucola e Parmigiano Reggiano 24 mesi",
+          "prezzo": "15,00"
+        },
+        {
+          "nome": "Cotoletta",
+          "prezzo": "8,00"
+        },
+        {
+          "nome": "Scamorza alla piastra",
+          "prezzo": "8,00"
+        },
+        {
+          "nome": "Salsicce",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Hamburger di manzo",
+          "prezzo": "12,00"
+        },
+        {
+          "nome": "Scaloppina",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "Petto di pollo ai ferri",
+          "prezzo": "7,00"
+        }
+      ]
+    },
+    {
+      "id": "contorni",
+      "titolo": "Contorni",
+      "piatti": [
+        {
+          "nome": "Funghi trifolati",
+          "prezzo": "4,00"
+        },
+        {
+          "nome": "Peperoni in padella",
+          "prezzo": "4,00"
+        },
+        {
+          "nome": "Friarielli",
+          "prezzo": "4,00"
+        },
+        {
+          "nome": "Melanzane a funghetto",
+          "prezzo": "4,00"
+        },
+        {
+          "nome": "Parmigiana di melanzane",
+          "prezzo": "7,00"
+        },
+        {
+          "nome": "Insalata di pomodori",
+          "prezzo": "4,00"
+        },
+        {
+          "nome": "Insalata mista",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Insalata verde",
+          "prezzo": "4,00"
+        },
+        {
+          "nome": "Misto contorni",
+          "prezzo": "8,00"
+        },
+        {
+          "nome": "Verdure grigliate",
+          "prezzo": "4,00"
+        }
+      ]
+    },
+    {
+      "id": "insalatone",
+      "titolo": "Insalatone",
+      "piatti": [
+        {
+          "nome": "Picea",
+          "descrizione": "Insalata riccia, rucola, filettoni di tonno, mozzarella e pomodorini",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Primavera",
+          "descrizione": "Lattuga, rucola, radicchio, pomodori, mais, Parmigiano Reggiano 24 mesi e olive",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Caprese",
+          "descrizione": "Lattuga, mozzarella di bufala, provola, pomodori, Parmigiano Reggiano 24 mesi e olive",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Carubana",
+          "descrizione": "Insalata mista, finocchi, ravanelli, sedano, fagiolini, carote e cetrioli",
+          "prezzo": "8,00"
+        },
+        {
+          "nome": "Tricolore",
+          "descrizione": "Bresaola, rucola, scaglie di Parmigiano Reggiano 24 mesi",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Marinara",
+          "descrizione": "Pesce spada affumicato, rucola e Parmigiano Reggiano 24 mesi",
+          "prezzo": "10,00"
+        },
+        {
+          "nome": "Del borgo",
+          "descrizione": "Insalata mista, filetto di tonno, polpo e olive",
+          "prezzo": "12,00"
+        },
+        {
+          "nome": "Del campo",
+          "descrizione": "Lattuga, radicchio, pomodorini, pollo grigliato, noci di Benevento, livetta e scaglie di Parmigiano Reggiano 24 mesi",
+          "prezzo": "9,00"
+        },
+        {
+          "nome": "Caesar salad",
+          "descrizione": "Incappucciata, pollo alla piastra, pancetta affumicata, pane fritto, salsa Caesar, Parmigiano Reggiano 24 mesi",
+          "prezzo": "11,00"
+        }
+      ]
+    },
+    {
+      "id": "dolci",
+      "titolo": "Per concludere",
+      "piatti": [
+        {
+          "nome": "Frutta di stagione",
+          "prezzo": "4,00"
+        },
+        {
+          "nome": "Dolci del giorno",
+          "prezzo": "5,00"
+        },
+        {
+          "nome": "Pizza con Nutella",
+          "prezzo": "7,00"
+        },
+        {
+          "nome": "Caffè",
+          "prezzo": "2,50"
+        },
+        {
+          "nome": "Grappa",
+          "prezzo": "3,00"
+        },
+        {
+          "nome": "Limoncello",
+          "prezzo": "3,00"
+        },
+        {
+          "nome": "Amaro",
+          "prezzo": "3,00"
+        }
       ]
     }
   ]
