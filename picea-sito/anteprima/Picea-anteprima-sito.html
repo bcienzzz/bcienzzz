@@ -955,11 +955,14 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 .mappa .mappa__esterna svg { width: 16px; height: 16px; }
 
 /* ---------- Storia: pagina premium (sala scura, brace, oro) ---------- */
-.testata--storia { isolation: isolate; text-align: center; padding-bottom: clamp(40px, 6vw, 72px);
+/* Intestazioni delle pagine interne: centrate, luce di brace dall'alto, filo d'oro */
+.testata--premium { isolation: isolate; text-align: center; padding-bottom: clamp(40px, 6vw, 72px);
   background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(201, 139, 62, .16), transparent 70%), var(--bordo-sezione); }
-.testata--storia .occhiello { justify-content: center; }
-.testata--storia .occhiello::after { content: ""; width: 28px; height: 1px; background: currentColor; }
-.testata--storia h1 { font-size: clamp(3rem, 11vw, 6.8rem); }
+.testata--premium .occhiello { justify-content: center; }
+.testata--premium .occhiello::after { content: ""; width: 28px; height: 1px; background: currentColor; }
+.testata--premium h1 { font-size: clamp(3rem, 11vw, 6.8rem); }
+.testata--premium p { margin-inline: auto; text-wrap: pretty; }
+.testata--premium .testata__filo + p { margin-top: 22px; }
 .testata__anno { position: absolute; z-index: -1; left: 50%; top: 58%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none;
   font-family: var(--f-titoli); font-size: clamp(5rem, 21vw, 19rem); letter-spacing: .04em; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(201, 139, 62, .14); }
 .testata__filo { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 26px; }
@@ -991,6 +994,8 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 .storia-sezione .capitoli__punti span.attivo { background: var(--resina); }
 .storia-sezione .capitoli__aiuto { color: var(--grigio-chiaro); }
 .storia-sezione .capitoli__binario:focus-visible .capitolo-card.attivo { outline-color: var(--resina); }
+.intro-link { display: flex; flex-wrap: wrap; gap: 8px 32px; }
+.lightbox__freccia[hidden] { display: none; }
 </style>
 <script>document.documentElement.className="js";</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Pizzeria Picea", "description": "Pizzeria napoletana nel centro storico di Pozzuoli dal 1996: la verace pizza napoletana cotta nel forno a legna.", "foundingDate": "1996", "servesCuisine": ["Pizza napoletana"], "telephone": "+390813030195", "email": "giannivanacore@libero.it", "address": {"@type": "PostalAddress", "streetAddress": "Corso della Repubblica, 131", "postalCode": "80078", "addressLocality": "Pozzuoli", "addressRegion": "NA", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.8228733, "longitude": 14.1195213}, "hasMap": "https://www.google.com/maps/search/?api=1&query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli", "acceptsReservations": true, "paymentAccepted": "Contanti, Pagamento contactless, Mastercard, VISA, Carta di debito, Apple Pay, Maestro", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "02:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "18:00", "closes": "02:00"}], "url": "https://www.pizzeriapicea.com", "image": "https://www.pizzeriapicea.com/assets/img/og-picea.jpg", "sameAs": ["https://www.instagram.com/piceapizzerie/", "https://www.facebook.com/pizzeriapicea/"]}</script>
@@ -1065,7 +1070,7 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
       <span class="occhiello">Dal 1996</span>
       <h2 class="citazione" id="titolo-intro">Rispettare le origini per <em>esaltare i sapori</em>.</h2>
       <p class="dettaglio">Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero.</p>
-      <a class="link-freccia" href="#storia">Leggi la nostra storia <svg aria-hidden="true" focusable="false"><use href="#i-freccia"/></svg></a>
+      <div class="intro-link"><a class="link-freccia" href="#storia">Leggi la nostra storia <svg aria-hidden="true" focusable="false"><use href="#i-freccia"/></svg></a><a class="link-freccia" href="#galleria">Guarda la galleria <svg aria-hidden="true" focusable="false"><use href="#i-freccia"/></svg></a></div>
     </div>
   </div>
 </section>
@@ -1197,7 +1202,7 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 
 </div><div class="pagina-anteprima" data-pagina="storia" hidden>
 
-<section class="testata testata--storia">
+<section class="testata testata--premium testata--storia">
   <span class="testata__anno" aria-hidden="true">MCMXCVI</span>
   <div class="contenitore">
     <span class="occhiello">Dal 1996 · Pozzuoli</span>
@@ -1231,10 +1236,11 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 
 </div><div class="pagina-anteprima" data-pagina="galleria" hidden>
 
-<section class="testata">
+<section class="testata testata--premium">
   <div class="contenitore">
     <span class="occhiello">Dal nostro forno</span>
     <h1>Galleria</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
     <p>La verace pizza napoletana di Picea, da vicino. Apri una foto per vederla a tutto schermo.</p>
   </div>
 </section>
@@ -1257,10 +1263,11 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 
 </div><div class="pagina-anteprima" data-pagina="prenota" hidden>
 
-<section class="testata">
+<section class="testata testata--premium">
   <div class="contenitore">
     <span class="occhiello">Prenotazioni</span>
     <h1>Prenota un tavolo</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
     <p>Compila i campi e premi il pulsante: si apre WhatsApp con il messaggio già pronto da inviare a Picea. La prenotazione è confermata quando ti rispondiamo.</p>
   </div>
 </section>
@@ -1326,10 +1333,11 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 
 </div><div class="pagina-anteprima" data-pagina="contatti" hidden>
 
-<section class="testata">
+<section class="testata testata--premium">
   <div class="contenitore">
     <span class="occhiello">Contatti</span>
     <h1>Vieni a trovarci</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
     <p>Siamo nel centro storico di Pozzuoli, in Corso della Repubblica,&nbsp;131.</p>
   </div>
 </section>
@@ -1379,10 +1387,11 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 
 </div><div class="pagina-anteprima" data-pagina="privacy" hidden>
 
-<section class="testata">
+<section class="testata testata--premium">
   <div class="contenitore">
     <span class="occhiello">Informativa</span>
     <h1>Privacy</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
     <p>Come questo sito tratta i dati di chi lo visita (Regolamento UE 2016/679, “GDPR”).</p>
   </div>
 </section>
@@ -2007,7 +2016,10 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
         lb.showModal(); document.body.style.overflow = "hidden";
       });
     });
-    lb.querySelectorAll(".lightbox__freccia").forEach(function (b) { b.addEventListener("click", function () { mostraFoto(corrente + +b.getAttribute("data-dir")); }); });
+    lb.querySelectorAll(".lightbox__freccia").forEach(function (b) {
+      if (foto.length < 2) { b.hidden = true; return; } // con una sola foto le frecce non servono
+      b.addEventListener("click", function () { mostraFoto(corrente + +b.getAttribute("data-dir")); });
+    });
     lb.querySelector(".lightbox__chiudi").addEventListener("click", function () { lb.close(); });
     lb.addEventListener("click", function (e) { if (e.target === lb || e.target.classList.contains("lightbox__foto")) lb.close(); });
     lb.addEventListener("keydown", function (e) {
@@ -2020,7 +2032,7 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
     lb.addEventListener("pointerup", function (e) {
       if (xInizio === null) return;
       var dx = e.clientX - xInizio; xInizio = null;
-      if (Math.abs(dx) > 50) mostraFoto(corrente + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 50 && foto.length > 1) mostraFoto(corrente + (dx < 0 ? 1 : -1));
     });
   }
 

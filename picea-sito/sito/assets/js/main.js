@@ -544,7 +544,10 @@
         lb.showModal(); document.body.style.overflow = "hidden";
       });
     });
-    lb.querySelectorAll(".lightbox__freccia").forEach(function (b) { b.addEventListener("click", function () { mostraFoto(corrente + +b.getAttribute("data-dir")); }); });
+    lb.querySelectorAll(".lightbox__freccia").forEach(function (b) {
+      if (foto.length < 2) { b.hidden = true; return; } // con una sola foto le frecce non servono
+      b.addEventListener("click", function () { mostraFoto(corrente + +b.getAttribute("data-dir")); });
+    });
     lb.querySelector(".lightbox__chiudi").addEventListener("click", function () { lb.close(); });
     lb.addEventListener("click", function (e) { if (e.target === lb || e.target.classList.contains("lightbox__foto")) lb.close(); });
     lb.addEventListener("keydown", function (e) {
@@ -557,7 +560,7 @@
     lb.addEventListener("pointerup", function (e) {
       if (xInizio === null) return;
       var dx = e.clientX - xInizio; xInizio = null;
-      if (Math.abs(dx) > 50) mostraFoto(corrente + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 50 && foto.length > 1) mostraFoto(corrente + (dx < 0 ? 1 : -1));
     });
   }
 

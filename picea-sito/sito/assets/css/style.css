@@ -947,11 +947,14 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 .mappa .mappa__esterna svg { width: 16px; height: 16px; }
 
 /* ---------- Storia: pagina premium (sala scura, brace, oro) ---------- */
-.testata--storia { isolation: isolate; text-align: center; padding-bottom: clamp(40px, 6vw, 72px);
+/* Intestazioni delle pagine interne: centrate, luce di brace dall'alto, filo d'oro */
+.testata--premium { isolation: isolate; text-align: center; padding-bottom: clamp(40px, 6vw, 72px);
   background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(201, 139, 62, .16), transparent 70%), var(--bordo-sezione); }
-.testata--storia .occhiello { justify-content: center; }
-.testata--storia .occhiello::after { content: ""; width: 28px; height: 1px; background: currentColor; }
-.testata--storia h1 { font-size: clamp(3rem, 11vw, 6.8rem); }
+.testata--premium .occhiello { justify-content: center; }
+.testata--premium .occhiello::after { content: ""; width: 28px; height: 1px; background: currentColor; }
+.testata--premium h1 { font-size: clamp(3rem, 11vw, 6.8rem); }
+.testata--premium p { margin-inline: auto; text-wrap: pretty; }
+.testata--premium .testata__filo + p { margin-top: 22px; }
 .testata__anno { position: absolute; z-index: -1; left: 50%; top: 58%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none;
   font-family: var(--f-titoli); font-size: clamp(5rem, 21vw, 19rem); letter-spacing: .04em; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(201, 139, 62, .14); }
 .testata__filo { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 26px; }
@@ -983,3 +986,5 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 .storia-sezione .capitoli__punti span.attivo { background: var(--resina); }
 .storia-sezione .capitoli__aiuto { color: var(--grigio-chiaro); }
 .storia-sezione .capitoli__binario:focus-visible .capitolo-card.attivo { outline-color: var(--resina); }
+.intro-link { display: flex; flex-wrap: wrap; gap: 8px 32px; }
+.lightbox__freccia[hidden] { display: none; }

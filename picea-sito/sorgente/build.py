@@ -433,7 +433,7 @@ def home():
       <span class="occhiello">Dal {C["anno_apertura"]}</span>
       <h2 class="citazione" id="titolo-intro">Rispettare le origini per <em>esaltare i sapori</em>.</h2>
       <p class="dettaglio">Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero.</p>
-      <a class="link-freccia" href="storia.html">Leggi la nostra storia {icona("freccia")}</a>
+      <div class="intro-link"><a class="link-freccia" href="storia.html">Leggi la nostra storia {icona("freccia")}</a><a class="link-freccia" href="galleria.html">Guarda la galleria {icona("freccia")}</a></div>
     </div>
   </div>
 </section>
@@ -560,7 +560,7 @@ def home():
 
 def storia():
     corpo = f"""
-<section class="testata testata--storia">
+<section class="testata testata--premium testata--storia">
   <span class="testata__anno" aria-hidden="true">MCMXCVI</span>
   <div class="contenitore">
     <span class="occhiello">Dal {C["anno_apertura"]} · Pozzuoli</span>
@@ -617,10 +617,11 @@ def galleria():
                     f'{pic}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(f["didascalia"])}</p></li>')
     insta = link_esterno(C["social"]["instagram"], "Altre foto su Instagram", "btn btn--vuoto", "instagram") if C["social"].get("instagram") else ""
     corpo = f"""
-<section class="testata">
+<section class="testata testata--premium">
   <div class="contenitore">
     <span class="occhiello">Dal nostro forno</span>
     <h1>Galleria</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
     <p>La verace pizza napoletana di Picea, da vicino. Apri una foto per vederla a tutto schermo.</p>
   </div>
 </section>
@@ -648,10 +649,11 @@ def galleria():
 def prenota():
     pmax = C["prenotazioni"]["persone_max"]
     corpo = f"""
-<section class="testata">
+<section class="testata testata--premium">
   <div class="contenitore">
     <span class="occhiello">Prenotazioni</span>
     <h1>Prenota un tavolo</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
     <p>Compila i campi e premi il pulsante: si apre WhatsApp con il messaggio già pronto da inviare a Picea. La prenotazione è confermata quando ti rispondiamo.</p>
   </div>
 </section>
@@ -723,10 +725,11 @@ def contatti():
     wa = (f'<a class="canale" href="https://wa.me/{WA_N}" target="_blank" rel="noopener">{icona("whatsapp")}'
           f'<div><small>WhatsApp</small><span>{e(WA_V)}</span></div>{NUOVA_SCHEDA}</a>') if WA_N else ""
     corpo = f"""
-<section class="testata">
+<section class="testata testata--premium">
   <div class="contenitore">
     <span class="occhiello">Contatti</span>
     <h1>Vieni a trovarci</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
     <p>Siamo nel centro storico di Pozzuoli, in {via_unita()}.</p>
   </div>
 </section>
@@ -787,10 +790,11 @@ def privacy():
     nota_logo = ("\n    <p>Il logo viene caricato da un server esterno (DISH Digital Solutions), che può ricevere l’indirizzo IP del visitatore.</p>"
                  if C["logo_url"].startswith("http") else "")
     corpo = f"""
-<section class="testata">
+<section class="testata testata--premium">
   <div class="contenitore">
     <span class="occhiello">Informativa</span>
     <h1>Privacy</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
     <p>Come questo sito tratta i dati di chi lo visita (Regolamento UE 2016/679, “GDPR”).</p>
   </div>
 </section>
