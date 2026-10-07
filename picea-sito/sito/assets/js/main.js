@@ -487,6 +487,47 @@
     });
   });
 
+  /* ---------- Galleria: foto a tutto schermo (frecce, tastiera, dito) ---------- */
+  var galleria = document.querySelector(".galleria"), lb = document.querySelector(".lightbox");
+  if (galleria && lb && typeof lb.showModal === "function") {
+    var foto = Array.prototype.slice.call(galleria.querySelectorAll("a[data-indice]"));
+    var lbImg = lb.querySelector("img"), lbDid = lb.querySelector(".lightbox__did"), lbConta = lb.querySelector(".lightbox__conta"), corrente = 0;
+    function mostraFoto(n) {
+      corrente = (n + foto.length) % foto.length;
+      var a = foto[corrente], mini = a.querySelector("img");
+      lbImg.classList.remove("pronta");
+      lbImg.onload = function () { lbImg.classList.add("pronta"); };
+      // se la versione grande non c'è (es. anteprima a file unico) si usa quella già caricata
+      lbImg.onerror = function () { lbImg.onerror = null; lbImg.src = mini.currentSrc || mini.src; };
+      lbImg.src = a.getAttribute("data-grande");
+      lbImg.alt = mini.alt;
+      lbDid.textContent = a.parentNode.querySelector(".galleria__did").textContent;
+      lbConta.textContent = (corrente + 1) + " / " + foto.length;
+    }
+    foto.forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        mostraFoto(+a.getAttribute("data-indice"));
+        lb.showModal(); document.body.style.overflow = "hidden";
+      });
+    });
+    lb.querySelectorAll(".lightbox__freccia").forEach(function (b) { b.addEventListener("click", function () { mostraFoto(corrente + +b.getAttribute("data-dir")); }); });
+    lb.querySelector(".lightbox__chiudi").addEventListener("click", function () { lb.close(); });
+    lb.addEventListener("click", function (e) { if (e.target === lb || e.target.classList.contains("lightbox__foto")) lb.close(); });
+    lb.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { e.preventDefault(); mostraFoto(corrente + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); mostraFoto(corrente - 1); }
+    });
+    lb.addEventListener("close", function () { document.body.style.overflow = ""; foto[corrente].focus(); });
+    var xInizio = null;
+    lb.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") xInizio = e.clientX; });
+    lb.addEventListener("pointerup", function (e) {
+      if (xInizio === null) return;
+      var dx = e.clientX - xInizio; xInizio = null;
+      if (Math.abs(dx) > 50) mostraFoto(corrente + (dx < 0 ? 1 : -1));
+    });
+  }
+
   /* ---------- Anno nel footer ---------- */
   document.querySelectorAll("[data-anno]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

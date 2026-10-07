@@ -58,6 +58,7 @@ SCHEMA_GIORNI = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday
 NAV = [
     ("index.html", "Home"),
     ("storia.html", "La storia"),
+    ("galleria.html", "Galleria"),
     ("prenota.html", "Prenota"),
     ("contatti.html", "Contatti"),
 ]
@@ -366,7 +367,7 @@ def dalla_radice(doc):
     """Per la 404, che può essere mostrata a qualsiasi indirizzo: risorse e pagine con percorsi assoluti."""
     doc = re.sub(r'(?<=["\s,])assets/', "/assets/", doc)
     doc = doc.replace('href="index.html"', 'href="/"')
-    return re.sub(r'href="(storia|prenota|contatti|privacy)\.html"', r'href="/\1.html"', doc)
+    return re.sub(r'href="(storia|galleria|prenota|contatti|privacy)\.html"', r'href="/\1.html"', doc)
 
 
 def pagina(nome, titolo, descrizione, corpo, classe_body="", extra_head=""):
@@ -595,6 +596,44 @@ def storia():
            corpo)
 
 
+def galleria():
+    foto = C.get("galleria", [])
+    voci = []
+    for i, f in enumerate(foto):
+        L = f["larghezze"]
+        h = round(800 * f["h"] / f["w"])
+        pic = immagine(f["file"], f["alt"], L, "(min-width: 1024px) 390px, (min-width: 720px) 46vw, 100vw", w=800, h=h)
+        voci.append(f'<li class="galleria__voce rivela"><a href="assets/img/{f["file"]}-{L[-1]}.jpg" data-grande="assets/img/{f["file"]}-{L[-1]}.webp" data-indice="{i}">'
+                    f'{pic}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(f["didascalia"])}</p></li>')
+    insta = link_esterno(C["social"]["instagram"], "Altre foto su Instagram", "btn btn--vuoto", "instagram") if C["social"].get("instagram") else ""
+    corpo = f"""
+<section class="testata">
+  <div class="contenitore">
+    <span class="occhiello">Dal nostro forno</span>
+    <h1>Galleria</h1>
+    <p>La verace pizza napoletana di Picea, da vicino. Apri una foto per vederla a tutto schermo.</p>
+  </div>
+</section>
+<section class="sezione chiaro">
+  <div class="contenitore">
+    <ul class="galleria">{"".join(voci)}</ul>
+    <div class="hero__azioni rivela" style="margin-top:40px;justify-content:center">
+      <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
+      {insta}
+    </div>
+  </div>
+</section>
+<dialog class="lightbox" aria-label="Foto a tutto schermo">
+  <figure class="lightbox__foto"><img src="data:," alt=""><figcaption><span class="lightbox__did"></span><span class="lightbox__conta"></span></figcaption></figure>
+  <button type="button" class="lightbox__freccia" data-dir="-1" aria-label="Foto precedente">{icona("freccia")}</button>
+  <button type="button" class="lightbox__freccia" data-dir="1" aria-label="Foto successiva">{icona("freccia")}</button>
+  <button type="button" class="lightbox__chiudi" aria-label="Chiudi"><span aria-hidden="true"></span></button>
+</dialog>
+"""
+    pagina("galleria.html", f"Galleria · {C['nome_completo']} a Pozzuoli",
+           "Le foto della verace pizza napoletana di Picea, cotta nel forno a legna nel centro storico di Pozzuoli.", corpo)
+
+
 def prenota():
     pmax = C["prenotazioni"]["persone_max"]
     corpo = f"""
@@ -803,7 +842,7 @@ def extra():
     if url:
         robots += f"\nSitemap: {url}/sitemap.xml\n"
         voci = "".join(f"  <url><loc>{url}/{'' if p == 'index.html' else p}</loc><lastmod>{OGGI.isoformat()}</lastmod></url>\n"
-                       for p in ["index.html", "storia.html", "prenota.html", "contatti.html", "privacy.html"])
+                       for p in ["index.html", "storia.html", "galleria.html", "prenota.html", "contatti.html", "privacy.html"])
         with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
             f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{voci}</urlset>\n')
         print("scritta sitemap.xml")
@@ -817,6 +856,7 @@ def extra():
 if __name__ == "__main__":
     home()
     storia()
+    galleria()
     prenota()
     contatti()
     privacy()

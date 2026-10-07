@@ -5,7 +5,7 @@ Sito statico (solo HTML, CSS e JavaScript, nessun database) per Picea, pizzeria 
 ```
 picea-sito/
 ├── sito/        ← la cartella da pubblicare online (è il sito vero e proprio)
-│   ├── index.html, storia.html, prenota.html, contatti.html, privacy.html, 404.html
+│   ├── index.html, storia.html, galleria.html, prenota.html, contatti.html, privacy.html, 404.html
 │   ├── robots.txt, sitemap.xml, favicon.ico
 │   └── assets/  (css, js, font, immagini)
 └── sorgente/    ← da qui si modificano i contenuti
@@ -29,6 +29,7 @@ Esempi:
 - **Orari**: `orari.fasce` (0 = domenica … 6 = sabato). Una chiusura minore dell'apertura vuol dire il giorno dopo (es. `18:00`–`02:00`); un giorno con `[]` è chiuso (oggi: il martedì). Gli orari si aggiornano da soli ovunque: settimana in home, tabelle, piè di pagina, stato "Aperto ora", orari prenotabili e dati per Google.
 - **Link Glovo**: `glovo_url`.
 - **Logo**: metti il file in `sito/assets/img/` (es. `logo.png`) e scrivi `"logo_url": "assets/img/logo.png"`. Oggi il logo viene preso dal vecchio sito (server DISH): se quel sito viene chiuso, il logo sparisce da solo senza lasciare buchi, ma conviene averlo in locale.
+- **Galleria**: le foto sono elencate in `galleria` dentro `config.json` (file, larghezze, dimensioni originali, testo alternativo, didascalia). Per aggiungerne una: salva in `sito/assets/img/` le versioni `nome-800.webp/.jpg` e `nome-1600.webp/.jpg` (o la larghezza reale, se la foto è più piccola) e aggiungi una voce all'elenco. Oggi la galleria usa dettagli dell'unica foto disponibile: appena arrivano foto recenti del locale e delle pizze vanno aggiunte qui.
 - **Privacy**: se cambi il testo dell'informativa, aggiorna anche `privacy_aggiornata`.
 - **Menu**: la pagina è stata tolta finché non arriva il menu ufficiale del cliente. `menu.json` contiene solo una bozza raccolta da fonti online, da NON pubblicare senza il controllo del cliente.
 
