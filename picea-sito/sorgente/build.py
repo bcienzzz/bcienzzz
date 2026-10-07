@@ -688,15 +688,30 @@ def pizze_con_foto():
 
 def galleria():
     grandi = []
-    for i, f in enumerate(C["galleria"]):
+    for i, f in enumerate(C["galleria"][:2]):
         L = f["larghezze"]
         larga = f["w"] > f["h"]
         pic = immagine(f["file"], f["alt"], L, "(min-width: 1024px) 700px, 100vw" if larga else "(min-width: 1024px) 400px, 100vw",
                        w=800, h=round(800 * f["h"] / f["w"]))
         grandi.append(f'<div class="galleria__voce galleria__grande{" galleria__grande--alta" if not larga else ""} rivela"><a href="assets/img/{f["file"]}-{L[-1]}.jpg" data-grande="assets/img/{f["file"]}-{L[-1]}.webp" data-indice="{i}">'
                       f'{pic}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(f["didascalia"])}</p></div>')
+    fila = []
+    for i, f in enumerate(C["galleria"][2:], 2):
+        L = f["larghezze"]
+        pic = immagine(f["file"], f["alt"], L, "(min-width: 1024px) 360px, (min-width: 720px) 46vw, 100vw", w=800, h=round(800 * f["h"] / f["w"]))
+        fila.append(f'<div class="galleria__voce galleria__fila-voce rivela"><a href="assets/img/{f["file"]}-{L[-1]}.jpg" data-grande="assets/img/{f["file"]}-{L[-1]}.webp" data-indice="{i}">'
+                    f'{pic}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(f["didascalia"])}</p></div>')
+    v = C.get("galleria_video")
+    if v:
+        fila.insert(1, f'''<figure class="galleria__voce galleria__video rivela">
+      <video muted loop playsinline preload="none" poster="assets/img/{v["poster"]}" width="{v["w"]}" height="{v["h"]}" aria-describedby="video-desc">
+        <source src="assets/video/{v["file"]}.webm" type="video/webm"><source src="assets/video/{v["file"]}.mp4" type="video/mp4">
+      </video>
+      <button type="button" class="galleria__play" aria-label="Metti in pausa il video" aria-pressed="false"><span aria-hidden="true"></span></button>
+      <figcaption class="galleria__did">{e(v["didascalia"])}<span class="sr-only" id="video-desc"> – video: {e(v["titolo"])}</span></figcaption>
+    </figure>''')
     piatti = []
-    for i, x in enumerate(pizze_con_foto(), len(grandi)):
+    for i, x in enumerate(pizze_con_foto(), len(C["galleria"])):
         piatti.append(f'<li class="galleria__voce galleria__piatto rivela" style="--i:{i % 4}"><a href="assets/img/pizza-{x["foto"]}-560.webp" data-grande="assets/img/pizza-{x["foto"]}-560.webp" data-indice="{i}">'
                       f'{foto_pizza(x["foto"], "Pizza " + x["nome"] + " di Picea", "(min-width: 1024px) 250px, (min-width: 720px) 30vw, 42vw")}</a>'
                       f'<p class="galleria__did">{e(x["nome"])}</p></li>')
@@ -714,6 +729,7 @@ def galleria():
   <span class="galleria-sezione__scritta" aria-hidden="true">PVTEOLI</span>
   <div class="contenitore galleria">
     <div class="galleria__grandi">{"".join(grandi)}</div>
+    <div class="galleria__fila">{"".join(fila)}</div>
     <div class="centro galleria__intro">
       <span class="occhiello rivela">Le pizze speciali</span>
       <h2 class="titolo-sezione rivela">Dal menu, <em>una per una</em></h2>

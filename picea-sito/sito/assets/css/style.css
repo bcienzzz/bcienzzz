@@ -1118,3 +1118,21 @@ div.galleria { columns: auto; }
 }
 @media (max-width: 899px) { .galleria__grande--alta { max-width: 520px !important; margin-inline: auto !important; } }
 div.galleria.contenitore { margin-inline: auto; padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px)); }
+
+/* Logo dell'hero ancora più in trasparenza */
+.hero__logo img { opacity: .32; }
+
+/* Galleria: seconda fila con due foto e il video */
+.galleria__fila { display: grid; gap: 28px; max-width: 1100px; margin: 28px auto 0; align-items: start; }
+@media (min-width: 720px) { .galleria__fila { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.galleria__fila img { width: 100%; height: auto; aspect-ratio: 9 / 12; object-fit: cover; }
+.galleria__fila .galleria__voce:last-child img { object-position: 30% 50%; } /* il logo nell'angolo della foto resta intero */
+.galleria__video { position: relative; margin: 0; }
+.galleria__video video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 12; object-fit: cover; border-radius: 4px; background: #1d1813;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(201, 139, 62, .28); }
+.galleria__play { position: absolute; right: 14px; top: 14px; width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+  background: rgba(15, 14, 12, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: grid; place-items: center; }
+.galleria__play span { width: 12px; height: 14px; border-left: 4px solid var(--calce); border-right: 4px solid var(--calce); }
+.galleria__play[aria-pressed="true"] span { width: 0; height: 0; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent var(--calce); margin-left: 3px; }
+.galleria__play:focus-visible { outline: 2px solid var(--resina); outline-offset: 3px; }
+.video-copertina { width: 100%; aspect-ratio: 9 / 12; object-fit: cover; border-radius: 4px; }

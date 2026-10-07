@@ -597,6 +597,19 @@
     document.querySelectorAll(".categoria[id]").forEach(function (c) { ioCat.observe(c); });
   }
 
+  /* ---------- Video della galleria: parte da solo (senza audio) quando si vede ---------- */
+  document.querySelectorAll(".galleria__video").forEach(function (box) {
+    var v = box.querySelector("video"), b = box.querySelector(".galleria__play"), fermato = ridotto;
+    if (!v || !b) return;
+    function stato() { var p = v.paused; b.setAttribute("aria-pressed", String(p)); b.setAttribute("aria-label", p ? "Avvia il video" : "Metti in pausa il video"); }
+    v.addEventListener("play", stato); v.addEventListener("pause", stato);
+    b.addEventListener("click", function () { if (v.paused) { fermato = false; v.play().catch(function () {}); } else { fermato = true; v.pause(); } });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (voci) {
+      voci.forEach(function (x) { if (x.isIntersecting && !fermato) v.play().catch(function () {}); else if (!x.isIntersecting) v.pause(); });
+    }, { threshold: .35 }).observe(v);
+    stato();
+  });
+
   /* ---------- Anno nel footer ---------- */
   document.querySelectorAll("[data-anno]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

@@ -211,7 +211,37 @@
       "h": 1600,
       "alt": "Pizza con salame piccante, fior di latte e basilico su carta con il logo Picea, al tavolo all’aperto",
       "didascalia": "Appena sfornata, sulla carta di Picea"
+    },
+    {
+      "file": "galleria-3",
+      "larghezze": [
+        800,
+        1170
+      ],
+      "w": 1170,
+      "h": 1137,
+      "alt": "Pizza margherita con cornicione alto e basilico, vista dall’alto",
+      "didascalia": "Il cornicione alto della napoletana"
+    },
+    {
+      "file": "galleria-4",
+      "larghezze": [
+        800,
+        1102
+      ],
+      "w": 1102,
+      "h": 1243,
+      "alt": "Pizza con pomodorini, mozzarella, pesto e basilico su un piatto in ghisa, con il logo Picea",
+      "didascalia": "Pomodorini, mozzarella e basilico"
     }
   ],
-  "menu_prezzi": false
+  "menu_prezzi": false,
+  "galleria_video": {
+    "file": "pizza-mare",
+    "poster": "video-pizza-mare.jpg",
+    "w": 464,
+    "h": 832,
+    "titolo": "Pizza con cozze e vongole, appena sfornata",
+    "didascalia": "Dal forno al tavolo"
+  }
 }
