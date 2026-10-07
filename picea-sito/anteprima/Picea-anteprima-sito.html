@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" class="no-js">
+<html lang="it" class="no-js" data-anteprima>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -946,6 +946,14 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 }
 /* Voce della barra in basso per la pagina in cui ci si trova: solo un filo color resina */
 .barra a[aria-current="page"] { box-shadow: inset 0 2px 0 var(--resina); }
+/* Mappa caricata: compare in dissolvenza; resta sempre il bottone per aprirla in Google Maps */
+.mappa iframe { position: relative; z-index: 1; opacity: 0; transition: opacity .6s var(--ease); background: transparent; }
+.mappa iframe.pronta { opacity: 1; }
+.mappa.caricata iframe { position: absolute; inset: 0; }
+.mappa__carica { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font-size: .9rem; color: var(--grigio-scuro); }
+.mappa .mappa__esterna { position: absolute; z-index: 2; right: 12px; bottom: 12px; min-height: 40px; padding: 8px 14px; font-size: .72rem;
+  --sfondo: var(--inchiostro); --colore: var(--calce); --bordo: var(--inchiostro); box-shadow: 0 8px 20px -10px rgba(0, 0, 0, .6); }
+.mappa .mappa__esterna svg { width: 16px; height: 16px; }
 </style>
 <script>document.documentElement.className="js";</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Pizzeria Picea", "description": "Pizzeria napoletana nel centro storico di Pozzuoli dal 1996: la verace pizza napoletana cotta nel forno a legna.", "foundingDate": "1996", "servesCuisine": ["Pizza napoletana"], "telephone": "+390813030195", "email": "giannivanacore@libero.it", "address": {"@type": "PostalAddress", "streetAddress": "Corso della Repubblica, 131", "postalCode": "80078", "addressLocality": "Pozzuoli", "addressRegion": "NA", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.8228733, "longitude": 14.1195213}, "hasMap": "https://www.google.com/maps/search/?api=1&query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli", "acceptsReservations": true, "paymentAccepted": "Contanti, Pagamento contactless, Mastercard, VISA, Carta di debito, Apple Pay, Maestro", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "02:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "18:00", "closes": "02:00"}], "url": "https://www.pizzeriapicea.com", "image": "https://www.pizzeriapicea.com/assets/img/og-picea.jpg", "sameAs": ["https://www.instagram.com/piceapizzerie/", "https://www.facebook.com/pizzeriapicea/"]}</script>
@@ -1412,7 +1420,7 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
   </div>
 </footer>
 <nav class="barra" aria-label="Azioni rapide" style="grid-template-columns:repeat(4,1fr)"><a href="tel:+390813030195"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>Chiama</a><a href="#prenota"><svg aria-hidden="true" focusable="false"><use href="#i-calendario"/></svg>Prenota</a><a href="https://glovoapp.com/it/it/napoli/stores/pizzeria-picea-nap" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-scooter"/></svg>Ordina<span class="sr-only"> (si apre in una nuova scheda)</span></a><a href="https://www.google.com/maps/search/?api=1&amp;query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Mappa<span class="sr-only"> (si apre in una nuova scheda)</span></a></nav>
-<script>window.PICEA={"orari": {"1": [["18:00", "00:00"]], "2": [], "3": [["11:30", "15:30"], ["18:00", "00:00"]], "4": [["11:30", "15:30"], ["18:00", "00:00"]], "5": [["11:30", "15:30"], ["18:00", "00:00"]], "6": [["11:30", "15:30"], ["18:00", "02:00"]], "0": [["11:30", "15:30"], ["18:00", "02:00"]]}, "whatsapp": "393389950152", "email": "giannivanacore@libero.it", "mapsEmbed": "https://www.google.com/maps?q=Corso%20della%20Repubblica%20131%2C%2080078%20Pozzuoli&output=embed", "indirizzo": "Corso della Repubblica, 131, 80078 Pozzuoli (NA)", "prenotazioni": {"intervallo": 30, "margine": 30, "personeMax": 20}};</script>
+<script>window.PICEA={"orari": {"1": [["18:00", "00:00"]], "2": [], "3": [["11:30", "15:30"], ["18:00", "00:00"]], "4": [["11:30", "15:30"], ["18:00", "00:00"]], "5": [["11:30", "15:30"], ["18:00", "00:00"]], "6": [["11:30", "15:30"], ["18:00", "02:00"]], "0": [["11:30", "15:30"], ["18:00", "02:00"]]}, "whatsapp": "393389950152", "email": "giannivanacore@libero.it", "mapsEmbed": "https://maps.google.com/maps?q=Corso%20della%20Repubblica%20131%2C%2080078%20Pozzuoli&t=&z=17&ie=UTF8&iwloc=&output=embed", "indirizzo": "Corso della Repubblica, 131, 80078 Pozzuoli (NA)", "prenotazioni": {"intervallo": 30, "margine": 30, "personeMax": 20}};</script>
 
 <script>/* Picea – script del sito. I dati (orari, numeri) arrivano da window.PICEA,
    generato da sorgente/config.json. */
@@ -1527,12 +1535,22 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
   /* ---------- Mappa: si carica solo al clic (niente cookie di Google prima) ---------- */
   document.querySelectorAll("[data-carica-mappa]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      var box = btn.closest(".mappa");
+      var box = btn.closest(".mappa"), testo = box.querySelector(".mappa__copertina p");
+      // Nell'anteprima a file unico i visualizzatori bloccano le pagine esterne: niente riquadro bianco.
+      if (document.documentElement.hasAttribute("data-anteprima")) {
+        testo.textContent = "Nell’anteprima la mappa interattiva non si può caricare: sul sito online compare qui. Intanto puoi aprirla in Google Maps.";
+        btn.remove(); return;
+      }
+      var esterno = box.querySelector('a[href*="google.com/maps"]');
+      esterno = esterno ? esterno.cloneNode(true) : null;
       box.style.minHeight = box.offsetHeight + "px"; // la mappa prende esattamente il posto della copertina
       var f = document.createElement("iframe");
-      f.src = D.mapsEmbed; f.title = "Mappa: " + (D.indirizzo || "Picea"); f.loading = "lazy";
+      f.src = D.mapsEmbed; f.title = "Mappa: " + (D.indirizzo || "Picea"); f.loading = "eager";
       f.referrerPolicy = "no-referrer-when-downgrade"; f.allowFullscreen = true;
-      box.innerHTML = ""; box.appendChild(f);
+      f.addEventListener("load", function () { f.classList.add("pronta"); });
+      box.innerHTML = '<p class="mappa__carica" aria-hidden="true">Caricamento della mappa…</p>';
+      box.appendChild(f);
+      if (esterno) { esterno.className = "btn mappa__esterna"; box.appendChild(esterno); }
       box.classList.add("caricata");
       f.focus();
     });

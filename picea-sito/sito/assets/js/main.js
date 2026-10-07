@@ -111,12 +111,22 @@
   /* ---------- Mappa: si carica solo al clic (niente cookie di Google prima) ---------- */
   document.querySelectorAll("[data-carica-mappa]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      var box = btn.closest(".mappa");
+      var box = btn.closest(".mappa"), testo = box.querySelector(".mappa__copertina p");
+      // Nell'anteprima a file unico i visualizzatori bloccano le pagine esterne: niente riquadro bianco.
+      if (document.documentElement.hasAttribute("data-anteprima")) {
+        testo.textContent = "Nell’anteprima la mappa interattiva non si può caricare: sul sito online compare qui. Intanto puoi aprirla in Google Maps.";
+        btn.remove(); return;
+      }
+      var esterno = box.querySelector('a[href*="google.com/maps"]');
+      esterno = esterno ? esterno.cloneNode(true) : null;
       box.style.minHeight = box.offsetHeight + "px"; // la mappa prende esattamente il posto della copertina
       var f = document.createElement("iframe");
-      f.src = D.mapsEmbed; f.title = "Mappa: " + (D.indirizzo || "Picea"); f.loading = "lazy";
+      f.src = D.mapsEmbed; f.title = "Mappa: " + (D.indirizzo || "Picea"); f.loading = "eager";
       f.referrerPolicy = "no-referrer-when-downgrade"; f.allowFullscreen = true;
-      box.innerHTML = ""; box.appendChild(f);
+      f.addEventListener("load", function () { f.classList.add("pronta"); });
+      box.innerHTML = '<p class="mappa__carica" aria-hidden="true">Caricamento della mappa…</p>';
+      box.appendChild(f);
+      if (esterno) { esterno.className = "btn mappa__esterna"; box.appendChild(esterno); }
       box.classList.add("caricata");
       f.focus();
     });
