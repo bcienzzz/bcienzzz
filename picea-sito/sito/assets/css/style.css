@@ -1104,3 +1104,5 @@ div.galleria { columns: auto; }
 .menu-fine__grazie { margin: 44px 0 0; font-family: var(--f-titoli); font-size: .95rem; letter-spacing: .32em; text-transform: uppercase; color: var(--resina); }
 .pagina-menu .testata__anno { font-size: clamp(6rem, 26vw, 22rem); }
 @media (min-width: 1024px) { .galleria__piatti { max-width: 1040px; margin-inline: auto; } }
+/* Logo dell'hero in trasparenza: si vedono le pizze sotto */
+.hero__logo img { opacity: .55; filter: drop-shadow(0 10px 30px rgba(0, 0, 0, .35)); }
