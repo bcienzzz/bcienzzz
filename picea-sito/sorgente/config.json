@@ -200,6 +200,17 @@
       "h": 1866,
       "alt": "Tre pizze napoletane di Picea viste dall’alto su un tavolo di legno",
       "didascalia": "Tre pizze dal nostro forno a legna"
+    },
+    {
+      "file": "galleria-2",
+      "larghezze": [
+        800,
+        1200
+      ],
+      "w": 1200,
+      "h": 1600,
+      "alt": "Pizza con salame piccante, fior di latte e basilico su carta con il logo Picea, al tavolo all’aperto",
+      "didascalia": "Appena sfornata, sulla carta di Picea"
     }
   ],
   "menu_prezzi": false

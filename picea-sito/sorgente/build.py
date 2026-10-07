@@ -687,11 +687,16 @@ def pizze_con_foto():
 
 
 def galleria():
-    principale = C["galleria"][0]
-    L = principale["larghezze"]
-    grande = immagine(principale["file"], principale["alt"], L, "(min-width: 1024px) 1100px, 100vw", w=800, h=round(800 * principale["h"] / principale["w"]))
+    grandi = []
+    for i, f in enumerate(C["galleria"]):
+        L = f["larghezze"]
+        larga = f["w"] > f["h"]
+        pic = immagine(f["file"], f["alt"], L, "(min-width: 1024px) 700px, 100vw" if larga else "(min-width: 1024px) 400px, 100vw",
+                       w=800, h=round(800 * f["h"] / f["w"]))
+        grandi.append(f'<div class="galleria__voce galleria__grande{" galleria__grande--alta" if not larga else ""} rivela"><a href="assets/img/{f["file"]}-{L[-1]}.jpg" data-grande="assets/img/{f["file"]}-{L[-1]}.webp" data-indice="{i}">'
+                      f'{pic}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(f["didascalia"])}</p></div>')
     piatti = []
-    for i, x in enumerate(pizze_con_foto(), 1):
+    for i, x in enumerate(pizze_con_foto(), len(grandi)):
         piatti.append(f'<li class="galleria__voce galleria__piatto rivela" style="--i:{i % 4}"><a href="assets/img/pizza-{x["foto"]}-560.webp" data-grande="assets/img/pizza-{x["foto"]}-560.webp" data-indice="{i}">'
                       f'{foto_pizza(x["foto"], "Pizza " + x["nome"] + " di Picea", "(min-width: 1024px) 250px, (min-width: 720px) 30vw, 42vw")}</a>'
                       f'<p class="galleria__did">{e(x["nome"])}</p></li>')
@@ -708,7 +713,7 @@ def galleria():
 <section class="sezione galleria-sezione">
   <span class="galleria-sezione__scritta" aria-hidden="true">PVTEOLI</span>
   <div class="contenitore galleria">
-    <div class="galleria__voce galleria__grande rivela"><a href="assets/img/{principale["file"]}-{L[-1]}.jpg" data-grande="assets/img/{principale["file"]}-{L[-1]}.webp" data-indice="0">{grande}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(principale["didascalia"])}</p></div>
+    <div class="galleria__grandi">{"".join(grandi)}</div>
     <div class="centro galleria__intro">
       <span class="occhiello rivela">Le pizze speciali</span>
       <h2 class="titolo-sezione rivela">Dal menu, <em>una per una</em></h2>
