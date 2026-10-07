@@ -111,6 +111,7 @@
   document.querySelectorAll("[data-carica-mappa]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var box = btn.closest(".mappa");
+      box.style.minHeight = box.offsetHeight + "px"; // la mappa prende esattamente il posto della copertina
       var f = document.createElement("iframe");
       f.src = D.mapsEmbed; f.title = "Mappa: " + (D.indirizzo || "Picea"); f.loading = "lazy";
       f.referrerPolicy = "no-referrer-when-downgrade"; f.allowFullscreen = true;
@@ -211,7 +212,9 @@
       if (problemi.length || fuori.length) {
         var msg = problemi.length ? (problemi.length > 1 ? "Mancano " : "Manca ") + elenco(problemi) + "." : "";
         erroreP.textContent = (msg + " " + fuori.join(" ")).trim();
-        var primo = fp.querySelector('[aria-invalid="true"]'); if (primo) primo.focus(); return;
+        var primo = fp.querySelector('[aria-invalid="true"]'); if (primo) primo.focus();
+        erroreP.scrollIntoView({ block: "nearest" }); // il messaggio non resta nascosto sotto l'header
+        return;
       }
       erroreP.textContent = "";
       var testo = "Ciao Picea! Vorrei prenotare un tavolo.\n\n" +
@@ -246,7 +249,12 @@
       if (!msg.value.trim()) { manca.push("il messaggio"); msg.setAttribute("aria-invalid", "true"); }
       var stato = fc.querySelector("#c-stato");
       if (stato) stato.hidden = true;
-      if (manca.length) { err.textContent = (manca.length > 1 ? "Mancano " : "Manca ") + manca.join(" e ") + "."; fc.querySelector('[aria-invalid="true"]').focus(); return; }
+      if (manca.length) {
+        err.textContent = (manca.length > 1 ? "Mancano " : "Manca ") + manca.join(" e ") + ".";
+        fc.querySelector('[aria-invalid="true"]').focus();
+        err.scrollIntoView({ block: "nearest" });
+        return;
+      }
       err.textContent = "";
       var corpo = msg.value.trim() + "\n\n— " + nome.value.trim() + (tel.value.trim() ? "\nTelefono: " + tel.value.trim() : "");
       window.location.href = "mailto:" + D.email + "?subject=" + encodeURIComponent("Messaggio dal sito – " + nome.value.trim()) + "&body=" + encodeURIComponent(corpo);
@@ -350,11 +358,19 @@
       p.addEventListener("click", function () { bloccoFinoA = Date.now() + 1200; fase(+p.getAttribute("data-fase")); });
     });
     if ("IntersectionObserver" in window) {
-      var ioLab = new IntersectionObserver(function (voci) {
-        if (Date.now() < bloccoFinoA) return;
-        voci.forEach(function (v) { if (v.isIntersecting) fase(+v.target.getAttribute("data-fase")); });
-      }, { rootMargin: "-48% 0px -48% 0px" });
-      passi.forEach(function (p) { ioLab.observe(p); });
+      // Sul telefono in verticale la scena occupa la metà alta dello schermo: la fase attiva è
+      // quella della scheda che si legge sotto la scena, non quella che le sta passando dietro.
+      var verticale = window.matchMedia("(max-width: 899px) and (orientation: portrait)"), ioLab;
+      function osserva() {
+        if (ioLab) ioLab.disconnect();
+        ioLab = new IntersectionObserver(function (voci) {
+          if (Date.now() < bloccoFinoA) return;
+          voci.forEach(function (v) { if (v.isIntersecting) fase(+v.target.getAttribute("data-fase")); });
+        }, { rootMargin: verticale.matches ? "-68% 0px -28% 0px" : "-48% 0px -48% 0px" });
+        passi.forEach(function (p) { ioLab.observe(p); });
+      }
+      osserva();
+      if (verticale.addEventListener) verticale.addEventListener("change", osserva);
     }
     fase(1);
   }
@@ -463,7 +479,12 @@
   } else animate.forEach(function (el) { el.classList.add("in-vista"); });
 
   /* ---------- Foto principale: entra in dissolvenza anche se era già in cache ---------- */
-  document.querySelectorAll(".hero__foto img").forEach(function (img) { if (img.complete && img.naturalWidth) img.classList.add("caricata"); });
+  document.querySelectorAll(".hero__foto img").forEach(function (img) {
+    if (!img.complete || !img.naturalWidth) return;
+    (img.decode ? img.decode() : Promise.resolve()).catch(function () {}).then(function () {
+      requestAnimationFrame(function () { img.classList.add("caricata"); });
+    });
+  });
 
   /* ---------- Anno nel footer ---------- */
   document.querySelectorAll("[data-anno]").forEach(function (el) { el.textContent = new Date().getFullYear(); });

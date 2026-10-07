@@ -79,6 +79,11 @@ def via_unita():
     return e(IND["via"]).replace(", ", ",&nbsp;")
 
 
+def citta_unita():
+    """CAP, città e provincia: la sigla (NA) non resta mai da sola su una riga."""
+    return f'{e(IND["cap"])} {e(IND["citta"])}&nbsp;({e(IND["provincia"])})'
+
+
 def fasce_giorno(giorno):
     return C["orari"]["fasce"].get(str(giorno)) or []
 
@@ -181,7 +186,8 @@ def immagine(nome, alt, larghezze, sizes, classe="", lazy=True, priorita=False, 
     attr = ' loading="lazy" decoding="async"' if lazy else ' decoding="async"'
     if priorita:
         # la classe "caricata" fa entrare la foto in dissolvenza sopra il segnaposto sfocato
-        attr += ' fetchpriority="high" onload="this.classList.add(\'caricata\')"'
+        attr += (' fetchpriority="high" onload="var i=this;(i.decode?i.decode():Promise.resolve()).catch(function(){})'
+                 '.then(function(){requestAnimationFrame(function(){i.classList.add(\'caricata\')})})"')
     dim = f' width="{w}" height="{h}"' if w and h else ""
     cl = f' class="{classe}"' if classe else ""
     return f'<picture{cl}>{s_vert}{s_webp}<img src="{src}"{img_srcset} alt="{e(alt)}"{dim}{attr}></picture>'
@@ -280,7 +286,7 @@ def header(pagina):
         voci_m.append(f'<li><a href="{href}"{cur}>{e(testo)}</a></li>')
     logo = (f'<img src="{e(C["logo_url"])}" alt="" width="48" height="48" referrerpolicy="no-referrer" '
             f'onerror="this.remove()">') if C["logo_url"] else ""
-    info_m = f'<p class="info">{e(INDIRIZZO_RIGA)}<br><a href="tel:{TEL_L}">{e(TEL_V)}</a></p>'
+    info_m = f'<p class="info">{via_unita()}, {citta_unita()}<br><a href="tel:{TEL_L}">{e(TEL_V)}</a></p>'
     return f"""<a class="salta" href="#contenuto">Vai al contenuto</a>
 {ICONE}
 <header class="header">
@@ -329,7 +335,7 @@ def footer():
       <div>
         <h2>Dove siamo</h2>
         <ul>
-          <li>{via_unita()}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</li>
+          <li>{via_unita()}<br>{citta_unita()}</li>
           <li>{link_esterno(C["maps_link"], "Indicazioni stradali")}</li>
         </ul>
       </div>
@@ -413,7 +419,7 @@ def home():
 <section class="info-rapide" aria-label="Informazioni rapide">
   <div class="contenitore">
     <a class="info-rapide__voce" href="#orari">{icona("orologio")}<div><small>Oggi</small><span data-oggi-orari>Vedi gli orari</span></div></a>
-    <a class="info-rapide__voce" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Dove siamo</small><span>{via_unita()} · {e(IND["citta"])}</span></div>{NUOVA_SCHEDA}</a>
+    <a class="info-rapide__voce" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Dove siamo</small><span>{via_unita()}&nbsp;·&nbsp;{e(IND["citta"])}</span></div>{NUOVA_SCHEDA}</a>
     <a class="info-rapide__voce" href="tel:{TEL_L}">{icona("tel")}<div><small>Chiama</small><span>{e(TEL_V)}</span></div></a>
   </div>
 </section>
@@ -524,7 +530,7 @@ def home():
     <div class="dove dove--home">
       <div class="dove__indirizzo rivela">
         <span class="dove__etichetta">Ci trovi qui</span>
-        <address class="indirizzo">{via_unita()}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</address>
+        <address class="indirizzo">{via_unita()}<br>{citta_unita()}</address>
         <p class="dove__nota">Nel cuore del centro storico.</p>
         <div class="hero__azioni">{link_esterno(C["maps_link"], "Indicazioni", "btn", "pin")}<a class="btn btn--vuoto" href="contatti.html">Tutti i contatti</a></div>
       </div>
@@ -538,7 +544,7 @@ def home():
   <div class="contenitore centro">
     <p class="hero__epigrafe rivela" aria-hidden="true">PVTEOLI · MCMXCVI</p>
     <h2 class="finale__titolo rivela" id="titolo-finale">Ti aspettiamo <em>a tavola</em></h2>
-    <p class="intro-sezione rivela" style="margin-inline:auto">{via_unita()} · {e(IND["citta"])}. Prenota su WhatsApp, chiamaci o ordina a domicilio su&nbsp;Glovo.</p>
+    <p class="intro-sezione rivela" style="margin-inline:auto">{via_unita()}&nbsp;·&nbsp;{e(IND["citta"])}. Prenota su WhatsApp, chiamaci o ordina a domicilio su&nbsp;Glovo.</p>
     <div class="finale__azioni rivela">
       <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
       <a class="btn btn--vuoto" href="tel:{TEL_L}">{icona("tel")}{e(TEL_V)}</a>
@@ -651,7 +657,7 @@ def prenota():
           <div><dt>Orario</dt><dd data-b="ora">—</dd></div>
           <div><dt>Persone</dt><dd data-b="persone">2</dd></div>
         </dl>
-        <div class="biglietto__piede"><span>{via_unita()}&nbsp;· {e(IND["citta"])}</span><span class="biglietto__timbro" aria-hidden="true">Pronta</span></div>
+        <div class="biglietto__piede"><span>{via_unita()}<br>{e(IND["citta"])}</span><span class="biglietto__timbro" aria-hidden="true">Pronta</span></div>
       </div>
       <h2>Orari</h2>
       {tabella_orari()}
@@ -685,7 +691,7 @@ def contatti():
         <a class="canale" href="tel:{TEL_L}">{icona("tel")}<div><small>Telefono</small><span>{e(TEL_V)}</span></div></a>
         {wa}
         <a class="canale" href="mailto:{e(C["email"])}">{icona("email")}<div><small>Email</small><span>{e(C["email"]).replace("@", "@<wbr>")}</span></div></a>
-        <a class="canale" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Indirizzo</small><span>{via_unita()}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</span></div>{NUOVA_SCHEDA}</a>
+        <a class="canale" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Indirizzo</small><span>{via_unita()}<br>{citta_unita()}</span></div>{NUOVA_SCHEDA}</a>
       </div>
       <h2 class="titolo-sezione rivela" style="font-size:2rem;margin-top:48px">Orari</h2>
       <div class="rivela">{tabella_orari()}</div>

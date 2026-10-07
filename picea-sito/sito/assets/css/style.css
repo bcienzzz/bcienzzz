@@ -439,7 +439,7 @@ a.canale:hover { background: var(--bianco); }
   .layout-prenota { grid-template-columns: 1.25fr .75fr; gap: 64px; }
   .layout-contatti { grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
   .layout-contatti .canali { grid-template-columns: 1fr; }
-  .footer__griglia { grid-template-columns: 1.6fr 1fr 1fr 1fr; }
+  .footer__griglia { grid-template-columns: minmax(0, 1fr) auto auto auto; column-gap: clamp(40px, 5vw, 72px); }
   .footer__fondo { grid-template-columns: 1fr auto; align-items: center; }
 }
 
@@ -564,7 +564,7 @@ body::after {
 
 /* ---------- Sigillo rotante ---------- */
 .banda .contenitore { position: relative; }
-.sigillo { position: absolute; right: var(--gutter); bottom: -10px; width: 168px; height: 168px; display: none; place-items: center; color: var(--calce); text-decoration: none; }
+.sigillo { position: absolute; right: var(--gutter); bottom: -10px; width: 168px; height: 168px; display: none; place-items: center; color: var(--calce); text-decoration: none; border-radius: 50%; }
 .sigillo__testo { position: absolute; inset: 0; width: 100%; height: 100%; will-change: transform; }
 .sigillo__testo text { font-family: var(--f-testo); font-size: 14px; font-weight: 700; fill: currentColor; }
 .sigillo__centro { width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; background: var(--resina); color: var(--carbone); transition: transform .4s var(--ease); }
@@ -681,7 +681,7 @@ body::after {
   background: radial-gradient(ellipse 55% 60% at 50% 110%, rgba(232, 128, 48, .35), rgba(201, 139, 62, .08) 50%, transparent 75%),
               repeating-linear-gradient(90deg, transparent 0 119px, rgba(243, 239, 232, .03) 119px 120px);
   animation: brace 6s ease-in-out infinite alternate;
-  -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
+  -webkit-mask-image: linear-gradient(transparent, #000 22%, #000 60%, transparent); mask-image: linear-gradient(transparent, #000 22%, #000 60%, transparent); }
 .finale:not(.in-vista) .finale__luce { animation-play-state: paused; }
 @keyframes brace { from { opacity: .75; } to { opacity: 1; } }
 .finale__titolo { font-size: clamp(3rem, 10vw, 6.4rem); line-height: 1; margin-top: 8px; }
@@ -840,4 +840,14 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
   .hero__azioni .btn { flex: 0 1 auto; min-height: 46px; }
   .menu-mobile { gap: 16px; }
   .menu-mobile li a { font-size: 1.5rem; padding: 10px 0; }
+  .testata { padding-top: calc(var(--header-h) + 24px); }
+  .testata h1, .vuoto h1 { font-size: clamp(2.4rem, 13vh, 3.4rem); }
+  .vuoto { min-height: 0; padding-top: calc(var(--header-h) + 24px); }
 }
+
+/* Focus da tastiera: anelli che seguono la forma degli elementi */
+.capitoli__binario:focus-visible { outline: none; }
+.capitoli__binario:focus-visible .capitolo-card.attivo { outline: 2px solid var(--resina-scura); outline-offset: 4px; }
+.info-rapide__voce:focus-visible { outline-offset: -3px; }
+/* Prenota: colonna stretta tra 1024 e 1100px */
+@media (min-width: 1024px) and (max-width: 1099px) { .lato .tabella-orari .giorni { font-size: 1.12rem; } }
