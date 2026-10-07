@@ -1693,15 +1693,25 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
         return null;
       }
       erroreP.textContent = "";
-      var testo = "Ciao Picea! Vorrei prenotare un tavolo.\n\n" +
-        "Nome: " + cNome.value.trim() + "\n" +
-        "Giorno: " + dataEstesa(cData.value) + "\n" +
-        "Orario: " + cOra.value + "\n" +
-        "Persone: " + n +
-        (cNote.value.trim() ? "\nNote: " + cNote.value.trim() : "") +
-        "\n\nAttendo la vostra conferma. Grazie!";
-      return "https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(testo);
+      return linkMessaggio();
     }
+    // Il messaggio viene scritto nel link a ogni modifica del modulo: così anche le app e i
+    // visualizzatori che leggono il link prima del tocco aprono la chat con il testo già pronto.
+    function linkMessaggio() {
+      var righe = ["Ciao Picea! Vorrei prenotare un tavolo.", ""];
+      if (cNome.value.trim()) righe.push("Nome: " + cNome.value.trim());
+      if (cData.value) righe.push("Giorno: " + dataEstesa(cData.value));
+      if (cOra.value) righe.push("Orario: " + cOra.value);
+      if (cPers.value.trim()) righe.push("Persone: " + cPers.value.trim());
+      if (cNote.value.trim()) righe.push("Note: " + cNote.value.trim());
+      righe.push("", "Attendo la vostra conferma. Grazie!");
+      return "https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(righe.join("\n"));
+    }
+    function aggiornaLink() { invia.href = linkMessaggio(); }
+    fp.addEventListener("input", aggiornaLink);
+    fp.addEventListener("change", aggiornaLink);
+    fp.querySelectorAll("[data-persone]").forEach(function (b) { b.addEventListener("click", function () { setTimeout(aggiornaLink, 0); }); });
+    aggiornaLink();
     function inviato() {
       var ok = document.getElementById("p-inviato");
       setTimeout(function () { if (ok) { ok.hidden = false; ok.focus({ preventScroll: true }); } if (big) big.classList.add("pronto"); }, 0);
