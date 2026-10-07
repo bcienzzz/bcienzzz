@@ -996,9 +996,29 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 .storia-sezione .capitoli__binario:focus-visible .capitolo-card.attivo { outline-color: var(--resina); }
 .intro-link { display: flex; flex-wrap: wrap; gap: 8px 32px; }
 .lightbox__freccia[hidden] { display: none; }
+
+/* ---------- Domande frequenti (Contatti) ---------- */
+.faq { margin-top: clamp(72px, 9vw, 120px); }
+.faq__elenco { max-width: 820px; margin: 36px auto 0; border-top: 1px solid var(--linea-chiara); }
+.faq__voce { border-bottom: 1px solid var(--linea-chiara); }
+.faq__voce summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  padding: 22px 4px; font-family: var(--f-titoli); font-size: clamp(1.2rem, 2.4vw, 1.45rem); color: var(--inchiostro); }
+.faq__voce summary::-webkit-details-marker { display: none; }
+.faq__voce summary::after { content: ""; flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--linea-chiara);
+  background: linear-gradient(currentColor, currentColor) 50% 50% / 12px 1.5px no-repeat, linear-gradient(currentColor, currentColor) 50% 50% / 1.5px 12px no-repeat;
+  color: var(--resina-scura); transition: transform .35s var(--ease), background-color .35s var(--ease), border-color .35s var(--ease); }
+.faq__voce[open] summary::after { transform: rotate(45deg); border-color: var(--resina-scura); }
+.faq__voce summary:hover { color: var(--resina-scura); }
+.faq__voce summary:focus-visible { outline-offset: -2px; }
+.faq__voce p { margin: 0; padding: 0 56px 24px 4px; color: var(--corpo); max-width: 62ch; }
+.faq__voce[open] p { animation: sale .45s var(--ease) both; }
+
+/* Footer: collegamenti a tutte le pagine */
+.footer__pagine { display: flex; flex-wrap: wrap; gap: 0 22px; }
+.footer__pagine a { color: var(--grigio-chiaro); }
 </style>
 <script>document.documentElement.className="js";</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Pizzeria Picea", "description": "Pizzeria napoletana nel centro storico di Pozzuoli dal 1996: la verace pizza napoletana cotta nel forno a legna.", "foundingDate": "1996", "servesCuisine": ["Pizza napoletana"], "telephone": "+390813030195", "email": "giannivanacore@libero.it", "address": {"@type": "PostalAddress", "streetAddress": "Corso della Repubblica, 131", "postalCode": "80078", "addressLocality": "Pozzuoli", "addressRegion": "NA", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.8228733, "longitude": 14.1195213}, "hasMap": "https://www.google.com/maps/search/?api=1&query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli", "acceptsReservations": true, "paymentAccepted": "Contanti, Pagamento contactless, Mastercard, VISA, Carta di debito, Apple Pay, Maestro", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "02:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "18:00", "closes": "02:00"}], "url": "https://www.pizzeriapicea.com", "image": "https://www.pizzeriapicea.com/assets/img/og-picea.jpg", "sameAs": ["https://www.instagram.com/piceapizzerie/", "https://www.facebook.com/pizzeriapicea/"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Pizzeria Picea", "description": "Pizzeria napoletana nel centro storico di Pozzuoli dal 1996: la verace pizza napoletana cotta nel forno a legna.", "foundingDate": "1996", "servesCuisine": ["Pizza napoletana"], "telephone": "+390813030195", "email": "giannivanacore@libero.it", "address": {"@type": "PostalAddress", "streetAddress": "Corso della Repubblica, 131", "postalCode": "80078", "addressLocality": "Pozzuoli", "addressRegion": "NA", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.8228733, "longitude": 14.1195213}, "hasMap": "https://www.google.com/maps/search/?api=1&query=Corso%20della%20Repubblica,%20131,%2080078%20pozzuoli", "acceptsReservations": "https://www.pizzeriapicea.com/prenota.html", "areaServed": {"@type": "City", "name": "Pozzuoli"}, "paymentAccepted": "Contanti, Pagamento contactless, Mastercard, VISA, Carta di debito, Apple Pay, Maestro", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "02:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "18:00", "closes": "23:59"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:30", "closes": "15:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "18:00", "closes": "02:00"}], "currenciesAccepted": "EUR", "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": "Accessibile", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Consegna a domicilio", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Tavoli all’aperto", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Eventi privati", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Da asporto", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Wi-Fi gratuito", "value": true}], "@id": "https://www.pizzeriapicea.com/#ristorante", "url": "https://www.pizzeriapicea.com/", "image": ["https://www.pizzeriapicea.com/assets/img/og-picea.jpg", "https://www.pizzeriapicea.com/assets/img/pizze-2000.jpg"], "potentialAction": {"@type": "ReserveAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://www.pizzeriapicea.com/prenota.html", "actionPlatform": ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"]}, "result": {"@type": "FoodEstablishmentReservation", "name": "Prenotazione di un tavolo"}}, "sameAs": ["https://www.instagram.com/piceapizzerie/", "https://www.facebook.com/pizzeriapicea/"]}</script>
 </head>
 <body class="pagina-home">
 
@@ -1383,6 +1403,13 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
       </div>
     </div>
   </div>
+  <div class="contenitore faq">
+    <div class="centro">
+      <span class="occhiello rivela">Domande frequenti</span>
+      <h2 class="titolo-sezione rivela">Prima di <em>venirci a trovare</em></h2>
+    </div>
+    <div class="faq__elenco rivela"><details class="faq__voce"><summary>Dove si trova la Pizzeria Picea?</summary><p>In Corso della Repubblica, 131, nel centro storico di Pozzuoli (NA).</p></details><details class="faq__voce"><summary>Quali sono gli orari?</summary><p>Lunedì 18:00&#8288;–&#8288;00:00; martedì chiuso; da mercoledì a venerdì 11:30&#8288;–&#8288;15:30 e 18:00&#8288;–&#8288;00:00; sabato e domenica 11:30&#8288;–&#8288;15:30 e 18:00&#8288;–&#8288;02:00.</p></details><details class="faq__voce"><summary>Come si prenota un tavolo?</summary><p>Dalla pagina Prenota: scegli giorno, orario e numero di persone e invia la richiesta su WhatsApp al 338 9950152. Ti rispondiamo per confermare. Puoi anche chiamare lo 081 303 0195.</p></details><details class="faq__voce"><summary>Fate consegna a domicilio?</summary><p>Sì, puoi ordinare a domicilio su Glovo. È possibile anche ordinare da asporto.</p></details><details class="faq__voce"><summary>Ci sono tavoli all’aperto?</summary><p>Sì. Il locale ha anche tavoli all’aperto, è accessibile e offre Wi-Fi gratuito.</p></details><details class="faq__voce"><summary>Organizzate eventi privati?</summary><p>Sì. Per un evento privato o un gruppo numeroso chiamaci allo 081 303 0195.</p></details><details class="faq__voce"><summary>Quali pagamenti accettate?</summary><p>Contanti, pagamento contactless, Mastercard, VISA, carta di debito, Apple Pay e Maestro.</p></details></div>
+  </div>
 </section>
 
 </div><div class="pagina-anteprima" data-pagina="privacy" hidden>
@@ -1463,7 +1490,7 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
     <p class="footer__gigante" aria-hidden="true">Picea</p>
     <div class="footer__fondo">
       <p>© <span data-anno>2026</span> Pizzeria Picea</p>
-      <p><a href="#privacy">Privacy</a></p>
+      <nav class="footer__pagine" aria-label="Pagine del sito"><a href="#index">Home</a><a href="#storia">La storia</a><a href="#galleria">Galleria</a><a href="#prenota">Prenota</a><a href="#contatti">Contatti</a><a href="#privacy">Privacy</a></nav>
     </div>
   </div>
 </footer>

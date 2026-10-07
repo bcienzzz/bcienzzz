@@ -64,3 +64,17 @@ Dominio: in `config.json` è impostato `https://www.pizzeriapicea.com` (risulta 
 - **Senza JavaScript** il sito si legge tutto; i due moduli lasciano il posto a telefono, WhatsApp ed email.
 - **Pagina 404**: usa percorsi dalla radice del dominio (`/assets/...`), quindi funziona a qualsiasi indirizzo sbagliato. Su Netlify viene usata in automatico.
 - **Font**: Marcellus (titoli) e Figtree (testo), ospitati nel sito con licenza SIL Open Font License.
+
+## SEO (cosa c'è già e cosa fare dopo la pubblicazione)
+
+Già nel sito:
+- titoli e descrizioni diversi per ogni pagina, con "pizzeria", "pizza napoletana" e "Pozzuoli";
+- dati strutturati per Google (schema.org): Restaurant con indirizzo, coordinate, orari (martedì chiuso), telefono, servizi, pagamenti e prenotazione; WebSite; percorso di navigazione (BreadcrumbList) nelle pagine interne; domande frequenti (FAQPage) nella pagina Contatti;
+- sitemap.xml e robots.txt; la privacy e la 404 non vengono indicizzate;
+- immagine di anteprima per WhatsApp/Facebook, testi alternativi sulle foto, pagine veloci e accessibili.
+
+Da fare quando il sito è online (non si può fare dal codice):
+1. **Google Search Console**: aggiungere il dominio, verificarlo e inviare `https://www.pizzeriapicea.com/sitemap.xml`.
+2. **Scheda Google (Google Business Profile)** di Picea: mettere il link al nuovo sito, controllare che orari (martedì chiuso), telefono e indirizzo siano identici a quelli del sito, aggiungere foto recenti e rispondere alle recensioni. Per una pizzeria è la cosa che conta di più.
+3. Mettere il link al sito anche nella bio di Instagram e nella pagina Facebook.
+4. Se il dominio cambia, aggiornare `sito_url` in `config.json` e rigenerare.

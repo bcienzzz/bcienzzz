@@ -215,16 +215,77 @@ def schema_ristorante():
         "geo": {"@type": "GeoCoordinates", "latitude": C["geo"]["lat"], "longitude": C["geo"]["lng"]},
         "hasMap": C["maps_link"],
         "acceptsReservations": True,
+        "areaServed": {"@type": "City", "name": IND["citta"]},
         "paymentAccepted": ", ".join(C["pagamenti"]),
         "openingHoursSpecification": spec,
     }
+    dati["currenciesAccepted"] = "EUR"
+    dati["amenityFeature"] = [{"@type": "LocationFeatureSpecification", "name": s["nome"], "value": True} for s in C["servizi"]]
     if C["sito_url"]:
-        dati["url"] = C["sito_url"]
-        dati["image"] = C["sito_url"].rstrip("/") + "/assets/img/og-picea.jpg"
+        u = C["sito_url"].rstrip("/")
+        dati["@id"] = u + "/#ristorante"
+        dati["url"] = u + "/"
+        dati["image"] = [u + "/assets/img/og-picea.jpg", u + "/assets/img/pizze-2000.jpg"]
+        dati["acceptsReservations"] = u + "/prenota.html"
+        dati["potentialAction"] = {"@type": "ReserveAction", "target": {"@type": "EntryPoint", "urlTemplate": u + "/prenota.html",
+                                   "actionPlatform": ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"]},
+                                   "result": {"@type": "FoodEstablishmentReservation", "name": "Prenotazione di un tavolo"}}
     same = [u for u in (C["social"].get("instagram"), C["social"].get("facebook")) if u]
     if same:
         dati["sameAs"] = same
+    return ld(dati)
+
+
+def ld(dati):
     return '<script type="application/ld+json">' + json.dumps(dati, ensure_ascii=False) + "</script>"
+
+
+def schema_sito():
+    u = C["sito_url"].rstrip("/")
+    return ld({"@context": "https://schema.org", "@type": "WebSite", "@id": u + "/#sito", "url": u + "/",
+               "name": C["nome_completo"], "inLanguage": "it-IT", "publisher": {"@id": u + "/#ristorante"}})
+
+
+def briciole(nome_pagina, file):
+    """Percorso Home › pagina: aiuta Google a capire la struttura del sito."""
+    u = C["sito_url"].rstrip("/")
+    return ld({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": u + "/"},
+        {"@type": "ListItem", "position": 2, "name": nome_pagina, "item": f"{u}/{file}"}]})
+
+
+def orari_frase():
+    """Orari in una frase, presi da config.json (per le domande frequenti)."""
+    parti = []
+    for g in C["orari"]["gruppi"]:
+        f = fasce_testo(g["giorni"][0])
+        giorni = g["etichetta"].lower()
+        if " – " in giorni:
+            giorni = giorni.replace(" – ", " e ") if len(g["giorni"]) == 2 else "da " + giorni.replace(" – ", " a ")
+        parti.append(f'{giorni} ' + (" e ".join(f) if f else "chiuso"))
+    t = "; ".join(parti)
+    return t[0].upper() + t[1:] + "."
+
+
+def domande():
+    """Domande frequenti costruite solo con i dati del cliente."""
+    servizi = [x["nome"] for x in C["servizi"]]
+    marchi = {"Mastercard", "VISA", "Apple Pay", "Maestro"}
+    pag = [x if x in marchi else x[0].lower() + x[1:] for x in C["pagamenti"]]
+    q = [
+        ("Dove si trova la Pizzeria Picea?", f'In {IND["via"]}, nel centro storico di {IND["citta"]} ({IND["provincia"]}).'),
+        ("Quali sono gli orari?", orari_frase()),
+        ("Come si prenota un tavolo?", f'Dalla pagina Prenota: scegli giorno, orario e numero di persone e invia la richiesta su WhatsApp al {C["whatsapp"]["visibile"]}. Ti rispondiamo per confermare. Puoi anche chiamare lo {C["telefono"]["visibile"]}.'),
+        ("Fate consegna a domicilio?", "Sì, puoi ordinare a domicilio su Glovo. È possibile anche ordinare da asporto." if GLOVO else "È possibile ordinare da asporto."),
+        ("Ci sono tavoli all’aperto?", "Sì. Il locale ha anche tavoli all’aperto" + (", è accessibile" if "Accessibile" in servizi else "") + (" e offre Wi-Fi gratuito." if "Wi-Fi gratuito" in servizi else ".")),
+        ("Organizzate eventi privati?", f'Sì. Per un evento privato o un gruppo numeroso chiamaci allo {C["telefono"]["visibile"]}.'),
+        ("Quali pagamenti accettate?", (lambda t: t[0].upper() + t[1:])(", ".join(pag[:-1]) + " e " + pag[-1] + ".")),
+    ]
+    if "Tavoli all’aperto" not in servizi:
+        q = [x for x in q if "aperto" not in x[0]]
+    if "Eventi privati" not in servizi:
+        q = [x for x in q if "eventi" not in x[0]]
+    return q
 
 
 def dati_js():
@@ -244,11 +305,13 @@ def dati_js():
 def head(pagina, titolo, descrizione, extra=""):
     url = C["sito_url"].rstrip("/")
     canon = ""
+    if pagina == "privacy.html":
+        canon = '<meta name="robots" content="noindex, follow">\n'
     if pagina == "404.html":
         canon = '<meta name="robots" content="noindex">'
-    elif url:
+    if url and pagina != "404.html":
         percorso = "/" if pagina == "index.html" else "/" + pagina
-        canon = (f'<link rel="canonical" href="{url}{percorso}">\n<meta property="og:url" content="{url}{percorso}">\n'
+        canon += (f'<link rel="canonical" href="{url}{percorso}">\n<meta property="og:url" content="{url}{percorso}">\n'
                  f'<meta property="og:image" content="{url}/assets/img/og-picea.jpg">\n'
                  '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
                  '<meta property="og:image:alt" content="Tre pizze napoletane di Picea viste dall’alto su un tavolo di legno">')
@@ -261,6 +324,10 @@ def head(pagina, titolo, descrizione, extra=""):
 <title>{e(titolo)}</title>
 <meta name="description" content="{e(descrizione)}">
 <meta name="theme-color" content="#0f0e0c">
+<meta name="geo.region" content="IT-{IND["provincia"]}">
+<meta name="geo.placename" content="{e(IND["citta"])}">
+<meta name="geo.position" content="{C["geo"]["lat"]};{C["geo"]["lng"]}">
+<meta name="ICBM" content="{C["geo"]["lat"]}, {C["geo"]["lng"]}">
 <meta property="og:type" content="{og_tipo}">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="{e(C["nome_completo"])}">
@@ -356,7 +423,7 @@ def footer():
     <p class="footer__gigante" aria-hidden="true">{e(C["nome"])}</p>
     <div class="footer__fondo">
       <p>© <span data-anno>{OGGI.year}</span> {legale_riga()}</p>
-      <p><a href="privacy.html">Privacy</a></p>
+      <nav class="footer__pagine" aria-label="Pagine del sito">{"".join(f'<a href="{h}">{e(t)}</a>' for h, t in NAV)}<a href="privacy.html">Privacy</a></nav>
     </div>
   </div>
 </footer>"""
@@ -554,8 +621,8 @@ def home():
 </section>
 """
     pagina("index.html", f"{C['nome_completo']} · Pizza napoletana a Pozzuoli dal {C['anno_apertura']}",
-           "Picea, pizzeria napoletana nel centro storico di Pozzuoli dal 1996: verace pizza napoletana cotta nel forno a legna. Prenota su WhatsApp o ordina su Glovo.",
-           corpo, "pagina-home", schema_ristorante())
+           "Pizzeria Picea, nel centro storico di Pozzuoli dal 1996: verace pizza napoletana cotta nel forno a legna. Prenota su WhatsApp o ordina su Glovo.",
+           corpo, "pagina-home", schema_ristorante() + "\n" + schema_sito())
 
 
 def storia():
@@ -592,9 +659,9 @@ def storia():
   </div>
 </section>
 """
-    pagina("storia.html", f"La nostra storia · {C['nome_completo']} a Pozzuoli",
-           "La storia di Picea, pizzeria napoletana nel centro storico di Pozzuoli dal 1996.",
-           corpo, "pagina-storia")
+    pagina("storia.html", f"La storia di Picea · Pizzeria a Pozzuoli dal {C['anno_apertura']}",
+           "La storia della Pizzeria Picea, dal 1996 nel centro storico di Pozzuoli: il nome che viene dalla Picea abies e la pizza napoletana nel forno a legna.",
+           corpo, "pagina-storia", briciole("La nostra storia", "storia.html"))
 
 
 def _romano(n):
@@ -642,8 +709,9 @@ def galleria():
   <button type="button" class="lightbox__chiudi" aria-label="Chiudi"><span aria-hidden="true"></span></button>
 </dialog>
 """
-    pagina("galleria.html", f"Galleria · {C['nome_completo']} a Pozzuoli",
-           "Le foto della verace pizza napoletana di Picea, cotta nel forno a legna nel centro storico di Pozzuoli.", corpo)
+    pagina("galleria.html", f"Foto · {C['nome_completo']}, pizza napoletana a Pozzuoli",
+           "Le foto della Pizzeria Picea: la verace pizza napoletana cotta nel forno a legna, nel centro storico di Pozzuoli.", corpo,
+           extra_head=briciole("Galleria", "galleria.html"))
 
 
 def prenota():
@@ -718,7 +786,8 @@ def prenota():
 </section>
 """
     pagina("prenota.html", f"Prenota un tavolo · {C['nome_completo']} a Pozzuoli",
-           "Prenota il tuo tavolo da Picea a Pozzuoli: scegli giorno, orario e persone e invia la richiesta su WhatsApp.", corpo)
+           "Prenota un tavolo alla Pizzeria Picea, nel centro storico di Pozzuoli: scegli giorno, orario e persone e invia la richiesta su WhatsApp.", corpo,
+           extra_head=briciole("Prenota un tavolo", "prenota.html"))
 
 
 def contatti():
@@ -765,11 +834,20 @@ def contatti():
       </div>
     </div>
   </div>
+  <div class="contenitore faq">
+    <div class="centro">
+      <span class="occhiello rivela">Domande frequenti</span>
+      <h2 class="titolo-sezione rivela">Prima di <em>venirci a trovare</em></h2>
+    </div>
+    <div class="faq__elenco rivela">{"".join(f'<details class="faq__voce"><summary>{e(d)}</summary><p>{e(r).replace("–", "&#8288;–&#8288;")}</p></details>' for d, r in domande())}</div>
+  </div>
 </section>
 """
-    pagina("contatti.html", f"Contatti e orari · {C['nome_completo']} a Pozzuoli",
-           f"Picea, {INDIRIZZO_RIGA}. Telefono {TEL_V}. Orari, indicazioni stradali e contatti.", corpo,
-           extra_head=schema_ristorante())
+    faq = ld({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": d, "acceptedAnswer": {"@type": "Answer", "text": r}} for d, r in domande()]})
+    pagina("contatti.html", f"Contatti, orari e indirizzo · {C['nome_completo']} Pozzuoli",
+           f"Pizzeria Picea, {IND['via']}, {IND['citta']}. Tel. {C['telefono']['visibile']}, WhatsApp {C['whatsapp']['visibile']}. Orari, indicazioni e domande frequenti.", corpo,
+           extra_head=schema_ristorante() + "\n" + briciole("Contatti", "contatti.html") + "\n" + faq)
 
 
 def data_estesa(iso):
@@ -857,7 +935,7 @@ def extra():
     if url:
         robots += f"\nSitemap: {url}/sitemap.xml\n"
         voci = "".join(f"  <url><loc>{url}/{'' if p == 'index.html' else p}</loc><lastmod>{OGGI.isoformat()}</lastmod></url>\n"
-                       for p in ["index.html", "storia.html", "galleria.html", "prenota.html", "contatti.html", "privacy.html"])
+                       for p in ["index.html", "storia.html", "galleria.html", "prenota.html", "contatti.html"])
         with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
             f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{voci}</urlset>\n')
         print("scritta sitemap.xml")
