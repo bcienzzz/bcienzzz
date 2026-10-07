@@ -8,14 +8,11 @@ import datetime
 import html
 import json
 import os
-import urllib.parse
-
-from ramo import ramo_svg
+import re
 
 QUI = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(QUI, "..", "sito")
 C = json.load(open(os.path.join(QUI, "config.json"), encoding="utf-8"))
-MENU = json.load(open(os.path.join(QUI, "menu.json"), encoding="utf-8"))
 OGGI = datetime.date.today()
 
 e = html.escape  # testo sicuro nell'HTML
@@ -31,7 +28,6 @@ ICONE = """<svg width="0" height="0" style="position:absolute" aria-hidden="true
 <symbol id="i-tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M5 3.5h3.2l1.6 4-2.1 1.3a11 11 0 0 0 5.5 5.5l1.3-2.1 4 1.6V17a2.5 2.5 0 0 1-2.7 2.5C9.6 19 5 14.4 4.5 6.2A2.5 2.5 0 0 1 5 3.5Z"/></symbol>
 <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.9a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8.1 8.1 0 1 1 12 20.1Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.7.7 2.3.8 3.1.6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1l-.6-.3Z"/></symbol>
 <symbol id="i-scooter" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="2.6"/><circle cx="18.5" cy="17" r="2.6"/><path d="M8.6 17h6.8l2.6-6h-3.5"/><path d="M14 5.5h2l2.3 9"/><path d="M3 11h7.5v4H5"/></g></symbol>
-<symbol id="i-menu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 4.5h11a3 3 0 0 1 3 3v12H7a3 3 0 0 1-3-3v-12Z"/><path d="M8 9h6M8 12.5h6M8 16h3.5" stroke-linecap="round"/><path d="M18 7.5h2v12h-2"/></g></symbol>
 <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
 <symbol id="i-calendario" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M14 14h2M8 17h2"/></g></symbol>
 <symbol id="i-orologio" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
@@ -67,10 +63,20 @@ NAV = [
 ]
 
 
+NUOVA_SCHEDA = '<span class="sr-only"> (si apre in una nuova scheda)</span>'
+
+
 def link_esterno(url, testo, classe="", icona_nome=None, etichetta=None):
     i = icona(icona_nome) if icona_nome else ""
-    aria = f' aria-label="{e(etichetta)}"' if etichetta else ""
-    return f'<a class="{classe}" href="{e(url)}" target="_blank" rel="noopener"{aria}>{i}{testo}<span class="sr-only"> (si apre in una nuova scheda)</span></a>'
+    cl = f' class="{classe}"' if classe else ""
+    if etichetta:  # l'aria-label sostituisce il testo, quindi l'avviso va dentro l'etichetta
+        return f'<a{cl} href="{e(url)}" target="_blank" rel="noopener" aria-label="{e(etichetta)} (si apre in una nuova scheda)">{i}{testo}</a>'
+    return f'<a{cl} href="{e(url)}" target="_blank" rel="noopener">{i}{testo}{NUOVA_SCHEDA}</a>'
+
+
+def via_unita():
+    """La via con il numero civico che non va mai a capo da solo."""
+    return e(IND["via"]).replace(", ", ",&nbsp;")
 
 
 def fasce_giorno(giorno):
@@ -145,7 +151,7 @@ def mappa_html():
   <div class="mappa__copertina">
     <span class="mappa__pin" aria-hidden="true"><i></i><i></i>{icona("pin", "pin")}</span>
     <strong>{e(IND["via"])}, {e(IND["citta"])}</strong>
-    <p>La mappa di Google si carica solo se la apri: prima di quel momento Google non riceve nessun dato.</p>
+    <p>La mappa di Google si carica solo se premi “Mostra la mappa”: prima di allora Google non riceve alcun dato.</p>
     <div class="azioni">
       <button class="btn" type="button" data-carica-mappa>Mostra la mappa</button>
       {link_esterno(C["maps_link"], "Apri in Google Maps", "btn btn--vuoto", "esterno")}
@@ -154,8 +160,15 @@ def mappa_html():
 </div>"""
 
 
-def immagine(nome, alt, larghezze, sizes, classe="", lazy=True, priorita=False, w=None, h=None):
-    """<picture> con WebP e JPEG. nome senza estensione; larghezze = lista di suffissi o None."""
+def immagine(nome, alt, larghezze, sizes, classe="", lazy=True, priorita=False, w=None, h=None, verticale=None):
+    """<picture> con WebP e JPEG. nome senza estensione; larghezze = lista di suffissi o None.
+    verticale = larghezze del ritaglio verticale (file nome-verticale-L) usato sui telefoni tenuti in verticale."""
+    s_vert = ""
+    if verticale:
+        media = "(max-width: 719px) and (orientation: portrait)"
+        for tipo, est in (("image/webp", "webp"), ("image/jpeg", "jpg")):
+            sv = ", ".join(f"assets/img/{nome}-verticale-{l}.{est} {l}w" for l in verticale)
+            s_vert += f'<source media="{media}" type="{tipo}" srcset="{sv}" sizes="100vw">'
     if larghezze:
         webp = ", ".join(f"assets/img/{nome}-{l}.webp {l}w" for l in larghezze)
         jpg = ", ".join(f"assets/img/{nome}-{l}.jpg {l}w" for l in larghezze)
@@ -167,20 +180,11 @@ def immagine(nome, alt, larghezze, sizes, classe="", lazy=True, priorita=False, 
         src, img_srcset = f"assets/img/{nome}.jpg", ""
     attr = ' loading="lazy" decoding="async"' if lazy else ' decoding="async"'
     if priorita:
-        attr += ' fetchpriority="high"'
+        # la classe "caricata" fa entrare la foto in dissolvenza sopra il segnaposto sfocato
+        attr += ' fetchpriority="high" onload="this.classList.add(\'caricata\')"'
     dim = f' width="{w}" height="{h}"' if w and h else ""
     cl = f' class="{classe}"' if classe else ""
-    return f'<picture{cl}>{s_webp}<img src="{src}"{img_srcset} alt="{e(alt)}"{dim}{attr}></picture>'
-
-
-def cronologia_html():
-    return "".join(
-        f'<li><span class="anno">{e(v["anno"])}' + (f'<small>{e(v["sotto"])}</small>' if v.get("sotto") else "") +
-        f'</span><p>{e(v["testo"])}</p></li>' for v in C.get("cronologia", []))
-
-
-def strati():
-    return '<div class="strati" aria-hidden="true"><span></span><span></span><span></span></div>'
+    return f'<picture{cl}>{s_vert}{s_webp}<img src="{src}"{img_srcset} alt="{e(alt)}"{dim}{attr}></picture>'
 
 
 # ------------------------------------------------------------------ struttura comune
@@ -234,10 +238,14 @@ def head(pagina, titolo, descrizione, extra=""):
     url = C["sito_url"].rstrip("/")
     canon = ""
     if pagina == "404.html":
-        canon = '<meta name="robots" content="noindex">\n<base href="/">'
+        canon = '<meta name="robots" content="noindex">'
     elif url:
         percorso = "/" if pagina == "index.html" else "/" + pagina
-        canon = f'<link rel="canonical" href="{url}{percorso}">\n<meta property="og:url" content="{url}{percorso}">\n<meta property="og:image" content="{url}/assets/img/og-picea.jpg">'
+        canon = (f'<link rel="canonical" href="{url}{percorso}">\n<meta property="og:url" content="{url}{percorso}">\n'
+                 f'<meta property="og:image" content="{url}/assets/img/og-picea.jpg">\n'
+                 '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+                 '<meta property="og:image:alt" content="Tre pizze napoletane di Picea viste dall’alto su un tavolo di legno">')
+    og_tipo = "restaurant.restaurant" if pagina in ("index.html", "contatti.html") else "website"
     return f"""<!DOCTYPE html>
 <html lang="it" class="no-js">
 <head>
@@ -246,7 +254,7 @@ def head(pagina, titolo, descrizione, extra=""):
 <title>{e(titolo)}</title>
 <meta name="description" content="{e(descrizione)}">
 <meta name="theme-color" content="#0f0e0c">
-<meta property="og:type" content="restaurant.restaurant">
+<meta property="og:type" content="{og_tipo}">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="{e(C["nome_completo"])}">
 <meta property="og:title" content="{e(titolo)}">
@@ -254,6 +262,7 @@ def head(pagina, titolo, descrizione, extra=""):
 <meta name="twitter:card" content="summary_large_image">
 {canon}
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/marcellus-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
@@ -276,9 +285,9 @@ def header(pagina):
 {ICONE}
 <header class="header">
   <div class="contenitore">
-    <a class="marchio" href="index.html" aria-label="{e(C["nome"])}, Pozzuoli dal {C["anno_apertura"]}: torna alla home">
+    <a class="marchio" href="index.html">
       {logo}
-      <span class="marchio__testo"><span class="marchio__nome">{e(C["nome"])}</span><span class="marchio__sotto">Pozzuoli · dal {C["anno_apertura"]}</span></span>
+      <span class="marchio__testo"><span class="marchio__nome">{e(C["nome"])}</span><span class="marchio__sotto">Pozzuoli · dal {C["anno_apertura"]}</span></span><span class="sr-only"> – torna alla home</span>
     </a>
     <nav class="nav" aria-label="Menu principale">{"".join(voci)}</nav>
     <a class="btn" href="prenota.html">{icona("calendario")}Prenota</a>
@@ -307,21 +316,21 @@ def barra(pagina):
 def footer():
     logo = (f'<img src="{e(C["logo_url"])}" alt="" width="48" height="48" loading="lazy" referrerpolicy="no-referrer" '
             f'onerror="this.remove()">') if C["logo_url"] else ""
-    wa = f'<li><a href="https://wa.me/{WA_N}" target="_blank" rel="noopener">WhatsApp {e(WA_V)}</a></li>' if WA_N else ""
-    glovo = f'<li><a href="{e(GLOVO)}" target="_blank" rel="noopener">Ordina su Glovo</a></li>' if GLOVO else ""
+    wa = f'<li>{link_esterno(f"https://wa.me/{WA_N}", "WhatsApp " + e(WA_V))}</li>' if WA_N else ""
+    glovo = f'<li>{link_esterno(GLOVO, "Ordina su Glovo")}</li>' if GLOVO else ""
     return f"""<footer class="footer">
   <div class="contenitore">
     <div class="footer__griglia">
       <div>
-        <a class="marchio" href="index.html" aria-label="{e(C["nome"])}, Pozzuoli dal {C["anno_apertura"]}: torna alla home">{logo}<span class="marchio__testo"><span class="marchio__nome">{e(C["nome"])}</span><span class="marchio__sotto">Pozzuoli · dal {C["anno_apertura"]}</span></span></a>
-        <p>Pizzeria napoletana nel centro storico di Pozzuoli. La verace pizza napoletana, cotta nel forno a legna.</p>
+        <a class="marchio" href="index.html">{logo}<span class="marchio__testo"><span class="marchio__nome">{e(C["nome"])}</span><span class="marchio__sotto">Pozzuoli · dal {C["anno_apertura"]}</span></span><span class="sr-only"> – torna alla home</span></a>
+        <p>Nel centro storico di Pozzuoli dal {C["anno_apertura"]}. La verace pizza napoletana, cotta nel forno a&nbsp;legna.</p>
         {social_html()}
       </div>
       <div>
         <h2>Dove siamo</h2>
         <ul>
-          <li>{e(IND["via"])}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</li>
-          <li><a href="{e(C["maps_link"])}" target="_blank" rel="noopener">Indicazioni stradali</a></li>
+          <li>{via_unita()}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</li>
+          <li>{link_esterno(C["maps_link"], "Indicazioni stradali")}</li>
         </ul>
       </div>
       <div>
@@ -347,6 +356,13 @@ def footer():
 </footer>"""
 
 
+def dalla_radice(doc):
+    """Per la 404, che può essere mostrata a qualsiasi indirizzo: risorse e pagine con percorsi assoluti."""
+    doc = re.sub(r'(?<=["\s,])assets/', "/assets/", doc)
+    doc = doc.replace('href="index.html"', 'href="/"')
+    return re.sub(r'href="(storia|prenota|contatti|privacy)\.html"', r'href="/\1.html"', doc)
+
+
 def pagina(nome, titolo, descrizione, corpo, classe_body="", extra_head=""):
     doc = "\n".join([
         head(nome, titolo, descrizione, extra_head),
@@ -359,35 +375,33 @@ def pagina(nome, titolo, descrizione, corpo, classe_body="", extra_head=""):
         '<script src="assets/js/main.js" defer></script>',
         "</body>\n</html>\n",
     ])
+    if nome == "404.html":
+        doc = dalla_radice(doc)
     with open(os.path.join(OUT, nome), "w", encoding="utf-8") as f:
         f.write(doc)
     print("scritta", nome)
 
 
-def stato_html():
-    return ('<p class="stato" data-stato hidden role="status"><span class="stato__punto" aria-hidden="true"></span>'
-            '<span data-stato-testo></span></p>')
+def stato_html(annuncia=True):
+    ruolo = ' role="status"' if annuncia else ""
+    return (f'<p class="stato" data-stato hidden{ruolo}><span class="stato__punto" aria-hidden="true"></span>'
+            '<span data-stato-testo>&nbsp;</span></p>')
 
 
 # ------------------------------------------------------------------ pagine
 def home():
     NASTRO = "".join(f"<span>{v}</span>" for v in ['Verace pizza napoletana', 'Forno a legna', 'Centro storico di Pozzuoli', 'Dal 1996'])
-    firme = [p for cat in MENU["categorie"] for p in cat["piatti"] if p.get("in_evidenza")]
-    lista_firme = "".join(
-        f'<li><h3>{e(p["nome"])}</h3>' + (f'<p>{e(p["descrizione"])}</p>' if p.get("descrizione") else "") + "</li>"
-        for p in firme[:3])
-    blocco_firme = f'<ul class="lista-firme">{lista_firme}</ul>' if lista_firme else ""
     servizi = "".join(f'<li>{icona(s["icona"])}{e(s["nome"])}</li>' for s in C["servizi"])
     pagamenti = "".join(f"<li>{e(p)}</li>" for p in C["pagamenti"])
     glovo_hero = bottone_glovo()
     corpo = f"""
 <section class="hero" aria-labelledby="titolo-home">
-  {immagine("pizze", "Tre pizze napoletane di Picea viste dall’alto su un tavolo di legno", [800, 1280, 2000, 2800], "(max-aspect-ratio: 3/2) 150vh, 100vw", "hero__foto", lazy=False, priorita=True, w=2000, h=1333)}
+  {immagine("pizze", "Tre pizze napoletane di Picea viste dall’alto su un tavolo di legno", [800, 1280, 2000], "(max-aspect-ratio: 3/2) 150vh, 100vw", "hero__foto", lazy=False, priorita=True, w=2000, h=1333, verticale=[640, 960])}
   <div class="contenitore">
     {stato_html()}
     <p class="hero__epigrafe" aria-hidden="true">PVTEOLI · MCMXCVI</p>
-    <h1 id="titolo-home">{e(C["nome"])}</h1>
-    <p class="hero__sotto">La vera pizza napoletana, cotta nel forno a legna nel centro storico di Pozzuoli.</p>
+    <h1 id="titolo-home">{e(C["nome"])}<span class="sr-only"> – pizzeria napoletana a Pozzuoli</span></h1>
+    <p class="hero__sotto">La vera pizza napoletana, cotta nel forno a&nbsp;legna nel centro storico di&nbsp;Pozzuoli.</p>
     <div class="hero__azioni">
       <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
       {glovo_hero}
@@ -399,7 +413,7 @@ def home():
 <section class="info-rapide" aria-label="Informazioni rapide">
   <div class="contenitore">
     <a class="info-rapide__voce" href="#orari">{icona("orologio")}<div><small>Oggi</small><span data-oggi-orari>Vedi gli orari</span></div></a>
-    <a class="info-rapide__voce" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Dove siamo</small><span>{e(IND["via"])} · {e(IND["citta"])}</span></div></a>
+    <a class="info-rapide__voce" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Dove siamo</small><span>{via_unita()} · {e(IND["citta"])}</span></div>{NUOVA_SCHEDA}</a>
     <a class="info-rapide__voce" href="tel:{TEL_L}">{icona("tel")}<div><small>Chiama</small><span>{e(TEL_V)}</span></div></a>
   </div>
 </section>
@@ -424,7 +438,7 @@ def home():
       <span class="occhiello rivela">La nostra pizza</span>
       <h2 class="titolo-sezione rivela" id="titolo-metodo">La verace pizza <em>napoletana</em></h2>
       <div class="strati" aria-hidden="true"><span></span><span></span><span></span></div>
-      <p class="intro-sezione rivela" style="margin-inline:auto">Scorri o tocca le quattro fasi.</p>
+      <p class="intro-sezione rivela" style="margin-inline:auto">Scorri la pagina o scegli una delle quattro fasi.</p>
     </div>
     <div class="laboratorio">
       <figure class="laboratorio__scena">
@@ -459,13 +473,13 @@ def home():
             <g class="fx-macchie" fill="#5a3418"><circle cx="86" cy="190" r="5"/><circle cx="92" cy="258" r="4"/><circle cx="122" cy="306" r="6"/><circle cx="196" cy="341" r="4"/><circle cx="270" cy="322" r="6"/><circle cx="318" cy="262" r="4"/><circle cx="326" cy="196" r="6"/><circle cx="296" cy="122" r="4"/><circle cx="236" cy="90" r="6"/><circle cx="160" cy="92" r="5"/><circle cx="112" cy="128" r="4"/></g>
           </g>
         </svg>
-        <figcaption id="lab-didascalia" class="laboratorio__didascalia" aria-live="polite"><span>I</span> La materia prima</figcaption>
+        <figcaption id="lab-didascalia" class="laboratorio__didascalia"><span aria-hidden="true">I</span> La materia prima</figcaption>
       </figure>
       <ol class="passi passi--schede">
-          <li class="rivela passo" data-fase="1" tabindex="0" aria-pressed="true"><span class="num" aria-hidden="true">I</span><h3>La materia prima</h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
-          <li class="rivela passo" data-fase="2" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">II</span><h3>L’impasto</h3><p>Un impasto disciplinato da tempi di lievitazione rigorosi.</p></li>
-          <li class="rivela passo" data-fase="3" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">III</span><h3>La stesura</h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
-          <li class="rivela passo" data-fase="4" tabindex="0" aria-pressed="false"><span class="num" aria-hidden="true">IV</span><h3>Il forno a legna</h3><p>La cottura nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
+          <li class="rivela passo attivo" data-fase="1"><span class="num" aria-hidden="true">I</span><h3><button type="button" class="passo__btn" aria-pressed="true">La materia prima</button></h3><p>Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
+          <li class="rivela passo" data-fase="2"><span class="num" aria-hidden="true">II</span><h3><button type="button" class="passo__btn" aria-pressed="false">L’impasto</button></h3><p>Disciplinato da tempi di lievitazione rigorosi.</p></li>
+          <li class="rivela passo" data-fase="3"><span class="num" aria-hidden="true">III</span><h3><button type="button" class="passo__btn" aria-pressed="false">La forma</button></h3><p>Cornicione contenuto e stesura della verace pizza napoletana.</p></li>
+          <li class="rivela passo" data-fase="4"><span class="num" aria-hidden="true">IV</span><h3><button type="button" class="passo__btn" aria-pressed="false">La cottura</button></h3><p>Nel forno a legna, come vuole la tradizione della pizza partenopea.</p></li>
       </ol>
     </div>
   </div>
@@ -475,7 +489,7 @@ def home():
   <div class="contenitore">
     <span class="occhiello rivela">Da Picea</span>
     <h2 class="titolo-sezione rivela" id="titolo-servizi">Al tavolo, da asporto <em>o a casa tua</em></h2>
-    <p class="intro-sezione rivela">Una delle storiche pizzerie di Pozzuoli. Una cultura generazionale della tradizione della pizza partenopea.</p>
+    <p class="intro-sezione rivela">Una delle storiche pizzerie di Pozzuoli, custode di una tradizione della pizza partenopea tramandata di generazione in generazione.</p>
     <ul class="servizi rivela">{servizi}</ul>
     <p class="sottotitolo-piccolo rivela">Pagamenti accettati</p>
     <ul class="pagamenti rivela">{pagamenti}</ul>
@@ -492,7 +506,7 @@ def home():
       <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
       <a class="btn btn--vuoto" href="tel:{TEL_L}">{icona("tel")}{e(TEL_V)}</a>
     </div>
-    <a class="sigillo" href="prenota.html" aria-label="Prenota un tavolo">
+    <a class="sigillo" href="prenota.html" aria-label="Prenota su WhatsApp">
       <svg class="sigillo__testo" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="cerchio" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#cerchio" textLength="486" lengthAdjust="spacing">PRENOTA SU WHATSAPP · PRENOTA SU WHATSAPP · </textPath></text></svg>
       <span class="sigillo__centro">{icona("whatsapp")}</span>
     </a>
@@ -504,14 +518,14 @@ def home():
     <div class="centro">
       <span class="occhiello rivela">Orari e indirizzo</span>
       <h2 class="titolo-sezione rivela" id="titolo-dove">Vieni a <em>trovarci</em></h2>
-      <div class="rivela" style="margin-top:22px">{stato_html()}</div>
+      <div class="rivela" style="margin-top:22px">{stato_html(annuncia=False)}</div>
     </div>
     <div class="rivela">{settimana_html()}</div>
     <div class="dove dove--home">
       <div class="dove__indirizzo rivela">
         <span class="dove__etichetta">Ci trovi qui</span>
-        <address class="indirizzo">{e(IND["via"]).replace(", ", ",&nbsp;")}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</address>
-        <p class="dove__nota">Nel centro storico di Pozzuoli.</p>
+        <address class="indirizzo">{via_unita()}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</address>
+        <p class="dove__nota">Nel cuore del centro storico.</p>
         <div class="hero__azioni">{link_esterno(C["maps_link"], "Indicazioni", "btn", "pin")}<a class="btn btn--vuoto" href="contatti.html">Tutti i contatti</a></div>
       </div>
       <div class="rivela" data-ritardo="1">{mappa_html()}</div>
@@ -524,7 +538,7 @@ def home():
   <div class="contenitore centro">
     <p class="hero__epigrafe rivela" aria-hidden="true">PVTEOLI · MCMXCVI</p>
     <h2 class="finale__titolo rivela" id="titolo-finale">Ti aspettiamo <em>a tavola</em></h2>
-    <p class="intro-sezione rivela" style="margin-inline:auto">La vera pizza napoletana, cotta nel forno a legna nel centro storico di Pozzuoli.</p>
+    <p class="intro-sezione rivela" style="margin-inline:auto">{via_unita()} · {e(IND["citta"])}. Prenota su WhatsApp, chiamaci o ordina a domicilio su&nbsp;Glovo.</p>
     <div class="finale__azioni rivela">
       <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
       <a class="btn btn--vuoto" href="tel:{TEL_L}">{icona("tel")}{e(TEL_V)}</a>
@@ -551,8 +565,8 @@ def storia():
   <div class="contenitore storia-testo">
     <div class="capitoli rivela">
       <ol class="capitoli__binario" tabindex="0" aria-label="La storia di Picea, da scorrere">
-        <li class="capitolo-card" id="cap-1"><span class="sr-only">Capitolo 1 di 4</span><span class="capitolo-card__num" aria-hidden="true">I</span><p>Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero: terme, macellum, ville, anfiteatri. Un luogo che respira archeologia.</p></li>
-        <li class="capitolo-card" id="cap-2"><span class="sr-only">Capitolo 2 di 4</span><span class="capitolo-card__num" aria-hidden="true">II</span><p>Tra le fonti, Giovanni incrocia la “Picea abies”, un abete rosso: era il combustibile eletto dai romani per alimentare i loro forni pubblici. Una legna vigorosa, che sprigionava calore rapido e un profumo balsamico. Da quella intuizione nasce “Picea”.</p></li>
+        <li class="capitolo-card attivo" id="cap-1"><span class="sr-only">Capitolo 1 di 4</span><span class="capitolo-card__num" aria-hidden="true">I</span><p>Nel 1996, Giovanni Vanacore approda a Pozzuoli, una città dove ogni angolo o scavo riporta alla luce la memoria dell’antica Roma e del suo impero: terme, <i lang="la">macellum</i>, ville, anfiteatri. Un luogo che respira archeologia.</p></li>
+        <li class="capitolo-card" id="cap-2"><span class="sr-only">Capitolo 2 di 4</span><span class="capitolo-card__num" aria-hidden="true">II</span><p>Tra le fonti, Giovanni incrocia la <i lang="la">Picea abies</i>, un abete rosso: era il combustibile eletto dai romani per alimentare i loro forni pubblici. Una legna vigorosa, che sprigionava calore rapido e un profumo balsamico. Da quella intuizione nasce “Picea”.</p></li>
         <li class="capitolo-card" id="cap-3"><span class="sr-only">Capitolo 3 di 4</span><span class="capitolo-card__num" aria-hidden="true">III</span><p>Pioniere a Pozzuoli della pizza tradizionale napoletana, Giovanni sceglie una caratteristica ben precisa: cornicione contenuto e stesura della verace pizza napoletana, impasto disciplinato da tempi di lievitazione rigorosi. La materia prima? Solo eccellenze del territorio, selezionate senza compromessi.</p></li>
         <li class="capitolo-card" id="cap-4"><span class="sr-only">Capitolo 4 di 4</span><span class="capitolo-card__num" aria-hidden="true">IV</span><p>Diventa così più di una pizzeria: è una continuità. Un dialogo tra la fornace romana e il forno moderno.</p></li>
       </ol>
@@ -561,12 +575,12 @@ def storia():
         <div class="capitoli__punti" aria-hidden="true"><span class="attivo"></span><span></span><span></span><span></span></div>
         <button type="button" class="capitoli__freccia" data-dir="1" aria-label="Capitolo successivo">{icona("freccia")}</button>
       </div>
-      <p class="capitoli__aiuto">Scorri con il dito o usa le frecce</p>
+      <p class="capitoli__aiuto">Scorri le schede o usa le frecce</p>
     </div>
     <blockquote class="estratto rivela">
       <p>Dal 1996 ad oggi la filosofia è immutata: rispettare le origini per esaltare i sapori.</p>
     </blockquote>
-    <p class="rivela finale">Entrare da Picea significa assaporare una pizza, ma anche una stratificazione di storia.</p>
+    <p class="rivela storia-chiusa">Entrare da Picea significa assaporare una pizza, ma anche una stratificazione di storia.</p>
     <div class="hero__azioni rivela" style="margin-top:48px;justify-content:center">
       <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
       <a class="btn btn--vuoto" href="contatti.html">Contatti</a>
@@ -577,57 +591,6 @@ def storia():
     pagina("storia.html", f"La nostra storia · {C['nome_completo']} a Pozzuoli",
            "La storia di Picea, pizzeria napoletana nel centro storico di Pozzuoli dal 1996.",
            corpo)
-
-
-def menu():
-    cats = MENU["categorie"]
-    nav = "".join(f'<li><a href="#{c["id"]}">{e(c["titolo"])}</a></li>' for c in cats)
-    blocchi = []
-    for i, c in enumerate(cats, 1):
-        piatti = []
-        for p in c["piatti"]:
-            segni = "".join(f'<span class="segno">{e(s)}</span>' for s in p.get("segni", []))
-            desc = f'<p>{e(p["descrizione"])}</p>' if p.get("descrizione") else ""
-            piatti.append(f'<li class="piatto"><h3>{e(p["nome"])}{segni}</h3>{desc}</li>')
-        nota = f'<p class="categoria__nota">{e(c["nota"])}</p>' if c.get("nota") else ""
-        blocchi.append(f"""<section class="categoria" id="{c["id"]}" aria-labelledby="t-{c["id"]}">
-  <div class="categoria__testa"><h2 id="t-{c["id"]}">{e(c["titolo"])}</h2><span aria-hidden="true">{_romano(i)}</span></div>
-  {nota}
-  <ul class="piatti">{"".join(piatti)}</ul>
-</section>""")
-    avviso = f'<p class="avviso-menu">{e(MENU["avviso"])}</p>' if MENU.get("avviso") else ""
-    corpo = f"""
-<section class="testata">
-  <div class="contenitore">
-    <span class="occhiello">Dal nostro forno</span>
-    <h1>Il menu</h1>
-    <p>{e(MENU.get("intro", ""))}</p>
-  </div>
-</section>
-<nav class="menu-nav" aria-label="Categorie del menu"><div class="contenitore"><ul>{nav}</ul></div></nav>
-<div class="chiaro" style="padding-bottom:clamp(72px,10vw,120px)">
-  <div class="contenitore stretto">
-    {"".join(blocchi)}
-    {avviso}
-    <div class="menu-cta">
-      <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>
-      {bottone_glovo("btn btn--vuoto btn--glovo", "Ordina a domicilio su Glovo")}
-    </div>
-  </div>
-</div>
-"""
-    pagina("menu.html", f"Menu · {C['nome_completo']} a Pozzuoli",
-           "Il menu di Picea a Pozzuoli: la verace pizza napoletana cotta nel forno a legna.", corpo)
-
-
-def _romano(n):
-    val = [(10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")]
-    out = ""
-    for v, s in val:
-        while n >= v:
-            out += s
-            n -= v
-    return out
 
 
 def prenota():
@@ -643,7 +606,9 @@ def prenota():
 <section class="sezione chiaro">
   <div class="contenitore layout-prenota">
     <div class="scheda rivela">
+      <noscript><p class="nota-modulo">Per prenotare scrivici su WhatsApp al {e(WA_V)} oppure chiamaci allo {e(TEL_V)}.</p></noscript>
       <form class="modulo" id="modulo-prenota" novalidate>
+        <p class="errore" id="p-errore" role="alert"></p>
         <div class="campo">
           <label for="p-nome">Nome</label>
           <input id="p-nome" name="nome" type="text" autocomplete="name" required>
@@ -668,26 +633,25 @@ def prenota():
           <span class="aiuto">Per gruppi numerosi o eventi privati, chiamaci.</span>
         </div>
         <div class="campo">
-          <label for="p-note">Note <span style="text-transform:none;letter-spacing:0;font-weight:400">(facoltativo)</span></label>
-          <textarea id="p-note" name="note" placeholder="Seggiolone, tavolo all’aperto, una ricorrenza…"></textarea>
+          <label for="p-note">Note <span class="facoltativo">(facoltative)</span></label>
+          <textarea id="p-note" name="note" placeholder="Tavolo all’aperto, una ricorrenza…"></textarea>
         </div>
-        <p class="errore" id="p-errore" role="alert"></p>
         <button class="btn" type="submit">{icona("whatsapp")}Invia la richiesta su WhatsApp</button>
         <p class="nota-modulo">Il sito non salva i tuoi dati: vengono solo inseriti nel messaggio che invii tu. <a href="privacy.html">Privacy</a></p>
         <p class="nota-modulo" id="p-inviato" tabindex="-1" hidden><strong>Ora tocca a te:</strong> nella chat di WhatsApp che si è aperta premi invia. Ti rispondiamo per confermare il tavolo.</p>
-        <p class="nota-modulo" id="p-wa" hidden><a class="btn" id="p-wa-link" href="https://wa.me/{C["whatsapp"]["numero"]}" target="_blank" rel="noopener">{icona("whatsapp")}Apri WhatsApp con il messaggio</a><br>WhatsApp non si è aperto? Tocca il bottone qui sopra.</p>
+        <p class="nota-modulo" id="p-wa" hidden><a class="btn" id="p-wa-link" href="https://wa.me/{WA_N}" target="_blank" rel="noopener">{icona("whatsapp")}Apri WhatsApp con il messaggio{NUOVA_SCHEDA}</a><br>WhatsApp non si è aperto? Usa il pulsante qui sopra.</p>
       </form>
     </div>
     <aside class="lato rivela" data-ritardo="1">
-      <div class="biglietto" id="biglietto" aria-live="polite">
+      <div class="biglietto" id="biglietto">
         <div class="biglietto__testa"><span>Picea</span><small>Richiesta di prenotazione</small></div>
         <dl class="biglietto__dati">
           <div><dt>Nome</dt><dd data-b="nome">—</dd></div>
           <div><dt>Giorno</dt><dd data-b="data">—</dd></div>
-          <div><dt>Ora</dt><dd data-b="ora">—</dd></div>
+          <div><dt>Orario</dt><dd data-b="ora">—</dd></div>
           <div><dt>Persone</dt><dd data-b="persone">2</dd></div>
         </dl>
-        <div class="biglietto__piede"><span>{e(IND["via"])} · {e(IND["citta"])}</span><span class="biglietto__timbro" aria-hidden="true">Pronta</span></div>
+        <div class="biglietto__piede"><span>{via_unita()}&nbsp;· {e(IND["citta"])}</span><span class="biglietto__timbro" aria-hidden="true">Pronta</span></div>
       </div>
       <h2>Orari</h2>
       {tabella_orari()}
@@ -705,13 +669,13 @@ def prenota():
 
 def contatti():
     wa = (f'<a class="canale" href="https://wa.me/{WA_N}" target="_blank" rel="noopener">{icona("whatsapp")}'
-          f'<div><small>WhatsApp</small><span>{e(WA_V)}</span></div></a>') if WA_N else ""
+          f'<div><small>WhatsApp</small><span>{e(WA_V)}</span></div>{NUOVA_SCHEDA}</a>') if WA_N else ""
     corpo = f"""
 <section class="testata">
   <div class="contenitore">
     <span class="occhiello">Contatti</span>
     <h1>Vieni a trovarci</h1>
-    <p>Siamo nel centro storico di Pozzuoli, in {e(IND["via"])}.</p>
+    <p>Siamo nel centro storico di Pozzuoli, in {via_unita()}.</p>
   </div>
 </section>
 <section class="sezione chiaro">
@@ -721,7 +685,7 @@ def contatti():
         <a class="canale" href="tel:{TEL_L}">{icona("tel")}<div><small>Telefono</small><span>{e(TEL_V)}</span></div></a>
         {wa}
         <a class="canale" href="mailto:{e(C["email"])}">{icona("email")}<div><small>Email</small><span>{e(C["email"]).replace("@", "@<wbr>")}</span></div></a>
-        <a class="canale" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Indirizzo</small><span>{e(IND["via"])}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</span></div></a>
+        <a class="canale" href="{e(C["maps_link"])}" target="_blank" rel="noopener">{icona("pin")}<div><small>Indirizzo</small><span>{via_unita()}<br>{e(IND["cap"])} {e(IND["citta"])} ({e(IND["provincia"])})</span></div>{NUOVA_SCHEDA}</a>
       </div>
       <h2 class="titolo-sezione rivela" style="font-size:2rem;margin-top:48px">Orari</h2>
       <div class="rivela">{tabella_orari()}</div>
@@ -731,13 +695,14 @@ def contatti():
       <div class="scheda rivela" style="margin-top:32px">
         <h2 style="font-size:1.8rem;margin-bottom:6px">Scrivici</h2>
         <p class="nota-modulo" style="margin-bottom:20px">Il messaggio si apre nella tua app di posta, pronto da inviare a {e(C["email"])}.</p>
+        <noscript><p class="nota-modulo">Scrivici a <a href="mailto:{e(C["email"])}">{e(C["email"])}</a> oppure chiamaci allo {e(TEL_V)}.</p></noscript>
         <form class="modulo" id="modulo-contatti" novalidate>
+          <p class="errore" id="c-errore" role="alert"></p>
           <div class="riga-campi">
             <div class="campo"><label for="c-nome">Nome</label><input id="c-nome" type="text" autocomplete="name" required></div>
-            <div class="campo"><label for="c-telefono">Telefono <span style="text-transform:none;letter-spacing:0;font-weight:400">(facoltativo)</span></label><input id="c-telefono" type="tel" autocomplete="tel"></div>
+            <div class="campo"><label for="c-telefono">Telefono <span class="facoltativo">(facoltativo)</span></label><input id="c-telefono" type="tel" autocomplete="tel"></div>
           </div>
           <div class="campo"><label for="c-messaggio">Messaggio</label><textarea id="c-messaggio" required></textarea></div>
-          <p class="errore" id="c-errore" role="alert"></p>
           <p class="nota-modulo" id="c-stato" role="status" hidden>Si sta aprendo la tua app di posta con il messaggio pronto. Se non si apre, scrivici a <a href="mailto:{e(C["email"])}">{e(C["email"])}</a> oppure chiamaci al {e(TEL_V)}.</p>
           <button class="btn" type="submit">{icona("email")}Scrivi l’email</button>
           <p class="nota-modulo">Il sito non salva i tuoi dati. <a href="privacy.html">Privacy</a></p>
@@ -750,6 +715,12 @@ def contatti():
     pagina("contatti.html", f"Contatti e orari · {C['nome_completo']} a Pozzuoli",
            f"Picea, {INDIRIZZO_RIGA}. Telefono {TEL_V}. Orari, indicazioni stradali e contatti.", corpo,
            extra_head=schema_ristorante())
+
+
+def data_estesa(iso):
+    d = datetime.date.fromisoformat(iso)
+    mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]
+    return f"{d.day} {mesi[d.month - 1]} {d.year}"
 
 
 def privacy():
@@ -783,14 +754,14 @@ def privacy():
     </dl>
 
     <h2>Cookie e statistiche</h2>
-    <p>Questo sito non usa cookie di profilazione né strumenti di statistica o pubblicità. I caratteri tipografici sono ospitati sul sito stesso.</p>{nota_logo}
+    <p>Questo sito non usa cookie né strumenti di statistica o pubblicità. I caratteri tipografici sono ospitati sul sito stesso.</p>{nota_logo}
 
     <h2>Prenotazioni e messaggi</h2>
     <p>I moduli “Prenota” e “Scrivici” non salvano dati sul sito. Servono solo a preparare un messaggio (con nome, giorno, orario, numero di persone, note o testo del messaggio) che invii tu tramite WhatsApp o la tua app di posta elettronica. Riceviamo questi dati soltanto se scegli di inviare il messaggio e li usiamo esclusivamente per rispondere alla tua richiesta e gestire la prenotazione (art. 6, par. 1, lett. b del GDPR). Li conserviamo per il tempo necessario a questo scopo.</p>
     <p>L’invio tramite WhatsApp o email avviene attraverso i servizi di Meta (WhatsApp) e del tuo fornitore di posta, secondo le rispettive informative.</p>
 
     <h2>Mappa</h2>
-    <p>La mappa di Google si carica solo se premi “Mostra la mappa”. Da quel momento Google può raccogliere dati e usare cookie secondo la propria <a href="https://policies.google.com/privacy?hl=it" target="_blank" rel="noopener">informativa sulla privacy</a>.</p>
+    <p>La mappa di Google si carica solo se premi “Mostra la mappa”. Da quel momento Google può raccogliere dati e usare cookie secondo la propria {link_esterno("https://policies.google.com/privacy?hl=it", "informativa sulla privacy")}.</p>
 
     <h2>Link ad altri siti</h2>
     <p>I collegamenti a Glovo, Instagram, Facebook e Google Maps portano a siti esterni, che trattano i dati secondo le proprie informative.</p>
@@ -799,9 +770,9 @@ def privacy():
     <p>Il servizio che ospita il sito può registrare automaticamente dati tecnici (come indirizzo IP, data e ora della visita) per garantirne il funzionamento e la sicurezza.</p>
 
     <h2>I tuoi diritti</h2>
-    <p>Puoi chiedere in qualsiasi momento l’accesso, la rettifica o la cancellazione dei tuoi dati e la limitazione del trattamento, oppure opporti al trattamento, scrivendo a <a href="mailto:{e(C["email"])}">{e(C["email"])}</a> (artt. 15–22 GDPR). Puoi anche presentare reclamo al <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
+    <p>Puoi chiedere in qualsiasi momento l’accesso, la rettifica o la cancellazione dei tuoi dati e la limitazione del trattamento, oppure opporti al trattamento, scrivendo a <a href="mailto:{e(C["email"])}">{e(C["email"])}</a> (artt. 15–22 GDPR). Puoi anche presentare reclamo al {link_esterno("https://www.garanteprivacy.it", "Garante per la protezione dei dati personali")}.</p>
 
-    <p style="margin-top:40px;color:var(--grigio-scuro)">Ultimo aggiornamento: {OGGI.day} {["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"][OGGI.month - 1]} {OGGI.year}.</p>
+    <p style="margin-top:40px;color:var(--grigio-scuro)">Ultimo aggiornamento: {data_estesa(C["privacy_aggiornata"])}.</p>
   </div>
 </section>
 """

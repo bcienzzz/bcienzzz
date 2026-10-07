@@ -80,7 +80,7 @@
     burger.setAttribute("aria-label", si ? "Chiudi il menu" : "Apri il menu");
     menu.classList.toggle("aperto", si);
     if ("inert" in menu) menu.inert = !si;
-    document.querySelectorAll("main, footer, .barra").forEach(function (el) { if ("inert" in el) el.inert = si; });
+    document.querySelectorAll("main, footer").forEach(function (el) { if ("inert" in el) el.inert = si; });
     document.body.style.overflow = si ? "hidden" : "";
     scroll();
   }
@@ -115,29 +115,10 @@
       f.src = D.mapsEmbed; f.title = "Mappa: " + (D.indirizzo || "Picea"); f.loading = "lazy";
       f.referrerPolicy = "no-referrer-when-downgrade"; f.allowFullscreen = true;
       box.innerHTML = ""; box.appendChild(f);
+      box.classList.add("caricata");
+      f.focus();
     });
   });
-
-  /* ---------- Menu: categoria attiva ---------- */
-  var linkCat = document.querySelectorAll(".menu-nav a");
-  if (linkCat.length && "IntersectionObserver" in window) {
-    var ioCat = new IntersectionObserver(function (voci) {
-      voci.forEach(function (v) {
-        if (!v.isIntersecting) return;
-        linkCat.forEach(function (a) {
-          var on = a.getAttribute("href") === "#" + v.target.id;
-          a.classList.toggle("attivo", on);
-          if (on && a.scrollIntoView && window.innerWidth < 1024) a.parentNode.parentNode.scrollTo({ left: a.offsetLeft - 20, behavior: ridotto ? "auto" : "smooth" });
-        });
-      });
-    }, { rootMargin: "-40% 0px -55% 0px" });
-    document.querySelectorAll(".categoria[id]").forEach(function (c) { ioCat.observe(c); });
-    var primaCat = document.querySelector(".categoria[id]");
-    window.addEventListener("scroll", function () {
-      if (primaCat && primaCat.getBoundingClientRect().top > window.innerHeight * 0.45) linkCat.forEach(function (a) { a.classList.remove("attivo"); });
-    }, { passive: true });
-  }
-
 
   /* ---------- Prenotazione via WhatsApp ---------- */
   var fp = document.getElementById("modulo-prenota");
@@ -166,7 +147,11 @@
       cOra.innerHTML = "";
       if (!cData.value) { cOra.appendChild(new Option("Scegli prima il giorno", "")); cOra.disabled = true; return; }
       var lista = orariDisponibili(cData.value);
-      if (!lista.length) { cOra.appendChild(new Option(fasce(giornoSett(cData.value)).length ? "Nessun orario disponibile in questo giorno" : "Il " + GIORNI[giornoSett(cData.value)] + " siamo chiusi", "")); cOra.disabled = true; return; }
+      if (!lista.length) {
+        var g = giornoSett(cData.value);
+        cOra.appendChild(new Option(!fasce(g).length ? "Il " + GIORNI[g] + " siamo chiusi" : adesso && cData.value === adesso.data ? "Per oggi non ci sono più orari disponibili" : "Nessun orario disponibile in questo giorno", ""));
+        cOra.disabled = true; return;
+      }
       cOra.disabled = false;
       cOra.appendChild(new Option("Scegli l’orario", ""));
       var pranzo = document.createElement("optgroup"); pranzo.label = "Pranzo";
@@ -185,8 +170,16 @@
     cData.addEventListener("change", riempiOrari);
     riempiOrari();
 
+    // Se dopo l'invio si cambia qualcosa, il pulsante di riserva non deve aprire WhatsApp con i dati vecchi.
+    function invalidaInvio() {
+      ["p-inviato", "p-wa"].forEach(function (id) { var el = document.getElementById(id); if (el) el.hidden = true; });
+    }
+    fp.addEventListener("input", invalidaInvio);
+    fp.addEventListener("change", invalidaInvio);
+
     fp.querySelectorAll("[data-persone]").forEach(function (b) {
       b.addEventListener("click", function () {
+        invalidaInvio();
         var n = parseInt(cPers.value, 10);
         if (!(n >= 1)) { cPers.value = 1; return; }
         n = Math.min(cfg.personeMax, Math.max(1, n + parseInt(b.getAttribute("data-persone"), 10)));
@@ -202,14 +195,16 @@
       if (ok) ok.hidden = true;
       if (wa) wa.hidden = true;
       // Se la pagina è rimasta aperta a lungo, aggiorna data e orari disponibili prima di controllare.
-      var ora = adessoRoma();
-      if (ora) { adesso = ora; cData.min = ora.data; riempiOrari(); }
+      var ora = adessoRoma(), oraScelta = cOra.value;
+      if (ora) { adesso = ora; cData.min = ora.data; riempiOrari(); cOra.dispatchEvent(new Event("change", { bubbles: true })); }
       var problemi = [], fuori = [];
       [cNome, cData, cOra, cPers].forEach(function (c) { c.removeAttribute("aria-invalid"); });
       if (!cNome.value.trim()) { problemi.push("il nome"); cNome.setAttribute("aria-invalid", "true"); }
       if (!cData.value) { problemi.push("il giorno"); cData.setAttribute("aria-invalid", "true"); }
-      else if (cData.value < cData.min || cData.value > cData.max) { fuori.push("Scegli un giorno da oggi ai prossimi tre mesi."); cData.setAttribute("aria-invalid", "true"); }
-      if (!cOra.value) { problemi.push("l’orario"); cOra.setAttribute("aria-invalid", "true"); }
+      else if (cData.value < cData.min || cData.value > cData.max) { fuori.push("Scegli un giorno entro i prossimi tre mesi."); cData.setAttribute("aria-invalid", "true"); }
+      else if (cOra.disabled) { fuori.push(cOra.options[0].text + ": scegli un altro giorno."); cData.setAttribute("aria-invalid", "true"); }
+      else if (!cOra.value && oraScelta) { fuori.push("L’orario " + oraScelta + " non è più disponibile: scegline un altro."); cOra.setAttribute("aria-invalid", "true"); }
+      if (cData.value && !cOra.disabled && !cOra.value && !oraScelta) { problemi.push("l’orario"); cOra.setAttribute("aria-invalid", "true"); }
       var n = /^\d+$/.test(cPers.value.trim()) ? parseInt(cPers.value, 10) : NaN;
       if (!cPers.value.trim()) { problemi.push("il numero di persone"); cPers.setAttribute("aria-invalid", "true"); }
       else if (!(n >= 1 && n <= cfg.personeMax)) { fuori.push("Il numero di persone deve essere da 1 a " + cfg.personeMax + "."); cPers.setAttribute("aria-invalid", "true"); }
@@ -265,8 +260,16 @@
     var cv = document.createElement("canvas");
     cv.className = "braci"; cv.setAttribute("aria-hidden", "true");
     hero.insertBefore(cv, hero.querySelector(".contenitore"));
-    var cx = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0, braci = [], visibile = true;
-    function misura() { W = hero.clientWidth; H = hero.clientHeight; cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px"; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    var cx = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0, braci = [], visibile = true, raf = 0;
+    function misura() {
+      if (hero.clientWidth === W && hero.clientHeight === H) return;
+      W = hero.clientWidth; H = hero.clientHeight; cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px"; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    // Una brace disegnata una volta sola e poi riusata (più leggero di un gradiente per ogni brace a ogni fotogramma).
+    var sprite = document.createElement("canvas"); sprite.width = sprite.height = 64;
+    var sx = sprite.getContext("2d"), sg = sx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    sg.addColorStop(0, "rgba(255, 196, 120, 1)"); sg.addColorStop(.4, "rgba(232, 128, 48, .55)"); sg.addColorStop(1, "rgba(232, 128, 48, 0)");
+    sx.fillStyle = sg; sx.fillRect(0, 0, 64, 64);
     function nuova(iniziale) {
       return { x: Math.random() * W, y: iniziale ? Math.random() * H : H + 10, r: .6 + Math.random() * 1.8,
         v: .25 + Math.random() * .7, o: Math.random() * Math.PI * 2, a: .35 + Math.random() * .5, vita: 0 };
@@ -284,24 +287,26 @@
     var n = Math.round(Math.min(46, W / 28));
     for (var i = 0; i < n; i++) braci.push(nuova(true));
     window.addEventListener("resize", misura);
-    if ("IntersectionObserver" in window) new IntersectionObserver(function (v) { visibile = v[0].isIntersecting; }).observe(hero);
-    (function anima() {
-      if (visibile && !document.hidden) {
-        cx.clearRect(0, 0, W, H);
-        braci.forEach(function (b, k) {
-          b.y -= b.v; b.o += .02; b.x += Math.sin(b.o) * .35 + (b.vx || 0); b.vita++;
-          if (b.scintilla) { b.vx *= .96; b.v *= .985; b.a *= .985; if (b.a < .05) { braci.splice(k, 1); return; } }
-          var alto = b.y / H, alfa = b.a * Math.min(1, b.vita / 60) * Math.max(0, alto);
-          if (b.y < -10 || alfa <= 0.01 && b.vita > 60) { if (b.scintilla) braci.splice(k, 1); else braci[k] = nuova(false); return; }
-          var g = cx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r * 4);
-          g.addColorStop(0, "rgba(255, 196, 120," + alfa + ")");
-          g.addColorStop(.4, "rgba(232, 128, 48," + alfa * .55 + ")");
-          g.addColorStop(1, "rgba(232, 128, 48, 0)");
-          cx.fillStyle = g; cx.beginPath(); cx.arc(b.x, b.y, b.r * 4, 0, Math.PI * 2); cx.fill();
-        });
+    function anima() {
+      raf = 0;
+      if (!visibile || document.hidden) return;
+      cx.clearRect(0, 0, W, H);
+      for (var k = braci.length - 1; k >= 0; k--) {
+        var b = braci[k];
+        b.y -= b.v; b.o += .02; b.x += Math.sin(b.o) * .35 + (b.vx || 0); b.vita++;
+        if (b.scintilla) { b.vx *= .96; b.v *= .985; b.a *= .985; if (b.a < .05) { braci.splice(k, 1); continue; } }
+        var alfa = b.a * Math.min(1, b.vita / 60) * Math.max(0, b.y / H);
+        if (b.y < -10 || alfa <= 0.01 && b.vita > 60) { if (b.scintilla) braci.splice(k, 1); else braci[k] = nuova(false); continue; }
+        cx.globalAlpha = alfa;
+        cx.drawImage(sprite, b.x - b.r * 4, b.y - b.r * 4, b.r * 8, b.r * 8);
       }
-      requestAnimationFrame(anima);
-    })();
+      cx.globalAlpha = 1;
+      raf = requestAnimationFrame(anima);
+    }
+    function avvia() { if (!raf && visibile && !document.hidden) raf = requestAnimationFrame(anima); }
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (v) { visibile = v[0].isIntersecting; avvia(); }).observe(hero);
+    document.addEventListener("visibilitychange", avvia);
+    avvia();
     var heroImg = hero.querySelector(".hero__foto img"), bandaImg = document.querySelector(".banda__foto img"), banda = document.querySelector(".banda");
     var inAttesa = false;
     window.addEventListener("scroll", function () {
@@ -309,7 +314,13 @@
       requestAnimationFrame(function () {
         var y = window.scrollY;
         if (heroImg && y < hero.offsetHeight) heroImg.style.transform = "translate3d(0," + (y * .25).toFixed(1) + "px,0) scale(1.04)";
-        if (bandaImg && banda) { var r = banda.getBoundingClientRect(); if (r.bottom > 0 && r.top < window.innerHeight) bandaImg.style.transform = "translate3d(0," + ((r.top - window.innerHeight / 2) * -.12).toFixed(1) + "px,0) scale(1.15)"; }
+        if (bandaImg && banda) {
+          var r = banda.getBoundingClientRect();
+          if (r.bottom > 0 && r.top < window.innerHeight) {
+            var lim = banda.offsetHeight * .07, t = Math.max(-lim, Math.min(lim, (r.top - window.innerHeight / 2) * -.12));
+            bandaImg.style.transform = "translate3d(0," + t.toFixed(1) + "px,0) scale(1.15)";
+          }
+        }
         inAttesa = false;
       });
     }, { passive: true });
@@ -321,18 +332,22 @@
     var passi = Array.prototype.slice.call(document.querySelectorAll(".passo"));
     var didascalia = document.getElementById("lab-didascalia");
     var ROMANI = ["I", "II", "III", "IV"];
-    var bloccoFinoA = 0;
+    var bloccoFinoA = 0, faseAttiva = 0;
     function fase(n) {
-      if (lab.getAttribute("data-fase") === String(n)) return;
+      if (faseAttiva === n) return;
+      faseAttiva = n;
       lab.setAttribute("data-fase", n);
-      passi.forEach(function (p) { var on = p.getAttribute("data-fase") === String(n); p.classList.toggle("attivo", on); p.setAttribute("aria-pressed", String(on)); });
+      passi.forEach(function (p) {
+        var on = p.getAttribute("data-fase") === String(n), btn = p.querySelector(".passo__btn");
+        p.classList.toggle("attivo", on);
+        if (btn) btn.setAttribute("aria-pressed", String(on));
+      });
       var t = passi[n - 1] && passi[n - 1].querySelector("h3");
-      if (didascalia && t) didascalia.innerHTML = "<span>" + ROMANI[n - 1] + "</span> " + t.textContent;
+      if (didascalia && t) didascalia.innerHTML = '<span aria-hidden="true">' + ROMANI[n - 1] + "</span> " + t.textContent;
     }
+    // Il pulsante nel titolo gestisce tastiera e lettori di schermo; il clic su tutta la scheda arriva qui.
     passi.forEach(function (p) {
-      function scegli() { bloccoFinoA = Date.now() + 1200; fase(+p.getAttribute("data-fase")); }
-      p.addEventListener("click", scegli);
-      p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); scegli(); } });
+      p.addEventListener("click", function () { bloccoFinoA = Date.now() + 1200; fase(+p.getAttribute("data-fase")); });
     });
     if ("IntersectionObserver" in window) {
       var ioLab = new IntersectionObserver(function (voci) {
@@ -387,7 +402,12 @@
       punti.forEach(function (p, k) { p.classList.toggle("attivo", k === i); });
       frecce[0].disabled = i === 0; frecce[1].disabled = i === schede.length - 1;
     }
-    function vai(i) { i = Math.max(0, Math.min(schede.length - 1, i)); binario.scrollTo({ left: schede[i].offsetLeft - schede[0].offsetLeft, behavior: ridotto ? "auto" : "smooth" }); segna(i); }
+    function vai(i) {
+      i = Math.max(0, Math.min(schede.length - 1, i));
+      var fine = binario.scrollWidth - binario.clientWidth;
+      binario.scrollTo({ left: Math.min(schede[i].offsetLeft - schede[0].offsetLeft, fine), behavior: ridotto ? "auto" : "smooth" });
+      segna(i);
+    }
     frecce.forEach(function (f) { f.addEventListener("click", function () { vai(attuale + +f.getAttribute("data-dir")); }); });
     binario.addEventListener("keydown", function (e) { if (e.key === "ArrowRight") { e.preventDefault(); vai(attuale + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); vai(attuale - 1); } });
     var tScroll;
@@ -395,6 +415,8 @@
       clearTimeout(tScroll);
       tScroll = setTimeout(function () {
         var x = binario.scrollLeft, migliore = 0, dist = Infinity;
+        // A fine corsa l'ultima scheda è tutta visibile anche se non arriva al bordo sinistro.
+        if (x >= binario.scrollWidth - binario.clientWidth - 4) { segna(schede.length - 1); return; }
         schede.forEach(function (c, k) { var d = Math.abs(c.offsetLeft - schede[0].offsetLeft - x); if (d < dist) { dist = d; migliore = k; } });
         segna(migliore);
       }, 80);
@@ -404,11 +426,44 @@
     binario.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") return; giu = true; mosso = false; x0 = e.clientX; s0 = binario.scrollLeft; binario.classList.add("trascina"); });
     window.addEventListener("pointermove", function (e) { if (!giu) return; var dx = e.clientX - x0; if (Math.abs(dx) > 4) mosso = true; binario.scrollLeft = s0 - dx; });
     window.addEventListener("pointerup", function () {
-      if (!giu) return; giu = false; binario.classList.remove("trascina");
-      if (mosso) { var dx = binario.scrollLeft - s0; vai(attuale + (dx > 60 ? 1 : dx < -60 ? -1 : 0)); }
+      if (!giu) return; giu = false;
+      var dx = binario.scrollLeft - s0; // letto prima che lo snap riporti la scheda al suo posto
+      binario.classList.remove("trascina");
+      if (mosso) vai(attuale + (dx > 60 ? 1 : dx < -60 ? -1 : 0));
     });
     segna(0);
   }
+
+  /* ---------- Movimento legato allo scorrimento: nastro e sigillo ---------- */
+  // Si muovono solo mentre si scorre la pagina (niente animazioni infinite che distraggono).
+  var nastro = document.querySelector(".nastro__binario"), sigillo = document.querySelector(".sigillo__testo");
+  if ((nastro || sigillo) && !ridotto) {
+    var attesaScroll = false;
+    function muovi() {
+      attesaScroll = false;
+      var y = window.scrollY;
+      if (nastro) {
+        var meta = nastro.scrollWidth / 2, r = nastro.getBoundingClientRect();
+        if (meta && r.bottom > 0 && r.top < window.innerHeight) nastro.style.transform = "translate3d(" + (-((y * .35) % meta)).toFixed(1) + "px,0,0)";
+      }
+      if (sigillo) {
+        var rs = sigillo.getBoundingClientRect();
+        if (rs.bottom > 0 && rs.top < window.innerHeight) sigillo.style.transform = "rotate(" + (y * .12).toFixed(1) + "deg)";
+      }
+    }
+    window.addEventListener("scroll", function () { if (!attesaScroll) { attesaScroll = true; requestAnimationFrame(muovi); } }, { passive: true });
+    muovi();
+  }
+
+  /* ---------- Animazioni decorative ferme quando sono fuori schermo ---------- */
+  var animate = document.querySelectorAll(".laboratorio, .finale, .mappa");
+  if ("IntersectionObserver" in window) {
+    var ioVista = new IntersectionObserver(function (voci) { voci.forEach(function (v) { v.target.classList.toggle("in-vista", v.isIntersecting); }); });
+    animate.forEach(function (el) { ioVista.observe(el); });
+  } else animate.forEach(function (el) { el.classList.add("in-vista"); });
+
+  /* ---------- Foto principale: entra in dissolvenza anche se era già in cache ---------- */
+  document.querySelectorAll(".hero__foto img").forEach(function (img) { if (img.complete && img.naturalWidth) img.classList.add("caricata"); });
 
   /* ---------- Anno nel footer ---------- */
   document.querySelectorAll("[data-anno]").forEach(function (el) { el.textContent = new Date().getFullYear(); });

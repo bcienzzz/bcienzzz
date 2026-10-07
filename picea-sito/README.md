@@ -5,14 +5,13 @@ Sito statico (solo HTML, CSS e JavaScript, nessun database) per Picea, pizzeria 
 ```
 picea-sito/
 ├── sito/        ← la cartella da pubblicare online (è il sito vero e proprio)
-│   ├── index.html, storia.html, menu.html, prenota.html, contatti.html, privacy.html, 404.html
-│   ├── robots.txt, sitemap.xml
+│   ├── index.html, storia.html, prenota.html, contatti.html, privacy.html, 404.html
+│   ├── robots.txt, sitemap.xml, favicon.ico
 │   └── assets/  (css, js, font, immagini)
 └── sorgente/    ← da qui si modificano i contenuti
     ├── config.json   dati della pizzeria: orari, telefono, WhatsApp, Glovo, social, dati legali
-    ├── menu.json     il menu (senza prezzi)
     ├── build.py      rigenera le pagine in ../sito
-    └── ramo.py       disegna il rametto di abete (Picea abies) usato come motivo grafico
+    └── menu.json     bozza di menu NON verificata e NON pubblicata (vedi sotto)
 ```
 
 ## Modificare i contenuti
@@ -27,10 +26,11 @@ picea-sito/
 3. Ricarica online la cartella `sito`.
 
 Esempi:
-- **Orari**: `orari.fasce` (0 = domenica … 6 = sabato). Una chiusura minore dell'apertura vuol dire il giorno dopo (es. `18:00`–`02:00`). Gli orari si aggiornano da soli ovunque: tabelle, piè di pagina, stato "Aperto ora", orari prenotabili e dati per Google.
-- **Link Glovo**: `glovo_url`. Si prende dall'app Glovo: pagina di Picea → Condividi → Copia link.
-- **Pizza in home**: in `menu.json` aggiungi `"in_evidenza": true` alla pizza (ne vengono mostrate 3).
-- **Logo**: metti il file in `sito/assets/img/` (es. `logo.png`) e scrivi `"logo_url": "assets/img/logo.png"`.
+- **Orari**: `orari.fasce` (0 = domenica … 6 = sabato). Una chiusura minore dell'apertura vuol dire il giorno dopo (es. `18:00`–`02:00`); un giorno con `[]` è chiuso (oggi: il martedì). Gli orari si aggiornano da soli ovunque: settimana in home, tabelle, piè di pagina, stato "Aperto ora", orari prenotabili e dati per Google.
+- **Link Glovo**: `glovo_url`.
+- **Logo**: metti il file in `sito/assets/img/` (es. `logo.png`) e scrivi `"logo_url": "assets/img/logo.png"`. Oggi il logo viene preso dal vecchio sito (server DISH): se quel sito viene chiuso, il logo sparisce da solo senza lasciare buchi, ma conviene averlo in locale.
+- **Privacy**: se cambi il testo dell'informativa, aggiorna anche `privacy_aggiornata`.
+- **Menu**: la pagina è stata tolta finché non arriva il menu ufficiale del cliente. `menu.json` contiene solo una bozza raccolta da fonti online, da NON pubblicare senza il controllo del cliente.
 
 Puoi modificare i colori e le spaziature in `sito/assets/css/style.css` e il comportamento delle pagine (prenotazione, mappa, menu mobile) in `sito/assets/js/main.js`. Questi due file non vengono toccati da `build.py`.
 
@@ -60,4 +60,6 @@ Dominio: in `config.json` è impostato `https://www.pizzeriapicea.com` (risulta 
 - **Modulo contatti**: apre l'app di posta del cliente con il messaggio pronto per l'email in `config.json`. Per ricevere i messaggi senza app di posta serve un servizio esterno (es. Web3Forms o Formspree, gratuiti con limiti).
 - **Mappa**: Google Maps si carica solo quando il visitatore preme "Mostra la mappa"; prima non parte nessuna richiesta a Google.
 - **Nessun cookie, nessuna statistica**: quindi non serve il banner dei cookie. Se in futuro si aggiunge Google Analytics o un pixel, servirà il banner.
+- **Senza JavaScript** il sito si legge tutto; i due moduli lasciano il posto a telefono, WhatsApp ed email.
+- **Pagina 404**: usa percorsi dalla radice del dominio (`/assets/...`), quindi funziona a qualsiasi indirizzo sbagliato. Su Netlify viene usata in automatico.
 - **Font**: Marcellus (titoli) e Figtree (testo), ospitati nel sito con licenza SIL Open Font License.
