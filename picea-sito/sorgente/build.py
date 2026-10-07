@@ -596,6 +596,15 @@ def storia():
            corpo)
 
 
+def _romano(n):
+    out = ""
+    for v, r in [(10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")]:
+        while n >= v:
+            out += r
+            n -= v
+    return out
+
+
 def galleria():
     foto = C.get("galleria", [])
     voci = []
@@ -603,7 +612,7 @@ def galleria():
         L = f["larghezze"]
         h = round(800 * f["h"] / f["w"])
         pic = immagine(f["file"], f["alt"], L, "(min-width: 1024px) 390px, (min-width: 720px) 46vw, 100vw", w=800, h=h)
-        voci.append(f'<li class="galleria__voce rivela"><a href="assets/img/{f["file"]}-{L[-1]}.jpg" data-grande="assets/img/{f["file"]}-{L[-1]}.webp" data-indice="{i}">'
+        voci.append(f'<li class="galleria__voce rivela" style="--n:\'{_romano(i + 1)}\'"><a href="assets/img/{f["file"]}-{L[-1]}.jpg" data-grande="assets/img/{f["file"]}-{L[-1]}.webp" data-indice="{i}">'
                     f'{pic}<span class="galleria__lente" aria-hidden="true"></span></a><p class="galleria__did">{e(f["didascalia"])}</p></li>')
     insta = link_esterno(C["social"]["instagram"], "Altre foto su Instagram", "btn btn--vuoto", "instagram") if C["social"].get("instagram") else ""
     corpo = f"""
@@ -614,7 +623,8 @@ def galleria():
     <p>La verace pizza napoletana di Picea, da vicino. Apri una foto per vederla a tutto schermo.</p>
   </div>
 </section>
-<section class="sezione chiaro">
+<section class="sezione galleria-sezione">
+  <span class="galleria-sezione__scritta" aria-hidden="true">PVTEOLI</span>
   <div class="contenitore">
     <ul class="galleria">{"".join(voci)}</ul>
     <div class="hero__azioni rivela" style="margin-top:40px;justify-content:center">

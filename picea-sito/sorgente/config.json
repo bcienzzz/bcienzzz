@@ -200,61 +200,6 @@
       "h": 1866,
       "alt": "Tre pizze napoletane di Picea viste dall’alto su un tavolo di legno",
       "didascalia": "Tre pizze dal nostro forno a legna"
-    },
-    {
-      "file": "galleria-2",
-      "larghezze": [
-        800,
-        1600
-      ],
-      "w": 1400,
-      "h": 800,
-      "alt": "Pizza con polpettine, basilico e scaglie di formaggio",
-      "didascalia": "Polpettine e basilico"
-    },
-    {
-      "file": "galleria-3",
-      "larghezze": [
-        800,
-        1600
-      ],
-      "w": 1400,
-      "h": 1206,
-      "alt": "Pizza con salume a fette, crema verde e foglie di basilico",
-      "didascalia": "Basilico fresco e salume"
-    },
-    {
-      "file": "galleria-4",
-      "larghezze": [
-        800,
-        1600
-      ],
-      "w": 1440,
-      "h": 1166,
-      "alt": "Pizza bianca con pomodorini gialli e basilico",
-      "didascalia": "Pomodorini gialli e basilico"
-    },
-    {
-      "file": "galleria-5",
-      "larghezze": [
-        800,
-        840
-      ],
-      "w": 840,
-      "h": 520,
-      "alt": "Dettaglio del cornicione cotto nel forno a legna",
-      "didascalia": "Il cornicione, cotto nel forno a legna"
-    },
-    {
-      "file": "galleria-6",
-      "larghezze": [
-        800,
-        900
-      ],
-      "w": 900,
-      "h": 800,
-      "alt": "Dettaglio di pomodorini gialli e basilico",
-      "didascalia": "Da vicino"
     }
   ]
 }
