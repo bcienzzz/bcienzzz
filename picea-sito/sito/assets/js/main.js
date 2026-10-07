@@ -183,8 +183,9 @@
     riempiOrari();
 
     // Se dopo l'invio si cambia qualcosa, il pulsante di riserva non deve aprire WhatsApp con i dati vecchi.
+    var big = document.getElementById("biglietto");
     function invalidaInvio() {
-      ["p-inviato", "p-wa"].forEach(function (id) { var el = document.getElementById(id); if (el) el.hidden = true; });
+      ["p-inviato"].forEach(function (id) { var el = document.getElementById(id); if (el) el.hidden = true; });
     }
     fp.addEventListener("input", invalidaInvio);
     fp.addEventListener("change", invalidaInvio);
@@ -201,11 +202,12 @@
 
     function elenco(a) { return a.length > 1 ? a.slice(0, -1).join(", ") + " e " + a[a.length - 1] : a[0]; }
 
-    fp.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var ok = document.getElementById("p-inviato"), wa = document.getElementById("p-wa");
+    // Il pulsante è un vero link a WhatsApp: al tocco si apre la chat (niente aperture automatiche
+    // che browser e app bloccano). Qui si controllano i dati e si scrive il messaggio nel link.
+    var invia = document.getElementById("p-invia");
+    function preparaInvio() {
+      var ok = document.getElementById("p-inviato");
       if (ok) ok.hidden = true;
-      if (wa) wa.hidden = true;
       // Se la pagina è rimasta aperta a lungo, aggiorna data e orari disponibili prima di controllare.
       var ora = adessoRoma(), oraScelta = cOra.value;
       if (ora) { adesso = ora; cData.min = ora.data; riempiOrari(); cOra.dispatchEvent(new Event("change", { bubbles: true })); }
@@ -225,7 +227,7 @@
         erroreP.textContent = (msg + " " + fuori.join(" ")).trim();
         var primo = fp.querySelector('[aria-invalid="true"]'); if (primo) primo.focus();
         erroreP.scrollIntoView({ block: "nearest" }); // il messaggio non resta nascosto sotto l'header
-        return;
+        return null;
       }
       erroreP.textContent = "";
       var testo = "Ciao Picea! Vorrei prenotare un tavolo.\n\n" +
@@ -235,16 +237,28 @@
         "Persone: " + n +
         (cNote.value.trim() ? "\nNote: " + cNote.value.trim() : "") +
         "\n\nAttendo la vostra conferma. Grazie!";
-      var url = "https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(testo);
-      // Il bottone resta visibile: se il browser blocca l'apertura automatica, basta toccarlo.
-      var link = document.getElementById("p-wa-link");
-      if (link) link.href = url;
-      if (wa) wa.hidden = false;
-      var finestra = null;
-      try { finestra = window.open(url, "_blank"); } catch (err) { finestra = null; }
-      if (finestra) { try { finestra.opener = null; } catch (err) {} }
-      else { try { window.location.href = url; } catch (err) {} }
-      if (ok) { ok.hidden = false; ok.focus(); }
+      return "https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(testo);
+    }
+    function inviato() {
+      var ok = document.getElementById("p-inviato");
+      setTimeout(function () { if (ok) { ok.hidden = false; ok.focus({ preventScroll: true }); } if (big) big.classList.add("pronto"); }, 0);
+    }
+    invia.addEventListener("click", function (e) {
+      var url = preparaInvio();
+      if (!url) { e.preventDefault(); return; }
+      invia.href = url; // il browser apre questo indirizzo subito dopo: è un tocco vero, non un'apertura automatica
+      inviato();
+    });
+    // Invio dalla tastiera dentro un campo: stesso controllo, poi si apre la chat
+    fp.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var url = preparaInvio();
+      if (!url) return;
+      invia.href = url;
+      var w = null;
+      try { w = window.open(url, "_blank", "noopener"); } catch (err) {}
+      if (!w) invia.focus(); // se il browser blocca la finestra, il pulsante è già pronto da toccare
+      inviato();
     });
   }
 
@@ -413,7 +427,6 @@
     fp.addEventListener("input", aggiornaBiglietto);
     fp.addEventListener("change", aggiornaBiglietto);
     fp.querySelectorAll("[data-persone]").forEach(function (b) { b.addEventListener("click", function () { setTimeout(aggiornaBiglietto, 0); }); });
-    fp.addEventListener("submit", function () { setTimeout(function () { var ok = document.getElementById("p-inviato"); if (ok && !ok.hidden) big.classList.add("pronto"); }, 0); });
   }
 
   /* ---------- Storia: capitoli da scorrere (dito, mouse, frecce) ---------- */

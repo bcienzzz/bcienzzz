@@ -560,14 +560,16 @@ def home():
 
 def storia():
     corpo = f"""
-<section class="testata">
+<section class="testata testata--storia">
+  <span class="testata__anno" aria-hidden="true">MCMXCVI</span>
   <div class="contenitore">
-    <span class="occhiello">Dal {C["anno_apertura"]}</span>
+    <span class="occhiello">Dal {C["anno_apertura"]} · Pozzuoli</span>
     <h1>La nostra storia</h1>
+    <div class="testata__filo" aria-hidden="true"><span></span><i></i><span></span></div>
   </div>
 </section>
 
-<section class="sezione chiaro">
+<section class="sezione storia-sezione">
   <div class="contenitore storia-testo">
     <div class="capitoli rivela">
       <ol class="capitoli__binario" tabindex="0" aria-label="La storia di Picea, da scorrere">
@@ -592,7 +594,7 @@ def storia():
 """
     pagina("storia.html", f"La nostra storia · {C['nome_completo']} a Pozzuoli",
            "La storia di Picea, pizzeria napoletana nel centro storico di Pozzuoli dal 1996.",
-           corpo)
+           corpo, "pagina-storia")
 
 
 def _romano(n):
@@ -686,10 +688,10 @@ def prenota():
           <label for="p-note">Note <span class="facoltativo">(facoltative)</span></label>
           <textarea id="p-note" name="note" placeholder="Tavolo all’aperto, una ricorrenza…"></textarea>
         </div>
-        <button class="btn" type="submit">{icona("whatsapp")}Invia la richiesta su WhatsApp</button>
+        <button type="submit" hidden>Invia la richiesta</button>
+        <a class="btn" id="p-invia" href="https://wa.me/{WA_N}" target="_blank" rel="noopener">{icona("whatsapp")}Invia la richiesta su WhatsApp{NUOVA_SCHEDA}</a>
         <p class="nota-modulo">Il sito non salva i tuoi dati: vengono solo inseriti nel messaggio che invii tu. <a href="privacy.html">Privacy</a></p>
-        <p class="nota-modulo" id="p-inviato" tabindex="-1" hidden><strong>Ora tocca a te:</strong> nella chat di WhatsApp che si è aperta premi invia. Ti rispondiamo per confermare il tavolo.</p>
-        <p class="nota-modulo" id="p-wa" hidden><a class="btn" id="p-wa-link" href="https://wa.me/{WA_N}" target="_blank" rel="noopener">{icona("whatsapp")}Apri WhatsApp con il messaggio{NUOVA_SCHEDA}</a><br>WhatsApp non si è aperto? Usa il pulsante qui sopra.</p>
+        <p class="nota-modulo" id="p-inviato" tabindex="-1" hidden><strong>Ora tocca a te:</strong> nella chat di WhatsApp con Picea ({e(WA_V)}) premi invia. Ti rispondiamo per confermare il tavolo.</p>
       </form>
     </div>
     <aside class="lato rivela" data-ritardo="1">
