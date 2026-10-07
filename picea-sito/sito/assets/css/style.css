@@ -572,10 +572,6 @@ body::after {
 .sigillo:hover .sigillo__centro { transform: scale(1.1); }
 @media (min-width: 900px) { .sigillo { display: grid; top: 50%; bottom: auto; transform: translateY(-50%); } }
 
-/* ---------- Marchio gigante nel footer ---------- */
-.footer .footer__gigante { margin: 64px 0 0; font-family: var(--f-titoli); font-size: clamp(5rem, 25vw, 22rem); line-height: .8; letter-spacing: .12em; text-align: center; text-transform: uppercase;
-  color: transparent; -webkit-text-stroke: 1px rgba(201, 139, 62, .28); background: linear-gradient(180deg, rgba(201, 139, 62, .12), transparent 75%); -webkit-background-clip: text; background-clip: text; user-select: none; }
-
 
 /* ---------- Laboratorio della pizza (interattivo) ---------- */
 .laboratorio { display: grid; gap: 28px; margin-top: 40px; align-items: start; }

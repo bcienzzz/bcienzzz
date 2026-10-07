@@ -423,7 +423,6 @@ def footer():
         {orari_brevi()}
       </div>
     </div>
-    <p class="footer__gigante" aria-hidden="true">{e(C["nome"])}</p>
     <div class="footer__fondo">
       <p>© <span data-anno>{OGGI.year}</span> {legale_riga()}</p>
       <nav class="footer__pagine" aria-label="Pagine del sito">{"".join(f'<a href="{h}">{e(t)}</a>' for h, t in NAV)}<a href="privacy.html">Privacy</a></nav>
