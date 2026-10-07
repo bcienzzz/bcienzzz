@@ -28,7 +28,7 @@ picea-sito/
 Esempi:
 - **Orari**: `orari.fasce` (0 = domenica … 6 = sabato). Una chiusura minore dell'apertura vuol dire il giorno dopo (es. `18:00`–`02:00`); un giorno con `[]` è chiuso (oggi: il martedì). Gli orari si aggiornano da soli ovunque: settimana in home, tabelle, piè di pagina, stato "Aperto ora", orari prenotabili e dati per Google.
 - **Link Glovo**: `glovo_url`.
-- **Logo**: metti il file in `sito/assets/img/` (es. `logo.png`) e scrivi `"logo_url": "assets/img/logo.png"`. Oggi il logo viene preso dal vecchio sito (server DISH): se quel sito viene chiuso, il logo sparisce da solo senza lasciare buchi, ma conviene averlo in locale.
+- **Logo**: il logo ufficiale è in `sito/assets/img/logo-picea-*.webp/.png` (esportato dal file vettoriale del cliente). Compare grande in cima alla home e piccolo nell’intestazione e nel footer.
 - **Galleria**: le foto sono elencate in `galleria` dentro `config.json` (file, larghezze, dimensioni originali, testo alternativo, didascalia). Per aggiungerne una: salva in `sito/assets/img/` le versioni `nome-800.webp/.jpg` e `nome-1600.webp/.jpg` (o la larghezza reale, se la foto è più piccola) e aggiungi una voce all'elenco. Oggi la galleria usa dettagli dell'unica foto disponibile: appena arrivano foto recenti del locale e delle pizze vanno aggiunte qui.
 - **Privacy**: se cambi il testo dell'informativa, aggiorna anche `privacy_aggiornata`.
 - **Menu**: la pagina è stata tolta finché non arriva il menu ufficiale del cliente. `menu.json` contiene solo una bozza raccolta da fonti online, da NON pubblicare senza il controllo del cliente.

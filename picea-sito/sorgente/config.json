@@ -32,7 +32,7 @@
     "instagram": "https://www.instagram.com/piceapizzerie/",
     "facebook": "https://www.facebook.com/pizzeriapicea/"
   },
-  "logo_url": "https://cdn.website.dish.co/media/1b/df/5088652/Pizzeria-Picea-130305898-2771379876455441-1981788927430622800-n-jpg.jpg",
+  "logo_url": "assets/img/logo-picea-160.png",
   "orari": {
     "_formato": "giorni: 0=domenica ... 6=sabato. Una chiusura minore o uguale all'apertura significa il giorno dopo (es. 18:00-02:00). Un giorno con lista vuota [] è chiuso.",
     "fasce": {

@@ -473,7 +473,7 @@ def home():
   <div class="contenitore">
     {stato_html()}
     <p class="hero__epigrafe" aria-hidden="true">PVTEOLI · MCMXCVI</p>
-    <h1 id="titolo-home">{e(C["nome"])}<span class="sr-only"> – pizzeria napoletana a Pozzuoli</span></h1>
+    <h1 id="titolo-home" class="hero__logo"><img src="assets/img/logo-picea-480.webp" srcset="assets/img/logo-picea-480.webp 480w, assets/img/logo-picea-960.webp 960w" sizes="(min-width: 1024px) 380px, 260px" width="480" height="480" alt="Picea Pizzerie" fetchpriority="high"><span class="sr-only"> – pizzeria napoletana a Pozzuoli</span></h1>
     <p class="hero__sotto">La vera pizza napoletana, cotta nel forno a&nbsp;legna nel centro storico di&nbsp;Pozzuoli.</p>
     <div class="hero__azioni">
       <a class="btn" href="prenota.html">{icona("calendario")}Prenota un tavolo</a>

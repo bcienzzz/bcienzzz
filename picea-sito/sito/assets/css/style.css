@@ -1008,3 +1008,23 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 /* Footer: collegamenti a tutte le pagine */
 .footer__pagine { display: flex; flex-wrap: wrap; gap: 0 22px; }
 .footer__pagine a { color: var(--grigio-chiaro); }
+
+/* ---------- Logo al posto della scritta nell'hero ---------- */
+.hero h1.hero__logo { font-size: 0; line-height: 0; letter-spacing: 0; margin: 0 0 4px -6px; }
+.hero__logo img { width: clamp(210px, 58vw, 300px); height: auto; filter: drop-shadow(0 18px 40px rgba(0, 0, 0, .55)); }
+@media (min-width: 1024px) { .hero__logo img { width: clamp(300px, 26vw, 380px); } }
+@media (max-height: 600px) { .hero__logo img { width: clamp(150px, 34vh, 220px); } }
+.js .hero h1.hero__logo { animation: logo-entra 1.4s var(--ease) .4s both; }
+@keyframes logo-entra { from { opacity: 0; transform: scale(.88) rotate(-8deg); filter: blur(8px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@media (prefers-reduced-motion: reduce) { .js .hero h1.hero__logo { animation: none; } }
+.marchio img { background: transparent; border: 0; }
+@media (max-height: 500px) and (orientation: landscape) { .hero__logo img { width: clamp(90px, 27vh, 120px); } }
+/* Telefono in orizzontale: logo a sinistra, testo e bottoni a destra */
+@media (max-height: 500px) and (orientation: landscape) and (max-width: 1023px) {
+  .hero > .contenitore { display: grid; grid-template-columns: auto 1fr; column-gap: 28px; align-items: center; }
+  .hero .stato { grid-column: 1 / -1; justify-self: start; }
+  .hero h1.hero__logo { grid-column: 1; grid-row: 2 / span 2; margin: 0; }
+  .hero__sotto { grid-column: 2; margin: 0 0 12px; }
+  .hero__azioni { grid-column: 2; }
+  .hero__logo img { width: clamp(110px, 32vh, 140px); }
+}
