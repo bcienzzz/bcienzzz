@@ -297,7 +297,6 @@ def header(pagina):
       <span class="marchio__testo"><span class="marchio__nome">{e(C["nome"])}</span><span class="marchio__sotto">Pozzuoli · dal {C["anno_apertura"]}</span></span><span class="sr-only"> – torna alla home</span>
     </a>
     <nav class="nav" aria-label="Menu principale">{"".join(voci)}</nav>
-    <a class="btn" href="prenota.html">{icona("calendario")}Prenota</a>
     <button class="burger" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -312,7 +311,7 @@ def barra(pagina):
     cur = lambda p: ' aria-current="page"' if p == pagina else ""
     voci = [
         f'<a href="tel:{TEL_L}">{icona("tel")}Chiama</a>',
-        f'<a class="primario" href="prenota.html"{cur("prenota.html")}>{icona("calendario")}Prenota</a>',
+        f'<a href="prenota.html"{cur("prenota.html")}>{icona("calendario")}Prenota</a>',
         glovo,
         link_esterno(C["maps_link"], "Mappa", "", "pin"),
     ]
