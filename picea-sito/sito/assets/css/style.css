@@ -851,3 +851,9 @@ noscript .nota-modulo { font-size: 1rem; color: var(--inchiostro); }
 .info-rapide__voce:focus-visible { outline-offset: -3px; }
 /* Prenota: colonna stretta tra 1024 e 1100px */
 @media (min-width: 1024px) and (max-width: 1099px) { .lato .tabella-orari .giorni { font-size: 1.12rem; } }
+/* Striscia info sotto l'hero: ogni voce centrata nella sua colonna */
+@media (min-width: 720px) {
+  .info-rapide__voce { justify-content: center; }
+  .info-rapide__voce + .info-rapide__voce { padding-left: 16px; padding-right: 16px; }
+}
+.info-rapide__voce .fascia { display: inline; white-space: nowrap; }

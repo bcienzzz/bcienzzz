@@ -57,7 +57,8 @@
     if (s.aperto && fasce(adesso.giorno).every(function (f) { return adesso.minuti < f[0]; })) giornoServizio = (adesso.giorno + 6) % 7;
     document.querySelectorAll("[data-oggi-orari]").forEach(function (el) {
       var f = fasce(giornoServizio);
-      el.textContent = f.length ? f.map(function (x) { return hhmm(x[0]) + "–" + hhmm(x[1]); }).join(" · ") : "Chiuso";
+      // ogni fascia oraria resta su una riga sola
+      el.innerHTML = f.length ? f.map(function (x) { return '<span class="fascia">' + hhmm(x[0]) + "–" + hhmm(x[1]) + "</span>"; }).join(" · ") : "Chiuso";
     });
     document.querySelectorAll("[data-giorni]").forEach(function (riga) {
       var oggi = riga.getAttribute("data-giorni").split(",").indexOf(String(giornoServizio)) !== -1;
