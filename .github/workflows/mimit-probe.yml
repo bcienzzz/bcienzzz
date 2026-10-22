@@ -1,0 +1,30 @@
+# Controllo temporaneo: scarica i file MIMIT e ne stampa intestazione e righe di esempio,
+# per verificare il formato reale prima di scrivere il parser.
+name: Verifica formato MIMIT
+on:
+  push:
+    paths: [".github/workflows/mimit-probe.yml"]
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica e ispeziona
+        run: |
+          set -e
+          for f in anagrafica_impianti_attivi.csv prezzo_alle_8.csv; do
+            curl -sSfL -A "Mozilla/5.0" -o "$f" "https://www.mimit.gov.it/images/exportCSV/$f"
+            echo "===== $f ====="
+            ls -l "$f"; file "$f"; wc -l "$f"
+            echo "--- prime 5 righe ---"; head -n 5 "$f"
+            echo "--- ultime 2 righe ---"; tail -n 2 "$f"
+          done
+          echo "===== esempi provincia NA (anagrafica) ====="
+          grep -E '\|NA\|' anagrafica_impianti_attivi.csv | head -n 5 || true
+          echo "conteggio NA: $(grep -cE '\|NA\|' anagrafica_impianti_attivi.csv || true)"
+          echo "===== comuni NA ====="
+          grep -E '\|NA\|' anagrafica_impianti_attivi.csv | awk -F'|' '{print $7}' | sort | uniq -c | sort -rn | head -n 80 || true
+          echo "===== tipi carburante ====="
+          tail -n +3 prezzo_alle_8.csv | awk -F'|' '{print $2}' | sort | uniq -c | sort -rn | head -n 40
+          echo "===== valori isSelf ====="
+          tail -n +3 prezzo_alle_8.csv | awk -F'|' '{print $4}' | sort | uniq -c
