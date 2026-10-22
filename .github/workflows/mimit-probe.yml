@@ -10,10 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Scarica e ispeziona
+        timeout-minutes: 10
         run: |
+          echo "IP runner: $(curl -s --max-time 10 https://ifconfig.co/country || true)"
           set -e
           for f in anagrafica_impianti_attivi.csv prezzo_alle_8.csv; do
-            curl -sSfL -A "Mozilla/5.0" -o "$f" "https://www.mimit.gov.it/images/exportCSV/$f"
+            curl -sSfL -v --connect-timeout 30 --max-time 240 -A "Mozilla/5.0" -o "$f" "https://www.mimit.gov.it/images/exportCSV/$f" 2>&1 | grep -E '^(\*|<|>) ' | head -n 40
             echo "===== $f ====="
             ls -l "$f"; file "$f"; wc -l "$f"
             echo "--- prime 5 righe ---"; head -n 5 "$f"
