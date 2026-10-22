@@ -1,36 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Carburanti Campi Flegrei
 
-## Getting Started
+Web app mobile-first (PWA) in italiano che mostra i distributori di carburante della zona
+Campi Flegrei / Pozzuoli con prezzi, disponibilità e fila stimata. I prezzi sono quelli
+ufficiali del MIMIT; disponibilità e fila arrivano dalle segnalazioni degli utenti.
 
-First, run the development server:
+> Fonte dati prezzi: Ministero delle Imprese e del Made in Italy (MIMIT), licenza IODL 2.0.
+
+## Stato del progetto
+
+| Step | Contenuto | Stato |
+|---|---|---|
+| 1 | Importazione e controllo dei dati MIMIT | ✅ fatto |
+| 2 | Mappa e lista | da fare |
+| 3 | Scheda distributore | da fare |
+| 4 | Segnalazioni utenti | da fare |
+| 5 | Stima della fila | da fare |
+| 6 | PWA, pubblicazione e aggiornamento giornaliero | da fare |
+
+## Cosa serve sul computer
+
+- [Node.js](https://nodejs.org) 22 o più recente (scegli la versione "LTS")
+- [Git](https://git-scm.com)
+
+## Installazione in locale
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/bcienzzz/bcienzzz.git carburanti-flegrei
+cd carburanti-flegrei
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Finché il lavoro non è unito al ramo principale, aggiungi `-b claude/magical-keller-2ozmze` al comando `git clone`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Comandi
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando | Cosa fa |
+|---|---|
+| `npm run import` | Scarica i file dal MIMIT, li controlla e crea `data/distributori.json` |
+| `npm run import -- --anagrafica FILE --prezzi FILE` | Come sopra, ma usando file già scaricati |
+| `npm run import -- --supabase` | Carica anche il risultato su Supabase (servono le variabili d'ambiente) |
+| `npm test` | Esegue i test automatici |
+| `npm run typecheck` / `npm run lint` | Controlli sul codice |
+| `npm run dev` | Avvia l'app su http://localhost:3000 (dallo step 2) |
 
-## Learn More
+### Provare l'importazione
 
-To learn more about Next.js, take a look at the following resources:
+1. Scarica dal browser (da una connessione italiana) i due file:
+   - https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv
+   - https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv
+2. Lancia:
+   ```bash
+   npm run import -- --anagrafica ~/Downloads/anagrafica_impianti_attivi.csv --prezzi ~/Downloads/prezzo_alle_8.csv
+   ```
+3. Lo script stampa un riepilogo: quanti distributori, quanti per comune nella zona Campi
+   Flegrei, quali hanno coordinate sospette. Il risultato è in `data/distributori.json`, mentre
+   le righe scartate finiscono in `data/scarti.json`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Se sei in Italia puoi anche lanciare solo `npm run import`, che scarica i file da solo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## I dati MIMIT
 
-## Deploy on Vercel
+Il formato è stato verificato sui file reali del 21/10/2026:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Prima riga**: `Estrazione del AAAA-MM-GG`. È la data mostrata in app come "prezzi aggiornati al…".
+- **Seconda riga**: i nomi delle colonne, separati da `|`.
+  - Anagrafica: `idImpianto|Gestore|Bandiera|Tipo Impianto|Nome Impianto|Indirizzo|Comune|Provincia|Latitudine|Longitudine`
+  - Prezzi: `idImpianto|descCarburante|prezzo|isSelf|dtComu` (`isSelf` = 1 self, 0 servito; `dtComu` = `GG/MM/AAAA HH:MM:SS`, ora italiana)
+- Se il MIMIT cambia le colonne, lo script **si ferma con un errore** invece di salvare dati sbagliati.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Problemi trovati nei file e come li gestiamo:
+
+| Problema | Soluzione |
+|---|---|
+| 113 righe con `\| gestori.prezzibenzina.it` dentro il nome, che rompe le colonne | Il testo spurio viene tolto |
+| Altri `\|` imprevisti nei campi | La riga viene scartata (in `data/scarti.json`), non indovinata |
+| Virgolette spaiate e tab dentro i campi | Vengono ripuliti |
+| Prezzi fermi da anni (alcuni dal 2013) | Segnati come `vecchio` se più vecchi di 30 giorni |
+| Prezzi assurdi (es. 0,10 € o metano a 4,999 €) | Segnati come `sospetto` |
+| Coordinate GPS sbagliate (es. un distributore di Sorrento in Liguria) | Segnate: vedi sotto |
+
+Controllo delle coordinate (campo `coordinate`):
+
+- `ok`: plausibili.
+- `invertite`: latitudine e longitudine erano scambiate, corrette in automatico.
+- `mancanti`: assenti o pari a zero.
+- `fuori_provincia`: il punto cade fuori dalla provincia dichiarata.
+- `lontane_dal_comune`: il punto è molto lontano dagli altri distributori dello stesso comune.
+
+Solo `ok` e `invertite` finiscono sulla mappa. Gli altri resteranno in lista con l'avviso
+"posizione non verificata".
+
+### Il MIMIT risponde solo dall'Italia
+
+Il sito del MIMIT non risponde alle connessioni dall'estero. Per questo l'aggiornamento
+giornaliero non può girare su GitHub Actions né su Vercel, che hanno server all'estero.
+Allo step 6 lo configuriamo su un server in Italia (Google Cloud Run, zona di Milano, nella
+quota gratuita).
+
+## Zone e province
+
+Tutto è in `src/config/zones.ts`:
+
+- `IMPORT_PROVINCES`: province importate. Ora `NA` e `CE`: Caserta serve per Villaggio Coppola, che è nel comune di Castel Volturno.
+- `ZONES`: le zone mostrate in app, ognuna con centro della mappa e contorno. La zona "Campi
+  Flegrei" comprende Pozzuoli, Bacoli, Monte di Procida, Quarto, Licola/Lago Patria, Villaggio
+  Coppola, Bagnoli, Fuorigrotta e dintorni (Pianura, Soccavo, Posillipo).
+
+Per aggiungere un'altra area: aggiungi la provincia a `IMPORT_PROVINCES`, il suo riquadro a
+`PROVINCE_BBOX` e, se vuoi, una nuova zona a `ZONES`.
+
+## Supabase
+
+1. Crea un progetto nuovo su [supabase.com](https://supabase.com): piano gratuito, regione **Frankfurt (eu-central-1)**.
+2. Vai su **SQL Editor**, incolla il contenuto di `supabase/schema.sql` e premi **Run**.
+3. Copia `.env.example` in `.env.local` e inserisci i valori da **Project Settings → API**.
+4. Prova: `npm run import -- --anagrafica ... --prezzi ... --supabase`
+
+### Variabili d'ambiente
+
+| Nome | Dove si usa | Segreta? |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | app e script | no |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | app (solo lettura) | no |
+| `SUPABASE_SERVICE_ROLE_KEY` | solo script di importazione | **sì**: mai nel browser, mai su Git |
+
+## Struttura del progetto
+
+```
+src/config/zones.ts        province e zone coperte
+src/lib/mimit/parse.ts     lettura dei file MIMIT
+src/lib/mimit/fuels.ts     raggruppamento dei carburanti (benzina, gasolio, GPL, metano)
+src/lib/mimit/build.ts     unione dei file e controlli su coordinate e prezzi
+src/lib/geo.ts             distanze e calcoli geografici
+scripts/import-mimit.ts    script di importazione giornaliera
+supabase/schema.sql        tabelle del database
+```
+
+## Pubblicazione (deploy)
+
+Verrà descritta allo step 6: Vercel per l'app e un job giornaliero in Italia per i dati.
