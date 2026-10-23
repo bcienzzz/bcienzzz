@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Colori di stato: verde = c'è / poca fila, giallo = attenzione, rosso = esaurito / fila lunga */
+  --color-stato-ok: #16a34a;
+  --color-stato-medio: #eab308;
+  --color-stato-ko: #dc2626;
+  /* Colore principale dell'app (non usato per gli stati) */
+  --color-primario: #1d4ed8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- Mappa: etichette con il prezzo ---- */
+
+.pin {
+  transform: translate(-50%, -100%);
+  position: absolute;
+  white-space: nowrap;
+  font: 700 13px/1 var(--font-sans);
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: #fff;
+  color: #0f172a;
+  border: 1.5px solid #cbd5e1;
+  box-shadow: 0 1px 4px rgb(15 23 42 / 0.25);
+}
+.pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  border-right: inherit;
+  border-bottom: inherit;
+  transform: translateX(-50%) rotate(45deg);
+}
+.pin--conveniente {
+  background: var(--color-primario);
+  color: #fff;
+  border-color: var(--color-primario);
+}
+.pin--dubbio {
+  color: #64748b;
+  border-style: dashed;
+}
+.pin--scelto {
+  z-index: 1000;
+  outline: 3px solid rgb(29 78 216 / 0.35);
+  font-size: 15px;
+}
+
+.gruppo {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid var(--color-primario);
+  color: #475569;
+  font: 600 10px/1.15 var(--font-sans);
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 1px 6px rgb(15 23 42 / 0.3);
+}
+.gruppo b {
+  color: #0f172a;
+  font-size: 13px;
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: #e5e7eb;
+}
+.leaflet-div-icon {
+  background: none;
+  border: none;
 }

@@ -11,7 +11,7 @@ ufficiali del MIMIT; disponibilità e fila arrivano dalle segnalazioni degli ute
 | Step | Contenuto | Stato |
 |---|---|---|
 | 1 | Importazione e controllo dei dati MIMIT | ✅ fatto |
-| 2 | Mappa e lista | da fare |
+| 2 | Mappa e lista | ✅ bozza fatta |
 | 3 | Scheda distributore | da fare |
 | 4 | Segnalazioni utenti | da fare |
 | 5 | Stima della fila | da fare |
@@ -41,7 +41,8 @@ Finché il lavoro non è unito al ramo principale, aggiungi `-b claude/magical-k
 | `npm run import -- --supabase` | Carica anche il risultato su Supabase (servono le variabili d'ambiente) |
 | `npm test` | Esegue i test automatici |
 | `npm run typecheck` / `npm run lint` | Controlli sul codice |
-| `npm run dev` | Avvia l'app su http://localhost:3000 (dallo step 2) |
+| `npm run dev` | Avvia l'app su http://localhost:3000 |
+| `npm run import -- ... --snapshot` | Aggiorna `src/data/snapshot.json`, la copia dei dati usata quando Supabase non è configurato |
 
 ### Provare l'importazione
 
@@ -57,6 +58,23 @@ Finché il lavoro non è unito al ramo principale, aggiungi `-b claude/magical-k
    le righe scartate finiscono in `data/scarti.json`.
 
 Se sei in Italia puoi anche lanciare solo `npm run import`, che scarica i file da solo.
+
+## Provare l'app
+
+```bash
+npm run dev
+```
+
+Apri http://localhost:3000. Per vederla come sul telefono, usa la modalità dispositivo
+mobile del browser: in Chrome, tasto destro → Ispeziona → icona del telefono.
+
+### Da dove legge i dati l'app
+
+1. Se `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` sono impostate, legge da **Supabase**.
+2. Altrimenti usa **`src/data/snapshot.json`**, una copia dei dati della zona salvata nel progetto.
+   Così l'app funziona anche senza database. La crei o aggiorni con `npm run import -- ... --snapshot`.
+
+In app, il pannello Informazioni (icona "i") mostra in fondo quale delle due fonti è in uso.
 
 ## I dati MIMIT
 
@@ -132,6 +150,13 @@ src/lib/mimit/parse.ts     lettura dei file MIMIT
 src/lib/mimit/fuels.ts     raggruppamento dei carburanti (benzina, gasolio, GPL, metano)
 src/lib/mimit/build.ts     unione dei file e controlli su coordinate e prezzi
 src/lib/geo.ts             distanze e calcoli geografici
+src/lib/dati.ts            caricamento dei dati per l'app (Supabase o copia locale)
+src/lib/stazioni.ts        ordinamento, media della zona, prezzi "convenienti"
+src/lib/format.ts          prezzi, date e indirizzi in italiano
+src/data/snapshot.json     copia dei dati della zona
+src/components/App.tsx     schermata principale (filtri, mappa/lista)
+src/components/Mappa.tsx   mappa Leaflet + OpenStreetMap
+src/components/Lista.tsx   lista dei distributori
 scripts/import-mimit.ts    script di importazione giornaliera
 supabase/schema.sql        tabelle del database
 ```

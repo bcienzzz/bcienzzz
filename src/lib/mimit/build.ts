@@ -87,6 +87,12 @@ export function buildDataset(
   for (const d of distributori) {
     if (d.lat !== null && d.lon !== null && COORDINATE_MOSTRABILI.includes(d.coordinate)) {
       d.zone = zone.filter((z) => inPoligono(d.lat!, d.lon!, z.contorno)).map((z) => z.id);
+    } else {
+      // Coordinate inaffidabili: usiamo comune e CAP, così il distributore resta almeno in lista.
+      const capIndirizzo = d.indirizzo.match(/\b\d{5}\b/g) ?? [];
+      d.zone = zone
+        .filter((z) => z.comuni.includes(d.comune) || capIndirizzo.some((c) => z.cap.includes(c)))
+        .map((z) => z.id);
     }
   }
 

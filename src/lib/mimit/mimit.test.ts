@@ -135,8 +135,12 @@ describe("buildDataset", () => {
 
   it("assegna la zona solo con coordinate affidabili", () => {
     expect(get(52653).zone).toEqual(["campi-flegrei"]);
-    expect(get(70001).zone).toEqual([]);
     expect(get(62970).zone).toEqual([]);
+  });
+
+  it("con coordinate inaffidabili usa comune e CAP", () => {
+    expect(get(70001).zone).toEqual(["campi-flegrei"]); // POZZUOLI, punto a Torre del Greco
+    expect(get(70002).zone).toEqual(["campi-flegrei"]); // POZZUOLI, senza GPS
   });
 
   it("unisce i prezzi tenendo la comunicazione più recente", () => {

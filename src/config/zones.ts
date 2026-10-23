@@ -28,6 +28,12 @@ export type Zone = {
    * Un distributore fa parte della zona se le sue coordinate cadono qui dentro.
    */
   contorno: [number, number][];
+  /**
+   * Usati solo quando le coordinate non sono affidabili: il distributore entra nella zona
+   * se il comune è in `comuni` oppure se l'indirizzo contiene uno dei `cap`.
+   */
+  comuni: string[];
+  cap: string[];
 };
 
 export const ZONES: Zone[] = [
@@ -48,6 +54,10 @@ export const ZONES: Zone[] = [
       [40.77, 14.215], // mare davanti a Posillipo
       [40.77, 13.93], // mare davanti a Capo Miseno
     ],
+    comuni: ["POZZUOLI", "BACOLI", "MONTE DI PROCIDA", "QUARTO"],
+    // CAP di Napoli: Posillipo, Bagnoli, Fuorigrotta, Pianura/Soccavo. Non mettiamo CAP
+    // condivisi con comuni fuori zona (es. 80014 Giugliano, 80070 anche Ischia).
+    cap: ["80123", "80124", "80125", "80126"],
   },
 ];
 

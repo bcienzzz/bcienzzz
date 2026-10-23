@@ -4,6 +4,8 @@
 //   npm run import                         scarica i file dal MIMIT (serve un IP italiano)
 //   npm run import -- --anagrafica a.csv --prezzi p.csv   usa file già scaricati
 //   aggiungi --supabase per caricare il risultato sul database
+//   aggiungi --snapshot per aggiornare src/data/snapshot.json, la copia dei dati usata
+//   dall'app quando Supabase non è configurato
 //
 // Scrive sempre data/distributori.json (usato anche in locale dall'app) e data/scarti.json.
 
@@ -67,6 +69,7 @@ async function main(): Promise<void> {
       prezzi: { type: "string", default: URL_PREZZI },
       out: { type: "string", default: "data" },
       supabase: { type: "boolean", default: false },
+      snapshot: { type: "boolean", default: false },
     },
   });
 
@@ -88,6 +91,12 @@ async function main(): Promise<void> {
   );
   stampaReport(dataset);
   console.log(`\nScritto ${values.out}/distributori.json`);
+
+  if (values.snapshot) {
+    const soloZone = { ...dataset, distributori: dataset.distributori.filter((d) => d.zone.length > 0) };
+    await writeFile("src/data/snapshot.json", JSON.stringify(soloZone) + "\n");
+    console.log(`Scritto src/data/snapshot.json (${soloZone.distributori.length} distributori nelle zone)`);
+  }
 
   if (values.supabase) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
