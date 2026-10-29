@@ -1,0 +1,1279 @@
+===== FILE: minicucci/index.html =====
+<!doctype html>
+<html lang="it" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Antica Pasticceria Minicucci | Pasticceria, bar e gelateria a Ischia dal 1933</title>
+<meta name="description" content="Antica Pasticceria Minicucci a Ischia dal 1933: babà, dolci al limone, cornetti, gelato, caffè e rosticceria. Via Alfredo De Luca 51. Pastry shop & café in Ischia.">
+<meta name="theme-color" content="#083B5C">
+<meta property="og:title" content="Antica Pasticceria Minicucci | Pasticceria, bar e gelateria a Ischia dal 1933">
+<meta property="og:description" content="Antica Pasticceria Minicucci a Ischia dal 1933: babà, dolci al limone, cornetti, gelato, caffè e rosticceria. Via Alfredo De Luca 51. Pastry shop & café in Ischia.">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="it" href="index.html">
+<link rel="alternate" hreflang="en" href="visitors.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+<link rel="stylesheet" href="assets/stile.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Bakery", "name": "Antica Pasticceria Minicucci", "description": "Pasticceria, bar, gelateria e rosticceria a Ischia dal 1933.", "foundingDate": "1933", "telephone": "+39 081 991337", "servesCuisine": ["Pasticceria", "Gelateria", "Bar", "Rosticceria"], "address": {"@type": "PostalAddress", "streetAddress": "Via Alfredo De Luca, 51", "postalCode": "80077", "addressLocality": "Ischia", "addressRegion": "NA", "addressCountry": "IT"}}</script>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="i-orologio" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm1-13h-2v6l5 3 1-1.7-4-2.3V7Z"/></symbol>
+  <symbol id="i-freccia" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Antica Pasticceria Minicucci, home">
+      <strong>Minicucci</strong>
+      <small>Antica Pasticceria · dal 1933</small>
+    </a>
+    <nav class="nav-desktop" aria-label="Menu principale">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="dolci.html">Dolci & Bar</a>
+      <a href="storia.html">La storia</a>
+      <a href="visitors.html">Visitors</a>
+      <a href="contatti.html">Dove siamo</a>
+    </nav>
+    <a class="btn btn--mare header-cta" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni</a>
+    <button class="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="menu-mobile" id="menu-mobile" aria-label="Menu">
+  <ul>
+    <li><a href="index.html" aria-current="page">Home</a></li>
+    <li><a href="dolci.html">Dolci & Bar</a></li>
+    <li><a href="storia.html">La storia</a></li>
+    <li><a href="visitors.html">Visitors</a></li>
+    <li><a href="contatti.html">Dove siamo</a></li>
+  </ul>
+  <a class="btn" href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama 081 991337</a>
+</nav>
+<div class="maiolica" aria-hidden="true"></div>
+
+<main id="contenuto">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="hero__dal">Ischia · dal 1933</span>
+      <h1>Il dolce di Ischia,<br><em>dal 1933.</em></h1>
+      <p class="lead">Babà, dolci al limone, cornetti caldi e gelato: a Ischia da Minicucci, colazione, merenda e dopocena hanno lo stesso profumo da quasi un secolo.</p>
+      <span class="en">Ischia's historic pastry shop &amp; café since 1933 — breakfast, pastries and gelato.</span>
+      <div class="azioni" style="margin-top:26px">
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Portami in pasticceria</a>
+        <a class="btn btn--vuoto" href="dolci.html">Scopri i dolci<svg><use href="#i-freccia"/></svg></a>
+      </div>
+      <div class="hero__info">
+        <span><svg><use href="#i-orologio"/></svg>Aperti tutti i giorni*</span>
+        <span><svg><use href="#i-pin"/></svg>Via Alfredo De Luca, 51</span>
+      </div>
+    </div>
+    <figure class="illustrazione illustrazione--crema" role="img" aria-label="Babà e limoni (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="158" rx="70" ry="14" fill="#fff" stroke="#2E86AB" stroke-width="3"/><ellipse cx="100" cy="156" rx="52" ry="8" fill="none" stroke="#2E86AB" stroke-width="1.5" stroke-dasharray="4 5"/><g transform="translate(100 112) scale(1.25)"><path d="M-26 40h52l-6-34h-40Z" fill="#C9822B"/><path d="M-26 40h52l-2-10h-48Z" fill="#A86418"/><path d="M-32 8c0-36 64-36 64 0 0 6-64 6-64 0Z" fill="#D9963A"/><path d="M-24-6c6-12 30-14 40-4" stroke="#F2C76E" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M-30 10c4 8 8-2 12 6s8-4 14 4 10-4 16 2 8-2 16 0" stroke="#8B4D10" stroke-width="2" fill="none" opacity=".5"/></g><g transform="translate(42 150) rotate(-20) scale(0.7)"><path d="M-30 0c0-17 14-26 30-26s30 9 30 26-14 26-30 26S-30 17-30 0Z" fill="#F4C430" stroke="#C99A00" stroke-width="2.5"/><path d="M-30 0l-8-3 2 7ZM30 0l8 3-2-7Z" fill="#E0AE14"/><ellipse cx="-10" cy="-10" rx="10" ry="4" fill="#FFF3C4" opacity=".8"/><path d="M8-24c10-16 28-16 34-10-8 10-22 14-34 10Z" fill="#3E8E4F"/><path d="M8-24c10-6 20-8 30-9" stroke="#2C6B3A" stroke-width="1.5" fill="none"/></g><g transform="translate(160 146) rotate(15) scale(0.75)"><path d="M-30 0c0-17 14-26 30-26s30 9 30 26-14 26-30 26S-30 17-30 0Z" fill="#F4C430" stroke="#C99A00" stroke-width="2.5"/><path d="M-30 0l-8-3 2 7ZM30 0l8 3-2-7Z" fill="#E0AE14"/><ellipse cx="-10" cy="-10" rx="10" ry="4" fill="#FFF3C4" opacity=".8"/><path d="M8-24c10-16 28-16 34-10-8 10-22 14-34 10Z" fill="#3E8E4F"/><path d="M8-24c10-6 20-8 30-9" stroke="#2C6B3A" stroke-width="1.5" fill="none"/></g></svg><figcaption>Babà e limoni</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ COSA TROVI ============ -->
+<section class="sezione">
+  <div class="wrap">
+    <div class="testa rivela">
+      <span class="eyebrow">Dalla mattina alla sera</span>
+      <h2 class="titolo">Quattro anime, un solo indirizzo</h2>
+      <span class="en">Pastry shop, café, gelato and savoury snacks — all under one roof.</span>
+    </div>
+    <ul class="punti rivela">
+      <li class="punto"><h3>Pasticceria</h3><p>I dolci della tradizione, a partire dal nostro babà.</p></li>
+      <li class="punto"><h3>Bar &amp; colazione</h3><p>Caffè, cappuccino e cornetto: la colazione all'italiana.</p></li>
+      <li class="punto"><h3>Gelateria</h3><p>Una coppetta o un cono per le serate d'estate sull'isola.</p></li>
+      <li class="punto"><h3>Rosticceria</h3><p>Qualcosa di salato per uno spuntino veloce.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ I PIÙ AMATI ============ -->
+<section class="sezione sezione--bianca">
+  <div class="wrap">
+    <div class="testa rivela">
+      <span class="eyebrow">I più amati</span>
+      <h2 class="titolo">Da non perdere</h2>
+      <span class="en">Our guests' favourites — don't leave Ischia without trying them.</span>
+    </div>
+    <div class="vetrina">
+      <article class="prodotto rivela">
+        <figure class="illustrazione illustrazione--crema" role="img" aria-label="Babà (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="158" rx="70" ry="14" fill="#fff" stroke="#2E86AB" stroke-width="3"/><ellipse cx="100" cy="156" rx="52" ry="8" fill="none" stroke="#2E86AB" stroke-width="1.5" stroke-dasharray="4 5"/><g transform="translate(100 112) scale(1.3)"><path d="M-26 40h52l-6-34h-40Z" fill="#C9822B"/><path d="M-26 40h52l-2-10h-48Z" fill="#A86418"/><path d="M-32 8c0-36 64-36 64 0 0 6-64 6-64 0Z" fill="#D9963A"/><path d="M-24-6c6-12 30-14 40-4" stroke="#F2C76E" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M-30 10c4 8 8-2 12 6s8-4 14 4 10-4 16 2 8-2 16 0" stroke="#8B4D10" stroke-width="2" fill="none" opacity=".5"/></g></svg><figcaption>Babà</figcaption></figure>
+        <div class="prodotto__testo"><span class="etichetta">Classico</span><h3>Il babà</h3><p>Il dolce napoletano per eccellenza, tra i più citati da chi ci viene a trovare.</p></div>
+      </article>
+      <article class="prodotto rivela">
+        <figure class="illustrazione illustrazione--mare" role="img" aria-label="Dolci al limone (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><g transform="translate(70 90) rotate(-15) scale(1.1)"><path d="M-30 0c0-17 14-26 30-26s30 9 30 26-14 26-30 26S-30 17-30 0Z" fill="#F4C430" stroke="#C99A00" stroke-width="2.5"/><path d="M-30 0l-8-3 2 7ZM30 0l8 3-2-7Z" fill="#E0AE14"/><ellipse cx="-10" cy="-10" rx="10" ry="4" fill="#FFF3C4" opacity=".8"/><path d="M8-24c10-16 28-16 34-10-8 10-22 14-34 10Z" fill="#3E8E4F"/><path d="M8-24c10-6 20-8 30-9" stroke="#2C6B3A" stroke-width="1.5" fill="none"/></g><g transform="translate(130 120) rotate(20) scale(1.05)"><path d="M-30 0c0-17 14-26 30-26s30 9 30 26-14 26-30 26S-30 17-30 0Z" fill="#F4C430" stroke="#C99A00" stroke-width="2.5"/><path d="M-30 0l-8-3 2 7ZM30 0l8 3-2-7Z" fill="#E0AE14"/><ellipse cx="-10" cy="-10" rx="10" ry="4" fill="#FFF3C4" opacity=".8"/><path d="M8-24c10-16 28-16 34-10-8 10-22 14-34 10Z" fill="#3E8E4F"/><path d="M8-24c10-6 20-8 30-9" stroke="#2C6B3A" stroke-width="1.5" fill="none"/></g><g transform="translate(80 148) rotate(5) scale(0.8)"><path d="M-30 0c0-17 14-26 30-26s30 9 30 26-14 26-30 26S-30 17-30 0Z" fill="#F4C430" stroke="#C99A00" stroke-width="2.5"/><path d="M-30 0l-8-3 2 7ZM30 0l8 3-2-7Z" fill="#E0AE14"/><ellipse cx="-10" cy="-10" rx="10" ry="4" fill="#FFF3C4" opacity=".8"/><path d="M8-24c10-16 28-16 34-10-8 10-22 14-34 10Z" fill="#3E8E4F"/><path d="M8-24c10-6 20-8 30-9" stroke="#2C6B3A" stroke-width="1.5" fill="none"/></g></svg><figcaption>Dolci al limone</figcaption></figure>
+        <div class="prodotto__testo"><span class="etichetta">Sapore dell'isola</span><h3>I dolci al limone</h3><p>Il gusto fresco del limone, perfetto in una giornata di mare.</p></div>
+      </article>
+      <article class="prodotto rivela">
+        <figure class="illustrazione illustrazione--limone" role="img" aria-label="Cornetto al limone (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="158" rx="70" ry="14" fill="#fff" stroke="#2E86AB" stroke-width="3"/><ellipse cx="100" cy="156" rx="52" ry="8" fill="none" stroke="#2E86AB" stroke-width="1.5" stroke-dasharray="4 5"/><g transform="translate(100 132) scale(1.05)"><path d="M-58 14c10-30 34-44 58-44s48 14 58 44c-8 6-18 2-24-4-8 8-20 12-34 12s-26-4-34-12c-6 6-16 10-24 4Z" fill="#E3A24A" stroke="#A86418" stroke-width="2.5"/><path d="M-24-22c4 16 4 30 0 42M0-30v48M24-22c-4 16-4 30 0 42" stroke="#A86418" stroke-width="2.5" fill="none"/><path d="M-10-24c8-4 18-4 24 0" stroke="#F7D08A" stroke-width="4" stroke-linecap="round" fill="none"/><g fill="#fff" opacity=".9"><circle cx="-36" cy="-2" r="2"/><circle cx="-12" cy="-12" r="2"/><circle cx="12" cy="-8" r="2"/><circle cx="34" cy="-4" r="2"/><circle cx="2" cy="4" r="2"/></g></g></svg><figcaption>Cornetto al limone</figcaption></figure>
+        <div class="prodotto__testo"><span class="etichetta">Colazione</span><h3>Il cornetto al limone</h3><p>Il compagno ideale del cappuccino per iniziare la giornata.</p></div>
+      </article>
+    </div>
+    <p style="text-align:center;margin-top:34px"><a class="btn btn--mare" href="dolci.html">Vedi tutti i dolci<svg><use href="#i-freccia"/></svg></a></p>
+  </div>
+</section>
+
+<!-- ============ STORIA BREVE ============ -->
+<section class="sezione sezione--carta">
+  <div class="wrap due-col">
+    <div class="rivela"><figure class="illustrazione illustrazione--larga illustrazione--cielo" role="img" aria-label="Ischia (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="146" cy="56" r="22" fill="#F4C430"/><path d="M20 150c20-14 34-30 50-30h70c16 0 30 16 44 30Z" fill="#6B5E55"/><path d="M62 120v-34h10v-8h8v8h12V72h-6v-8h8v-6h8v6h8v8h-6v14h10v-8h8v8h10v34Z" fill="#F3EBDA" stroke="#3B2418" stroke-width="2"/><path d="M96 58l6-14 6 14Z" fill="#D9573B"/><rect x="100" y="96" width="8" height="12" rx="4" fill="#3B2418"/><rect x="74" y="100" width="6" height="8" rx="3" fill="#3B2418"/><rect x="122" y="100" width="6" height="8" rx="3" fill="#3B2418"/><path d="M0 156c12-6 24-6 36 0s24 6 36 0 24-6 36 0 24 6 36 0 24-6 36 0 24 6 36 0V200H0Z" fill="#2E86AB"/><path d="M0 174c12-6 24-6 36 0s24 6 36 0 24-6 36 0 24 6 36 0 24-6 36 0 24 6 36 0V200H0Z" fill="#0E5A8A"/></svg><figcaption>Ischia</figcaption></figure></div>
+    <div class="rivela">
+      <span class="eyebrow">La nostra storia</span>
+      <h2 class="titolo">Dal 1933 a Ischia</h2>
+      <p>Una pasticceria storica dell'isola: generazioni di ischitani e di viaggiatori sono passati dal nostro bancone per un caffè, un dolce o un gelato.</p>
+      <a class="btn btn--vuoto" href="storia.html">Leggi la storia<svg><use href="#i-freccia"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECENSIONE ============ -->
+<section class="sezione sezione--limone">
+  <div class="wrap" style="max-width:820px;text-align:center">
+    <blockquote class="citazione rivela">
+      “Buonissimi cornetti al limone. Personale esperto, rapido, puntuale e cortese.”
+      <cite>— Recensione di un cliente</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="fascia-cta">
+  <div class="wrap">
+    <h2>Sei a Ischia? Passa a trovarci.</h2>
+    <p>In vacanza sull'isola? La tua pausa dolce è in Via Alfredo De Luca.<span class="en" style="color:rgba(255,255,255,.85)">On holiday in Ischia? Your sweet break is waiting.</span></p>
+    <div class="azioni">
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Indicazioni</a>
+      <a class="btn btn--vuoto" href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama 081 991337</a>
+    </div>
+    <p style="margin-top:20px;font-size:.85rem;opacity:.85">* Orari da verificare con l'attività</p>
+  </div>
+</section>
+
+</main>
+
+<div class="maiolica" aria-hidden="true"></div>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h3>Antica Pasticceria Minicucci</h3>
+        <p>Pasticceria · Bar · Gelateria · Rosticceria<br>a Ischia dal 1933.</p>
+      </div>
+      <div>
+        <h3>Dove siamo</h3>
+        <p>Via Alfredo De Luca, 51<br>80077 Ischia (NA)</p>
+      </div>
+      <div>
+        <h3>Contatti</h3>
+        <ul>
+          <li><a href="tel:+39081991337">Tel. 081 991337</a></li>
+          <li><a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni stradali</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pagine</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dolci.html">Dolci & Bar</a></li>
+          <li><a href="storia.html">La storia</a></li>
+          <li><a href="visitors.html">Visitors</a></li>
+          <li><a href="contatti.html">Dove siamo</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legale">© Antica Pasticceria Minicucci · P. IVA [da inserire] · <a href="#">Privacy</a> · <a href="#">Cookie</a> — Bozza di sito, contenuti da confermare.</p>
+  </div>
+</footer>
+
+<!-- Barra azioni rapide (solo mobile) -->
+<nav class="barra-mobile" aria-label="Azioni rapide">
+  <a href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama</a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Portami lì</a>
+</nav>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
+
+
+===== FILE: minicucci/dolci.html =====
+<!doctype html>
+<html lang="it" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dolci, bar e gelateria | Antica Pasticceria Minicucci Ischia</title>
+<meta name="description" content="Pasticceria, colazione, gelato e rosticceria a Ischia: scopri i dolci dell'Antica Pasticceria Minicucci, dal babà ai dolci al limone.">
+<meta name="theme-color" content="#083B5C">
+<meta property="og:title" content="Dolci, bar e gelateria | Antica Pasticceria Minicucci Ischia">
+<meta property="og:description" content="Pasticceria, colazione, gelato e rosticceria a Ischia: scopri i dolci dell'Antica Pasticceria Minicucci, dal babà ai dolci al limone.">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="it" href="index.html">
+<link rel="alternate" hreflang="en" href="visitors.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+<link rel="stylesheet" href="assets/stile.css">
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="i-orologio" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm1-13h-2v6l5 3 1-1.7-4-2.3V7Z"/></symbol>
+  <symbol id="i-freccia" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Antica Pasticceria Minicucci, home">
+      <strong>Minicucci</strong>
+      <small>Antica Pasticceria · dal 1933</small>
+    </a>
+    <nav class="nav-desktop" aria-label="Menu principale">
+      <a href="index.html">Home</a>
+      <a href="dolci.html" aria-current="page">Dolci & Bar</a>
+      <a href="storia.html">La storia</a>
+      <a href="visitors.html">Visitors</a>
+      <a href="contatti.html">Dove siamo</a>
+    </nav>
+    <a class="btn btn--mare header-cta" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni</a>
+    <button class="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="menu-mobile" id="menu-mobile" aria-label="Menu">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dolci.html" aria-current="page">Dolci & Bar</a></li>
+    <li><a href="storia.html">La storia</a></li>
+    <li><a href="visitors.html">Visitors</a></li>
+    <li><a href="contatti.html">Dove siamo</a></li>
+  </ul>
+  <a class="btn" href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama 081 991337</a>
+</nav>
+<div class="maiolica" aria-hidden="true"></div>
+
+<main id="contenuto">
+
+<section class="hero hero--pagina">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow" style="color:var(--limone)">Dolci &amp; Bar</span>
+      <h1>Dalla colazione<br><em>al dopocena</em></h1>
+      <p class="lead">Ogni momento della giornata ha il suo dolce. Ecco cosa trovi al nostro bancone.</p>
+      <span class="en">What you'll find at our counter, from breakfast to late evening.</span>
+    </div>
+  </div>
+</section>
+
+<section class="sezione">
+  <div class="wrap">
+    <p class="nota-bozza"><strong>Nota bozza:</strong> l'elenco va completato e confermato dall'attività (prodotti disponibili, specialità, eventuali prezzi). Al momento sono indicati solo i prodotti citati nelle recensioni e le categorie dell'attività.</p>
+    <div class="menu-lista">
+      <div class="menu-gruppo rivela">
+        <h2>Pasticceria <span class="en">Pastries</span></h2>
+        <ul>
+          <li><b>Babà</b><span>Il classico napoletano. <i>Napoli's iconic rum baba.</i></span></li>
+          <li><b>Dolci al limone</b><span>Il sapore dell'isola. <i>Lemon pastries.</i></span></li>
+          <li><b>[Altra specialità da inserire]</b><span>Descrizione da completare.</span></li>
+          <li><b>[Altra specialità da inserire]</b><span>Descrizione da completare.</span></li>
+        </ul>
+      </div>
+      <div class="menu-gruppo rivela">
+        <h2>Bar &amp; colazione <span class="en">Café &amp; breakfast</span></h2>
+        <ul>
+          <li><b>Cornetti</b><span>Anche al limone. <i>Italian croissants, lemon too.</i></span></li>
+          <li><b>Caffè e cappuccino</b><span>La colazione all'italiana. <i>Espresso &amp; cappuccino.</i></span></li>
+          <li><b>[Bevande da inserire]</b><span>Descrizione da completare.</span></li>
+        </ul>
+      </div>
+      <div class="menu-gruppo rivela">
+        <h2>Gelateria <span class="en">Gelato</span></h2>
+        <ul>
+          <li><b>Coni e coppette</b><span>Gusti da inserire. <i>Cones &amp; cups.</i></span></li>
+          <li><b>[Gusti della casa da inserire]</b><span>Descrizione da completare.</span></li>
+        </ul>
+      </div>
+      <div class="menu-gruppo rivela">
+        <h2>Rosticceria <span class="en">Savoury snacks</span></h2>
+        <ul>
+          <li><b>[Prodotti da inserire]</b><span>Descrizione da completare.</span></li>
+          <li><b>[Prodotti da inserire]</b><span>Descrizione da completare.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sezione sezione--bianca">
+  <div class="wrap">
+    <div class="testa testa--centro rivela"><span class="eyebrow">Galleria</span><h2 class="titolo">La nostra vetrina</h2></div>
+    <div class="vetrina">
+      <div class="rivela"><figure class="illustrazione illustrazione--quadra illustrazione--limone" role="img" aria-label="Banco pasticceria (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="158" rx="70" ry="14" fill="#fff" stroke="#2E86AB" stroke-width="3"/><ellipse cx="100" cy="156" rx="52" ry="8" fill="none" stroke="#2E86AB" stroke-width="1.5" stroke-dasharray="4 5"/><g transform="translate(100 112) scale(1.3)"><path d="M-26 40h52l-6-34h-40Z" fill="#C9822B"/><path d="M-26 40h52l-2-10h-48Z" fill="#A86418"/><path d="M-32 8c0-36 64-36 64 0 0 6-64 6-64 0Z" fill="#D9963A"/><path d="M-24-6c6-12 30-14 40-4" stroke="#F2C76E" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M-30 10c4 8 8-2 12 6s8-4 14 4 10-4 16 2 8-2 16 0" stroke="#8B4D10" stroke-width="2" fill="none" opacity=".5"/></g></svg><figcaption>Banco pasticceria</figcaption></figure></div>
+      <div class="rivela"><figure class="illustrazione illustrazione--quadra illustrazione--mare" role="img" aria-label="Banco gelati (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><g transform="translate(100 92) scale(1.25)"><path d="M-24 0h48L0 70Z" fill="#E3A24A" stroke="#A86418" stroke-width="2.5"/><path d="M-16 0l26 48M2 0l14 26M-6 50l22-50M-14 26l14-26" stroke="#A86418" stroke-width="1.8" fill="none"/><circle cx="-12" cy="-8" r="18" fill="#FFF3C4" stroke="#E0AE14" stroke-width="2"/><circle cx="14" cy="-8" r="18" fill="#F7B3A6" stroke="#D9573B" stroke-width="2"/><circle cx="0" cy="-30" r="19" fill="#8B5A3C" stroke="#5E3A22" stroke-width="2"/><path d="M-8-38c4-4 10-4 14 0" stroke="#B9835F" stroke-width="3" stroke-linecap="round" fill="none"/></g></svg><figcaption>Banco gelati</figcaption></figure></div>
+      <div class="rivela"><figure class="illustrazione illustrazione--quadra illustrazione--crema" role="img" aria-label="Colazione al bar (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><g transform="translate(70 110) scale(0.95)"><ellipse cx="0" cy="34" rx="46" ry="9" fill="#fff" stroke="#2E86AB" stroke-width="3"/><path d="M-28-6h56c0 22-10 38-28 38S-28 16-28-6Z" fill="#fff" stroke="#2E86AB" stroke-width="3"/><path d="M28 2c14 0 14 18 0 18" stroke="#2E86AB" stroke-width="3" fill="none"/><ellipse cx="0" cy="-6" rx="28" ry="6" fill="#6B3F22"/><path d="M-8-6c4-2 12-2 16 0" stroke="#D9A066" stroke-width="2" fill="none"/><path d="M-10-18c-6-8 6-12 0-22M6-18c-6-8 6-12 0-22" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" opacity=".8"/></g><g transform="translate(140 150) scale(0.55)"><path d="M-58 14c10-30 34-44 58-44s48 14 58 44c-8 6-18 2-24-4-8 8-20 12-34 12s-26-4-34-12c-6 6-16 10-24 4Z" fill="#E3A24A" stroke="#A86418" stroke-width="2.5"/><path d="M-24-22c4 16 4 30 0 42M0-30v48M24-22c-4 16-4 30 0 42" stroke="#A86418" stroke-width="2.5" fill="none"/><path d="M-10-24c8-4 18-4 24 0" stroke="#F7D08A" stroke-width="4" stroke-linecap="round" fill="none"/><g fill="#fff" opacity=".9"><circle cx="-36" cy="-2" r="2"/><circle cx="-12" cy="-12" r="2"/><circle cx="12" cy="-8" r="2"/><circle cx="34" cy="-4" r="2"/><circle cx="2" cy="4" r="2"/></g></g></svg><figcaption>Colazione al bar</figcaption></figure></div>
+    </div>
+  </div>
+</section>
+
+<section class="fascia-cta">
+  <div class="wrap">
+    <h2>Ti è venuta voglia di un babà?</h2>
+    <div class="azioni">
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Portami lì</a>
+      <a class="btn btn--vuoto" href="contatti.html">Orari e contatti</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="maiolica" aria-hidden="true"></div>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h3>Antica Pasticceria Minicucci</h3>
+        <p>Pasticceria · Bar · Gelateria · Rosticceria<br>a Ischia dal 1933.</p>
+      </div>
+      <div>
+        <h3>Dove siamo</h3>
+        <p>Via Alfredo De Luca, 51<br>80077 Ischia (NA)</p>
+      </div>
+      <div>
+        <h3>Contatti</h3>
+        <ul>
+          <li><a href="tel:+39081991337">Tel. 081 991337</a></li>
+          <li><a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni stradali</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pagine</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dolci.html">Dolci & Bar</a></li>
+          <li><a href="storia.html">La storia</a></li>
+          <li><a href="visitors.html">Visitors</a></li>
+          <li><a href="contatti.html">Dove siamo</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legale">© Antica Pasticceria Minicucci · P. IVA [da inserire] · <a href="#">Privacy</a> · <a href="#">Cookie</a> — Bozza di sito, contenuti da confermare.</p>
+  </div>
+</footer>
+
+<!-- Barra azioni rapide (solo mobile) -->
+<nav class="barra-mobile" aria-label="Azioni rapide">
+  <a href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama</a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Portami lì</a>
+</nav>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
+
+
+===== FILE: minicucci/storia.html =====
+<!doctype html>
+<html lang="it" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La nostra storia dal 1933 | Antica Pasticceria Minicucci Ischia</title>
+<meta name="description" content="Dal 1933 a Ischia: la storia dell'Antica Pasticceria Minicucci, pasticceria, bar e gelateria storica dell'isola.">
+<meta name="theme-color" content="#083B5C">
+<meta property="og:title" content="La nostra storia dal 1933 | Antica Pasticceria Minicucci Ischia">
+<meta property="og:description" content="Dal 1933 a Ischia: la storia dell'Antica Pasticceria Minicucci, pasticceria, bar e gelateria storica dell'isola.">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="it" href="index.html">
+<link rel="alternate" hreflang="en" href="visitors.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+<link rel="stylesheet" href="assets/stile.css">
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="i-orologio" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm1-13h-2v6l5 3 1-1.7-4-2.3V7Z"/></symbol>
+  <symbol id="i-freccia" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Antica Pasticceria Minicucci, home">
+      <strong>Minicucci</strong>
+      <small>Antica Pasticceria · dal 1933</small>
+    </a>
+    <nav class="nav-desktop" aria-label="Menu principale">
+      <a href="index.html">Home</a>
+      <a href="dolci.html">Dolci & Bar</a>
+      <a href="storia.html" aria-current="page">La storia</a>
+      <a href="visitors.html">Visitors</a>
+      <a href="contatti.html">Dove siamo</a>
+    </nav>
+    <a class="btn btn--mare header-cta" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni</a>
+    <button class="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="menu-mobile" id="menu-mobile" aria-label="Menu">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dolci.html">Dolci & Bar</a></li>
+    <li><a href="storia.html" aria-current="page">La storia</a></li>
+    <li><a href="visitors.html">Visitors</a></li>
+    <li><a href="contatti.html">Dove siamo</a></li>
+  </ul>
+  <a class="btn" href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama 081 991337</a>
+</nav>
+<div class="maiolica" aria-hidden="true"></div>
+
+<main id="contenuto">
+
+<section class="hero hero--pagina">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow" style="color:var(--limone)">La storia</span>
+      <h1>Quasi un secolo<br><em>di dolcezza</em></h1>
+      <p class="lead">Dal 1933 una presenza fissa nella vita di Ischia.</p>
+      <span class="en">A family of pastry makers in Ischia since 1933.</span>
+    </div>
+  </div>
+</section>
+
+<section class="sezione">
+  <div class="wrap due-col">
+    <div class="rivela">
+      <p class="nota-bozza"><strong>Nota bozza:</strong> l'unico dato certo è l'anno di fondazione (1933). Tappe, nomi e aneddoti vanno forniti dall'attività.</p>
+      <ol class="timeline">
+        <li><span class="anno">1933</span><h3>L'inizio</h3><p>Apre l'Antica Pasticceria Minicucci a Ischia.</p></li>
+        <li><span class="anno">[anno]</span><h3>[Tappa da inserire]</h3><p>Es. passaggio alla nuova generazione, apertura della gelateria…</p></li>
+        <li><span class="anno">[anno]</span><h3>[Tappa da inserire]</h3><p>Es. trasferimento in Via Alfredo De Luca, nuove specialità…</p></li>
+        <li><span class="anno">Oggi</span><h3>Pasticceria, bar, gelateria e rosticceria</h3><p>Un punto di riferimento per ischitani e turisti.</p></li>
+      </ol>
+    </div>
+    <div class="rivela"><figure class="illustrazione illustrazione--cielo" role="img" aria-label="Castello Aragonese, Ischia (illustrazione)"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="146" cy="56" r="22" fill="#F4C430"/><path d="M20 150c20-14 34-30 50-30h70c16 0 30 16 44 30Z" fill="#6B5E55"/><path d="M62 120v-34h10v-8h8v8h12V72h-6v-8h8v-6h8v6h8v8h-6v14h10v-8h8v8h10v34Z" fill="#F3EBDA" stroke="#3B2418" stroke-width="2"/><path d="M96 58l6-14 6 14Z" fill="#D9573B"/><rect x="100" y="96" width="8" height="12" rx="4" fill="#3B2418"/><rect x="74" y="100" width="6" height="8" rx="3" fill="#3B2418"/><rect x="122" y="100" width="6" height="8" rx="3" fill="#3B2418"/><path d="M0 156c12-6 24-6 36 0s24 6 36 0 24-6 36 0 24 6 36 0 24-6 36 0 24 6 36 0V200H0Z" fill="#2E86AB"/><path d="M0 174c12-6 24-6 36 0s24 6 36 0 24-6 36 0 24 6 36 0 24-6 36 0 24 6 36 0V200H0Z" fill="#0E5A8A"/></svg><figcaption>Castello Aragonese, Ischia</figcaption></figure></div>
+  </div>
+</section>
+
+<section class="sezione sezione--limone">
+  <div class="wrap" style="max-width:820px;text-align:center">
+    <p class="citazione rivela">“[Una frase dei titolari sul loro lavoro, da inserire.]”<cite>— Famiglia Minicucci [da confermare]</cite></p>
+  </div>
+</section>
+
+<section class="fascia-cta">
+  <div class="wrap">
+    <h2>Vieni ad assaggiare la storia</h2>
+    <div class="azioni"><a class="btn" href="dolci.html">Scopri i dolci</a><a class="btn btn--vuoto" href="contatti.html">Dove siamo</a></div>
+  </div>
+</section>
+
+</main>
+
+<div class="maiolica" aria-hidden="true"></div>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h3>Antica Pasticceria Minicucci</h3>
+        <p>Pasticceria · Bar · Gelateria · Rosticceria<br>a Ischia dal 1933.</p>
+      </div>
+      <div>
+        <h3>Dove siamo</h3>
+        <p>Via Alfredo De Luca, 51<br>80077 Ischia (NA)</p>
+      </div>
+      <div>
+        <h3>Contatti</h3>
+        <ul>
+          <li><a href="tel:+39081991337">Tel. 081 991337</a></li>
+          <li><a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni stradali</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pagine</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dolci.html">Dolci & Bar</a></li>
+          <li><a href="storia.html">La storia</a></li>
+          <li><a href="visitors.html">Visitors</a></li>
+          <li><a href="contatti.html">Dove siamo</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legale">© Antica Pasticceria Minicucci · P. IVA [da inserire] · <a href="#">Privacy</a> · <a href="#">Cookie</a> — Bozza di sito, contenuti da confermare.</p>
+  </div>
+</footer>
+
+<!-- Barra azioni rapide (solo mobile) -->
+<nav class="barra-mobile" aria-label="Azioni rapide">
+  <a href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama</a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Portami lì</a>
+</nav>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
+
+
+===== FILE: minicucci/visitors.html =====
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visiting Ischia? Historic pastry shop since 1933 | Minicucci</title>
+<meta name="description" content="Antica Pasticceria Minicucci, Ischia's historic pastry shop and café since 1933: rum baba, lemon pastries, Italian breakfast and gelato. Via Alfredo De Luca 51.">
+<meta name="theme-color" content="#083B5C">
+<meta property="og:title" content="Visiting Ischia? Historic pastry shop since 1933 | Minicucci">
+<meta property="og:description" content="Antica Pasticceria Minicucci, Ischia's historic pastry shop and café since 1933: rum baba, lemon pastries, Italian breakfast and gelato. Via Alfredo De Luca 51.">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="it" href="index.html">
+<link rel="alternate" hreflang="en" href="visitors.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+<link rel="stylesheet" href="assets/stile.css">
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="i-orologio" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm1-13h-2v6l5 3 1-1.7-4-2.3V7Z"/></symbol>
+  <symbol id="i-freccia" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Antica Pasticceria Minicucci, home">
+      <strong>Minicucci</strong>
+      <small>Antica Pasticceria · dal 1933</small>
+    </a>
+    <nav class="nav-desktop" aria-label="Menu principale">
+      <a href="index.html">Home</a>
+      <a href="dolci.html">Dolci & Bar</a>
+      <a href="storia.html">La storia</a>
+      <a href="visitors.html" aria-current="page">Visitors</a>
+      <a href="contatti.html">Dove siamo</a>
+    </nav>
+    <a class="btn btn--mare header-cta" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni</a>
+    <button class="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="menu-mobile" id="menu-mobile" aria-label="Menu">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dolci.html">Dolci & Bar</a></li>
+    <li><a href="storia.html">La storia</a></li>
+    <li><a href="visitors.html" aria-current="page">Visitors</a></li>
+    <li><a href="contatti.html">Dove siamo</a></li>
+  </ul>
+  <a class="btn" href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama 081 991337</a>
+</nav>
+<div class="maiolica" aria-hidden="true"></div>
+
+<main id="contenuto">
+
+<section class="hero hero--pagina">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow" style="color:var(--limone)">Welcome to Ischia</span>
+      <h1>Your sweet stop<br><em>on the island</em></h1>
+      <p class="lead">A historic pastry shop and café, open since 1933. Pop in for breakfast, an afternoon treat or a gelato after dinner.</p>
+      <div class="azioni" style="margin-top:22px">
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Get directions</a>
+        <a class="btn btn--vuoto" href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Call us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sezione">
+  <div class="wrap">
+    <div class="testa rivela">
+      <span class="eyebrow">Local tips</span>
+      <h2 class="titolo">How to enjoy it like a local</h2>
+    </div>
+    <ul class="punti rivela">
+      <li class="punto"><h3>Breakfast</h3><p>Italians have breakfast standing at the counter: a cappuccino and a <i>cornetto</i>. Try the lemon one.</p></li>
+      <li class="punto"><h3>The rum baba</h3><p>The <i>babà</i> is Naples' most famous pastry, soaked in a sweet syrup. A must-try.</p></li>
+      <li class="punto"><h3>Lemon flavours</h3><p>Lemons are the taste of the Gulf of Naples — perfect on a hot beach day.</p></li>
+      <li class="punto"><h3>Gelato</h3><p>End your evening stroll the Italian way: with a cone or a cup.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sezione sezione--bianca">
+  <div class="wrap" style="max-width:820px">
+    <div class="testa rivela"><span class="eyebrow">Good to know</span><h2 class="titolo">FAQ</h2></div>
+    <p class="nota-bozza"><strong>Draft note:</strong> answers marked [to confirm] must be checked with the business.</p>
+    <div class="faq rivela">
+      <details><summary>Where are you?</summary><p>Via Alfredo De Luca, 51 — 80077 Ischia (NA). <a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Open in Google Maps</a>.</p></details>
+      <details><summary>What are your opening hours?</summary><p>Every day, approx. 7:00 am – 11:00 pm [to confirm]. See the <a href="contatti.html">contact page</a>.</p></details>
+      <details><summary>Can I sit down?</summary><p>[To confirm: indoor/outdoor seating.]</p></details>
+      <details><summary>Do you accept cards?</summary><p>[To confirm.]</p></details>
+      <details><summary>Can I take pastries back home?</summary><p>[To confirm: travel packaging and shelf life.]</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="fascia-cta">
+  <div class="wrap">
+    <h2>See you in Ischia!</h2>
+    <div class="azioni"><a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Get directions</a></div>
+  </div>
+</section>
+
+</main>
+
+<div class="maiolica" aria-hidden="true"></div>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h3>Antica Pasticceria Minicucci</h3>
+        <p>Pasticceria · Bar · Gelateria · Rosticceria<br>a Ischia dal 1933.</p>
+      </div>
+      <div>
+        <h3>Dove siamo</h3>
+        <p>Via Alfredo De Luca, 51<br>80077 Ischia (NA)</p>
+      </div>
+      <div>
+        <h3>Contatti</h3>
+        <ul>
+          <li><a href="tel:+39081991337">Tel. 081 991337</a></li>
+          <li><a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni stradali</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pagine</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dolci.html">Dolci & Bar</a></li>
+          <li><a href="storia.html">La storia</a></li>
+          <li><a href="visitors.html">Visitors</a></li>
+          <li><a href="contatti.html">Dove siamo</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legale">© Antica Pasticceria Minicucci · P. IVA [da inserire] · <a href="#">Privacy</a> · <a href="#">Cookie</a> — Bozza di sito, contenuti da confermare.</p>
+  </div>
+</footer>
+
+<!-- Barra azioni rapide (solo mobile) -->
+<nav class="barra-mobile" aria-label="Azioni rapide">
+  <a href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama</a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Portami lì</a>
+</nav>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
+
+
+===== FILE: minicucci/contatti.html =====
+<!doctype html>
+<html lang="it" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dove siamo, orari e contatti | Antica Pasticceria Minicucci Ischia</title>
+<meta name="description" content="Antica Pasticceria Minicucci: Via Alfredo De Luca 51, Ischia. Telefono 081 991337. Orari, mappa e indicazioni stradali.">
+<meta name="theme-color" content="#083B5C">
+<meta property="og:title" content="Dove siamo, orari e contatti | Antica Pasticceria Minicucci Ischia">
+<meta property="og:description" content="Antica Pasticceria Minicucci: Via Alfredo De Luca 51, Ischia. Telefono 081 991337. Orari, mappa e indicazioni stradali.">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="it" href="index.html">
+<link rel="alternate" hreflang="en" href="visitors.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+<link rel="stylesheet" href="assets/stile.css">
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="i-orologio" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm1-13h-2v6l5 3 1-1.7-4-2.3V7Z"/></symbol>
+  <symbol id="i-freccia" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Antica Pasticceria Minicucci, home">
+      <strong>Minicucci</strong>
+      <small>Antica Pasticceria · dal 1933</small>
+    </a>
+    <nav class="nav-desktop" aria-label="Menu principale">
+      <a href="index.html">Home</a>
+      <a href="dolci.html">Dolci & Bar</a>
+      <a href="storia.html">La storia</a>
+      <a href="visitors.html">Visitors</a>
+      <a href="contatti.html" aria-current="page">Dove siamo</a>
+    </nav>
+    <a class="btn btn--mare header-cta" href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni</a>
+    <button class="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="menu-mobile" id="menu-mobile" aria-label="Menu">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dolci.html">Dolci & Bar</a></li>
+    <li><a href="storia.html">La storia</a></li>
+    <li><a href="visitors.html">Visitors</a></li>
+    <li><a href="contatti.html" aria-current="page">Dove siamo</a></li>
+  </ul>
+  <a class="btn" href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama 081 991337</a>
+</nav>
+<div class="maiolica" aria-hidden="true"></div>
+
+<main id="contenuto">
+
+<section class="hero hero--pagina">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow" style="color:var(--limone)">Dove siamo</span>
+      <h1>Ti aspettiamo<br><em>a Ischia</em></h1>
+      <p class="lead">Via Alfredo De Luca, 51 · 80077 Ischia (NA)</p>
+      <span class="en">Find us, call us or send us a request.</span>
+    </div>
+  </div>
+</section>
+
+<section class="sezione">
+  <div class="wrap due-col" style="align-items:start">
+    <div class="scheda rivela">
+      <h2>Contatti</h2>
+      <div class="contatto-riga"><svg><use href="#i-pin"/></svg><div>Via Alfredo De Luca, 51<br>80077 Ischia (NA)<br><a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni stradali</a></div></div>
+      <div class="contatto-riga"><svg><use href="#i-tel"/></svg><div><a href="tel:+39081991337">081 991337</a><br><span class="en" style="margin:0">From abroad: +39 081 991337</span></div></div>
+      <h3 style="margin-top:26px">Orari <span class="en">Opening hours</span></h3>
+      <table class="orari">
+        <tr><th scope="row">Lunedì – Domenica</th><td>7:00 – 23:00</td></tr>
+      </table>
+      <p class="nota-bozza" style="margin-top:16px"><strong>Da verificare:</strong> orari indicativi presi da schede online; confermare anche il civico (51 o 49).</p>
+    </div>
+    <iframe class="mappa rivela" title="Mappa: Antica Pasticceria Minicucci, Ischia" src="https://www.google.com/maps?q=Pasticceria+Minicucci,+Via+Alfredo+De+Luca+51,+Ischia&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+
+<section class="sezione sezione--carta">
+  <div class="wrap" style="max-width:760px">
+    <div class="testa rivela">
+      <span class="eyebrow">Scrivici</span>
+      <h2 class="titolo">Richiedi informazioni</h2>
+      <span class="en">Questions or special requests? Write to us.</span>
+    </div>
+    <form class="form scheda rivela" novalidate>
+      <div class="riga">
+        <div><label for="nome">Nome *</label><input id="nome" name="nome" autocomplete="name" required></div>
+        <div><label for="telefono">Telefono *</label><input id="telefono" name="telefono" type="tel" autocomplete="tel" required></div>
+      </div>
+      <div><label for="motivo">Motivo</label>
+        <select id="motivo" name="motivo">
+          <option>Informazioni</option>
+          <option>Ordine di dolci</option>
+          <option>Altro</option>
+        </select>
+      </div>
+      <div><label for="messaggio">Messaggio *</label><textarea id="messaggio" name="messaggio" required></textarea></div>
+      <label style="font-weight:400;display:flex;gap:10px;align-items:flex-start"><input type="checkbox" required style="width:auto;margin-top:5px"> Acconsento al trattamento dei dati secondo l'informativa privacy *</label>
+      <button class="btn btn--mare" type="submit">Invia richiesta</button>
+      <p class="form-esito" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<div class="maiolica" aria-hidden="true"></div>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h3>Antica Pasticceria Minicucci</h3>
+        <p>Pasticceria · Bar · Gelateria · Rosticceria<br>a Ischia dal 1933.</p>
+      </div>
+      <div>
+        <h3>Dove siamo</h3>
+        <p>Via Alfredo De Luca, 51<br>80077 Ischia (NA)</p>
+      </div>
+      <div>
+        <h3>Contatti</h3>
+        <ul>
+          <li><a href="tel:+39081991337">Tel. 081 991337</a></li>
+          <li><a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener">Indicazioni stradali</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pagine</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dolci.html">Dolci & Bar</a></li>
+          <li><a href="storia.html">La storia</a></li>
+          <li><a href="visitors.html">Visitors</a></li>
+          <li><a href="contatti.html">Dove siamo</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legale">© Antica Pasticceria Minicucci · P. IVA [da inserire] · <a href="#">Privacy</a> · <a href="#">Cookie</a> — Bozza di sito, contenuti da confermare.</p>
+  </div>
+</footer>
+
+<!-- Barra azioni rapide (solo mobile) -->
+<nav class="barra-mobile" aria-label="Azioni rapide">
+  <a href="tel:+39081991337"><svg><use href="#i-tel"/></svg>Chiama</a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria+Minicucci+Via+Alfredo+De+Luca+51+Ischia" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Portami lì</a>
+</nav>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
+
+
+===== FILE: minicucci/assets/stile.css =====
+/* Antica Pasticceria Minicucci — bozza sito
+   Palette ispirata a Ischia: limone, mare, maiolica, crema. */
+
+:root {
+  --limone: #F4C430;
+  --limone-chiaro: #FFF3C4;
+  --mare: #0E5A8A;
+  --mare-scuro: #083B5C;
+  --maiolica: #2E86AB;
+  --corallo: #D9573B;
+  --crema: #FBF6EC;
+  --carta: #F3EBDA;
+  --cioccolato: #3B2418;
+  --testo: #2A1F18;
+  --grigio: #6B5E55;
+  --bianco: #FFFFFF;
+  --ombra: 0 12px 32px rgba(59, 36, 24, .14);
+  --raggio: 6px;
+  --header-h: 68px;
+  --max: 1160px;
+  --font-titoli: "Playfair Display", Georgia, serif;
+  --font-testo: "Karla", "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--testo);
+  font-family: var(--font-testo);
+  font-size: 17px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--font-titoli); font-weight: 700; line-height: 1.12; margin: 0 0 .4em; }
+p { margin: 0 0 1em; }
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.salta { position: absolute; left: -999px; top: 8px; background: var(--mare); color: var(--bianco); padding: 10px 16px; z-index: 100; }
+.salta:focus { left: 8px; }
+
+/* ---------- Fascia maiolica (motivo decorativo in CSS) ---------- */
+.maiolica {
+  height: 18px;
+  background-color: var(--bianco);
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--limone) 0 3px, transparent 3.5px),
+    conic-gradient(from 45deg, var(--maiolica) 0 25%, transparent 0 50%, var(--maiolica) 0 75%, transparent 0);
+  background-size: 18px 18px;
+  opacity: .9;
+}
+
+/* ---------- Testi di supporto ---------- */
+.eyebrow {
+  display: inline-block;
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--corallo);
+  margin-bottom: 10px;
+}
+.en { display: block; font-family: var(--font-testo); font-style: italic; font-weight: 400; font-size: .95rem; color: var(--grigio); letter-spacing: .02em; margin-top: 4px; }
+.titolo { font-size: clamp(1.9rem, 5.5vw, 3rem); }
+.testa { max-width: 680px; margin-bottom: 36px; }
+.testa--centro { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* ---------- Bottoni ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 12px 24px;
+  background: var(--limone); color: var(--cioccolato);
+  border: 2px solid var(--limone); border-radius: var(--raggio);
+  font-family: var(--font-testo); font-weight: 700; font-size: 1rem;
+  text-decoration: none; text-align: center;
+  transition: transform .18s ease, background .18s ease, color .18s ease;
+  cursor: pointer;
+}
+.btn:hover { transform: translateY(-2px); background: #FFD447; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn--mare { background: var(--mare); border-color: var(--mare); color: var(--bianco); }
+.btn--mare:hover { background: var(--mare-scuro); border-color: var(--mare-scuro); }
+.btn--vuoto { background: transparent; border-color: currentColor; color: inherit; }
+.btn--vuoto:hover { background: rgba(255,255,255,.12); }
+.btn:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--corallo); outline-offset: 3px; }
+.azioni { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(251, 246, 236, .96);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(59, 36, 24, .08);
+}
+.header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: var(--header-h); }
+.logo { text-decoration: none; line-height: 1; }
+.logo strong { display: block; font-family: var(--font-titoli); font-size: 1.45rem; color: var(--mare-scuro); }
+.logo small { display: block; font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--corallo); margin-top: 3px; }
+.nav-desktop { display: none; }
+.nav-desktop a { text-decoration: none; font-weight: 500; padding: 6px 2px; border-bottom: 2px solid transparent; }
+.nav-desktop a:hover, .nav-desktop a[aria-current="page"] { border-color: var(--limone); }
+.header-cta { display: none; min-height: 44px; padding: 8px 18px; }
+.burger {
+  width: 46px; height: 46px; display: grid; place-content: center; gap: 5px;
+  background: none; border: 0; cursor: pointer; padding: 0;
+}
+.burger span { display: block; width: 26px; height: 2px; background: var(--cioccolato); transition: transform .2s ease, opacity .2s ease; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.menu-mobile {
+  position: fixed; inset: var(--header-h) 0 0 0; z-index: 49;
+  background: var(--mare-scuro); color: var(--bianco);
+  padding: 28px 20px; overflow-y: auto;
+  transform: translateX(100%); transition: transform .25s ease; visibility: hidden;
+}
+.menu-mobile.aperto { transform: none; visibility: visible; }
+.menu-mobile ul { list-style: none; margin: 0 0 28px; padding: 0; }
+.menu-mobile li a { display: block; padding: 14px 0; font-family: var(--font-titoli); font-size: 1.6rem; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.12); }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; background: var(--mare-scuro); color: var(--bianco); overflow: hidden; }
+.hero__grid { display: grid; gap: 32px; padding-top: 48px; padding-bottom: 56px; }
+.hero h1 { font-size: clamp(2.4rem, 9vw, 4.6rem); }
+.hero h1 em { font-style: italic; color: var(--limone); font-weight: 400; }
+.hero .lead { font-size: 1.15rem; max-width: 520px; opacity: .92; }
+.hero .en { color: rgba(255,255,255,.7); }
+.hero__dal { display: inline-block; border: 1px solid rgba(255,255,255,.4); padding: 6px 14px; border-radius: 40px; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 18px; }
+.hero__info { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px; font-size: .95rem; opacity: .9; }
+.hero__info span { display: inline-flex; align-items: center; gap: 8px; }
+.hero__info svg { width: 18px; height: 18px; color: var(--limone); }
+
+/* Hero di pagina interna */
+.hero--pagina .hero__grid { padding-top: 40px; padding-bottom: 44px; }
+.hero--pagina h1 { font-size: clamp(2.1rem, 7vw, 3.6rem); }
+
+/* ---------- Segnaposto immagini ---------- */
+.foto-segnaposto {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--raggio);
+  background:
+    linear-gradient(160deg, rgba(244,196,48,.85), rgba(217,87,59,.75)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.08) 0 12px, transparent 12px 24px);
+  display: grid; place-content: center; text-align: center;
+  color: var(--cioccolato); padding: 24px;
+  box-shadow: var(--ombra);
+}
+.foto-segnaposto--mare { background: linear-gradient(160deg, var(--maiolica), var(--mare-scuro)); color: var(--bianco); }
+.foto-segnaposto--larga { aspect-ratio: 16 / 10; }
+.foto-segnaposto--quadra { aspect-ratio: 1; }
+.foto-segnaposto b { font-family: var(--font-titoli); font-size: 1.3rem; display: block; }
+.foto-segnaposto small { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+
+/* ---------- Sezioni ---------- */
+.sezione { padding: 64px 0; }
+.sezione--carta { background: var(--carta); }
+.sezione--bianca { background: var(--bianco); }
+.sezione--limone { background: var(--limone-chiaro); }
+
+.due-col { display: grid; gap: 32px; align-items: center; }
+
+/* Punti di forza */
+.punti { display: grid; gap: 18px; list-style: none; padding: 0; margin: 0; }
+.punto { background: var(--bianco); border-left: 4px solid var(--limone); padding: 22px 22px 18px; }
+.punto h3 { font-size: 1.3rem; margin-bottom: .3em; color: var(--mare-scuro); }
+.punto p { margin: 0; color: var(--grigio); }
+
+/* Vetrina prodotti */
+.vetrina { display: grid; gap: 22px; grid-template-columns: 1fr; }
+.prodotto { background: var(--bianco); border-radius: var(--raggio); overflow: hidden; box-shadow: var(--ombra); display: flex; flex-direction: column; }
+.prodotto .foto-segnaposto { border-radius: 0; box-shadow: none; aspect-ratio: 4 / 3; }
+.prodotto__testo { padding: 18px 20px 22px; }
+.prodotto h3 { font-size: 1.35rem; margin-bottom: .2em; }
+.prodotto p { margin: 0; color: var(--grigio); font-size: .97rem; }
+.etichetta { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; background: var(--limone-chiaro); color: var(--cioccolato); padding: 3px 9px; border-radius: 3px; margin-bottom: 10px; }
+
+/* Lista menu (pagina dolci) */
+.menu-lista { display: grid; gap: 36px; }
+.menu-gruppo h2 { font-size: 1.7rem; color: var(--mare-scuro); padding-bottom: 10px; border-bottom: 2px solid var(--limone); }
+.menu-gruppo ul { list-style: none; padding: 0; margin: 0; }
+.menu-gruppo li { padding: 12px 0; border-bottom: 1px dashed rgba(59,36,24,.18); }
+.menu-gruppo li b { display: block; font-size: 1.05rem; }
+.menu-gruppo li span { color: var(--grigio); font-size: .93rem; }
+
+/* Nota bozza */
+.nota-bozza {
+  background: #FFF8E1; border: 1px dashed #C99A00; color: #6A4E00;
+  padding: 12px 16px; font-size: .88rem; border-radius: var(--raggio); margin: 0 0 24px;
+}
+
+/* Timeline storia */
+.timeline { list-style: none; margin: 0; padding: 0 0 0 26px; border-left: 2px solid var(--limone); }
+.timeline li { position: relative; padding: 0 0 34px 10px; }
+.timeline li::before { content: ""; position: absolute; left: -35px; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--corallo); border: 3px solid var(--crema); }
+.timeline .anno { font-family: var(--font-titoli); font-size: 2rem; color: var(--mare); line-height: 1; display: block; margin-bottom: 6px; }
+
+/* Citazione */
+.citazione { font-family: var(--font-titoli); font-style: italic; font-size: clamp(1.4rem, 4vw, 2rem); line-height: 1.35; color: var(--mare-scuro); margin: 0; }
+.citazione cite { display: block; margin-top: 14px; font-family: var(--font-testo); font-style: normal; font-size: .9rem; color: var(--grigio); }
+
+/* Fascia CTA */
+.fascia-cta { background: var(--corallo); color: var(--bianco); padding: 52px 0; text-align: center; }
+.fascia-cta h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+.fascia-cta .azioni { justify-content: center; margin-top: 22px; }
+.fascia-cta .btn--vuoto { color: var(--bianco); }
+
+/* Orari e contatti */
+.scheda { background: var(--bianco); padding: 26px; border-radius: var(--raggio); box-shadow: var(--ombra); }
+.scheda h2, .scheda h3 { color: var(--mare-scuro); }
+.orari { width: 100%; border-collapse: collapse; }
+.orari th, .orari td { text-align: left; padding: 10px 0; border-bottom: 1px solid rgba(59,36,24,.1); }
+.orari td { text-align: right; font-weight: 700; }
+.contatto-riga { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(59,36,24,.1); }
+.contatto-riga svg { width: 24px; height: 24px; color: var(--corallo); flex: none; margin-top: 3px; }
+.contatto-riga a { font-weight: 700; color: var(--mare); }
+.mappa { width: 100%; aspect-ratio: 4 / 3; border: 0; border-radius: var(--raggio); box-shadow: var(--ombra); background: var(--carta); }
+
+/* Form */
+.form { display: grid; gap: 16px; }
+.form label { display: block; font-weight: 700; font-size: .92rem; margin-bottom: 6px; }
+.form input, .form select, .form textarea {
+  width: 100%; font: inherit; font-size: 1rem; padding: 12px 14px;
+  border: 1.5px solid rgba(59,36,24,.25); border-radius: var(--raggio); background: var(--bianco); color: var(--testo);
+}
+.form input:focus, .form select:focus, .form textarea:focus { outline: 3px solid var(--limone); outline-offset: 1px; border-color: var(--mare); }
+.form textarea { min-height: 120px; resize: vertical; }
+.form .riga { display: grid; gap: 16px; }
+.form-esito { font-weight: 700; color: var(--mare); min-height: 1.5em; margin: 0; }
+
+/* FAQ */
+.faq details { background: var(--bianco); border-radius: var(--raggio); margin-bottom: 10px; padding: 0 18px; box-shadow: 0 2px 8px rgba(59,36,24,.06); }
+.faq summary { cursor: pointer; padding: 16px 0; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::after { content: "+"; font-size: 1.4rem; line-height: 1; color: var(--corallo); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { color: var(--grigio); }
+
+/* ---------- Footer ---------- */
+.footer { background: var(--cioccolato); color: rgba(255,255,255,.85); padding: 48px 0 100px; font-size: .95rem; }
+.footer__grid { display: grid; gap: 28px; }
+.footer h3 { font-size: 1.15rem; color: var(--limone); margin-bottom: .6em; }
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer li { padding: 3px 0; }
+.footer a { text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+.footer .legale { margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.14); font-size: .8rem; opacity: .7; }
+
+/* ---------- Barra azioni mobile ---------- */
+.barra-mobile {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: rgba(59,36,24,.2);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -6px 18px rgba(0,0,0,.12);
+}
+.barra-mobile a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; font-weight: 700; text-decoration: none; background: var(--limone); color: var(--cioccolato); }
+.barra-mobile a + a { background: var(--mare); color: var(--bianco); }
+.barra-mobile svg { width: 20px; height: 20px; }
+
+/* ---------- Animazioni ---------- */
+.rivela { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.rivela.visto { opacity: 1; transform: none; }
+.no-js .rivela { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .rivela { opacity: 1; transform: none; }
+}
+
+/* ---------- Tablet ---------- */
+@media (min-width: 700px) {
+  .vetrina { grid-template-columns: repeat(2, 1fr); }
+  .punti { grid-template-columns: repeat(2, 1fr); }
+  .form .riga { grid-template-columns: 1fr 1fr; }
+  .footer__grid { grid-template-columns: repeat(2, 1fr); }
+  .menu-lista { grid-template-columns: repeat(2, 1fr); gap: 36px 48px; }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1000px) {
+  :root { --header-h: 78px; }
+  .burger, .menu-mobile, .barra-mobile { display: none; }
+  .nav-desktop { display: flex; gap: 26px; }
+  .header-cta { display: inline-flex; }
+  .hero__grid { grid-template-columns: 1.15fr .85fr; align-items: center; padding-top: 72px; padding-bottom: 80px; }
+  .hero--pagina .hero__grid { grid-template-columns: 1fr; padding-top: 64px; padding-bottom: 64px; }
+  .due-col { grid-template-columns: 1fr 1fr; gap: 64px; }
+  .due-col--inversa > :first-child { order: 2; }
+  .vetrina { grid-template-columns: repeat(3, 1fr); }
+  .punti { grid-template-columns: repeat(4, 1fr); }
+  .sezione { padding: 96px 0; }
+  .footer { padding-bottom: 48px; }
+  .footer__grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+}
+
+/* ---------- Illustrazioni (in attesa delle foto reali) ---------- */
+.illustrazione {
+  position: relative; margin: 0;
+  aspect-ratio: 4 / 5; max-width: 100%;
+  border-radius: var(--raggio); overflow: hidden;
+  display: grid; place-items: center;
+  background-color: var(--limone-chiaro);
+  box-shadow: var(--ombra);
+}
+.illustrazione::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(46,134,171,.16) 0 2px, transparent 2.5px),
+    conic-gradient(from 45deg, rgba(46,134,171,.08) 0 25%, transparent 0 50%, rgba(46,134,171,.08) 0 75%, transparent 0);
+  background-size: 28px 28px;
+}
+.illustrazione svg { position: relative; width: 78%; height: auto; max-height: 86%; }
+.illustrazione figcaption {
+  position: absolute; left: 12px; bottom: 12px;
+  background: rgba(255,255,255,.92); color: var(--cioccolato);
+  font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 3px;
+}
+.illustrazione--crema { background-color: var(--crema); }
+.illustrazione--limone { background-color: var(--limone); }
+.illustrazione--mare { background-color: var(--maiolica); }
+.illustrazione--mare::before { background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,.25) 0 2px, transparent 2.5px), conic-gradient(from 45deg, rgba(255,255,255,.1) 0 25%, transparent 0 50%, rgba(255,255,255,.1) 0 75%, transparent 0); }
+.illustrazione--cielo { background-color: #CFE6F2; }
+.illustrazione--cielo::before { display: none; }
+.illustrazione--cielo svg { width: 100%; max-height: 100%; align-self: end; }
+.illustrazione--quadra { aspect-ratio: 1; }
+.illustrazione--larga { aspect-ratio: 16 / 10; }
+.prodotto .illustrazione { border-radius: 0; box-shadow: none; aspect-ratio: 4 / 3; }
+.prodotto .illustrazione svg { width: 62%; }
+.hero .illustrazione { border: 6px solid var(--bianco); }
+
+
+===== FILE: minicucci/assets/script.js =====
+// Antica Pasticceria Minicucci — interazioni della bozza
+document.documentElement.classList.remove("no-js");
+
+// Menu mobile
+const burger = document.querySelector(".burger");
+const menu = document.getElementById("menu-mobile");
+if (burger && menu) {
+  const chiudi = () => {
+    burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "Apri il menu");
+    menu.classList.remove("aperto");
+    document.body.style.overflow = "";
+  };
+  burger.addEventListener("click", () => {
+    const aperto = burger.getAttribute("aria-expanded") === "true";
+    if (aperto) return chiudi();
+    burger.setAttribute("aria-expanded", "true");
+    burger.setAttribute("aria-label", "Chiudi il menu");
+    menu.classList.add("aperto");
+    document.body.style.overflow = "hidden";
+  });
+  menu.querySelectorAll("a").forEach(a => a.addEventListener("click", chiudi));
+  addEventListener("keydown", e => { if (e.key === "Escape") chiudi(); });
+  matchMedia("(min-width: 1000px)").addEventListener("change", chiudi);
+}
+
+// Modulo richieste: nella bozza non è collegato a nessun servizio di invio
+const form = document.querySelector(".form");
+if (form) {
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    form.querySelector(".form-esito").textContent =
+      "Grazie! (Bozza: il modulo non invia ancora i dati. Per ora chiamaci allo 081 991337.)";
+    form.reset();
+  });
+}
+
+// Animazioni in entrata
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add("visto"); io.unobserve(en.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll(".rivela").forEach(el => io.observe(el));
+} else {
+  document.querySelectorAll(".rivela").forEach(el => el.classList.add("visto"));
+}
+
+
+===== FILE: minicucci/README.md =====
+# Bozza sito — Antica Pasticceria Minicucci (Ischia)
+
+Sito statico (HTML + CSS + JS, nessuna dipendenza). Apri `index.html` nel browser.
+
+## Pagine
+- `index.html` — Home
+- `dolci.html` — Pasticceria, bar, gelateria, rosticceria
+- `storia.html` — La storia dal 1933
+- `visitors.html` — Pagina in inglese per i turisti
+- `contatti.html` — Dove siamo, orari, mappa, modulo richieste
+
+Stili in `assets/stile.css` (colori nelle variabili `:root`), interazioni in `assets/script.js`.
+
+## Da completare prima della pubblicazione
+- Foto reali (ora ci sono illustrazioni provvisorie in stile maiolica)
+- Elenco prodotti, tappe della storia, risposte FAQ (segnati con `[da inserire]` / `[to confirm]`)
+- Verificare orari (7:00–23:00) e numero civico (51 o 49)
+- P. IVA, privacy e cookie policy
+- Collegare il modulo contatti a un servizio di invio (es. Formspree o Netlify Forms)
+- Eventuali social, WhatsApp ed email
+
+
