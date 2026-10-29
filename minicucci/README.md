@@ -12,7 +12,7 @@ Sito statico (HTML + CSS + JS, nessuna dipendenza). Apri `index.html` nel browse
 Stili in `assets/stile.css` (colori nelle variabili `:root`), interazioni in `assets/script.js`.
 
 ## Da completare prima della pubblicazione
-- Foto reali (ora ci sono segnaposto "Foto da inserire")
+- Foto reali (ora ci sono illustrazioni provvisorie in stile maiolica)
 - Elenco prodotti, tappe della storia, risposte FAQ (segnati con `[da inserire]` / `[to confirm]`)
 - Verificare orari (7:00–23:00) e numero civico (51 o 49)
 - P. IVA, privacy e cookie policy

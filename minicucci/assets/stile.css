@@ -295,3 +295,39 @@ p { margin: 0 0 1em; }
   .footer { padding-bottom: 48px; }
   .footer__grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
 }
+
+/* ---------- Illustrazioni (in attesa delle foto reali) ---------- */
+.illustrazione {
+  position: relative; margin: 0;
+  aspect-ratio: 4 / 5; max-width: 100%;
+  border-radius: var(--raggio); overflow: hidden;
+  display: grid; place-items: center;
+  background-color: var(--limone-chiaro);
+  box-shadow: var(--ombra);
+}
+.illustrazione::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(46,134,171,.16) 0 2px, transparent 2.5px),
+    conic-gradient(from 45deg, rgba(46,134,171,.08) 0 25%, transparent 0 50%, rgba(46,134,171,.08) 0 75%, transparent 0);
+  background-size: 28px 28px;
+}
+.illustrazione svg { position: relative; width: 78%; height: auto; max-height: 86%; }
+.illustrazione figcaption {
+  position: absolute; left: 12px; bottom: 12px;
+  background: rgba(255,255,255,.92); color: var(--cioccolato);
+  font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 3px;
+}
+.illustrazione--crema { background-color: var(--crema); }
+.illustrazione--limone { background-color: var(--limone); }
+.illustrazione--mare { background-color: var(--maiolica); }
+.illustrazione--mare::before { background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,.25) 0 2px, transparent 2.5px), conic-gradient(from 45deg, rgba(255,255,255,.1) 0 25%, transparent 0 50%, rgba(255,255,255,.1) 0 75%, transparent 0); }
+.illustrazione--cielo { background-color: #CFE6F2; }
+.illustrazione--cielo::before { display: none; }
+.illustrazione--cielo svg { width: 100%; max-height: 100%; align-self: end; }
+.illustrazione--quadra { aspect-ratio: 1; }
+.illustrazione--larga { aspect-ratio: 16 / 10; }
+.prodotto .illustrazione { border-radius: 0; box-shadow: none; aspect-ratio: 4 / 3; }
+.prodotto .illustrazione svg { width: 62%; }
+.hero .illustrazione { border: 6px solid var(--bianco); }
